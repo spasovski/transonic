@@ -132,7 +132,7 @@
             }
         }
     }
-    .featured-type .featured-type-choices {
+    fieldset.tabs {
         border: 0;
         padding: 0;
 
@@ -154,6 +154,9 @@
         padding: 10px;
     }
     .background-image-input {
+        display: inline-block;
+        margin-left: 20px;
+
         [data-fileinput-fake] {
             border: 1px dotted $light-gray;
             display: block;
@@ -216,26 +219,7 @@
     .description .description-type .inner {
         padding: 5px;
     }
-    .collection-type {
-        width: 100%;
-
-        &[data-collection-type="article"] {
-            .background-image {
-                display: none;
-            }
-        }
-        &[data-collection-type="standard"],
-        &[data-collection-type="showcase"],
-        &[data-collection-type="mega"] {
-            .shelf-landing {
-                display: none;
-            }
-        }
-        .background-image {
-            display: inline-block;
-        }
-    }
-    .editorial-title {
+        .editorial-title {
         select {
             border: 1px solid $light-gray;
             padding: 6px;
@@ -290,4 +274,29 @@
 .transonic-form .app-selector {
     margin: 10px 20px 0 0;
     vertical-align: top;
+}
+
+.collections {
+    .float-wrap {
+        float: left;
+        width: 40%;
+
+        input {
+            width: 70%;
+        }
+    }
+    .description.top-hat-field.half {
+        float: right;
+        position: relative
+        right: 140px;
+    }
+    [data-collection-type="promo"],
+    [data-collection-type="listing"] {
+        .shelf-landing {
+            display: none;
+        }
+    }
+    .background-image {
+        display: inline-block;
+    }
 }

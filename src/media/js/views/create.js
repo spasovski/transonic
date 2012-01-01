@@ -4,7 +4,7 @@ define('views/create',
     'use strict';
     var gettext = l10n.gettext;
 
-    var imageUploads = {};  // Keep track of drag-and-drop uploads to stuff into FormData later.
+    var imageUploads = {};  // keep track of drag-and-drop uploads to stuff into FormData later.
 
     z.page.on('change', '.colors input', function() {
         // Sync color previews and inputs.
@@ -20,7 +20,8 @@ define('views/create',
     })
     .on('change', '.collection-type-choices input', function(e) {
         // To help CSS toggle background image upload widgets for different collection types.
-        $(this).closest('.collection-type').attr('data-collection-type', this.value);
+        $('.collection-type').hide().filter('.' + this.value).show();
+        $('.collection-type.bg').attr('data-collection-type', this.value);
     })
     .on('app-selected', function(e, id) {
         // App selection.

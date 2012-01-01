@@ -1,26 +1,48 @@
 <form class="transonic-form collections">
 
-  <section class="island">
+  <section class="island c">
     {% include "locale_switcher.html" %}
 
     <h3>{{ title }}</h3>
-    {% include "fields/title.html" %}
-    {% include "fields/slug.html" %}
+    <div class="float-wrap c">
+      {% include "fields/title.html" %}
+      {% include "fields/slug.html" %}
+    </div>
     {% include "fields/description.html" %}
   </section>
 
+  {% macro collection_type(name, type, checked) %}
+    <input id="collection-type-{{ type }}" type="radio"
+           name="collection-type" value="{{ type }}"
+           {% if checked %} checked{%endif%} />
+    <label for="collection-type-{{ type }}">{{ name }}</label>
+  {% endmacro %}
+
+  <fieldset class="collection-type-choices tabs" data-collection-type="promo">
+    {{ collection_type(_('Promo'), 'promo', true) }}
+    {{ collection_type(_('Listing'), 'listing') }}
+    {{ collection_type(_('Operator Shelf'), 'shelf') }}
+  </fieldset>
+
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
-    {% include "fields/colors.html" %}
-    {% include "fields/collection_type.html" %}
-  </section>
 
-  <section class="island select-app">
-    <h3>{{ _('Add Apps to Collection') }}</h3>
+    <div class="collection-type promo shelf">
+      {% include "fields/colors.html" %}
+    </div>
+
+    <div class="collection-type bg promo listing shelf" data-collection-type="promo">
+      {% include "fields/background_images.html" %}
+    </div>
+
+    <div class="collection-type apps promo listing">
+      <h2>{{ _('Apps') }}</h2>
+      {% include "app_selector.html" %}
+    </div>
   </section>
 
   <section class="island submit">
-    <h3>{{ _('Submit Custom Featured App') }}</h3>
+    <h3>{{ _('Submit Collection or Article') }}</h3>
     <button type="submit">{{ _('Submit') }}</button>
   </section>
 

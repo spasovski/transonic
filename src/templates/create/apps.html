@@ -17,15 +17,13 @@
     <label for="featured-type-{{ type }}">{{ name }}</label>
   {% endmacro %}
 
-  <div class="featured-type">
-    <fieldset class="featured-type-choices">
-      {{ featured_type(_('Icon'), 'icon', true) }}
-      {{ featured_type(_('Header Graphic'), 'background-image') }}
-      {{ featured_type(_('Description'), 'description') }}
-      {{ featured_type(_('Quote'), 'quote') }}
-      {{ featured_type(_('Preview'), 'preview') }}
-    </fieldset>
-  </div>
+  <fieldset class="featured-type-choices tabs">
+    {{ featured_type(_('Icon'), 'icon', true) }}
+    {{ featured_type(_('Header Graphic'), 'background-image') }}
+    {{ featured_type(_('Description'), 'description') }}
+    {{ featured_type(_('Quote'), 'quote') }}
+    {{ featured_type(_('Preview'), 'preview') }}
+  </fieldset>
 
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
