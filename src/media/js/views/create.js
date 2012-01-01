@@ -24,8 +24,6 @@ define('views/create',
     })
     .on('app-selected', function(e, id) {
         // App selection.
-        $('input[name="app"]').val(id);
-
         requests.get(urls.api.unsigned.url('app', [id])).done(function(app) {
             $('.selected-app').html(app_select.render_result(app));
         });

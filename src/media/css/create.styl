@@ -21,7 +21,7 @@
         font-weight: normal;
     }
     .field {
-        margin: 20px 0;
+        margin: 15px 0;
     }
     .top-hat-field {
         > label:first-child {
@@ -132,22 +132,23 @@
             }
         }
     }
-    .featured-type {
-        .inline-label {
-            margin-right: -6px;
-        }
-        .featured-type-choices {
-            padding: 0;
+    .featured-type .featured-type-choices {
+        border: 0;
+        padding: 0;
 
-            label {
-                display: inline-block;
-                margin-left: 15px;
-                padding: 7px;
-            }
+        label {
+            border-radius: 2px 2px 0 0;
+            display: inline-block;
+            margin-left: 20px;
+            padding: 7px 15px;
         }
-    }
-    .background-image.field {
-        margin-top: 30px;
+        input:checked + label {
+            background: #fff;
+            border: 1px solid $light-gray;
+            border-bottom-width: 0;
+            color: $dark-gray;
+            box-shadow: none;
+        }
     }
     .background-image .inner {
         padding: 10px;
@@ -256,7 +257,7 @@
     }
     .featured-app {
         display: inline-block;
-        margin-top: 15px;
+        margin-top: 10px;
         width: 320px;
 
         .helptext {
@@ -287,6 +288,6 @@
 }
 
 .transonic-form .app-selector {
-    margin: 15px 20px 0 0;
+    margin: 10px 20px 0 0;
     vertical-align: top;
 }

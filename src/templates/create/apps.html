@@ -4,22 +4,51 @@
     {% include "locale_switcher.html" %}
 
     <h3>{{ title }}</h3>
+
+    {% include "app_selector.html" %}
+    {% include "fields/featured_app.html" %}
     {% include "fields/slug.html" %}
   </section>
 
-  <section class="island select-app">
-    <h3>{{ _('Add App to Feature') }}</h3>
-    {% include "app_selector.html" %}
-    {% include "fields/featured_app.html" %}
-  </section>
+  {% macro featured_type(name, type, checked) %}
+    <input id="featured-type-{{ type }}" type="radio"
+           name="featured-type" value="{{ type }}"
+           {% if checked %} checked{%endif%} />
+    <label for="featured-type-{{ type }}">{{ name }}</label>
+  {% endmacro %}
+
+  <div class="featured-type">
+    <fieldset class="featured-type-choices">
+      {{ featured_type(_('Icon'), 'icon', true) }}
+      {{ featured_type(_('Header Graphic'), 'background-image') }}
+      {{ featured_type(_('Description'), 'description') }}
+      {{ featured_type(_('Quote'), 'quote') }}
+      {{ featured_type(_('Preview'), 'preview') }}
+    </fieldset>
+  </div>
 
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
-    {% include "fields/colors.html" %}
-    {% include "fields/featured_type.html" %}
-    {% include "fields/background_images_w_desc.html" %}
-    {% include "fields/description_screenshot.html" %}
-    {% include "fields/quote.html" %}
+
+    <div class="featured-details icon background-image quote preview">
+      {% include "fields/colors.html" %}
+    </div>
+
+    <div class="featured-details background-image hidden">
+      {% include "fields/background_images.html" %}
+    </div>
+
+    <div class="featured-details description quote preview hidden">
+      {% include "fields/description.html" %}
+    </div>
+
+    <div class="featured-details quote hidden">
+      {% include "fields/quote.html" %}
+    </div>
+
+    <div class="featured-details preview hidden">
+      {% include "fields/preview.html" %}
+    </div>
   </section>
 
   <section class="island submit">

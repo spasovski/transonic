@@ -33,8 +33,15 @@ define('app_selector',
 
     .on('click', '.app-selector .result', function() {
         var $this = $(this);
-        $('.app-selector .result').removeClass('selected');
-        $this.addClass('selected');
+        var $app_selector = $('.app-selector');
+
+        // Set placeholder.
+        $app_selector.find('#app-selector').val('').attr('placeholder', $this.find('[itemprop="name"] a').text());
+        // Set form field.
+        $app_selector.find('input[name="app"]').val($this.data('id'));
+        // Hide results list.
+        $app_selector.find('.result').remove();
+        // Trigger with ID.
         z.page.trigger('app-selected', [$this.attr('data-id')]);
     });
 

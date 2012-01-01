@@ -1,6 +1,8 @@
 <div class="app-selector top-hat-field">
-  <label for="app-selector">{{ _('App Selector') }}</label>
+  <label for="app-selector">{{ _('App') }}</label>
   <input id="app-selector" type="search" placeholder="{{ _('Search for an app...') }}">
+    <img class="chosen-icon">
+  </input>
   <div class="results">
     <div class="paginator c" data-offset="0">
       {# L10n: `prev` stands for previous. #}
@@ -8,4 +10,6 @@
       <a class="next">{{ _('Next') }}</a>
     </div>
   </div>
+
+  <input name="app" type="hidden">
 </div>
