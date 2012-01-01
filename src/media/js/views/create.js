@@ -1,8 +1,7 @@
 define('views/create',
-    ['app_selector', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'requests', 'settings', 'urls', 'utils', 'z'],
-    function(app_select, $, fakefilefield, l10n, log, requests, settings, urls, utils, z) {
+    ['app_selector', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'requests', 'settings', 'forms_transonic', 'urls', 'utils', 'z'],
+    function(app_select, $, fakefilefield, l10n, log, requests, settings, forms_transonic, urls, utils, z) {
     'use strict';
-    var console = log('create');
     var gettext = l10n.gettext;
 
     var imageUploads = {};  // Keep track of drag-and-drop uploads to stuff into FormData later.
@@ -70,7 +69,14 @@ define('views/create',
         var lang = this.value;
         $('.localized').hide()
                        .filter('[data-lang=' + lang + ']').show();
-    });
+    })
+
+    .on('submit', '.transonic-form', utils._pd(function(e) {
+        var $form = $(this);
+        if ($form.data('type') == 'apps') {
+            console.log(forms_transonic.create_featured_app($form));
+        }
+    }));
 
     return function(builder, args) {
         var feedType = args[0];

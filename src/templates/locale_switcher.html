@@ -1,7 +1,7 @@
 {% macro locale_textarea(name, lang) %}
   <textarea name="{{ name }}-{{ lang }}"
             placeholder="This app is awesome! ({{ lang }})"
-            data-lang="{{ lang }}"
+            data-name="{{ name }}" data-lang="{{ lang }}"
             class="localized{% if lang != 'en-US' %} hidden{% endif %}">
   </textarea>
 {% endmacro %}
