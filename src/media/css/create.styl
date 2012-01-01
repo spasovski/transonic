@@ -17,6 +17,7 @@
 }
 
 .transonic-form {
+    /* Generic form styling (applies to apps + collections + editorials). */
     .island:first-child > h3 {
         font-weight: normal;
     }
@@ -219,45 +220,6 @@
     .description .description-type .inner {
         padding: 5px;
     }
-        .editorial-title {
-        select {
-            border: 1px solid $light-gray;
-            padding: 6px;
-            vertical-align: middle;
-        }
-    }
-    .editorial-type {
-        input + label {
-            margin-bottom: 5px;
-
-            + label {
-                font-size: 12px;
-                margin: 0 0 10px 30px;
-            }
-        }
-        input:not(:checked) + label + label {
-            color: $earl-gray;
-        }
-    }
-    .featured-app {
-        display: inline-block;
-        margin-top: 10px;
-        width: 320px;
-
-        .helptext {
-            border: 1px solid $light-gray;
-            border-radius: 0 0 5px 5px;
-            font-weight: 300;
-            padding: 10px;
-            width: 320px;
-        }
-    }
-}
-
-.transonic-form.apps {
-    .background-image-input.shelf-landing {
-        display: none;
-    }
 }
 
 .locale-switcher {
@@ -274,6 +236,25 @@
 .transonic-form .app-selector {
     margin: 10px 20px 0 0;
     vertical-align: top;
+}
+
+.apps {
+    .background-image-input.shelf-landing {
+        display: none;
+    }
+    .featured-app {
+        display: inline-block;
+        margin-top: 10px;
+        width: 320px;
+
+        .helptext {
+            border: 1px solid $light-gray;
+            border-radius: 0 0 5px 5px;
+            font-weight: 300;
+            padding: 10px;
+            width: 320px;
+        }
+    }
 }
 
 .collections {
@@ -298,5 +279,28 @@
     }
     .background-image {
         display: inline-block;
+    }
+}
+
+.editorial {
+    .editorial-title {
+        select {
+            border: 1px solid $light-gray;
+            padding: 6px;
+            vertical-align: middle;
+        }
+    }
+    .editorial-type {
+        input + label {
+            margin-bottom: 5px;
+
+            + label {
+                font-size: 12px;
+                margin: 0 0 10px 30px;
+            }
+        }
+        input:not(:checked) + label + label {
+            color: $earl-gray;
+        }
     }
 }
