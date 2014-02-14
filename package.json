@@ -1,0 +1,19 @@
+{
+  "name": "transonic",
+  "version": "0.0.0",
+  "description": "The new Rocketfuel.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mozilla/transonic.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/mozilla/transonic/issues"
+  },
+  "homepage": "https://github.com/mozilla/transonic"
+}

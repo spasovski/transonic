@@ -1,0 +1,224 @@
+@import 'lib';
+
+// Site-wide or structural styles only in this file.
+// Can't find a better file for your style? Create one!
+// This is not your diaper.
+
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    //text-rendering: optimizeLegibility;
+    word-wrap: break-word;
+}
+
+.js-hidden, .hidden {
+    display: none;
+}
+
+noscript {
+    background: $salt-flat-white;
+    display: table;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    p {
+        background: url(../img/pretty/marketplace_logo.png) 50% 48% no-repeat;
+        background-size: auto 60px;
+        display: table-cell;
+        font-weight: bold;
+        height: 100%;
+        padding-top: 60px;
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+a {
+    color: $sailor-blue;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+    &:not([href]) {
+        cursor: pointer;
+    }
+}
+
+body {
+    background: $seavan-salt-white;
+    color: $castle-skull-gray;
+    // min-height needed so ff b2g/android can scroll to 0 (bug 872622).
+    min-height: 300px;
+    overflow-x: hidden;
+}
+
+#site-header, #page {
+    min-width: 320px;
+    section.main {
+        margin-left: auto;
+        margin-right: auto;
+        &:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        &.full {
+            width: 100%;
+            > div {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+}
+
+#page {
+    position: relative;
+    > .overlay {
+        max-width: 100%;
+    }
+}
+
+.alert {
+    background: $swiss-cheese-yellow;
+    border: 1px solid $pineapple-yellow;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    h1 {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin: 0;
+    }
+}
+
+.row {
+    clear: both;
+    padding: 1em 0;
+    width: 100%;
+
+    > * {
+        display: block;
+        float: left;
+    }
+
+    > :last-child {
+        clear: right;
+    }
+
+    &.gutter {
+        padding: 1em;
+
+        > *:not(:last-child) {
+            padding-right: 1em;
+        }
+    }
+
+    .full {width: 100%;}
+    .half {width: 50%;}
+    .third {width: 33.333%;}
+    .two-thirds {width: 66.666%;}
+    .quarter {width: 25%;}
+}
+
+.well, section.group {
+    background: #fff;
+    box-shadow: 0 1px 1px $cement-gray;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+span.label {
+    border-radius: 0.25em;
+    color: #000;
+    margin-right: 0.5em;
+    padding: 0 0.5em;
+}
+
+section.group {
+    overflow: hidden;
+    padding: 0;
+
+    h1, h2, h3 {
+        background: $refreshing-white;
+        border-bottom: 1px solid $seavan-salt-white;
+        font-size: 1em;
+        margin-bottom: 10px;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+    }
+
+    > * {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    > p {
+        margin-bottom: 1em;
+    }
+}
+
+.detailed-error, .fragment-error {
+    background: #fff;
+    display: block;
+    padding: 15px;
+
+    b {
+        display: block;
+    }
+}
+
+main {
+    margin: 0 auto;
+    max-width: $desktop-content;
+}
+
+.main {
+    margin: 0 auto;
+    .fragment-error {
+        padding: 0;
+    }
+}
+
+.two-up {
+    width: 50%;
+    float: left;
+    &:nth-child(2n+1) {
+        padding: 0 5px 0 0;
+    }
+    &:nth-child(2n) {
+        padding: 0 0 0 5px;
+    }
+    .button {
+        display: block;
+    }
+}
+
+.only-logged-in,
+.logged-in .only-logged-out,
+.only-rocketfuel-disabled {
+    display: none !important;
+}
+
+.only-logged-out,
+.logged-in .only-logged-in,
+.rocketfuel-disabled .only-rocketfuel-disabled {
+    display: block !important;
+}
+
+.action-required {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    .notice {
+        float: left;
+        margin: 15px 0;
+    }
+    .button.persona {
+        float: right;
+    }
+}

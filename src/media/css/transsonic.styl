@@ -1,0 +1,143 @@
+@import 'lib';
+
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0turn); }
+    to { -webkit-transform: rotate(1turn); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0turn); }
+    to { transform: rotate(1turn); }
+}
+
+.spinner {
+    spinner();
+    &.alt {
+        spinner-alt-image();
+    }
+    &.btn-replace {
+        spinner-abs();
+        top: 24px;
+    }
+    &.spaced {
+        margin: 70px auto;
+    }
+    &.padded {
+        padding: 70px 0;
+    }
+}
+
+ul {
+    list-style: none;
+}
+
+@media $at-least-desktop {
+    html, #footer {
+        background: #fff;
+    }
+
+    #footer {
+        border-top: 1px solid $cloud-gray;
+        margin: 1px 0 0;
+        max-width: inherit;
+        padding: 48px 0;
+        width: 100%;
+    }
+
+    .container {
+        &.product-details,
+        &.results {
+            margin: 50px 0;
+        }
+        &.prose,
+        &.form-grid {
+            padding: 25px;
+        }
+    }
+
+    /* TODO: Should these stay here? */
+    .tabs {
+        height: 40px;
+        position: relative;
+        li {
+            float: left;
+            margin-right: 10px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        a {
+            background-color: $light-gray;
+            border-radius: 10px 10px 0 0;
+            color: #888;
+            display: inline-block;
+            padding: 8px 15px 12px; // Inconsistent for tabby behaviour.
+            // No repaint since the parent has a height.
+            transition(margin 0.1s ease);
+            &.active {
+                color: #000;
+                background-color: #fff;
+            }
+            &.active, &:hover {
+                margin-top: -3px;
+            }
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        + .main {
+            position: relative;
+            top: -5px;
+            z-index: 10;
+        }
+    }
+    .tab {
+        display: none;
+        &.active {
+            display: block;
+        }
+        .create li {
+            float: left;
+            height: 300px;
+            margin: 20px 0 0;
+            position: relative;
+            text-align: center;
+            width: 33%;
+        }
+        h3 {
+            bottom: 10px;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+        }
+    }
+    .main {
+        background-color: #fff;
+        padding: 10px;
+        &.details {
+            float: left;
+            width: 940px;
+            border-radius: 0 0 10px 10px;
+        }
+    }
+    .preview {
+        border: 1px solid $light-gray;
+        height: 480px;
+        margin: -5px 0 0 20px;
+        width: 320px;
+    }
+    /* end TODO */
+
+    @media $retina {
+
+    }
+} // End of Desktop.
+
+@media $retina {
+    .spinner {
+        spinner-base-image('retina');
+        &.alt {
+            spinner-alt-image('retina');
+        }
+    }
+}

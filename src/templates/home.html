@@ -1,0 +1,15 @@
+<div>
+  <ul class="tabs c">
+    <li><a class="create-content active">{{ _('create content') }}</a></li>
+    <li><a class="existing-content">{{ _('existing content') }}</a></li>
+    <li><a class="feed-builder">{{ _('feed builder') }}</a></li>
+  </ul>
+  <section class="main details">
+    {% include "tabs/create.html" %}
+    {% include "tabs/existing.html" %}
+    {% include "tabs/feed_builder.html" %}
+  </section>
+  <aside>
+    <iframe id="preview" class="preview" src=""></iframe>
+  </aside>
+</div>
