@@ -13,8 +13,6 @@ define('views/home', ['l10n', 'settings'], function(l10n, settings) {
     return function(builder) {
         builder.start('home.html').done(function() {
             initTabs();
-
-            $('#preview').attr('src', settings.api_url);
         });
 
         builder.z('type', 'root');

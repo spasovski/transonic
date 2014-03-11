@@ -12,6 +12,7 @@
 
 .spinner {
     spinner();
+
     &.alt {
         spinner-alt-image();
     }
@@ -29,6 +30,11 @@
 
 ul {
     list-style: none;
+}
+
+.lonely-island {
+    margin: 0 auto;
+    width: 940px;
 }
 
 @media $at-least-desktop {
@@ -59,9 +65,11 @@ ul {
     .tabs {
         height: 40px;
         position: relative;
+
         li {
             float: left;
             margin-right: 10px;
+
             &:last-child {
                 margin-right: 0;
             }
@@ -69,11 +77,12 @@ ul {
         a {
             background-color: $light-gray;
             border-radius: 10px 10px 0 0;
-            color: #888;
+            color: $gray;
             display: inline-block;
             padding: 8px 15px 12px; // Inconsistent for tabby behaviour.
             // No repaint since the parent has a height.
             transition(margin 0.1s ease);
+
             &.active {
                 color: #000;
                 background-color: #fff;
@@ -93,6 +102,7 @@ ul {
     }
     .tab {
         display: none;
+
         &.active {
             display: block;
         }
@@ -114,9 +124,10 @@ ul {
     .main {
         background-color: #fff;
         padding: 10px;
+
         &.details {
             float: left;
-            width: 940px;
+            width: 100%;
             border-radius: 0 0 10px 10px;
         }
     }
