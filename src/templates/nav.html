@@ -1,0 +1,9 @@
+{% macro navtab(class, name, url) %}
+  <li><a href="{{ url }}" class="{{ class }}">{{ name }}</a></li>
+{% endmacro %}
+
+<ul>
+  {{ navtab('create', _('create content'), url('home')) }}
+  {{ navtab('existing', _('existing content'), '#') }}
+  {{ navtab('builder', _('feed builder'), '#') }}
+</ul>

@@ -28,6 +28,20 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         persona_tos: null,
         persona_privacy: null,
 
-        title_suffix: 'Firefox Marketplace Curation Tools'
+        title_suffix: 'Firefox Marketplace Curation Tools',
+
+        bg_color_choices: [
+            '#B90000',  // Raring Red.
+            '#FF4E00',  // Oneric Orange.
+            '#CD6723',  // Breezy Brown.
+            '#00AACC',  // Dapper Blue.
+            '#5F9B0A',  // Gusty Green.
+            '#2C393B',  // Intrepid Indigo.
+        ],
+
+        text_color_choices: [
+            '#000',  // Pretty Dark.
+            '#FFF',  // A bit brighter than Pretty Dark.
+        ],
     });
 });

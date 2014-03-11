@@ -1,0 +1,17 @@
+<form class="transonic-form">
+
+  <section class="island">
+    <h3>{{ title }}</h3>
+    {% include "fields/slug.html" %}
+  </section>
+
+  <section class="island select-app">
+    <h3>{{ _('Add App to Feature') }}</h3>
+  </section>
+
+  <section class="island customize">
+    <h3>{{ _('Customize') }}</h3>
+    {% include "fields/colors.html" %}
+  </section>
+
+</form>

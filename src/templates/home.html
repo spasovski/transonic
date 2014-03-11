@@ -1,12 +1,19 @@
-<div class="lonely-island c">
-  <ul class="tabs c">
-    <li><a class="create-content active">{{ _('create content') }}</a></li>
-    <li><a class="existing-content">{{ _('existing content') }}</a></li>
-    <li><a class="feed-builder">{{ _('feed builder') }}</a></li>
+{% macro create_tab(href, src, name) %}
+  <li>
+    <a href="{{ href }}">
+      <img src="{{ src }}" alt="{{ name }}">
+      <h3><a>{{ name }}</a></h3>
+    </a>
+  </li>
+{% endmacro %}
+
+<section id="create-content" class="island">
+  <ul class="create c">
+    {{ create_tab(url('create', ['apps']), '../media/img/featured.jpg',
+                  _('custom featured apps')) }}
+    {{ create_tab(url('create', ['collections']), '../media/img/collections.jpg',
+                  _('collections and articles')) }}
+    {{ create_tab(url('create', ['editorial']), '../media/img/editorial.jpg',
+                  _('editorial brands')) }}
   </ul>
-  <section class="main details">
-    {% include "tabs/create.html" %}
-    {% include "tabs/existing.html" %}
-    {% include "tabs/feed_builder.html" %}
-  </section>
-</div>
+</section>

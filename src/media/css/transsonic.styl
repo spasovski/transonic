@@ -32,24 +32,34 @@ ul {
     list-style: none;
 }
 
-.lonely-island {
-    margin: 0 auto;
-    width: 940px;
+.page > section.island:first-child {
+    border-radius: 0 5px 5px 5px;
+    padding: 10px;
+}
+
+section.island {
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 18px;
+    padding: 5px 0;
 }
 
 @media $at-least-desktop {
-    html, #footer {
+    html {
         background: #fff;
     }
-
-    #footer {
-        border-top: 1px solid $cloud-gray;
-        margin: 1px 0 0;
-        max-width: inherit;
-        padding: 48px 0;
-        width: 100%;
+    main,
+    .site-header > nav {
+        margin: 0 auto;
+        width: 940px;
     }
-
     .container {
         &.product-details,
         &.results {
@@ -60,87 +70,13 @@ ul {
             padding: 25px;
         }
     }
-
-    /* TODO: Should these stay here? */
-    .tabs {
-        height: 40px;
-        position: relative;
-
-        li {
-            float: left;
-            margin-right: 10px;
-
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-        a {
-            background-color: $light-gray;
-            border-radius: 10px 10px 0 0;
-            color: $gray;
-            display: inline-block;
-            padding: 8px 15px 12px; // Inconsistent for tabby behaviour.
-            // No repaint since the parent has a height.
-            transition(margin 0.1s ease);
-
-            &.active {
-                color: #000;
-                background-color: #fff;
-            }
-            &.active, &:hover {
-                margin-top: -3px;
-            }
-            &:hover {
-                text-decoration: none;
-            }
-        }
-        + .main {
-            position: relative;
-            top: -5px;
-            z-index: 10;
-        }
-    }
-    .tab {
-        display: none;
-
-        &.active {
-            display: block;
-        }
-        .create li {
-            float: left;
-            height: 300px;
-            margin: 20px 0 0;
-            position: relative;
-            text-align: center;
-            width: 33%;
-        }
-        h3 {
-            bottom: 10px;
-            position: absolute;
-            text-align: center;
-            width: 100%;
-        }
-    }
-    .main {
-        background-color: #fff;
-        padding: 10px;
-
-        &.details {
-            float: left;
-            width: 100%;
-            border-radius: 0 0 10px 10px;
-        }
-    }
-    .preview {
-        border: 1px solid $light-gray;
-        height: 480px;
-        margin: -5px 0 0 20px;
-        width: 320px;
-    }
-    /* end TODO */
-
-    @media $retina {
-
+    #footer {
+        background: #fff;
+        border-top: 1px solid $cloud-gray;
+        margin: 1px 0 0;
+        max-width: inherit;
+        padding: 48px 0;
+        width: 100%;
     }
 } // End of Desktop.
 

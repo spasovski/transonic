@@ -1,0 +1,27 @@
+{% macro color_field(class, name, choices) %}
+  <div class="{{ class }} field">
+    <label class="inline-label">{{ name }}</label>
+
+    <div class="colors">
+      <div class="color-box" style="background: {{ choices[0] }}"></div>
+      <span class="selected-text">{{ choices[0] }}</span>
+
+      <div class="choices">
+        {% for color in choices %}
+          <div class="color-box" style="background: {{ color }}" data-color="{{ color }}"></div>
+        {% endfor %}
+
+        {% for color in choices %}
+          <fieldset class="hidden">
+            <input type="radio" name="{{ class }}" value="{{ color }}" />
+          </fieldset>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+<div class="color-fields">
+  {{ color_field('bg-color', _('Background'), settings.bg_color_choices) }}
+  {{ color_field('text-color', _('Text'), settings.text_color_choices) }}
+</div>

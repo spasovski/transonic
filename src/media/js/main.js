@@ -47,6 +47,9 @@ function() {
             nunjucks.env.render('header.html'));
         $('#site-footer').html(
             nunjucks.env.render('footer.html'));
+        $('#nav').html(
+            nunjucks.env.render('nav.html'));
+
 
         z.body.toggleClass('logged-in', require('user').logged_in());
         z.page.trigger('reloaded_chrome');
