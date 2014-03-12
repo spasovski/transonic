@@ -1,0 +1,16 @@
+{% macro featured_type(name, type, checked) %}
+  <input id="featured-type-{{ type }}" type="radio"
+         name="featured-type" value="{{ type }}"
+         {% if checked %} checked{%endif%} />
+  <label for="featured-type-{{ type }}">{{ name }}</label>
+{% endmacro %}
+
+<div class="featured-type field">
+  <label class="inline-label">{{ _('Featured Type') }}</label>
+
+  <fieldset class="featured-type-choices choices-box">
+    {{ featured_type(_('Header Graphic'), 'background-image', true) }}
+    {{ featured_type(_('Description'), 'description') }}
+    {{ featured_type(_('Quote'), 'quote') }}
+  </fieldset>
+</div>

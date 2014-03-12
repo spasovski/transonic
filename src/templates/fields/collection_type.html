@@ -1,0 +1,24 @@
+{% macro collection_type(name, type, checked) %}
+  <input id="collection-type-{{ type }}" type="radio"
+         name="collection-type" value="{{ type }}"
+         {% if checked %} checked{%endif%} />
+  <label for="collection-type-{{ type }}">{{ name }}</label>
+{% endmacro %}
+
+<div class="collection-type field c">
+  <div class="collection-type top-hat-field half">
+    <label for="collection-type">{{ _('Collection Type') }}</label>
+    <div class="inner">
+      <fieldset class="collection-type-choices vert-choices">
+        {{ collection_type(_('No Background Image (Article)'), 'article', true) }}
+        {{ collection_type(_('No Customization (Standard Collection)'), 'standard') }}
+        {{ collection_type(_('Display App Icons (Showcase Collection)'), 'showcase') }}
+        {{ collection_type(_('Use Sub-Categories (Mega Collection)'), 'mega') }}
+        {{ collection_type(_('Use Different Background Images on Feed Banner and Landing Page (Operator Shelf)'), 'operator-shelf') }}
+      </fieldset>
+    </div>
+  </div>
+  {% include "fields/background_image.html" %}
+  {{ background_image(_('Feed Banner'), 'collection-background-image hidden') }}
+  {{ background_image(_('Feed Banner'), 'shelf-background-image hidden', _('Landing Page')) }}
+</div>

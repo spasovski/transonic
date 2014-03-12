@@ -1,21 +1,20 @@
-<form class="transonic-form apps">
+<form class="transonic-form collections">
 
   <section class="island">
     <h3>{{ title }}</h3>
+    {% include "fields/title.html" %}
     {% include "fields/slug.html" %}
-  </section>
-
-  <section class="island select-app">
-    <h3>{{ _('Add App to Feature') }}</h3>
+    {% include "fields/description.html" %}
   </section>
 
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
     {% include "fields/colors.html" %}
-    {% include "fields/featured_type.html" %}
-    {% include "fields/background_image.html" %}{{ background_image_description(_('Feed Banner')) }}
-    {% include "fields/description_screenshot.html" %}
-    {% include "fields/quote.html" %}
+    {% include "fields/collection_type.html" %}
+  </section>
+
+  <section class="island select-app">
+    <h3>{{ _('Add Apps to Collection') }}</h3>
   </section>
 
   <section class="island submit">

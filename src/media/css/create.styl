@@ -60,6 +60,9 @@
         &:first-child {
             margin-right: 20px;
         }
+        &.hidden {
+            display: none;
+        }
     }
     fieldset {
         input {
@@ -92,7 +95,7 @@
         padding: 10px 15px;
     }
 
-    .slug input {
+    .boring-text input {
         width: 33%;
     }
     .color-fields .field {
@@ -126,11 +129,11 @@
             }
         }
     }
-    .promote-type {
+    .featured-type {
         .inline-label {
             margin-right: -6px;
         }
-        .promote-type-choices {
+        .featured-type-choices {
             padding: 0;
 
             label {
@@ -142,12 +145,18 @@
     }
     .background-image.field {
         margin-top: 30px;
-
-        .background-image .inner {
-            padding: 10px;
-        }
+    }
+    .background-image .inner {
+        padding: 10px;
     }
     .description .description-type .inner {
         padding: 5px;
+    }
+    .collection-type {
+        width: 100%;
+
+        .background-image:not(.hidden) {
+            display: inline-block;
+        }
     }
 }

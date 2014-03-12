@@ -1,13 +1,19 @@
-<div class="background-image promote-details field">
-  <div class="background-image top-hat-field half">
+{% macro background_image(name1, class, name2) %}
+  <div class="background-image top-hat-field half{% if class %} {{ class }}{% endif %}">
     <label for="background-image">{{ _('Background Image') }}</label>
     <div class="inner">
-      <p>{{ _('Drag a PNG or JPG into the space above or click to upload an image.') }}</p>
+        <p>{{ _('Drag a PNG or JPG into the space above or click to upload an image.') }}</p>
     </div>
   </div>
+{% endmacro %}
 
-  <div class="background-description top-hat-field half">
-    <label for="background-description">{{ _('Description (Optional)') }}</label>
-    <textarea name="background-description" placeholder="{{ _('This app is awesome!') }}"></textarea>
+{% macro background_image_description(name) %}
+  <div class="background-image featured-details field">
+    {{ background_image(name) }}
+
+    <div class="background-description top-hat-field half">
+      <label for="background-description">{{ _('Description (Optional)') }}</label>
+      <textarea name="background-description" placeholder="{{ _('This app is awesome!') }}"></textarea>
+    </div>
   </div>
-</div>
+{% endmacro %}

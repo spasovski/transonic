@@ -11,11 +11,19 @@ define('views/create', ['jquery', 'l10n', 'log', 'settings', 'z'],
         var color = $this.attr('value');
         $parent.find('.selected-color').css('background', color);
         $parent.find('.selected-text').text(color);
-    });
-
-    z.page.on('change', '.promote-type-choices input', function(e) {
-        // Tab between different promotion types (graphic, desc, pull quote).
-        $('.promote-details').hide().filter('.' + this.value).show();
+    })
+    .on('change', '.featured-type-choices input', function(e) {
+        // Tab between different featured types (graphic, desc, pull quote).
+        $('.featured-details').hide().filter('.' + this.value).show();
+    })
+    .on('change', '.collection-type-choices input', function(e) {
+        // Toggle background image upload widgets for different collection types.
+        var $bgImgs = $('.collection-type .background-image').addClass('hidden');
+        if (['standard', 'showcase', 'mega'].indexOf(this.value) !== -1) {
+            $bgImgs.filter('.collection-background-image').removeClass('hidden');
+        } else if (this.value == 'operator-shelf') {
+            $bgImgs.filter('.shelf-background-image').removeClass('hidden');
+        }
     });
 
     return function(builder, args) {

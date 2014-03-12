@@ -1,23 +1,4 @@
-{% macro description_type(name, type, checked) %}
-  <input id="description-type-{{ type }}" type="radio"
-         name="description-type" value="{{ type }}"
-         {% if checked %} checked{%endif%} />
-  <label for="description-type-{{ type }}">{{ name }}</label>
-{% endmacro %}
-
-<div class="description promote-details field hidden">
-  <div class="description top-hat-field half">
-    <label for="description">{{ _('Description') }}</label>
-    <textarea name="description" placeholder="{{ _('This app is awesome!') }}"></textarea>
-  </div>
-
-  <div class="description-type top-hat-field half">
-    <label for="description">{{ _('Show Screenshots?') }}</label>
-    <div class="inner">
-      <fieldset class="vert-choices">
-        {{ description_type(_('Description Only'), 'description-only', true) }}
-        {{ description_type(_('Description + Screenshot'), 'description-screenshot') }}
-      </fieldset>
-    </div>
-  </div>
+<div class="description top-hat-field half">
+  <label for="description">{{ _('Description') }}</label>
+  <textarea name="description" placeholder="{{ _('This app is awesome!') }}"></textarea>
 </div>
