@@ -1,0 +1,20 @@
+{% macro quote_choice(quote, checked) %}
+  <input id="quote-{{ quote.id }}" type="radio"
+         name="quote" value="{{ quote.body }}"
+         {% if checked %} checked{%endif%} />
+  <label for="quote-{{ quote.id }}">{{ quote.body }}</label>
+{% endmacro %}
+
+<div class="quote promote-details field hidden">
+  <div class="quote top-hat-field">
+    <label>{{ _('Quote') }}</label>
+    <div class="inner">
+      <fieldset class="vert-choices">
+        {% for quote in quote_mock %}
+          {# TODO: pull quotes from API. #}
+          {{ quote_choice(quote, loop.index0 == 0) }}
+        {% endfor %}
+      </fieldset>
+    </div>
+  </div>
+</div>

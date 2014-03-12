@@ -1,7 +1,25 @@
-define('views/create', ['l10n', 'log', 'settings'], function(l10n, log, settings) {
+define('views/create', ['jquery', 'l10n', 'log', 'settings', 'z'],
+    function($, l10n, log, settings, z) {
     'use strict';
     var console = log('create');
     var gettext = l10n.gettext;
+
+    z.page.on('click', '.choices .color-box', function() {
+        var $this = $(this);
+        var $parent = $(this).closest('.colors');
+
+        var color = $this.data('color');
+
+        $parent.find('.choices input[value="' + color + '"]')
+               .prop('checked', true);
+
+        $parent.find('.selected-color').css('background', color);
+        $parent.find('.selected-text').text(color);
+    });
+
+    z.page.on('change', '.promote-type-choices input', function(e) {
+        $('.promote-details').hide().filter('.' + this.value).show();
+    });
 
     return function(builder, args) {
         var feedType = args[0];
@@ -19,7 +37,12 @@ define('views/create', ['l10n', 'log', 'settings'], function(l10n, log, settings
         builder.z('type', 'create');
         builder.start('create/' + feedType + '.html', {
             'feed_type': feedType,  // 'apps', 'collections', or 'editorial'.
-            'title': title
+            'quote_mock': [
+                {'id': 0, 'body': 'A++'},
+                {'id': 1, 'body': 'is so cool!'},
+                {'id': 2, 'body': 'flappy bird but better'},
+            ],
+            'title': title,
         });
     };
 });

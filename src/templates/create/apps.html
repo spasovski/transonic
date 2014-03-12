@@ -12,6 +12,15 @@
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
     {% include "fields/colors.html" %}
+    {% include "fields/promote_type.html" %}
+    {% include "fields/background_image.html" %}
+    {% include "fields/description.html" %}
+    {% include "fields/quote.html" %}
+  </section>
+
+  <section class="island submit">
+    <h3>{{ _('Submit Custom Featured App') }}</h3>
+    <button type="submit">{{ _('Submit') }}</button>
   </section>
 
 </form>

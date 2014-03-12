@@ -2,9 +2,9 @@
   <div class="{{ class }} field">
     <label class="inline-label">{{ name }}</label>
 
-    <div class="colors">
-      <div class="color-box" style="background: {{ choices[0] }}"></div>
-      <span class="selected-text">{{ choices[0] }}</span>
+    <div class="colors choices-box">
+      <div class="selected-color color-box" style="background: {{ choices[0] }}"></div>
+      <p class="selected-text">{{ choices[0] }}</p>
 
       <div class="choices">
         {% for color in choices %}

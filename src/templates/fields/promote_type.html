@@ -1,0 +1,16 @@
+{% macro promote_type(name, type, checked) %}
+  <input id="promote-type-{{ type }}" type="radio"
+         name="promote-type" value="{{ type }}"
+         {% if checked %} checked{%endif%} />
+  <label for="promote-type-{{ type }}">{{ name }}</label>
+{% endmacro %}
+
+<div class="promote-type field">
+  <label class="inline-label">{{ _('Promotion Type') }}</label>
+
+  <fieldset class="promote-type-choices choices-box">
+    {{ promote_type(_('Header Graphic'), 'background-image', true) }}
+    {{ promote_type(_('Description'), 'description') }}
+    {{ promote_type(_('Quote'), 'quote') }}
+  </fieldset>
+</div>

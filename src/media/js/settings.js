@@ -40,8 +40,8 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         ],
 
         text_color_choices: [
-            '#000',  // Pretty Dark.
-            '#FFF',  // A bit brighter than Pretty Dark.
+            '#000000',  // Pretty Dark.
+            '#FFFFFF',  // A bit brighter than Pretty Dark.
         ],
     });
 });
