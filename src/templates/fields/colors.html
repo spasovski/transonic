@@ -6,17 +6,14 @@
       <div class="selected-color color-box" style="background: {{ choices[0] }}"></div>
       <p class="selected-text">{{ choices[0] }}</p>
 
-      <div class="choices">
+      <fieldset class="choices">
         {% for color in choices %}
-          <div class="color-box" style="background: {{ color }}" data-color="{{ color }}"></div>
+          <input id="{{ class + loop.index0 }}" type="radio" name="{{ class }}" value="{{ color }}" />
+          <label for="{{ class + loop.index0 }}" class="color">
+            <div class="color-box" style="background: {{ color }}"></div>
+          </label>
         {% endfor %}
-
-        {% for color in choices %}
-          <fieldset class="hidden">
-            <input type="radio" name="{{ class }}" value="{{ color }}" />
-          </fieldset>
-        {% endfor %}
-      </div>
+      </fieldset>
     </div>
   </div>
 {% endmacro %}

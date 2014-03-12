@@ -4,20 +4,17 @@ define('views/create', ['jquery', 'l10n', 'log', 'settings', 'z'],
     var console = log('create');
     var gettext = l10n.gettext;
 
-    z.page.on('click', '.choices .color-box', function() {
+    z.page.on('change', '.colors input', function() {
+        // Sync color previews and inputs.
         var $this = $(this);
         var $parent = $(this).closest('.colors');
-
-        var color = $this.data('color');
-
-        $parent.find('.choices input[value="' + color + '"]')
-               .prop('checked', true);
-
+        var color = $this.attr('value');
         $parent.find('.selected-color').css('background', color);
         $parent.find('.selected-text').text(color);
     });
 
     z.page.on('change', '.promote-type-choices input', function(e) {
+        // Tab between different promotion types (graphic, desc, pull quote).
         $('.promote-details').hide().filter('.' + this.value).show();
     });
 

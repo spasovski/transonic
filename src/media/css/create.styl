@@ -33,9 +33,9 @@
         }
     }
     .inline-label {
-        display: inline-block;
         background: $light-gray;
         border-radius: 5px 0 0 5px;
+        display: inline-block;
         margin-right: -4px;
         padding: 8px 20px;
         vertical-align: middle;
@@ -68,7 +68,7 @@
         label:hover {
             cursor: pointer;
         }
-        input:checked + label {
+        input:checked + label:not(.color) {
             background: $sailor-blue;
             box-shadow: 0 0 1px 1px $light-gray;
             color: #fff;
@@ -117,14 +117,12 @@
             }
         }
         .choices {
+            border: 0;
             display: inline-block;
+            padding: 0;
 
-            .color-box {
-                margin-right: 5px;
-
-                &:hover {
-                    cursor: pointer;
-                }
+            label {
+                display: inline-block;
             }
         }
     }
