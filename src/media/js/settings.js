@@ -43,5 +43,19 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             '#000000',  // Pretty Dark.
             '#FFFFFF',  // A bit brighter than Pretty Dark.
         ],
+
+        editorial_titles: [
+            [gettext('Awesome Game'), gettext('Awesome Games')],
+            [gettext('Best of the Best'), gettext('Best of the Best')],
+            [gettext('Community Pick'), gettext('Community Picks')],
+            [gettext('Editor\'s Pick'), gettext('Editor\'s Picks')],
+            [gettext('Essential'), gettext('Essentials')],
+            [gettext('Fresh App'), gettext('Fresh Apps')],
+            [gettext('Good Deal'), gettext('Good Deals')],
+            [gettext('Hidden Gem'), gettext('Hidden Gems')],
+            [gettext('Noteworthy'), gettext('Noteworthy')],
+            [gettext('Partner Highlight'), gettext('Partner Highlights')],
+            [gettext('Staff Recommendation'), gettext('Staff Recommendations')],
+        ],
     });
 });

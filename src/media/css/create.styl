@@ -17,6 +17,9 @@
 }
 
 .transonic-form {
+    .island:first-child > h3 {
+        font-weight: normal;
+    }
     .field {
         margin: 20px 0;
     }
@@ -157,6 +160,26 @@
 
         .background-image:not(.hidden) {
             display: inline-block;
+        }
+    }
+    .editorial-title {
+        select {
+            border: 1px solid $light-gray;
+            padding: 6px;
+            vertical-align: middle;
+        }
+    }
+    .editorial-type {
+        input + label {
+            margin-bottom: 5px;
+
+            + label {
+                font-size: 12px;
+                margin: 0 0 10px 30px;
+            }
+        }
+        input:not(:checked) + label + label {
+            color: $earl-gray;
         }
     }
 }

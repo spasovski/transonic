@@ -1,0 +1,19 @@
+<form class="transonic-form editorial">
+
+  <section class="island">
+    <h3>{{ title }}</h3>
+    {% include "fields/editorial_title.html" %}
+    {% include "fields/slug.html" %}
+    {% include "fields/editorial_type.html" %}
+  </section>
+
+  <section class="island select-app">
+    <h3>{{ _('Add App(s) to Editorial Brand') }}</h3>
+  </section>
+
+  <section class="island submit">
+    <h3>{{ _('Submit Custom Featured App') }}</h3>
+    <button type="submit">{{ _('Submit') }}</button>
+  </section>
+
+</form>

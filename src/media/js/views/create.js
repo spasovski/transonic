@@ -35,7 +35,7 @@ define('views/create', ['jquery', 'l10n', 'log', 'settings', 'z'],
         } else if (feedType == 'collections') {
             title = gettext('Collections and Articles');
         } else if (feedType == 'editorial') {
-            title = gettext('Editorial Brand');
+            title = gettext('Editorial Brands');
         }
 
         builder.z('title', title);
