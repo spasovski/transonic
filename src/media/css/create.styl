@@ -152,6 +152,56 @@
     .background-image .inner {
         padding: 10px;
     }
+    .background-image-input {
+        [data-fileinput-fake] {
+            border: 1px dotted $light-gray;
+            display: block;
+            height: 200px;
+            width: 200px;
+            margin: 20px auto;
+            text-align: center;
+
+            &:hover {
+                cursor: pointer;
+            }
+            span {
+                font-weight: 300;
+                position: relative;
+                top: unquote('calc(50% - 8px)');
+            }
+            input {
+                border: 0;
+                border-radius: 5px;
+                position: relative;
+                text-align: center;
+                top: 60%;
+
+                &:hover {
+                    cursor: default;
+                }
+                &[disabled] {
+                    background-color: #fff;
+                    border-radius: 10px;
+                    color: $dark-gray;
+                }
+            }
+        }
+        &.filled [data-fileinput-fake] {
+            border: 2px solid $green;
+            position: relative;
+
+            &:after {
+                background: url(../img/pretty/tick.svg) no-repeat;
+                content: "";
+                display: block;
+                position: absolute;
+                height: 32px;
+                right: 0;
+                top: 15px;
+                width: 32px;
+            }
+        }
+    }
     .description .description-type .inner {
         padding: 5px;
     }

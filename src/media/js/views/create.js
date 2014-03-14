@@ -1,5 +1,5 @@
-define('views/create', ['jquery', 'l10n', 'log', 'settings', 'z'],
-    function($, l10n, log, settings, z) {
+define('views/create', ['jquery', 'jquery.fakefilefield', 'l10n', 'log', 'settings', 'z'],
+    function($, fakefilefield, l10n, log, settings, z) {
     'use strict';
     var console = log('create');
     var gettext = l10n.gettext;
@@ -24,6 +24,12 @@ define('views/create', ['jquery', 'l10n', 'log', 'settings', 'z'],
         } else if (this.value == 'operator-shelf') {
             $bgImgs.filter('.shelf-background-image').removeClass('hidden');
         }
+    })
+    .on('change', '.background-image-input [type="file"]', function() {
+       $(this).closest('.background-image-input').addClass('filled');
+    })
+    .on('loaded', function() {
+        $('.fileinput').fakeFileField();
     });
 
     return function(builder, args) {
