@@ -164,17 +164,24 @@
             &:hover {
                 cursor: pointer;
             }
+            img {
+                max-width: 100%;
+            }
             span {
+                background: #fff;
+                border-radius: 2px;
                 font-weight: 300;
+                padding: 4px 6px;
                 position: relative;
                 top: unquote('calc(50% - 8px)');
             }
             input {
                 border: 0;
                 border-radius: 5px;
+                display: none;
+                font-weight: 300;
                 position: relative;
                 text-align: center;
-                top: 60%;
 
                 &:hover {
                     cursor: default;
@@ -200,6 +207,9 @@
                 top: 15px;
                 width: 32px;
             }
+            input {
+                display: block;
+            }
         }
     }
     .description .description-type .inner {
@@ -208,7 +218,19 @@
     .collection-type {
         width: 100%;
 
-        .background-image:not(.hidden) {
+        &[data-collection-type="article"] {
+            .background-image {
+                display: none;
+            }
+        }
+        &[data-collection-type="standard"],
+        &[data-collection-type="showcase"],
+        &[data-collection-type="mega"] {
+            .shelf-landing {
+                display: none;
+            }
+        }
+        .background-image {
             display: inline-block;
         }
     }
@@ -231,5 +253,11 @@
         input:not(:checked) + label + label {
             color: $earl-gray;
         }
+    }
+}
+
+.transonic-form.apps {
+    .background-image-input.shelf-landing {
+        display: none;
     }
 }

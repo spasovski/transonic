@@ -4,6 +4,8 @@ define('views/create', ['jquery', 'jquery.fakefilefield', 'l10n', 'log', 'settin
     var console = log('create');
     var gettext = l10n.gettext;
 
+    var imageUploads = {};  // Keep track of drag-and-drop uploads to stuff into FormData later.
+
     z.page.on('change', '.colors input', function() {
         // Sync color previews and inputs.
         var $this = $(this);
@@ -17,19 +19,41 @@ define('views/create', ['jquery', 'jquery.fakefilefield', 'l10n', 'log', 'settin
         $('.featured-details').hide().filter('.' + this.value).show();
     })
     .on('change', '.collection-type-choices input', function(e) {
-        // Toggle background image upload widgets for different collection types.
-        var $bgImgs = $('.collection-type .background-image').addClass('hidden');
-        if (['standard', 'showcase', 'mega'].indexOf(this.value) !== -1) {
-            $bgImgs.filter('.collection-background-image').removeClass('hidden');
-        } else if (this.value == 'operator-shelf') {
-            $bgImgs.filter('.shelf-background-image').removeClass('hidden');
+        // To help CSS toggle background image upload widgets for different collection types.
+        $(this).closest('.collection-type').attr('data-collection-type', this.value);
+    })
+
+    // Drag and drop image uploads.
+    .on('dragover dragleave', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    })
+    .on('drop', '.background-image-input', function(e) {
+        e.preventDefault();
+        var $this = $(this);
+
+        // Read file.
+        var file = e.originalEvent.dataTransfer.files[0];
+
+        // Preview file.
+        if (['image/png', 'image/jpeg'].indexOf(file.type) !== -1) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $this.addClass('filled')
+                     .find('.preview').attr('src', e.target.result);
+                $this.find('input[type="text"]').attr('value', file.name);
+            };
+            reader.readAsDataURL(file);
+            imageUploads[$this.find('[type="file"]').attr('name')] = file;
         }
+    })
+
+    // Click image uploads.
+    .on('loaded', function() {
+        $('.fileinput').fakeFileField();
     })
     .on('change', '.background-image-input [type="file"]', function() {
        $(this).closest('.background-image-input').addClass('filled');
-    })
-    .on('loaded', function() {
-        $('.fileinput').fakeFileField();
     });
 
     return function(builder, args) {

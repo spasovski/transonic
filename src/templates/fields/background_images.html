@@ -1,0 +1,10 @@
+{% include "fields/image_file_input.html" %}
+
+<div class="background-image top-hat-field half">
+  <label for="background-image">{{ _('Background Image') }}</label>
+  <div class="inner">
+    {{ image_file_input(_('Feed Banner'), 'feed-banner') }}
+    {{ image_file_input(_('Shelf Landing'), 'shelf-landing') }}
+    <p>{{ _('Drag a PNG or JPG into the space above or click to upload an image.') }}</p>
+  </div>
+</div>
