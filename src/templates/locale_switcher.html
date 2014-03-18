@@ -1,0 +1,18 @@
+{% macro locale_textarea(name, lang) %}
+  <textarea name="{{ name }}-{{ lang }}"
+            placeholder="This app is awesome! ({{ lang }})"
+            data-lang="{{ lang }}"
+            class="localized{% if lang != 'en-US' %} hidden{% endif %}">
+  </textarea>
+{% endmacro %}
+
+<div class="locale-switcher">
+  <label for="locale-swicher">{{ _('Localize for:') }}</label>
+  <select id="locale-switcher">
+    {% for lang in settings.languages %}
+      <option value="{{ lang }}"{% if lang == 'en-US' %} selected{% endif %}>
+        {{ lang }}
+      </option>
+    {% endfor %}
+  </select>
+</div>

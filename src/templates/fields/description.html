@@ -1,4 +1,6 @@
 <div class="description top-hat-field half">
-  <label for="description">{{ _('Description') }}</label>
-  <textarea name="description" placeholder="{{ _('This app is awesome!') }}"></textarea>
+  <label>{{ _('Description') }}</label>
+  {% for lang in settings.languages %}
+    {{ locale_textarea('description', lang) }}
+  {% endfor %}
 </div>

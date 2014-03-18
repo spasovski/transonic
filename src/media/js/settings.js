@@ -30,6 +30,12 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
 
         title_suffix: 'Firefox Marketplace Curation Tools',
 
+        languages: [
+            'bn-BD', 'ca', 'cs', 'de', 'el', 'en-US', 'es', 'fr', 'hr', 'hu',
+            'it', 'mk', 'nl', 'pl', 'pt-BR', 'ro', 'ru', 'sr', 'sr-Latn', 'sk',
+            'tr', 'zh-CN'
+        ],
+
         bg_color_choices: [
             '#B90000',  // Raring Red.
             '#FF4E00',  // Oneric Orange.

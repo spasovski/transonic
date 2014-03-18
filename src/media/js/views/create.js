@@ -54,6 +54,13 @@ define('views/create', ['jquery', 'jquery.fakefilefield', 'l10n', 'log', 'settin
     })
     .on('change', '.background-image-input [type="file"]', function() {
        $(this).closest('.background-image-input').addClass('filled');
+    })
+
+    // Localization of text fields.
+    .on('change', '#locale-switcher', function() {
+        var lang = this.value;
+        $('.localized').hide()
+                       .filter('[data-lang=' + lang + ']').show();
     });
 
     return function(builder, args) {

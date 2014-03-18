@@ -2,7 +2,9 @@
   {% include "fields/background_images.html" %}
 
   <div class="background-description top-hat-field half">
-    <label for="background-description">{{ _('Description (Optional)') }}</label>
-    <textarea name="background-description" placeholder="{{ _('This app is awesome!') }}"></textarea>
+    <label>{{ _('Description (Optional)') }}</label>
+    {% for lang in settings.languages %}
+      {{ locale_textarea('background-description', lang) }}
+    {% endfor %}
   </div>
 </div>
