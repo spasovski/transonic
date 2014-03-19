@@ -1,0 +1,22 @@
+<div class="result c" data-id="{{ id }}">
+  <img class="icon" src="{{ icon }}">
+  <div class="info">
+    <h3 class="name" itemprop="name">
+      <a href="{{ detail_url }}" target="_blank">{{ name }}</a>
+    </h3>
+    <div class="author" itemprop="author">{{ author }}</div>
+    <div class="compat-info">
+      <ul class="device-types" itemprop="device-types">
+        <li class="desktop{% if device_types.indexOf('desktop') == -1 %} unavailable{% endif %}"></li>
+        <li class="android{% if device_types.indexOf('android') == -1 and device_types.indexOf('android-mobile') == -1 and device_types.indexOf('android-tablet') == -1 %} unavailable{% endif %}"></li>
+        <li class="firefoxos{% if device_types.indexOf('firefoxos') == -1 %} unavailable{% endif %}"></li>
+      </ul>
+      <ul class="disabled-regions" itemprop="disabled-regions">
+        <span>{{ _('Disabled:') }}</span>
+        {% for disabled_region in disabled_regions %}
+          <li class="{{ disabled_region }}"></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
