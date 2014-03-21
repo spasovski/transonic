@@ -1,0 +1,140 @@
+@import 'lib';
+
+.app-selector,
+.selected-app {
+    display: inline-block;
+    width: 320px;
+
+    input {
+        height: 40px;
+        padding-left: 10px;
+        width: 100%;
+    }
+    .paginator {
+        a {
+            border: 1px solid $light-gray;
+            display: inline-block;
+            float: left;
+            padding: 10px 0;
+            text-align: center;
+            transition(background .1s);
+            width: 50%;
+
+            &:hover {
+                cursor: pointer;
+                background: $faint-blue;
+                text-decoration: none;
+            }
+        }
+
+        &:last-child {
+            display: none;
+        }
+    }
+    .result {
+        border: solid $light-gray;
+        border-width: 0 1px 1px;
+        padding: 15px 5px 10px 5px;
+        transition(background .1s);
+
+        &:hover {
+            cursor: pointer;
+            background: $faint-blue;
+        }
+        &:last-child {
+            border-radius: 0 0 5px 5px;
+        }
+        &.selected {
+            background: $shadow-blue;
+        }
+    }
+    .icon {
+        float: left;
+        margin: 0 10px 10px 0;
+    }
+    .info {
+        float: left;
+
+        .name {
+            font-size: 18px;
+            padding-top: 0;
+        }
+        .author {
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+        .name,
+        .author {
+            max-width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+    .compat-info {
+        .device-types {
+            float: left;
+            margin-top: 5px;
+
+            li {
+                background: url(../img/icons/platform_icons.png) no-repeat;
+                display: inline-block;
+                height: 23px;
+                position: relative;
+                text-indent: -9999px;
+                vertical-align: middle;
+                width: 26px;
+
+                &.unavailable {
+                    opacity: .8;
+                }
+                &.desktop {
+                    background-position: 0 -92px;
+
+                    &.unavailable {
+                        background-position: 0 -115px;
+                    }
+                }
+                &.android,
+                &.android-mobile,
+                &.android-tablet {
+                    background-position: 0 -138px;
+                    margin-left: 2px;
+
+                    &.unavailable {
+                        background-position: 0 -161px;
+                    }
+                }
+                &.firefoxos {
+                    background-position: 0 -184px;
+
+                    &.unavailable {
+                        background-position: 0 -207px;
+                    }
+                }
+            }
+        }
+        .disabled-regions {
+            border-left: 1px solid $light-gray;
+            float: left;
+            margin: 5px 0 0 3px;
+            max-width: 150px;
+            padding-left: 8px;
+
+            span {
+                font-size: 13px;
+                font-weight: 300;
+            }
+        }
+    }
+}
+for region in ar br cl cn co de es gr hu it me mx pe pl rs uk us uy ve restofworld
+    .disabled-regions .{region} {
+        background-image: url(unquote('../img/icons/regions/' + region + '.png'));
+        background-size: 13px;
+        display: inline-block;
+        height: 13px;
+        position: relative;
+        top: 2px;
+        width: 13px;
+    }

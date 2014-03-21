@@ -1,5 +1,6 @@
-define('views/create', ['jquery', 'jquery.fakefilefield', 'l10n', 'log', 'settings', 'z'],
-    function($, fakefilefield, l10n, log, settings, z) {
+define('views/create',
+    ['app_selector', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'requests', 'settings', 'urls', 'utils', 'z'],
+    function(app_select, $, fakefilefield, l10n, log, requests, settings, urls, utils, z) {
     'use strict';
     var console = log('create');
     var gettext = l10n.gettext;
@@ -21,6 +22,14 @@ define('views/create', ['jquery', 'jquery.fakefilefield', 'l10n', 'log', 'settin
     .on('change', '.collection-type-choices input', function(e) {
         // To help CSS toggle background image upload widgets for different collection types.
         $(this).closest('.collection-type').attr('data-collection-type', this.value);
+    })
+    .on('app-selected', function(e, id) {
+        // App selection.
+        $('input[name="app"]').val(id);
+
+        requests.get(urls.api.unsigned.url('app', [id])).done(function(app) {
+            $('.selected-app').html(app_select.render_result(app));
+        });
     })
 
     // Drag and drop image uploads.
