@@ -4,7 +4,7 @@
     <h3 class="name" itemprop="name">
       <a href="{{ detail_url }}" target="_blank">{{ name }}</a>
     </h3>
-    <div class="author" itemprop="author">{{ author }}</div>
+    <div class="author" itemprop="author">{{ author or _('No Author') }}</div>
     <div class="compat-info">
       <ul class="device-types" itemprop="device-types">
         <li class="desktop{% if device_types.indexOf('desktop') == -1 %} unavailable{% endif %}"></li>
@@ -17,6 +17,12 @@
           <li class="{{ disabled_region }}"></li>
         {% endfor %}
       </ul>
-    </div>
   </div>
+  {% if with_actions %}
+    <div class="actions">
+      <a class="reorder prev">up</a>
+      <a class="delete" data-id="{{ id }}">delete</a>
+      <a class="reorder next">down</a>
+    </div>
+  {% endif %}
 </div>

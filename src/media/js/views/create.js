@@ -1,6 +1,6 @@
 define('views/create',
-    ['app_selector', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'requests', 'settings', 'forms_transonic', 'urls', 'utils', 'z'],
-    function(app_select, $, fakefilefield, l10n, log, requests, settings, forms_transonic, urls, utils, z) {
+    ['app_selector', 'apps_widget', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'requests', 'settings', 'forms_transonic', 'urls', 'utils', 'z'],
+    function(app_select, apps_widget, $, fakefilefield, l10n, log, requests, settings, forms_transonic, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -24,10 +24,11 @@ define('views/create',
         $('.collection-type.bg').attr('data-collection-type', this.value);
     })
     .on('app-selected', function(e, id) {
-        // App selection.
-        requests.get(urls.api.unsigned.url('app', [id])).done(function(app) {
-            $('.selected-app').html(app_select.render_result(app));
-        });
+        if ($('.transonic-form').data('type') == 'apps') {
+            apps_widget.set(id);
+        } else {
+            apps_widget.append(id);
+        };
     })
 
     // Drag and drop image uploads.
@@ -35,8 +36,7 @@ define('views/create',
         e.preventDefault();
         e.stopPropagation();
     })
-    .on('drop', '.background-image-input', function(e) {
-        e.preventDefault();
+    .on('drop', '.background-image-input', utils._pd(function(e) {
         var $this = $(this);
 
         // Read file.
@@ -53,7 +53,7 @@ define('views/create',
             reader.readAsDataURL(file);
             imageUploads[$this.find('[type="file"]').attr('name')] = file;
         }
-    })
+    }))
 
     // Click image uploads.
     .on('loaded', function() {
@@ -90,7 +90,7 @@ define('views/create',
         }
 
         builder.z('title', title);
-        builder.z('type', 'create');
+        builder.z('type', feedType);
         builder.start('create/' + feedType + '.html', {
             'feed_type': feedType,  // 'apps', 'collections', or 'editorial'.
             'quote_mock': [

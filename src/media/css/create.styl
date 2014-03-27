@@ -246,14 +246,12 @@
         display: inline-block;
         margin-top: 10px;
         width: 320px;
-
-        .helptext {
-            border: 1px solid $light-gray;
-            border-radius: 0 0 5px 5px;
-            font-weight: 300;
-            padding: 10px;
-            width: 320px;
-        }
+    }
+    .selected-app {
+        border: 1px solid $light-gray;
+        border-radius: 0 0 5px 5px;
+        font-weight: 300;
+        padding: 10px;
     }
 }
 
@@ -273,6 +271,9 @@
     }
     [data-collection-type="promo"],
     [data-collection-type="listing"] {
+        .background-image {
+            width: 270px;
+        }
         .shelf-landing {
             display: none;
         }
@@ -301,6 +302,38 @@
         }
         input:not(:checked) + label + label {
             color: $earl-gray;
+        }
+    }
+}
+
+.apps-widget {
+    margin-top: 10px;
+
+    .apps {
+        .app-helptext {
+            border: 1px solid $light-gray;
+            border-radius: 0 0 5px 5px;
+            font-weight: 300;
+            padding: 10px;
+        }
+        .result {
+            position: relative;
+
+            &:hover {
+                background: none;
+            }
+        }
+    }
+    .actions {
+        bottom: 9px;
+        position: absolute;
+        right: 10px;
+        text-align: center;
+        width: 50px;
+
+        a {
+            display: block;
+            padding: 3px 0;
         }
     }
 }

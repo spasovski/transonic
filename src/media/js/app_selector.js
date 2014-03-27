@@ -34,13 +34,7 @@ define('app_selector',
     .on('click', '.app-selector .result', function() {
         var $this = $(this);
         var $app_selector = $('.app-selector');
-
-        // Set placeholder.
-        $app_selector.find('#app-selector').val('').attr('placeholder', $this.find('[itemprop="name"] a').text());
-        // Set form field.
         $app_selector.find('input[name="app"]').val($this.data('id'));
-        // Hide results list.
-        $app_selector.find('.result').remove();
         // Trigger with ID.
         z.page.trigger('app-selected', [$this.attr('data-id')]);
     });
@@ -55,15 +49,16 @@ define('app_selector',
         });
     }
 
-    var render_result = function(app) {
+    var render_result = function(app, with_actions) {
         return nunjucks.env.render('app_selector_result.html', {
             author: app.author,
             detail_url: settings.api_url + '/app/' + app.slug,
             device_types: app.device_types,
+            disabled_regions: get_disabled_regions(app),
             icon: app.icons['48'],
             id: app.id,
             name: utils.translate(app.name),
-            disabled_regions: get_disabled_regions(app)
+            with_actions: with_actions,
         });
     };
 
