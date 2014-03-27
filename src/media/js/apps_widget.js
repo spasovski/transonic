@@ -9,7 +9,7 @@ define('apps_widget',
     function get_app_ids() {
         var ids = [];
         $('.apps-widget .result').map(function() {
-            ids.push(this.getAttribute('data-id'), 10);
+            ids.push(parseInt(this.getAttribute('data-id'), 10));
         });
         return ids;
     }
@@ -34,7 +34,7 @@ define('apps_widget',
         var pos = all_ids.indexOf(id);
         var is_prev = $this.hasClass('prev');
 
-        if ((is_prev && pos === 0) || (!is_prev && pos === all_ids.length - 1)) {
+        if ((is_prev && pos === 0) || (!is_prev && pos == all_ids.length - 1)) {
             // Don't swap if trying to move the first element up or last element down.
             return;
         }
@@ -64,7 +64,7 @@ define('apps_widget',
     var set = function(id) {
         requests.get(urls.api.unsigned.url('app', [id])).done(function(app) {
             // Render the selected app as the selected featured app.
-            $apps_list.find('.apps').html(app_select.render_result(app));
+            $apps_list.html(app_select.render_result(app));
             // Set placeholder and hide results list.
             var $app_selector = $('.app-selector');
             $app_selector.find('#app-selector').val('')

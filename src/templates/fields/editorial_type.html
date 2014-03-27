@@ -1,23 +1,9 @@
-{% macro editorial_type(name, description, type, checked) %}
-  <input id="editorial-type-{{ type }}" type="radio"
-         name="editorial-type" value="{{ type }}"
-         {% if checked %} checked{%endif%} />
-  <label for="editorial-type-{{ type }}">{{ name }}</label>
-  <label for="editorial-type-{{ type }}">{{ description }}</label>
-{% endmacro %}
-
-<div class="editorial-type field c">
-  <div class="editorial-type top-hat-field half">
-    <label for="editorial-type">{{ _('Layout Type') }}</label>
-    <div class="inner">
-      <fieldset class="editorial-type-choices vert-choices">
-        {{ editorial_type(_('Table Layout'),
-                          _('Apps are stacked three in a line, then vertically. Landing page will appear when there are over 6 apps.'),
-                          'article', true) }}
-        {{ editorial_type(_('List Layout'),
-                          _('Apps are stacked vertically, one line per app. Landing page will appear when there are over 2 apps.'),
-                          'operator-shelf') }}
-      </fieldset>
-    </div>
-  </div>
+<div class="editorial-type field">
+  <label for="editorial-type" class="inline-label">{{ _('Layout ') }}</label>
+  <select id="editorial-type" name="type">
+      <option class="table" value="table" selected>{{ _('Table Layout') }}</option>
+      <option class="list" value="list">{{ _('List Layout') }}</option>
+  </select>
+  <p class="editorial-helptext table">{{ _('Apps will be stacked three in a line, then vertically. Landing page will appear when there are over 6 apps.') }}</p>
+  <p class="editorial-helptext list hidden">{{ _('Apps will be stacked vertically, one line per app. Landing page will appear when there are over 2 apps.') }}</p>
 </div>

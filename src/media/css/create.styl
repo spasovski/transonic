@@ -253,6 +253,9 @@
         font-weight: 300;
         padding: 10px;
     }
+    .background-image.field {
+        width: 270px;
+    }
 }
 
 .collections {
@@ -284,25 +287,18 @@
 }
 
 .editorial {
-    .editorial-title {
+    .editorial-title,
+    .editorial-type {
         select {
             border: 1px solid $light-gray;
             padding: 6px;
             vertical-align: middle;
         }
     }
-    .editorial-type {
-        input + label {
-            margin-bottom: 5px;
-
-            + label {
-                font-size: 12px;
-                margin: 0 0 10px 30px;
-            }
-        }
-        input:not(:checked) + label + label {
-            color: $earl-gray;
-        }
+    .editorial-helptext {
+        font-weight: 300;
+        font-size: 12px;
+        padding-top: 8px;
     }
 }
 

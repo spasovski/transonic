@@ -23,12 +23,20 @@ define('views/create',
         $('.collection-type').hide().filter('.' + this.value).show();
         $('.collection-type.bg').attr('data-collection-type', this.value);
     })
+    .on('change', '.editorial-type select', function() {
+        var $helptext = $('.editorial-helptext').hide();
+        if ($(this).find('.table').prop('selected')) {
+            $helptext.filter('.table').show();
+        } else {
+            $helptext.filter('.list').show();
+        }
+    })
     .on('app-selected', function(e, id) {
         if ($('.transonic-form').data('type') == 'apps') {
             apps_widget.set(id);
         } else {
             apps_widget.append(id);
-        };
+        }
     })
 
     // Drag and drop image uploads.
