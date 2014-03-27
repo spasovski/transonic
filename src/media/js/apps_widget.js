@@ -9,7 +9,7 @@ define('apps_widget',
     function get_app_ids() {
         var ids = [];
         $('.apps-widget .result').map(function() {
-            ids.push(parseInt(this.getAttribute('data-id'), 10));
+            ids.push(this.getAttribute('data-id'), 10);
         });
         return ids;
     }
@@ -22,7 +22,7 @@ define('apps_widget',
 
     .on('click', '.apps-widget .actions .delete', function() {
         // Remove.
-        var id = this.getAttribute('data-id');
+        var id = $(this).closest('.result').data('id');
         $apps_list.find('[data-id="' +  id + '"]').remove();
     })
 
@@ -34,15 +34,20 @@ define('apps_widget',
         var pos = all_ids.indexOf(id);
         var is_prev = $this.hasClass('prev');
 
-        if ((is_prev && pos === 0) || pos === all_ids.length - 1) {
+        if ((is_prev && pos === 0) || (!is_prev && pos === all_ids.length - 1)) {
+            // Don't swap if trying to move the first element up or last element down.
             return;
         }
 
         var swap_id = is_prev ? all_ids[pos - 1] : all_ids[pos + 1];
-        var original = $apps_list.find('[data-id="' + swap_id + '"]');
-        var clone = original.cloneNode();
-        console.log($app);
+        var $swap_with = $apps_list.find('[data-id="' + swap_id + '"]');
 
+        if (is_prev) {
+            $app.clone().insertBefore($swap_with);
+        } else {
+            $app.clone().insertAfter($swap_with);
+        }
+        $app.remove();
     });
 
     var append = function(id) {
