@@ -1,6 +1,6 @@
 define('views/create',
-    ['app_selector', 'apps_widget', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'requests', 'settings', 'forms_transonic', 'urls', 'utils', 'z'],
-    function(app_select, apps_widget, $, fakefilefield, l10n, log, requests, settings, forms_transonic, urls, utils, z) {
+    ['app_selector', 'apps_widget', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'preview_tray', 'requests', 'settings', 'forms_transonic', 'templates', 'urls', 'utils', 'z'],
+    function(app_select, apps_widget, $, fakefilefield, l10n, log, preview_tray, requests, settings, forms_transonic, nunjucks, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -34,10 +34,25 @@ define('views/create',
     .on('app-selected', function(e, id) {
         if ($('.transonic-form').data('type') == 'apps') {
             apps_widget.set(id);
+
+            requests.get(urls.api.unsigned.url('app', [id])).done(function(app) {
+                $('.screenshots').html(nunjucks.env.render('preview_tray.html', {app: app}));
+                z.page.trigger('populatetray');
+            });
         } else {
             apps_widget.append(id);
         }
     })
+    .on('click', '.preview-tray li', utils._pd(function() {
+        // Preview tray, select screenshot.
+        var $this = $(this);
+
+        // Move image to middle, activate the dot.
+        $this.closest('.preview-tray').find('.dot').eq($this.index()).trigger('click')
+
+        // Set the input value to the src.
+        .closest('.screenshot').find('input').val($this.data('id'));
+    }))
 
     // Drag and drop image uploads.
     .on('dragover dragleave', function(e) {

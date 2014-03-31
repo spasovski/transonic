@@ -220,6 +220,12 @@
     .description .description-type .inner {
         padding: 5px;
     }
+    .placeholder-text {
+        border: 1px solid $light-gray;
+        border-radius: 0 0 5px 5px;
+        font-weight: 300;
+        padding: 10px;
+    }
 }
 
 .locale-switcher {
@@ -277,8 +283,7 @@
         .background-image {
             width: 270px;
         }
-        .shelf-landing {
-            display: none;
+        .shelf-landing {display: none;
         }
     }
     .background-image {
@@ -305,19 +310,11 @@
 .apps-widget {
     margin-top: 10px;
 
-    .apps {
-        .app-helptext {
-            border: 1px solid $light-gray;
-            border-radius: 0 0 5px 5px;
-            font-weight: 300;
-            padding: 10px;
-        }
-        .result {
-            position: relative;
+    .apps .result {
+        position: relative;
 
-            &:hover {
-                background: none;
-            }
+        &:hover {
+            background: none;
         }
     }
     .actions {

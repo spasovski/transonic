@@ -22,13 +22,13 @@
     {{ featured_type(_('Header Graphic'), 'background-image') }}
     {{ featured_type(_('Description'), 'description') }}
     {{ featured_type(_('Quote'), 'quote') }}
-    {{ featured_type(_('Preview'), 'preview') }}
+    {{ featured_type(_('Screenshot'), 'screenshot') }}
   </fieldset>
 
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
 
-    <div class="featured-details icon background-image quote preview">
+    <div class="featured-details icon background-image quote screenshot">
       {% include "fields/colors.html" %}
     </div>
 
@@ -36,7 +36,7 @@
       {% include "fields/background_images.html" %}
     </div>
 
-    <div class="featured-details description quote preview hidden">
+    <div class="featured-details description quote screenshot hidden">
       {% include "fields/description.html" %}
     </div>
 
@@ -44,8 +44,8 @@
       {% include "fields/quote.html" %}
     </div>
 
-    <div class="featured-details preview hidden">
-      {% include "fields/preview.html" %}
+    <div class="featured-details screenshot hidden">
+      {% include "fields/screenshot.html" %}
     </div>
   </section>
 

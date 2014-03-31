@@ -1,0 +1,18 @@
+<div class="preview-tray{{ ' single' if app.previews.length == 1 }}">
+  <div class="slider shots">
+    <ul class="content">
+      {% for preview in app.previews %}
+        <li itemscope itemtype="http://schema.org/ImageObject" data-id="{{ preview.id }}">
+          <a class="screenshot thumbnail" href="{{ preview.image_url }}">
+            <img alt="{{ _('screenshot') }}" src="{{ preview.thumbnail_url }}" draggable="false" itemprop="contentURL">
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="dots">
+    {% for preview in app.previews %}
+      <b class="dot"></b>
+    {% endfor %}
+  </div>
+</div>
