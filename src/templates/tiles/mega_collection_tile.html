@@ -1,0 +1,13 @@
+{# Used for mega collections only. #}
+
+<a href="{{ url }}">
+  <section class="collection mega">
+    <div class="curve" style="background-color: {{ color|hex2rgba('.6') }}"></div>
+    <div class="info">
+      <h1>{{ name }}</h1>
+      <p class="author">{{ _('by') }} {{ author }}</p>
+    </div>
+    <div class="alt-curve" style="background-color: {{ color|hex2rgba('.8') }}"></div>
+    <div class="desc">{{ description }}</div>
+  </section>
+</a>

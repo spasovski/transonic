@@ -1,0 +1,18 @@
+{# Currently used for a user/editor collection, featured app, operator shelf. #}
+
+<a href="{{ url }}">
+  <section class="collection" style="background-color: {{ color|hex2rgba('.4') }}">
+    {% if apps %}
+      <ul class="app-icons">
+        {% for app in apps %}
+          <li><img src="{{ app.icons[64] }}" alt="{{ app.name }}"></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    <div class="curve" style="background-color: {{ color|hex2rgba('.8') }}"></div>
+    <div class="info">
+      <h1>{{ name }}</h1>
+      <p class="author">{{ _('by') }} {{ author }}</p>
+    </div>
+  </section>
+</a>

@@ -1,0 +1,94 @@
+@import 'lib';
+
+// TODO: Nuke this it's for demo reasons only.
+#collections > li {
+    float: left;
+    margin-right: 20px;
+    .collection {
+        margin-bottom: 20px;
+    }
+}
+
+.collection {
+    border-radius: 5px;
+    height: 142px;
+    overflow: hidden;
+    position: relative;
+    width: 300px;
+    .curve, .alt-curve {
+        border-radius: 50%;
+        height: 400px;
+        left: -350px;
+        position: absolute;
+        top: 30px;
+        width: 1000px;
+        z-index: 10;
+    }
+    .info {
+        padding: 0 10px;
+        position: absolute;
+        top: 85px;
+        z-index: 15;
+    }
+    h1 {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 25px;
+    }
+    .author {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    h1, .author, img {
+        color: #fff;
+    }
+    .app-icons {
+        height: 60px;
+        left: 50%;
+        position: absolute;
+        top: 15px;
+        transform: translate(-50%, 0);
+        white-space: nowrap;
+        z-index: 15;
+        li {
+            display: inline-block;
+            margin-right: 20px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        li, img {
+            height: 60px;
+            width: 60px;
+        }
+    }
+    &.mega {
+        min-height: 175px;
+        .curve {
+            top: 15px;
+        }
+        .alt-curve {
+            top: 85px;
+        }
+        .info {
+            top: 33px;
+        }
+        .desc {
+            color: #fff;
+            font-size: 15px;
+            padding: 0 10px;
+            position: absolute;
+            top: 100px;
+            z-index: 15;
+        }
+    }
+    &.shelf {
+        height: 90px;
+        .curve {
+            top: 50px;
+        }
+        .info {
+            top: 60px;
+        }
+    }
+}
