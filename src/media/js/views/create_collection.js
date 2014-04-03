@@ -5,7 +5,7 @@ define('views/create_collection',
     var gettext = l10n.gettext;
 
     function initCollectionList() {
-        requests.get(urls.api.url('collection_list')).done(function(result) {
+        requests.get(urls.api.url('collections')).done(function(result) {
             var collections = result.objects;
 
             for (var i = 0; i < collections.length; i++) {

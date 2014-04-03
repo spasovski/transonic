@@ -8,7 +8,8 @@
 
       <fieldset class="choices">
         {% for color in choices %}
-          <input id="{{ class + loop.index0 }}" type="radio" name="{{ class }}" value="{{ color }}" />
+          <input id="{{ class + loop.index0 }}" type="radio" name="{{ class }}"
+                 value="{{ color }}"{{ 'checked' if not loop.index0 }}>
           <label for="{{ class + loop.index0 }}" class="color">
             <div class="color-box" style="background: {{ color }}"></div>
           </label>

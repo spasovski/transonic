@@ -8,8 +8,5 @@ define('routes_api', [], function() {
         'feed-apps': '/api/v2/feed/apps/',
         'feed-items': '/api/v2/feed/items/',
         'search': '/api/v1/apps/search/suggest?cache=1&vary=0',
-
-        // TODO: Likely redundant, clean up later.
-        'collection_list': '/api/v2/feed/collections/',
     };
 });
