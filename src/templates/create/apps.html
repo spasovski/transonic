@@ -10,19 +10,20 @@
     {% include "fields/slug.html" %}
   </section>
 
-  {% macro featured_type(name, type, checked) %}
+  {% macro featured_type(name, type, val, checked) %}
     <input id="featured-type-{{ type }}" type="radio"
-           name="featured-type" value="{{ type }}"
+           name="featured-type" value="{{ val }}"
+           data-type="{{ type }}"
            {% if checked %} checked{%endif%} />
     <label for="featured-type-{{ type }}">{{ name }}</label>
   {% endmacro %}
 
   <fieldset class="featured-type-choices tabs">
-    {{ featured_type(_('Icon'), settings.FEEDAPP_TYPES.ICON, true) }}
-    {{ featured_type(_('Header Graphic'), settings.FEEDAPP_TYPES.IMAGE) }}
-    {{ featured_type(_('Description'), settings.FEEDAPP_TYPES.DESC) }}
-    {{ featured_type(_('Quote'), settings.FEEDAPP_TYPES.QUOTE) }}
-    {{ featured_type(_('Screenshot'), settings.FEEDAPP_TYPES.PREVIEW) }}
+    {{ featured_type(_('Icon'), 'icon', settings.FEEDAPP_TYPES.ICON, true) }}
+    {{ featured_type(_('Header Graphic'), 'background-image', settings.FEEDAPP_TYPES.IMAGE) }}
+    {{ featured_type(_('Description'), 'description', settings.FEEDAPP_TYPES.DESC) }}
+    {{ featured_type(_('Quote'), 'quote', settings.FEEDAPP_TYPES.QUOTE) }}
+    {{ featured_type(_('Screenshot'), 'screenshot', settings.FEEDAPP_TYPES.PREVIEW) }}
   </fieldset>
 
   <section class="island customize">

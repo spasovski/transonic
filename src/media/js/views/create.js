@@ -16,7 +16,7 @@ define('views/create',
     })
     .on('change', '.featured-type-choices input', function(e) {
         // Tab between different featured types (graphic, desc, pull quote).
-        $('.featured-details').hide().filter('.' + this.value).show();
+        $('.featured-details').hide().filter('.' + this.getAttribute('data-type')).show();
     })
     .on('change', '.collection-type-choices input', function(e) {
         // To help CSS toggle background image upload widgets for different collection types.
