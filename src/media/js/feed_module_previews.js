@@ -1,5 +1,4 @@
-define('collectify', ['templates'], function(nunjucks) {
-
+define('feed_module_previews', ['templates'], function(nunjucks) {
 
     // These are user and editor collections for now.
     // There will likely be a distinction in practice.

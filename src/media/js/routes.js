@@ -7,7 +7,7 @@ var routes = window.routes = [
     {'pattern': '^/$', 'view_name': 'home'},
     {'pattern': root + '$', 'view_name': 'home'},
     {'pattern': root + 'create/([^/<>"\']+)$', 'view_name': 'create'},
-    {'pattern': root + 'create\-collection$', 'view_name': 'create_collection'},
+    {'pattern': root + 'demo$', 'view_name': 'feed_modules_demo'},
 
     {'pattern': '^/tests$', 'view_name': 'tests'},
     {'pattern': '^/debug$', 'view_name': 'debug'}
