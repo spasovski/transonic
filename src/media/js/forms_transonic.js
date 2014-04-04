@@ -22,12 +22,25 @@ define('forms_transonic',
 
         };
 
+        // Post FeedApp.
         var def = defer.Deferred();
+        var $file_input = $form.find('[name="background-image-feed-banner"]');
         save_feed_app(feedapp_data).done(function(feed_app) {
-            def.resolve(feed_app);
+            console.log("YO");
+            if ($file_input.val()) {
+                // Upload background image if one was uploaded.
+                console.log("YEHHHHH");
+                upload_feed_app_image(feed_app, $file_input).done(function(feed_image) {
+                    def.resolve(feed_app);
+                });
+            } else {
+                // If no background image selected, just finish.
+                console.log("NOOOOOO");
+                def.resolve(feed_app);
+            }
         });
 
-        return def;
+        return def.promise();
     };
 
     function save_collection(data) {
@@ -38,6 +51,22 @@ define('forms_transonic',
     function save_feed_app(data) {
         // Validate feed app data and send create request.
         return requests.post(urls.api.url('feed-apps'), data);
+    }
+
+    function upload_feed_app_image(feedapp, $file_input) {
+        // Upload feed app background image (header graphic).
+        var def = defer.Deferred();
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            // Read from file input to data URL and send image to API upload endpoint.
+            requests.put(urls.api.url('feed-app-image', [feedapp.id]), reader.result).done(function(data) {
+                def.resolve(data);
+            });
+        };
+        reader.readAsDataURL($file_input[0].files[0]);
+
+        return def.promise();
     }
 
     function save_feed_item(collection_id, feed_app_id) {

@@ -89,11 +89,11 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         ],
 
         FEEDAPP_TYPES: {
-            'ICON': 0,
-            'IMAGE': 1,
-            'DESC': 2,
-            'QUOTE': 3,
-            'PREVIEW': 4
+            'ICON': 'icon',
+            'IMAGE': 'image',
+            'DESCRIPTION': 'description',
+            'QUOTE': 'quote',
+            'PREVIEW': 'preview'
         }
     });
 });

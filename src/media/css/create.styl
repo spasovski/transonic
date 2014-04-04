@@ -158,34 +158,39 @@
         display: inline-block;
         margin-left: 20px;
 
+        p {
+            position: relative;
+            text-align: center;
+            top: 5px;
+        }
         [data-fileinput-fake] {
             border: 1px dotted $light-gray;
             display: block;
             height: 200px;
             width: 200px;
             margin: 20px auto;
+            position: relative;
             text-align: center;
+            vertical-align: top;
 
             &:hover {
                 cursor: pointer;
             }
             img {
+                position: absolute;
+                left: 0;
                 max-width: 100%;
-            }
-            span {
-                background: #fff;
-                border-radius: 2px;
-                font-weight: 300;
-                padding: 4px 6px;
-                position: relative;
-                top: unquote('calc(50% - 8px)');
+                top: 0;
             }
             input {
                 border: 0;
                 border-radius: 5px;
+                bottom: 0;
                 display: none;
                 font-weight: 300;
-                position: relative;
+                left: 0;
+                position: absolute;
+                right: 0;
                 text-align: center;
 
                 &:hover {
@@ -202,18 +207,9 @@
             border: 2px solid $green;
             position: relative;
 
-            &:after {
-                background: url(../img/pretty/tick.svg) no-repeat;
-                content: "";
-                display: block;
-                position: absolute;
-                height: 32px;
-                right: 0;
-                top: 15px;
-                width: 32px;
-            }
             input {
                 display: block;
+                margin: 0 auto;
             }
         }
     }

@@ -83,6 +83,16 @@ define('views/create',
         $('.fileinput').fakeFileField();
     })
     .on('change', '.background-image-input [type="file"]', function() {
+       var file = this.files[0];
+       var preview = $(this).closest('.background-image-input').find('.preview');
+       var reader = new FileReader();
+
+       reader.onloadend = function() {
+           preview.attr('src', reader.result);
+       };
+       if (file) {
+           reader.readAsDataURL(file);
+       }
        $(this).closest('.background-image-input').addClass('filled');
     })
 
