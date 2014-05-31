@@ -21,7 +21,7 @@ define('views/feed_modules_demo',
                 }
             }
         }).fail(function() {
-            alert('Excuse to use an alert since this is a demo page. The API call to collecion_list failed. Are you running Flue?');
+            alert('The API call to collecion_list failed. Are you running Flue?');
         });
     }
 
