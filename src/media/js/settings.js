@@ -91,7 +91,7 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         FEEDAPP_TYPES: {
             'ICON': 'icon',
             'IMAGE': 'image',
-            'DESCRIPTION': 'description',
+            'DESC': 'description',
             'QUOTE': 'quote',
             'PREVIEW': 'preview'
         }

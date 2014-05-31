@@ -29,11 +29,15 @@ define('forms_transonic',
                 // Upload background image if one was uploaded.
                 upload_feed_app_image(feed_app, $file_input).done(function(feed_image) {
                     def.resolve(feed_app);
+                }).fail(function(error) {
+                    def.reject(error);
                 });
             } else {
                 // If no background image selected, just finish.
                 def.resolve(feed_app);
             }
+        }).fail(function(xhr, text, status, res) {
+            def.reject(xhr.responseText);
         });
 
         return def.promise();

@@ -108,6 +108,8 @@ define('views/create',
         if ($form.data('type') == 'apps') {
             forms_transonic.create_featured_app($form).done(function(feed_item) {
                 notification.notification({message: gettext('Featured app successfully created')});
+            }).fail(function(error) {
+                notification.notification({message: error});
             });
         }
     }));
