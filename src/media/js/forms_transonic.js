@@ -19,23 +19,19 @@ define('forms_transonic',
             description: build_localized_field('description'),
             feedapp_type: $form.find('.featured-type-choices input:checked').val(),
             slug: $form.find('[name="slug"]').val(),
-
         };
 
         // Post FeedApp.
         var def = defer.Deferred();
         var $file_input = $form.find('[name="background-image-feed-banner"]');
         save_feed_app(feedapp_data).done(function(feed_app) {
-            console.log("YO");
             if ($file_input.val()) {
                 // Upload background image if one was uploaded.
-                console.log("YEHHHHH");
                 upload_feed_app_image(feed_app, $file_input).done(function(feed_image) {
                     def.resolve(feed_app);
                 });
             } else {
                 // If no background image selected, just finish.
-                console.log("NOOOOOO");
                 def.resolve(feed_app);
             }
         });
