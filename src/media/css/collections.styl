@@ -4,17 +4,19 @@
 #collections > li {
     float: left;
     margin-right: 20px;
+
     .collection {
         margin-bottom: 20px;
     }
 }
 
-.collection {
+.collection-demo {
     border-radius: 5px;
     height: 142px;
     overflow: hidden;
     position: relative;
     width: 300px;
+
     .curve, .alt-curve {
         border-radius: 50%;
         height: 400px;
@@ -50,9 +52,11 @@
         transform: translate(-50%, 0);
         white-space: nowrap;
         z-index: 15;
+
         li {
             display: inline-block;
             margin-right: 20px;
+
             &:last-child {
                 margin-right: 0;
             }
@@ -64,6 +68,7 @@
     }
     &.mega {
         min-height: 175px;
+
         .curve {
             top: 15px;
         }
@@ -84,6 +89,7 @@
     }
     &.shelf {
         height: 90px;
+
         .curve {
             top: 50px;
         }

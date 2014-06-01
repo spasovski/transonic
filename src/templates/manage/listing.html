@@ -3,7 +3,7 @@
     <h2>{{ _('Featured Apps ({number})')|format({number: this.meta.total_count}) }}</h2>
     <ul class="feed-apps">
       {% for feed_app in this.objects %}
-        <li data-slug="{{ feed_app.slug }}">
+        <li class="feed-app" data-slug="{{ feed_app.slug }}">
           <a href="{{ url('edit', ['apps', feed_app.slug]) }}">
             <img class="icon" src="{{ feed_app.app.icons['48'] }}">
             <h3>{{ feed_app.app.name }}</h3>
@@ -21,7 +21,7 @@
     <h2>{{ _('Collections ({number})')|format({number: this.meta.total_count}) }}</h2>
     <ul class="collections">
       {% for collection in this.objects %}
-        <li data-slug="{{ collection.slug }}">
+        <li class="collection" data-slug="{{ collection.slug }}">
           <a href="{{ url('edit', ['collections', collection.slug]) }}">
             {% if collection.apps.length %}
               <img class="icon" src="{{ collection.apps[0].app.icons['48'] }}">
@@ -41,7 +41,7 @@
     <h2>{{ _('Editorial Brands ({number})')|format({number: this.meta.total_count or 0}) }}</h2>
     <ul class="brands">
       {% for brand in this.objects %}
-        <li>
+        <li class="brand">
           <h3>{{ brand.name }}</h3>
           <span class="delete"></span>
         </li>

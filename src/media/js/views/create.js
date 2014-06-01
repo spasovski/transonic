@@ -103,7 +103,7 @@ define('views/create',
                        .filter('[data-lang=' + lang + ']').show();
     })
 
-    .on('submit', '.transonic-form', utils._pd(function(e) {
+    .on('click', '.transonic-form button.submit', utils._pd(function(e) {
         var $form = $(this);
         if ($form.data('type') == 'apps') {
             forms_transonic.create_featured_app($form).done(function(feed_item) {
