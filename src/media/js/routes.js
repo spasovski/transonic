@@ -8,6 +8,7 @@ var routes = window.routes = [
     {'pattern': root + '$', 'view_name': 'home'},
     {'pattern': root + 'create/([^/<>"\']+)$', 'view_name': 'create'},
     {'pattern': root + 'manage$', 'view_name': 'manage'},
+    {'pattern': root + 'manage/([^/<>"\']+)/([^/<>"\']+)$', 'view_name': 'edit'},
     {'pattern': root + 'demo$', 'view_name': 'feed_modules_demo'},
 
     {'pattern': '^/tests$', 'view_name': 'tests'},
