@@ -19,11 +19,11 @@
   {% endmacro %}
 
   <fieldset class="featured-type-choices tabs">
-    {{ featured_type(_('Icon'), 'icon', settings.FEEDAPP_TYPES.ICON, true) }}
-    {{ featured_type(_('Header Graphic'), 'background-image', settings.FEEDAPP_TYPES.IMAGE) }}
-    {{ featured_type(_('Description'), 'description', settings.FEEDAPP_TYPES.DESC) }}
-    {{ featured_type(_('Quote'), 'quote', settings.FEEDAPP_TYPES.QUOTE) }}
-    {{ featured_type(_('Screenshot'), 'screenshot', settings.FEEDAPP_TYPES.PREVIEW) }}
+    {{ featured_type(_('Icon'), 'icon', settings.FEEDAPP_TYPE_ICON, true) }}
+    {{ featured_type(_('Header Graphic'), 'background-image', settings.FEEDAPP_TYPE_IMAGE) }}
+    {{ featured_type(_('Description'), 'description', settings.FEEDAPP_TYPE_DESC) }}
+    {{ featured_type(_('Quote'), 'quote', settings.FEEDAPP_TYPE_QUOTE) }}
+    {{ featured_type(_('Screenshot'), 'screenshot', settings.FEEDAPP_TYPE_PREVIEW) }}
   </fieldset>
 
   <section class="island customize">

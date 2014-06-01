@@ -88,12 +88,28 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             [gettext('Staff Recommendation'), gettext('Staff Recommendations')],
         ],
 
+        FEEDAPP_TYPE_ICON: 'icon',
+        FEEDAPP_TYPE_IMAGE: 'image',
+        FEEDAPP_TYPE_DESC: 'description',
+        FEEDAPP_TYPE_QUOTE: 'quote',
+        FEEDAPP_TYPE_PREVIEW: 'preview',
+
         FEEDAPP_TYPES: {
-            'ICON': 'icon',
-            'IMAGE': 'image',
-            'DESC': 'description',
-            'QUOTE': 'quote',
-            'PREVIEW': 'preview'
-        }
+            'icon': gettext('Icon'),
+            'image': gettext('Background Image'),
+            'description': gettext('Description'),
+            'quote': gettext('Quote'),
+            'preview': gettext('Screenshot'),
+        },
+
+        COLL_STANDARD: 1,
+        COLL_LISTING: 2,
+        COLL_OPERATOR: 3,
+
+        COLL_TYPES: {
+            1: gettext('Standard Collection'),  // Header graphic.
+            2: gettext('Listing Collection'),  // No header graphic.
+            3: gettext('Operator Collection'),  // Tailored to operator.
+        },
     });
 });

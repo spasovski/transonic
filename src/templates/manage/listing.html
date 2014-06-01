@@ -1,0 +1,45 @@
+<section class="manage-modules-listing island">
+  {% defer (url=api('feed-apps')|urlparams(ordering='-created')) %}
+    <h2>{{ _('Featured Apps ({number})')|format({number: this.meta.total_count}) }}</h2>
+    <ul>
+      {% for feed_app in this.objects %}
+        <li>
+         <h3>{{ feed_app.app.name }}</h3>
+         <p>{{ settings.FEEDAPP_TYPES[feed_app.feedapp_type] }}</p>
+         <span class="delete"></span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% placeholder %}
+    <h2>{{ _('Featured Apps') }}</h2>
+  {% end %}
+
+  {% defer (url=api('collections')|urlparams(ordering='-created')) %}
+    <h2>{{ _('Collections ({number})')|format({number: this.meta.total_count}) }}</h2>
+    <ul>
+      {% for collection in this.objects %}
+        <li>
+          <h3>{{ collection.name }}</h3>
+          <p>{{ settings.COLL_TYPES[collection.collection_type] }}</p>
+          <span class="delete"></span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% placeholder %}
+    <h2>{{ _('Collections') }}</h2>
+  {% end %}
+
+  {% defer (url='') %}
+    <h2>{{ _('Editorial Brands ({number})')|format({number: this.meta.total_count or 0}) }}</h2>
+    <ul>
+      {% for brand in this.objects %}
+        <li>
+          <h3>{{ brand.name }}</h3>
+          <span class="delete"></span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% placeholder %}
+    <h2>{{ _('Editorial Brand') }}</h2>
+  {% end %}
+</section>
