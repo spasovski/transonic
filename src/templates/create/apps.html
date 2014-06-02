@@ -10,42 +10,49 @@
     {% include "fields/slug.html" %}
   </section>
 
-  {% macro featured_type(name, type, val, checked) %}
+  {% macro featured_type(name, type, val, obj_val) %}
     <input id="featured-type-{{ type }}" type="radio"
            name="featured-type" value="{{ val }}"
            data-type="{{ type }}"
-           {% if checked %} checked{%endif%} />
+           {% if obj_val == val %} checked{%endif%} />
     <label for="featured-type-{{ type }}">{{ name }}</label>
   {% endmacro %}
 
+  {% set feed_type = obj.feedapp_type if obj else settings.FEEDAPP_TYPE_ICON %}
+
   <fieldset class="featured-type-choices tabs">
-    {{ featured_type(_('Icon'), 'icon', settings.FEEDAPP_TYPE_ICON, true) }}
-    {{ featured_type(_('Header Graphic'), 'background-image', settings.FEEDAPP_TYPE_IMAGE) }}
-    {{ featured_type(_('Description'), 'description', settings.FEEDAPP_TYPE_DESC) }}
-    {{ featured_type(_('Quote'), 'quote', settings.FEEDAPP_TYPE_QUOTE) }}
-    {{ featured_type(_('Screenshot'), 'screenshot', settings.FEEDAPP_TYPE_PREVIEW) }}
+    {{ featured_type(_('Icon'), 'icon', settings.FEEDAPP_TYPE_ICON, feed_type) }}
+    {{ featured_type(_('Header Graphic'), 'background-image', settings.FEEDAPP_TYPE_IMAGE, feed_type) }}
+    {{ featured_type(_('Description'), 'description', settings.FEEDAPP_TYPE_DESC, feed_type) }}
+    {{ featured_type(_('Quote'), 'quote', settings.FEEDAPP_TYPE_QUOTE, feed_type) }}
+    {{ featured_type(_('Screenshot'), 'screenshot', settings.FEEDAPP_TYPE_PREVIEW, feed_type) }}
   </fieldset>
 
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
 
-    <div class="featured-details icon background-image quote screenshot">
+    <div class="featured-details icon background-image quote screenshot
+                {{ 'hidden' if indexOf(['icon', 'background-image', 'quote', 'screenshot'], feed_type) == -1 }}">
       {% include "fields/colors.html" %}
     </div>
 
-    <div class="featured-details background-image hidden">
+    <div class="featured-details background-image
+                {{ 'hidden' if indexOf(['background-image'], feed_type) == -1 }}">
       {% include "fields/background_images.html" %}
     </div>
 
-    <div class="featured-details description quote screenshot hidden">
+    <div class="featured-details description quote screenshot
+                {{ 'hidden' if indexOf(['description', 'quote', 'screenshot'], feed_type) == -1 }}">
       {% include "fields/description.html" %}
     </div>
 
-    <div class="featured-details quote hidden">
+    <div class="featured-details quote
+                {{ 'hidden' if indexOf(['quote'], feed_type) == -1 }}">
       {% include "fields/quote.html" %}
     </div>
 
-    <div class="featured-details screenshot hidden">
+    <div class="featured-details screenshot
+                {{ 'hidden' if indexOf(['screenshot'], feed_type) == -1 }}">
       {% include "fields/screenshot.html" %}
     </div>
   </section>

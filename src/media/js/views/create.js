@@ -4,8 +4,9 @@ define('views/create',
     'use strict';
     var gettext = l10n.gettext;
 
-    z.body.on('click', '.transonic-form button.submit', utils._pd(function(e) {
-        var $form = $(this);
+    z.body.on('click', '.transonic-form .submit', utils._pd(function(e) {
+        var $form = $(this).closest('form');
+
         if ($form.data('type') == 'apps') {
             forms_transonic.create_featured_app($form).done(function(feed_item) {
                 notification.notification({message: gettext('Featured app successfully created')});

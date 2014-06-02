@@ -1,6 +1,7 @@
 <div class="description field top-hat-field half">
+  {% set desc = obj.description if obj else {} %}
   <label>{{ _('Description') }}</label>
   {% for lang in settings.languages %}
-    {{ locale_textarea('description', lang) }}
+    {{ locale_textarea('description', lang, desc[lang]) }}
   {% endfor %}
 </div>

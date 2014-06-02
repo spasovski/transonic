@@ -12,20 +12,22 @@ define('views/edit',
 
     return function(builder, args) {
         var feedType = args[0];
+        var slug = args[1];
 
         var title;
         if (feedType == 'apps') {
-            title = format.format(gettext('Editing Featured App: {0}'), args[1]);
+            title = format.format(gettext('Editing Featured App: {0}'), slug);
         } else if (feedType == 'collections') {
-            title = format.format(gettext('Editing Collection: {0}'), args[1]);
+            title = format.format(gettext('Editing Collection: {0}'), slug);
         } else if (feedType == 'editorial') {
-            title = format.format(gettext('Editing Editorial Brand: {0}'), args[1]);
+            title = format.format(gettext('Editing Editorial Brand: {0}'), slug);
         }
 
         builder.z('title', title);
         builder.z('type', feedType);
-        builder.start('create/' + feedType + '.html', {
+        builder.start('edit/' + feedType + '.html', {
             'feed_type': feedType,  // 'apps', 'collections', or 'editorial'.
+            'slug': slug,
             'quote_mock': [
                 {'id': 0, 'body': 'A++'},
                 {'id': 1, 'body': 'is so cool!'},

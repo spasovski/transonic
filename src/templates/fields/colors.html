@@ -1,15 +1,17 @@
 {% macro color_field(class, name, choices) %}
+  {% set color_selected = obj.background_color if obj else choices[0]%}
+
   <div class="{{ class }} field">
     <label class="inline-label">{{ name }}</label>
 
     <div class="colors choices-box">
-      <div class="selected-color color-box" style="background: {{ choices[0] }}"></div>
-      <p class="selected-text">{{ choices[0] }}</p>
+      <div class="selected-color color-box" style="background: {{ color_selected }}"></div>
+      <p class="selected-text">{{ color_selected }}</p>
 
       <fieldset class="choices">
         {% for color in choices %}
           <input id="{{ class + loop.index0 }}" type="radio" name="{{ class }}"
-                 value="{{ color }}"{{ 'checked' if not loop.index0 }}>
+                 value="{{ color }}"{{ 'checked' if color_selected == color }}>
           <label for="{{ class + loop.index0 }}" class="color">
             <div class="color-box" style="background: {{ color }}"></div>
           </label>

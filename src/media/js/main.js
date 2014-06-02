@@ -17,6 +17,7 @@ define(
     'main',
     [
         'helpers',  // Must come before mostly everything else.
+        'helpers_local',
         'forms',  // Comment this if your app has no forms.
         'l10n',
         'log',
