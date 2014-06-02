@@ -1,4 +1,4 @@
-define('views/manage',
+define('views/manage_listing',
     ['jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'urls', 'utils', 'z'],
     function($, l10n, log, notification, requests, settings, nunjucks, urls, utils, z) {
     'use strict';
