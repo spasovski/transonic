@@ -4,7 +4,7 @@
   {% set C_LISTING = settings.COLL_LISTING %}
   {% set C_OPERATOR = settings.COLL_OPERATOR %}
 
-  {% set coll_type = obj.collection_type if obj else C_PROMO %}
+  {% set coll_type = settings.COLL_IDS[obj.collection_type] if obj else C_PROMO %}
 
   <section class="island c">
     {% include "locale_switcher.html" %}

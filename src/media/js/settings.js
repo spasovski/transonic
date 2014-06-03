@@ -93,7 +93,6 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         FEEDAPP_TYPE_DESC: 'description',
         FEEDAPP_TYPE_QUOTE: 'quote',
         FEEDAPP_TYPE_PREVIEW: 'preview',
-
         FEEDAPP_TYPES: {
             'icon': gettext('Icon'),
             'image': gettext('Background Image'),
@@ -102,20 +101,23 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'preview': gettext('Screenshot'),
         },
 
-        COLL_PROMO: 0,
-        COLL_LISTING: 1,
-        COLL_OPERATOR: 2,
-
+        COLL_PROMO: 'promo',
+        COLL_LISTING: 'listing',
+        COLL_OPERATOR: 'operator',
         COLL_TYPES: {
             0: gettext('Promo Collection'),  // Header graphic.
             1: gettext('Listing Collection'),  // No header graphic.
             2: gettext('Operator Shelf'),  // Tailored to operator.
         },
-
         COLL_SLUGS: {
             'promo': 0,
             'listing': 1,
             'operator': 2,
+        },
+        COLL_IDS: {
+            0: 'promo',
+            1: 'listing',
+            2: 'operator',
         }
     });
 });
