@@ -1,6 +1,6 @@
 define('views/create',
-    ['fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'utils', 'z'],
-    function(fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, settings, nunjucks, utils, z) {
+    ['fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'urls', 'utils', 'z'],
+    function(fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, settings, nunjucks, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -8,7 +8,8 @@ define('views/create',
         var $form = $(this).closest('form');
 
         if ($form.data('type') == 'apps') {
-            forms_transonic.create_featured_app($form).done(function(feed_item) {
+            forms_transonic.create_featured_app($form).done(function(feed_element) {
+                z.page.trigger('navigate', [urls.reverse('edit', ['apps', feed_element.slug])]);
                 notification.notification({message: gettext('Featured app successfully created')});
             }).fail(function(error) {
                 notification.notification({message: error});
