@@ -1,7 +1,8 @@
 define('forms_transonic',
-    ['app_selector', 'defer', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'requests', 'settings', 'storage', 'urls', 'utils', 'z'],
-    function(app_select, defer, $, fakefilefield, l10n, log, requests, settings, storage, urls, utils, z) {
+    ['app_selector', 'defer', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'nunjucks', 'requests', 'settings', 'storage', 'urls', 'utils', 'validate_transonic', 'z'],
+    function(app_select, defer, $, fakefilefield, l10n, log, notification, nunjucks, requests, settings, storage, urls, utils, validate, z) {
     'use strict';
+    var gettext = l10n.gettext;
 
     function build_localized_field(name) {
         var data = {};
@@ -28,7 +29,7 @@ define('forms_transonic',
         // Post FeedApp.
         var def = defer.Deferred();
         var $file_input = $form.find('[name="background-image-feed-banner"]');
-        save_feed_app(feedapp_data, slug).done(function(feed_app) {
+        save_feed_app(feedapp_data, $file_input, slug).done(function(feed_app) {
             if ($file_input.val()) {
                 // Upload background image if one was uploaded.
                 upload_feed_app_image(feed_app, $file_input).done(function(feed_image) {
@@ -40,8 +41,12 @@ define('forms_transonic',
                 // If no background image selected, just finish.
                 def.resolve(feed_app);
             }
-        }).fail(function(xhr, text, status, res) {
-            def.reject(xhr.responseText);
+        }).fail(function(err) {
+            if (!err) {
+                def.reject(gettext('Sorry, we found some errors in the form.'));
+                return;
+            }
+            def.reject(err.responseText);
         });
 
         return def.promise();
@@ -76,7 +81,13 @@ define('forms_transonic',
         return def.promise();
     };
 
-    function save_feed_app(data, slug) {
+    function save_feed_app(data, $file_input, slug) {
+        var errors = validate.featured_app(data, $file_input);
+        if (errors.length) {
+            render_errors(errors);
+            return defer.Deferred().reject();
+        }
+
         // Validate feed app data and send create request.
         if (slug) {
             // Update.
@@ -120,6 +131,12 @@ define('forms_transonic',
             app: feed_app_id,
             collection: collection_id,
         });
+    }
+
+    function render_errors(errors) {
+        $('.submit .form-errors').html(nunjucks.env.render('errors/form_errors.html', {
+            errors: errors
+        }));
     }
 
     return {

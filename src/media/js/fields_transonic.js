@@ -23,11 +23,13 @@ define('fields_transonic',
     .on('change', '.featured-type-choices input', function(e) {
         // Tab between different featured types (graphic, desc, pull quote).
         $('.featured-details').hide().filter('.' + this.getAttribute('data-type')).show();
+        $('.form-errors').empty();
     })
     .on('change', '.collection-type-choices input', function(e) {
         // To help CSS toggle background image upload widgets for different collection types.
         $('.collection-type').hide().filter('.' + this.value).show();
         $('.collection-type.bg').attr('data-collection-type', this.value);
+        $('.form-errors').empty();
     })
     .on('change', '.editorial-type select', function() {
         var $helptext = $('.editorial-helptext').hide();
