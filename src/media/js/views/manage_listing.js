@@ -1,6 +1,6 @@
 define('views/manage_listing',
-    ['jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'urls', 'utils', 'z'],
-    function($, l10n, log, notification, requests, settings, nunjucks, urls, utils, z) {
+    ['format', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'urls', 'utils', 'z'],
+    function(format, $, l10n, log, notification, requests, settings, nunjucks, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -10,6 +10,11 @@ define('views/manage_listing',
         // Delete.
         var $this = $(this);
         var $item = $this.closest('li');
+
+        if (!window.confirm(format.format(gettext('Do you really want to delete {0}?'), $item.data('slug')))) {
+            // Confirm.
+            return;
+        }
 
         var endpoint = urls.api.url('feed-app', [$item.data('slug')]);
         if ($this.parent().hasClass('.collection')) {

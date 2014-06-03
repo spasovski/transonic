@@ -6,8 +6,8 @@
         <li class="feed-app" data-slug="{{ feed_app.slug }}">
           <a href="{{ url('edit', ['apps', feed_app.slug]) }}">
             <img class="icon" src="{{ feed_app.app.icons['48'] }}">
-            <h3>{{ feed_app.app.name }}</h3>
-            <p>{{ settings.FEEDAPP_TYPES[feed_app.feedapp_type] }}</p>
+            <h3>{{ '{name} ({slug})'|format({name: feed_app.app.name, slug: feed_app.slug}) }}</h3>
+            <span class="type">{{ settings.FEEDAPP_TYPES[feed_app.feedapp_type] }}</span>
             <span class="delete"></span>
           </a>
         </li>
