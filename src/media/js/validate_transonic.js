@@ -9,11 +9,12 @@ define('validate_transonic',
         if (!data.app) {
             errs.push(gettext('App is required.'));
         }
+        if (!data.slug) {
+            errs.push(gettext('Slug is required.'));
+        }
         if (!$file_input.val().length &&
             [settings.FEEDAPP_TYPE_IMAGE].indexOf(data.feedapp_type) !== -1) {
-            if (data.feedapp_type == settings.FEEDAPP_TYPE_IMAGE) {
-                errs.push(gettext('Background image is required.'));
-            }
+            errs.push(gettext('Background image is required.'));
         }
         if (!validate_localized_field(data.description) &&
             [settings.FEEDAPP_TYPE_DESC].indexOf(data.feedapp_type) !== -1) {
@@ -27,10 +28,24 @@ define('validate_transonic',
             [settings.FEEDAPP_TYPE_QUOTE].indexOf(data.feedapp_type) !== -1) {
             errs.push(gettext('Quote text is required.'));
         }
+        return errs;
+    };
+
+    var collection = function(data, $file_input, $apps) {
+        var errs = [];
+        if (!validate_localized_field(data.name)) {
+            errs.push(gettext('Name is required.'));
+        }
         if (!data.slug) {
             errs.push(gettext('Slug is required.'));
         }
-
+        if (!$file_input.val().length &&
+            [settings.COLL_PROMO].indexOf(data.collection_type) !== -1) {
+            errs.push(gettext('Background image is required.'));
+        }
+        if (!$apps.length) {
+            errs.push(gettext('Apps are required.'));
+        }
         return errs;
     };
 
@@ -44,7 +59,8 @@ define('validate_transonic',
     }
 
     return {
-        featured_app: featured_app
+        featured_app: featured_app,
+        collection: collection
     };
 });
 

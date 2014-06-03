@@ -25,28 +25,30 @@ define('forms_transonic',
             pullquote_text: build_localized_field('pq-text'),
             slug: $form.find('[name="slug"]').val(),
         };
+        var $file_input = $form.find('[name="background-image-feed-banner"]');
+
+        // Validate.
+        var def = defer.Deferred();
+        var errors = validate.featured_app(feedapp_data, $file_input);
+        if (errors.length) {
+            render_errors(errors);
+            return def.reject(gettext('Sorry, we found some errors in the form.'));
+        }
 
         // Post FeedApp.
-        var def = defer.Deferred();
-        var $file_input = $form.find('[name="background-image-feed-banner"]');
         save_feed_app(feedapp_data, $file_input, slug).done(function(feed_app) {
+            // Upload background image if needed.
             if ($file_input.val()) {
-                // Upload background image if one was uploaded.
                 upload_feed_app_image(feed_app, $file_input).done(function(feed_image) {
                     def.resolve(feed_app);
                 }).fail(function(error) {
                     def.reject(error);
                 });
             } else {
-                // If no background image selected, just finish.
                 def.resolve(feed_app);
             }
-        }).fail(function(err) {
-            if (!err) {
-                def.reject(gettext('Sorry, we found some errors in the form.'));
-                return;
-            }
-            def.reject(err.responseText);
+        }).fail(function(xhr) {
+            def.reject(xhr.responseText);
         });
 
         return def.promise();
@@ -62,32 +64,41 @@ define('forms_transonic',
             name: build_localized_field('name'),
             slug: $form.find('[name="slug"]').val(),
         };
+        var $file_input = $form.find('[name="background-image-feed-banner"]');
+        var $apps = $('.apps-widget .result');
 
+        // Validate.
         var def = defer.Deferred();
-        save_collection(collection_data, slug).done(function(collection) {
-            var apps_added = 0;
-            var $apps = $('.apps-widget .result');
+        var errors = validate.collection(collection_data, $file_input, $apps);
+        if (errors.length) {
+            render_errors(errors);
+            return def.reject(gettext('Sorry, we found some errors in the form.'));
+        }
 
+        // Post collection.
+        save_collection(collection_data, $file_input, $apps, slug).done(function(collection) {
+            // Add apps.
+            var apps_added = 0;
             $apps.each(function(i, app) {
-                // TODO: batch adds.
                 add_app_to_collection(collection.id, app.getAttribute('data-id')).done(function() {
+                    // TODO: batch adds.
                     if (++apps_added >= $apps.length) {
                         def.resolve(collection);
                     }
                 });
             });
+        }).fail(function(err) {
+            if (!err) {
+                def.reject(gettext('Sorry, we found some errors in the form.'));
+                return;
+            }
+            def.reject(err.responseText);
         });
 
         return def.promise();
     };
 
-    function save_feed_app(data, $file_input, slug) {
-        var errors = validate.featured_app(data, $file_input);
-        if (errors.length) {
-            render_errors(errors);
-            return defer.Deferred().reject();
-        }
-
+    function save_feed_app(data, slug) {
         // Validate feed app data and send create request.
         if (slug) {
             // Update.
