@@ -7,6 +7,14 @@
   </textarea>
 {% endmacro %}
 
+{% macro locale_input(name, lang, val) %}
+  <input name="{{ name }}-{{ lang }}" type="text"
+         placeholder="My Awesome Gems ({{ lang }})"
+         data-name="{{ name }}" data-lang="{{ lang }}"
+         class="localized{% if lang != 'en-US' %} hidden{% endif %}"
+         value="{{ val }}">
+{% endmacro %}
+
 <div class="locale-switcher">
   <label for="locale-swicher">{{ _('Localize for:') }}</label>
   <select id="locale-switcher">

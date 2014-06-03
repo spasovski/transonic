@@ -47,6 +47,35 @@ define('forms_transonic',
         return def.promise();
     };
 
+    var create_collection = function($form, slug) {
+        // Create Feed Collection.
+        var collection_data = {
+            background_color: $form.find('.bg-color input:checked').val(),
+            collection_type: settings.COLL_SLUGS[$form.find('.collection-type-choices input:checked').val()],
+            description: build_localized_field('description'),
+            is_public: true,  // TODO: remove.
+            name: build_localized_field('name'),
+            slug: $form.find('[name="slug"]').val(),
+        };
+
+        var def = defer.Deferred();
+        save_collection(collection_data, slug).done(function(collection) {
+            var apps_added = 0;
+            var $apps = $('.apps-widget .result');
+
+            $apps.each(function(i, app) {
+                // TODO: batch adds.
+                add_app_to_collection(collection.id, app.getAttribute('data-id')).done(function() {
+                    if (++apps_added >= $apps.length) {
+                        def.resolve(collection);
+                    }
+                });
+            });
+        });
+
+        return def.promise();
+    };
+
     function save_feed_app(data, slug) {
         // Validate feed app data and send create request.
         if (slug) {
@@ -81,7 +110,7 @@ define('forms_transonic',
 
     function add_app_to_collection(collection_id, app_id) {
         // Add app to collection.
-        return requests.post(urls.api.url('collections-add-app', [res.id]),
+        return requests.post(urls.api.url('collections-add-app', [collection_id]),
                              {app: app_id});
     }
 
@@ -94,6 +123,7 @@ define('forms_transonic',
     }
 
     return {
-        create_update_featured_app: create_update_featured_app
+        create_update_featured_app: create_update_featured_app,
+        create_collection: create_collection
     };
 });

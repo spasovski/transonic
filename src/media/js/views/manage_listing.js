@@ -4,7 +4,7 @@ define('views/manage_listing',
     'use strict';
     var gettext = l10n.gettext;
 
-    z.body.on('click', '.delete', utils._pd(function(e) {
+    z.body.on('click', '.manage-modules-listing .delete', utils._pd(function(e) {
         e.stopPropagation();
 
         // Delete.

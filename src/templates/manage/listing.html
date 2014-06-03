@@ -24,10 +24,10 @@
         <li class="collection" data-slug="{{ collection.slug }}">
           <a href="{{ url('edit', ['collections', collection.slug]) }}">
             {% if collection.apps.length %}
-              <img class="icon" src="{{ collection.apps[0].app.icons['48'] }}">
+              <img class="icon" src="{{ collection.apps[0].icons['48'] }}">
             {% endif %}
             <h3>{{ _('{name} ({num_apps} apps)')|format({name: collection.name, num_apps: collection.apps.length}) }}</h3>
-            <p>{{ settings.COLL_TYPES[collection.collection_type] }}</p>
+            <span class="type">{{ settings.COLL_TYPES[collection.collection_type] }}</span>
             <span class="delete"></span>
           </a>
         </li>

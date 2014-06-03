@@ -102,14 +102,20 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'preview': gettext('Screenshot'),
         },
 
-        COLL_STANDARD: 1,
-        COLL_LISTING: 2,
-        COLL_OPERATOR: 3,
+        COLL_PROMO: 0,
+        COLL_LISTING: 1,
+        COLL_OPERATOR: 2,
 
         COLL_TYPES: {
-            1: gettext('Standard Collection'),  // Header graphic.
-            2: gettext('Listing Collection'),  // No header graphic.
-            3: gettext('Operator Collection'),  // Tailored to operator.
+            0: gettext('Promo Collection'),  // Header graphic.
+            1: gettext('Listing Collection'),  // No header graphic.
+            2: gettext('Operator Shelf'),  // Tailored to operator.
         },
+
+        COLL_SLUGS: {
+            'promo': 0,
+            'listing': 1,
+            'operator': 2,
+        }
     });
 });

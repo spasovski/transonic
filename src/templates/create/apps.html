@@ -9,7 +9,7 @@
   {% set FT_QUOTE = settings.FEEDAPP_TYPE_QUOTE %}
   {% set FT_PREVIEW = settings.FEEDAPP_TYPE_PREVIEW %}
 
-  {% set feed_app_type = obj.feedapp_type if obj else settings.FEEDAPP_TYPE_ICON %}
+  {% set feed_app_type = obj.feedapp_type if obj else FT_ICON %}
 
   <section class="island">
     {% include "locale_switcher.html" %}
@@ -78,7 +78,7 @@
         {{ _('Submit Featured App') }}
       {% endif %}
     </h3>
-    <button type="submit">
+    <button class="submit">
       {% if obj %}
         {{ _('Update') }}
       {% else %}

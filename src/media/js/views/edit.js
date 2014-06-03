@@ -21,10 +21,13 @@ define('views/edit',
         var slug = args[1];
 
         var title;
+        var endpoint;
         if (feedType == 'apps') {
             title = format.format(gettext('Editing Featured App: {0}'), slug);
+            endpoint = urls.api.base.url('feed-app', [slug]);
         } else if (feedType == 'collections') {
             title = format.format(gettext('Editing Collection: {0}'), slug);
+            endpoint = urls.api.base.url('collection', [slug]);
         } else if (feedType == 'editorial') {
             title = format.format(gettext('Editing Editorial Brand: {0}'), slug);
         }
@@ -32,7 +35,7 @@ define('views/edit',
         builder.z('title', title);
         builder.z('type', feedType);
 
-        requests.get(urls.api.base.url('feed-app', [slug])).done(function(obj) {
+        requests.get(endpoint).done(function(obj) {
             builder.start('create/' + feedType + '.html', {
                 'feed_type': feedType,  // 'apps', 'collections', or 'editorial'.
                 'obj': obj,
@@ -42,6 +45,7 @@ define('views/edit',
                 $('.fileinput').fakeFileField();
 
                 if (feedType == 'apps') {
+                    // App widget.
                     apps_widget.render_set(obj.app);
 
                     // Calculate which screenshot to initially select.
@@ -53,6 +57,12 @@ define('views/edit',
                     }
                     $('.screenshots').html(nunjucks.env.render('preview_tray.html', {app: obj.app}));
                     preview_tray.populateTray.call($('.preview-tray')[0], preview_index);
+
+                } else if (feedType == 'collections') {
+                    // App widget.
+                    for (var i = 0; i < obj.apps.length; i++) {
+                        apps_widget.render_append(obj.apps[i]);
+                    }
                 }
             });
         });

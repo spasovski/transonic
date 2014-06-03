@@ -1,4 +1,10 @@
-<form class="transonic-form collections">
+<form class="transonic-form collections create" data-type="collections">
+  {# Short abbreviations. #}
+  {% set C_PROMO = settings.COLL_PROMO %}
+  {% set C_LISTING = settings.COLL_LISTING %}
+  {% set C_OPERATOR = settings.COLL_OPERATOR %}
+
+  {% set coll_type = obj.collection_type if obj else C_PROMO %}
 
   <section class="island c">
     {% include "locale_switcher.html" %}
@@ -11,31 +17,34 @@
     {% include "fields/description.html" %}
   </section>
 
-  {% macro collection_type(name, type, checked) %}
+  {% macro collection_type(name, type, obj_type) %}
     <input id="collection-type-{{ type }}" type="radio"
            name="collection-type" value="{{ type }}"
-           {% if checked %} checked{%endif%} />
+           {% if obj_type == type %} checked{%endif%} />
     <label for="collection-type-{{ type }}">{{ name }}</label>
   {% endmacro %}
 
   <fieldset class="collection-type-choices tabs" data-collection-type="promo">
-    {{ collection_type(_('Promo'), 'promo', true) }}
-    {{ collection_type(_('Listing'), 'listing') }}
-    {{ collection_type(_('Operator Shelf'), 'shelf') }}
+    {{ collection_type(_('Promo'), C_PROMO, coll_type) }}
+    {{ collection_type(_('Listing'), C_LISTING, coll_type) }}
+    {{ collection_type(_('Operator Shelf'), C_OPERATOR, coll_type) }}
   </fieldset>
 
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
 
-    <div class="collection-type promo shelf">
+    <div class="collection-type promo operator
+                {{ 'hidden' if indexOf([C_PROMO, C_OPERATOR], coll_type) == -1 }}">
       {% include "fields/colors.html" %}
     </div>
 
-    <div class="collection-type bg promo listing shelf" data-collection-type="promo">
+    <div class="collection-type bg promo operator
+                {{ 'hidden' if indexOf([C_PROMO, C_OPERATOR], coll_type) == -1 }}" data-collection-type="promo">
       {% include "fields/background_images.html" %}
     </div>
 
-    <div class="collection-type apps promo listing shelf">
+    <div class="collection-type apps promo listing operator
+                {{ 'hidden' if indexOf([C_PROMO, C_LISTING, C_OPERATOR], coll_type) == -1 }}">
       <h2>{{ _('Apps') }}</h2>
       {% include "app_selector.html" %}
       {% include "apps_widget.html" %}
@@ -44,7 +53,7 @@
 
   <section class="island submit">
     <h3>{{ _('Submit Collection') }}</h3>
-    <button type="submit">{{ _('Submit') }}</button>
+    <button class="submit">{{ _('Submit') }}</button>
   </section>
 
 </form>
