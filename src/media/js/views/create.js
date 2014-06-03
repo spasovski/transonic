@@ -22,9 +22,9 @@ define('views/create',
 
         var title;
         if (feedType == 'apps') {
-            title = gettext('Custom Featured Apps');
+            title = gettext('Featured Apps');
         } else if (feedType == 'collections') {
-            title = gettext('Collections and Articles');
+            title = gettext('Collections');
         } else if (feedType == 'editorial') {
             title = gettext('Editorial Brands');
         }

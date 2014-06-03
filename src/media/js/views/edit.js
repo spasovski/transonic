@@ -1,6 +1,6 @@
 define('views/edit',
-    ['apps_widget', 'fields_transonic', 'format', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'urls', 'utils', 'z'],
-    function(apps_widget, fields_transonic, format, forms_transonic, $, fakefilefield, l10n, log, notification, requests, settings, nunjucks, urls, utils, z) {
+    ['apps_widget', 'fields_transonic', 'format', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'preview_tray', 'requests', 'settings', 'templates', 'urls', 'utils', 'z'],
+    function(apps_widget, fields_transonic, format, forms_transonic, $, fakefilefield, l10n, log, notification, preview_tray, requests, settings, nunjucks, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -37,6 +37,16 @@ define('views/edit',
 
                 if (feedType == 'apps') {
                     apps_widget.render_set(obj.app);
+
+                    // Calculate which screenshot to initially select.
+                    var preview_index = 0;
+                    for (var i = 0; i < obj.app.previews.length; i++) {
+                        if (obj.app.previews[i].id === obj.preview.id) {
+                            preview_index = i;
+                        }
+                    }
+                    $('.screenshots').html(nunjucks.env.render('preview_tray.html', {app: obj.app}));
+                    preview_tray.populateTray.call($('.preview-tray')[0], preview_index);
                 }
             });
         });

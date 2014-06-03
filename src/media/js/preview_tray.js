@@ -1,3 +1,5 @@
+/* A Transonic-specific preview tray that selects even when a single image
+   and allows passing in an initial selected image. */
 define('preview_tray',
     ['flipsnap', 'log', 'models', 'templates', 'capabilities', 'shothandles', 'underscore', 'z'],
     function(Flipsnap, log, models, nunjucks, caps, handles, _, z) {
@@ -15,9 +17,9 @@ define('preview_tray',
         $this.closest('.preview-tray')[0].slider.moveToPoint($this.index());
     });
 
-    function populateTray() {
+    var populateTray = function(point) {
         var $tray = $(this);
-        if ($tray.hasClass('single') || $tray.hasClass('init')) {
+        if ($tray.hasClass('init')) {
             return;
         }
 
@@ -41,8 +43,7 @@ define('preview_tray',
 
         slider.element.addEventListener('fsmoveend', setActiveDot, false);
 
-        // Show as many thumbs as possible to start (zero-indexed).
-        slider.moveToPoint(~~($tray.width() / THUMB_PADDED / 2) - 1);
+        slider.moveToPoint(point || 0);
 
         slider_pool.push(slider);
 
@@ -54,11 +55,7 @@ define('preview_tray',
         }
         setActiveDot();
 
-        // Tray can fit 3 desktop thumbs before paging is required.
-        if (numPreviews > 3 && caps.widescreen()) {
-            handles.attachHandles(slider, $tray.find('.slider'));
-        }
-
+        handles.attachHandles(slider, $tray.find('.slider'));
     }
 
     // Reinitialize Flipsnap positions on resize.
@@ -86,4 +83,7 @@ define('preview_tray',
         $('.preview-tray').each(populateTray);
     });
 
+    return {
+        populateTray: populateTray
+    };
 });

@@ -9,10 +9,6 @@
     position: relative;
     width: 900px;
 
-    &.single {
-        // No dots so make it smaller. Leave 15px from bottom of screenshot to bottom of tray.
-        height: 201px;
-    }
     .slider {
         margin-top: 15px;
         overflow: hidden;
@@ -48,7 +44,8 @@
             width: 100%;
         }
         &.selected img {
-            box-shadow: 0 0 12px 2px $sailor-blue;
+            box-shadow: 0 0 0 4px $sailor-blue;
+            border-radius: 2px;
         }
         img {
             -moz-user-select: none;
