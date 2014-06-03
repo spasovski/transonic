@@ -4,11 +4,11 @@ define('views/create',
     'use strict';
     var gettext = l10n.gettext;
 
-    z.body.on('click', '.transonic-form .submit', utils._pd(function(e) {
+    z.body.on('click', '.transonic-form.create .submit', utils._pd(function(e) {
         var $form = $(this).closest('form');
 
         if ($form.data('type') == 'apps') {
-            forms_transonic.create_featured_app($form).done(function(feed_element) {
+            forms_transonic.create_update_featured_app($form).done(function(feed_element) {
                 z.page.trigger('navigate', [urls.reverse('edit', ['apps', feed_element.slug])]);
                 notification.notification({message: gettext('Featured app successfully created')});
             }).fail(function(error) {

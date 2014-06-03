@@ -1,6 +1,7 @@
 {# This template is used for both creating and editing a featured app. #}
 
-<form class="transonic-form apps" data-type="apps">
+<form class="transonic-form apps {{ 'edit' if obj else 'create' }}" data-type="apps"
+      {% if obj %}data-slug="{{ obj.slug }}"{% endif %}>
   {# Short abbreviations. #}
   {% set FT_ICON = settings.FEEDAPP_TYPE_ICON %}
   {% set FT_IMAGE = settings.FEEDAPP_TYPE_IMAGE%}

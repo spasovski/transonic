@@ -82,6 +82,7 @@ define('apps_widget',
                      .attr('placeholder', app.name)
                      .text();
         $app_selector.find('.result').remove();
+        $app_selector.find('input[name="app"]').val(app.id);
     };
 
     return {

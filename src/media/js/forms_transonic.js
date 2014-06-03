@@ -11,8 +11,8 @@ define('forms_transonic',
         return data;
     }
 
-    var create_featured_app = function($form) {
-        // Create FeedApp.
+    var create_update_featured_app = function($form, slug) {
+        // Create or update FeedApp. If pass in slug, then it's update.
         var feedapp_data = {
             app: $form.find('[name="app"]').val(),
             background_color: $form.find('.bg-color input:checked').val(),
@@ -28,7 +28,7 @@ define('forms_transonic',
         // Post FeedApp.
         var def = defer.Deferred();
         var $file_input = $form.find('[name="background-image-feed-banner"]');
-        save_feed_app(feedapp_data).done(function(feed_app) {
+        save_feed_app(feedapp_data, slug).done(function(feed_app) {
             if ($file_input.val()) {
                 // Upload background image if one was uploaded.
                 upload_feed_app_image(feed_app, $file_input).done(function(feed_image) {
@@ -47,14 +47,15 @@ define('forms_transonic',
         return def.promise();
     };
 
-    function save_collection(data) {
-        // Validate collection data and send create request.
-        return requests.post(urls.api.url('collections'), data);
-    }
-
-    function save_feed_app(data) {
+    function save_feed_app(data, slug) {
         // Validate feed app data and send create request.
-        return requests.post(urls.api.url('feed-apps'), data);
+        if (slug) {
+            // Update.
+            return requests.put(urls.api.url('feed-app', [slug]), data);
+        } else {
+            // Create.
+            return requests.post(urls.api.url('feed-apps'), data);
+        }
     }
 
     function upload_feed_app_image(feedapp, $file_input) {
@@ -73,12 +74,9 @@ define('forms_transonic',
         return def.promise();
     }
 
-    function save_feed_item(collection_id, feed_app_id) {
-        // Validate feed app data and send create request.
-        return requests.post(urls.api.url('feed-items'), {
-            app: feed_app_id,
-            collection: collection_id,
-        });
+    function save_collection(data) {
+        // Validate collection data and send create request.
+        return requests.post(urls.api.url('collections'), data);
     }
 
     function add_app_to_collection(collection_id, app_id) {
@@ -87,7 +85,15 @@ define('forms_transonic',
                              {app: app_id});
     }
 
+    function save_feed_item(collection_id, feed_app_id) {
+        // Validate feed app data and send create request.
+        return requests.post(urls.api.url('feed-items'), {
+            app: feed_app_id,
+            collection: collection_id,
+        });
+    }
+
     return {
-        create_featured_app: create_featured_app
+        create_update_featured_app: create_update_featured_app
     };
 });

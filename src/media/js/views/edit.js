@@ -4,9 +4,15 @@ define('views/edit',
     'use strict';
     var gettext = l10n.gettext;
 
-    z.body.on('submit', '.transonic-form', utils._pd(function(e) {
-        var $form = $(this);
+    z.body.on('click', '.transonic-form.edit .submit', utils._pd(function(e) {
+        var $form = $(this).closest('form');
+
         if ($form.data('type') == 'apps') {
+            forms_transonic.create_update_featured_app($form, $form.data('slug')).done(function(feed_element) {
+                notification.notification({message: gettext('Featured app successfully updated')});
+            }).fail(function(error) {
+                notification.notification({message: error});
+            });
         }
     }));
 
