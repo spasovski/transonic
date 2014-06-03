@@ -1,6 +1,7 @@
 <div class="app-selector top-hat-field">
   <label for="app-selector">{{ _('App') }}</label>
-  <input id="app-selector" type="search" placeholder="{{ _('Search for an app...') }}">
+  <input id="app-selector" type="search" placeholder="{{ _('Search for an app...') }}"
+         {{ 'disabled' if feed_type == 'apps' and obj }}>
     <img class="chosen-icon">
   </input>
   <div class="results">

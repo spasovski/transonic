@@ -1,4 +1,14 @@
+{# This template is used for both creating and editing a featured app. #}
+
 <form class="transonic-form apps" data-type="apps">
+  {# Short abbreviations. #}
+  {% set FT_ICON = settings.FEEDAPP_TYPE_ICON %}
+  {% set FT_IMAGE = settings.FEEDAPP_TYPE_IMAGE%}
+  {% set FT_DESC = settings.FEEDAPP_TYPE_DESC %}
+  {% set FT_QUOTE = settings.FEEDAPP_TYPE_QUOTE %}
+  {% set FT_PREVIEW = settings.FEEDAPP_TYPE_PREVIEW %}
+
+  {% set feed_app_type = obj.feedapp_type if obj else settings.FEEDAPP_TYPE_ICON %}
 
   <section class="island">
     {% include "locale_switcher.html" %}
@@ -7,10 +17,12 @@
 
     {% include "app_selector.html" %}
     {% include "apps_widget.html" %}
+
     {% include "fields/slug.html" %}
   </section>
 
   {% macro featured_type(name, type, val, obj_val) %}
+    {# Tabs for the type of featured app. #}
     <input id="featured-type-{{ type }}" type="radio"
            name="featured-type" value="{{ val }}"
            data-type="{{ type }}"
@@ -18,48 +30,59 @@
     <label for="featured-type-{{ type }}">{{ name }}</label>
   {% endmacro %}
 
-  {% set feed_type = obj.feedapp_type if obj else settings.FEEDAPP_TYPE_ICON %}
-
   <fieldset class="featured-type-choices tabs">
-    {{ featured_type(_('Icon'), 'icon', settings.FEEDAPP_TYPE_ICON, feed_type) }}
-    {{ featured_type(_('Header Graphic'), 'background-image', settings.FEEDAPP_TYPE_IMAGE, feed_type) }}
-    {{ featured_type(_('Description'), 'description', settings.FEEDAPP_TYPE_DESC, feed_type) }}
-    {{ featured_type(_('Quote'), 'quote', settings.FEEDAPP_TYPE_QUOTE, feed_type) }}
-    {{ featured_type(_('Screenshot'), 'screenshot', settings.FEEDAPP_TYPE_PREVIEW, feed_type) }}
+    {{ featured_type(_('Icon'), 'icon', FT_ICON, feed_app_type) }}
+    {{ featured_type(_('Header Graphic'), 'background-image', FT_IMAGE, feed_app_type) }}
+    {{ featured_type(_('Description'), 'description', FT_DESC, feed_app_type) }}
+    {{ featured_type(_('Quote'), 'quote', FT_QUOTE, feed_app_type) }}
+    {{ featured_type(_('Screenshot'), 'screenshot', FT_PREVIEW, feed_app_type) }}
   </fieldset>
 
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
 
+    {# The top line of classes determine what form fields are visible based upon the tab on change. #}
+    {# The bottom line of classes determine what form fields are visible if we are editing an app and go directly to the page. #}
     <div class="featured-details icon background-image quote screenshot
-                {{ 'hidden' if indexOf(['icon', 'background-image', 'quote', 'screenshot'], feed_type) == -1 }}">
+                {{ 'hidden' if indexOf([FT_ICON, FT_IMAGE, FT_QUOTE, FT_PREVIEW], feed_app_type) == -1 }}">
       {% include "fields/colors.html" %}
     </div>
 
     <div class="featured-details background-image
-                {{ 'hidden' if indexOf(['background-image'], feed_type) == -1 }}">
+                {{ 'hidden' if indexOf([FT_IMAGE], feed_app_type) == -1 }}">
       {% include "fields/background_images.html" %}
     </div>
 
     <div class="featured-details description quote screenshot
-                {{ 'hidden' if indexOf(['description', 'quote', 'screenshot'], feed_type) == -1 }}">
+                {{ 'hidden' if indexOf([FT_DESC, FT_QUOTE, FT_PREVIEW], feed_app_type) == -1 }}">
       {% include "fields/description.html" %}
     </div>
 
     <div class="featured-details quote
-                {{ 'hidden' if indexOf(['quote'], feed_type) == -1 }}">
+                {{ 'hidden' if indexOf([FT_QUOTE], feed_app_type) == -1 }}">
       {% include "fields/quote.html" %}
     </div>
 
     <div class="featured-details screenshot
-                {{ 'hidden' if indexOf(['screenshot'], feed_type) == -1 }}">
+                {{ 'hidden' if indexOf([FT_PREVIEW], feed_app_type) == -1 }}">
       {% include "fields/screenshot.html" %}
     </div>
   </section>
 
   <section class="island submit">
-    <h3>{{ _('Submit Custom Featured App') }}</h3>
-    <button type="submit">{{ _('Submit') }}</button>
+    <h3>
+      {% if obj %}
+        {{ _('Update Custom Featured App') }}
+      {% else %}
+        {{ _('Submit Custom Featured App') }}
+      {% endif %}
+    </h3>
+    <button type="submit">
+      {% if obj %}
+        {{ _('Submit') }}
+      {% else %}
+        {{ _('Update') }}
+      {% endif %}
+    </button>
   </section>
-
 </form>

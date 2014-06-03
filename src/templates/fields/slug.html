@@ -1,4 +1,5 @@
 <div class="slug boring-text field">
   <label for="slug" class="inline-label">{{ _('Slug') }}</label>
-  <input id="slug" name="slug" type="text" placeholder="{{ _('my-slug') }}">
+  <input id="slug" name="slug" type="text" placeholder="{{ _('my-slug') }}"
+         {{ 'disabled' if obj }} {% if obj %}value="{{ obj.slug }}"{% endif %}>
 </div>

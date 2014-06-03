@@ -14,7 +14,7 @@ define('apps_widget',
         return ids;
     }
 
-    z.page.on('loaded', function() {
+    z.page.on('loaded unloading', function() {
         // Store selectors.
         $apps_widget = $('.apps-widget');
         $apps_list = $('.apps-widget .apps');
@@ -62,21 +62,28 @@ define('apps_widget',
     };
 
     var set = function(id) {
+        // Fetch the app by ID and render.
         requests.get(urls.api.unsigned.url('app', [id])).done(function(app) {
-            // Render the selected app as the selected featured app.
-            $apps_list.html(app_select.render_result(app));
-            // Set placeholder and hide results list.
-            var $app_selector = $('.app-selector');
-            $app_selector.find('#app-selector').val('')
-                         .attr('placeholder', app.name)
-                         .text();
-            $app_selector.find('.result').remove();
+            render_set(app);
         });
+    };
+
+    var render_set = function(app) {
+        // Given an app object, render it in the widget.
+        // Hard-code JQuery because it is run async.
+        $('.apps-widget .apps').html(app_select.render_result(app));
+        // Set placeholder and hide results list.
+        var $app_selector = $('.app-selector');
+        $app_selector.find('#app-selector').val('')
+                     .attr('placeholder', app.name)
+                     .text();
+        $app_selector.find('.result').remove();
     };
 
     return {
         append: append,
         get_app_ids: get_app_ids,
+        render_set: render_set,
         set: set,
     };
 });

@@ -1,4 +1,4 @@
-define('helpers_local', ['nunjucks', 'z'], function(nunjucks, z) {
+define('helpers_local', ['nunjucks', 'urls', 'z'], function(nunjucks, urls, z) {
     var filters = nunjucks.require('filters');
     var globals = nunjucks.require('globals');
 
@@ -8,7 +8,8 @@ define('helpers_local', ['nunjucks', 'z'], function(nunjucks, z) {
 
     // Functions provided in the default context.
     var helpers = {
-        indexOf: indexOf
+        indexOf: indexOf,
+        api_base: urls.api.base.url,
     };
 
     // Put the helpers into the nunjucks global.

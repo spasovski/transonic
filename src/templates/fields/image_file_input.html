@@ -1,9 +1,9 @@
-{% macro image_file_input(name, slug) %}
+{% macro image_file_input(name, slug, src) %}
   <div class="background-image-input {{ slug }}">
     <p>{{ name }}</p>
     <div class="fileinput" data-fileinput>
       <div data-fileinput-fake>
-        <img class="preview">
+        <img class="preview" {% if src %}src="{{ src }}"{% endif %}>
         <input type="text" disabled></input>
       </div>
       <input type="file" name="background-image-{{ slug }}" class="realfileinput">

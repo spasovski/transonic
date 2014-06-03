@@ -20,7 +20,6 @@ define('forms_transonic',
             feedapp_type: $form.find('.featured-type-choices input:checked').val(),
             slug: $form.find('[name="slug"]').val(),
         };
-        console.log(feedapp_data);
 
         // Post FeedApp.
         var def = defer.Deferred();
