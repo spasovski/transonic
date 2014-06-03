@@ -1,6 +1,6 @@
 define('views/edit',
-    ['apps_widget', 'fields_transonic', 'format', 'forms_transonic', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'urls', 'utils', 'z'],
-    function(apps_widget, fields_transonic, format, forms_transonic, $, l10n, log, notification, requests, settings, nunjucks, urls, utils, z) {
+    ['apps_widget', 'fields_transonic', 'format', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'urls', 'utils', 'z'],
+    function(apps_widget, fields_transonic, format, forms_transonic, $, fakefilefield, l10n, log, notification, requests, settings, nunjucks, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -38,6 +38,8 @@ define('views/edit',
                 ],
                 'title': title,
             }).done(function() {
+                $('.fileinput').fakeFileField();
+
                 if (feedType == 'apps') {
                     apps_widget.render_set(obj.app);
                 }

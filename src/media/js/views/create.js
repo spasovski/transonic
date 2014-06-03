@@ -1,6 +1,6 @@
 define('views/create',
-    ['fields_transonic', 'forms_transonic', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'utils', 'z'],
-    function(fields_transonic, forms_transonic, $, l10n, log, notification, requests, settings, nunjucks, utils, z) {
+    ['fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'utils', 'z'],
+    function(fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, settings, nunjucks, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -38,6 +38,8 @@ define('views/create',
                 {'id': 2, 'body': 'flappy bird but better'},
             ],
             'title': title,
+        }).done(function() {
+            $('.fileinput').fakeFileField();
         });
     };
 });
