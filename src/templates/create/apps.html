@@ -53,8 +53,8 @@
       {% include "fields/background_images.html" %}
     </div>
 
-    <div class="featured-details description quote screenshot
-                {{ 'hidden' if indexOf([FT_DESC, FT_QUOTE, FT_PREVIEW], feed_app_type) == -1 }}">
+    <div class="featured-details description screenshot
+                {{ 'hidden' if indexOf([FT_DESC, FT_PREVIEW], feed_app_type) == -1 }}">
       {% include "fields/description.html" %}
     </div>
 

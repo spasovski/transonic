@@ -31,11 +31,6 @@ define('views/edit',
                 'feed_type': feedType,  // 'apps', 'collections', or 'editorial'.
                 'obj': obj,
                 'slug': slug,
-                'quote_mock': [
-                    {'id': 0, 'body': 'A++'},
-                    {'id': 1, 'body': 'is so cool!'},
-                    {'id': 2, 'body': 'flappy bird but better'},
-                ],
                 'title': title,
             }).done(function() {
                 $('.fileinput').fakeFileField();

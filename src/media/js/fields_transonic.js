@@ -13,6 +13,13 @@ define('fields_transonic',
         $parent.find('.selected-color').css('background', color);
         $parent.find('.selected-text').text(color);
     })
+    .on('change', '.pq-rating input', function() {
+        // Set rating data attribute to highlight stars.
+        var $this = $(this);
+        var $parent = $(this).closest('.pq-rating');
+        var rating = $parent.find('input:checked').val();
+        $parent.find('.choices').attr('data-rating', rating);
+    })
     .on('change', '.featured-type-choices input', function(e) {
         // Tab between different featured types (graphic, desc, pull quote).
         $('.featured-details').hide().filter('.' + this.getAttribute('data-type')).show();

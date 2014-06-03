@@ -1,18 +1,34 @@
-{% macro quote_choice(quote, checked) %}
-  <input id="quote-{{ quote.id }}" type="radio"
-         name="quote" value="{{ quote.body }}"
-         {% if checked %} checked{%endif%} />
-  <label for="quote-{{ quote.id }}">{{ quote.body }}</label>
-{% endmacro %}
+{# pq stands for pullquote. #}
 
-<div class="quote top-hat-field">
+<div class="pq-rating field">
+  {% set rating_selected = obj.pullquote_rating if obj else 0 %}
+
+  <label class="inline-label">{{ _('Rating') }}</label>
+  <div class="choices-box">
+      <fieldset class="choices" data-rating="{{ rating_selected }}">
+        {% set rating_stars = [1, 2, 3, 4, 5] %}
+        {% for rating in rating_stars %}
+          <input id="pq-rating-{{ rating }}" type="radio" name="pq-rating"
+                 value="{{ rating }}"{{ 'checked' if rating_selected == rating }}>
+          <label for="pq-rating-{{ rating }}" class="rating">
+            <span class="star star-{{ rating }}">&#9733;</span>
+          </label>
+        {% endfor %}
+      </fieldset>
+    </div>
+</div>
+
+<div class="pq-text field top-hat-field half">
+  {% set pq_text = obj.pullquote_text if obj else {} %}
+
   <label>{{ _('Quote') }}</label>
-  <div class="inner">
-    <fieldset class="vert-choices">
-      {% for quote in quote_mock %}
-        {# TODO: pull quotes from API. #}
-        {{ quote_choice(quote, loop.index0 == 0) }}
-      {% endfor %}
-    </fieldset>
-  </div>
+  {% for lang in settings.languages %}
+    {{ locale_textarea('pq-text', lang, pq_text[lang]) }}
+  {% endfor %}
+</div>
+
+<div class="pq-attribution field">
+  <label class="inline-label">{{ _('Attribution') }}</label>
+  <input id="pq-attribution" name="pq-attribution" type="text" placeholder="some-user-1"
+         {% if obj %}value="{{ obj.pullquote_attribution }}"{% endif %}>
 </div>

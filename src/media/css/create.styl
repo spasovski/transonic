@@ -75,7 +75,7 @@
         label:hover {
             cursor: pointer;
         }
-        input:checked + label:not(.color) {
+        input:checked + label:not(.color):not(.rating) {
             background: $sailor-blue;
             box-shadow: 0 0 1px 1px $light-gray;
             color: #fff;
@@ -123,14 +123,14 @@
                 width: 68px;
             }
         }
-        .choices {
-            border: 0;
-            display: inline-block;
-            padding: 0;
+    }
+    fieldset.choices {
+        border: 0;
+        display: inline-block;
+        padding: 0;
 
-            label {
-                display: inline-block;
-            }
+        label {
+            display: inline-block;
         }
     }
     fieldset.tabs {
@@ -221,6 +221,47 @@
         border-radius: 0 0 5px 5px;
         font-weight: 300;
         padding: 10px;
+    }
+    .pq-rating.field {
+        .choices-box {
+            height: 34px;
+            padding: 6px;
+            width: -moz-fit-content;
+            width: -webkit-fit-content;
+
+        }
+        [data-rating="1"] {
+            .star-1 {
+                color: $sailor-blue;
+            }
+        }
+        [data-rating="2"] {
+            .star-1, .star-2 {
+                color: $sailor-blue;
+            }
+        }
+        [data-rating="3"] {
+            .star-1, .star-2, .star-3 {
+                color: $sailor-blue;
+            }
+        }
+        [data-rating="4"] {
+             .star-1, .star-2, .star-3, .star-4 {
+                color: $sailor-blue;
+            }
+        }
+        [data-rating="5"] {
+            .star-1, .star-2, .star-3, .star-4, .star-5 {
+                color: $sailor-blue;
+            }
+        }
+        .star {
+            bottom: 10px;
+            color: $light-gray;
+            font-size: 30px;
+            margin-right: 2px;
+            position: relative;
+        }
     }
 }
 

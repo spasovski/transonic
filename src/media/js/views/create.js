@@ -33,11 +33,6 @@ define('views/create',
         builder.z('type', feedType);
         builder.start('create/' + feedType + '.html', {
             'feed_type': feedType,  // 'apps', 'collections', or 'editorial'.
-            'quote_mock': [
-                {'id': 0, 'body': 'A++'},
-                {'id': 1, 'body': 'is so cool!'},
-                {'id': 2, 'body': 'flappy bird but better'},
-            ],
             'title': title,
         }).done(function() {
             $('.fileinput').fakeFileField();

@@ -18,6 +18,9 @@ define('forms_transonic',
             background_color: $form.find('.bg-color input:checked').val(),
             description: build_localized_field('description'),
             feedapp_type: $form.find('.featured-type-choices input:checked').val(),
+            pullquote_attribution: $form.find('[name="pq-attribution"]').val(),
+            pullquote_rating: $form.find('.pq-rating input:checked').val(),
+            pullquote_text: build_localized_field('pq-text'),
             slug: $form.find('[name="slug"]').val(),
         };
 
