@@ -1,6 +1,6 @@
 define('apps_widget',
-    ['app_selector', 'jquery', 'requests', 'settings', 'urls', 'z'],
-    function(app_select, $, requests, settings, urls, z) {
+    ['app_selector', 'jquery', 'requests', 'settings', 'underscore', 'urls', 'z'],
+    function(app_select, $, requests, settings, _, urls, z) {
     'use strict';
 
     var $apps_widget;
@@ -71,6 +71,10 @@ define('apps_widget',
     var render_set = function(app) {
         // Given an app object, render it in the widget.
         // Hard-code JQuery because it is run async.
+        if (_.isObject(app.name)) {
+            // Choose an app name translation.
+            app.name = app.name['en-US'] || app.name[Object.keys(app.name)[0]];
+        }
         $('.apps-widget .apps').html(app_select.render_result(app));
         // Set placeholder and hide results list.
         var $app_selector = $('.app-selector');
