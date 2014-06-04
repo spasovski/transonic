@@ -301,6 +301,20 @@
 }
 
 .collections {
+    &[data-collection-type="promo"],
+    &[data-collection-type="listing"] {
+        .background-image {
+            width: 270px;
+        }
+        .shelf-landing {
+            display: none;
+        }
+    }
+    &[data-collection-type="promo"] {
+        .add-app-group {
+            display: inline-block;
+        }
+    }
     .float-wrap {
         float: left;
         width: 40%;
@@ -313,14 +327,6 @@
         float: right;
         position: relative
         right: 140px;
-    }
-    [data-collection-type="promo"],
-    [data-collection-type="listing"] {
-        .background-image {
-            width: 270px;
-        }
-        .shelf-landing {display: none;
-        }
     }
     .background-image {
         display: inline-block;
@@ -346,6 +352,9 @@
 .apps-widget {
     margin-top: 10px;
 
+    label {
+        position: relative;
+    }
     .apps .result {
         position: relative;
 
@@ -365,4 +374,14 @@
             padding: 3px 0;
         }
     }
+    .add-app-group {
+        bottom: 2px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0;
+        position: absolute;
+        right: 3px;
+        width: 150px;
+    }
 }
+

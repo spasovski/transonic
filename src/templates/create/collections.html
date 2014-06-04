@@ -1,11 +1,12 @@
-<form class="transonic-form collections create" data-type="collections">
-  {# Short abbreviations. #}
-  {% set C_PROMO = settings.COLL_PROMO %}
-  {% set C_LISTING = settings.COLL_LISTING %}
-  {% set C_OPERATOR = settings.COLL_OPERATOR %}
+{# This template is used for both creating and editing a featured app. #}
+{# Short abbreviations. #}
+{% set C_PROMO = settings.COLL_PROMO %}
+{% set C_LISTING = settings.COLL_LISTING %}
+{% set C_OPERATOR = settings.COLL_OPERATOR %}
+{% set coll_type = settings.COLL_IDS[obj.collection_type] if obj else C_PROMO %}
 
-  {% set coll_type = settings.COLL_IDS[obj.collection_type] if obj else C_PROMO %}
-
+<form class="transonic-form collections create" data-type="collections"
+      data-collection-type="{{ coll_type }}">
   <section class="island c">
     {% include "locale_switcher.html" %}
 
@@ -24,7 +25,7 @@
     <label for="collection-type-{{ type }}">{{ name }}</label>
   {% endmacro %}
 
-  <fieldset class="collection-type-choices tabs" data-collection-type="promo">
+  <fieldset class="collection-type-choices tabs">
     {{ collection_type(_('Promo'), C_PROMO, coll_type) }}
     {{ collection_type(_('Listing'), C_LISTING, coll_type) }}
     {{ collection_type(_('Operator Shelf'), C_OPERATOR, coll_type) }}
@@ -39,7 +40,7 @@
     </div>
 
     <div class="collection-type bg promo operator
-                {{ 'hidden' if indexOf([C_PROMO, C_OPERATOR], coll_type) == -1 }}" data-collection-type="promo">
+                {{ 'hidden' if indexOf([C_PROMO, C_OPERATOR], coll_type) == -1 }}">
       {% include "fields/background_images.html" %}
     </div>
 

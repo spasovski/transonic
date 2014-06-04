@@ -7,11 +7,11 @@
   </textarea>
 {% endmacro %}
 
-{% macro locale_input(name, lang, val) %}
+{% macro locale_input(name, lang, val, klass, placeholder) %}
   <input name="{{ name }}-{{ lang }}" type="text"
-         placeholder="My Awesome Gems ({{ lang }})"
+         placeholder="{{ placeholder or 'My Awesome Gems'}} ({{ lang }})"
          data-name="{{ name }}" data-lang="{{ lang }}"
-         class="localized{% if lang != 'en-US' %} hidden{% endif %}"
+         class="localized{% if lang != 'en-US' %} hidden{% endif %} {{ klass if klass }}"
          value="{{ val }}">
 {% endmacro %}
 

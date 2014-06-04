@@ -1,0 +1,5 @@
+{% from "locale_switcher.html" import locale_input %}
+
+{% for lang in settings.languages %}
+  {{ locale_input('name', lang, name[lang], 'app-group', _('App Group Name')) }}
+{% endfor %}

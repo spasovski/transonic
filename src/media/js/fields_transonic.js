@@ -29,6 +29,7 @@ define('fields_transonic',
         // To help CSS toggle background image upload widgets for different collection types.
         $('.collection-type').hide().filter('.' + this.value).show();
         $('.collection-type.bg').attr('data-collection-type', this.value);
+        $(this).closest('form').attr('data-collection-type', this.value);
         $('.form-errors').empty();
     })
     .on('change', '.editorial-type select', function() {
@@ -60,6 +61,10 @@ define('fields_transonic',
 
         // Set the input value to the src.
         .closest('.screenshot').find('input').val($this.data('id'));
+    }))
+    .on('click', '.add-app-group', utils._pd(function() {
+        /* Add app groups (somewhat like mega-collections) to widget. */
+        apps_widget.add_group();
     }))
 
     // Drag and drop image uploads.

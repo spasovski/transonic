@@ -1,6 +1,6 @@
 define('apps_widget',
-    ['app_selector', 'jquery', 'requests', 'settings', 'underscore', 'urls', 'z'],
-    function(app_select, $, requests, settings, _, urls, z) {
+    ['app_selector', 'jquery', 'nunjucks', 'requests', 'settings', 'underscore', 'urls', 'z'],
+    function(app_select, $, nunjucks, requests, settings, _, urls, z) {
     'use strict';
 
     function get_app_ids() {
@@ -85,7 +85,15 @@ define('apps_widget',
         $apps_widget.find('.placeholder-text').remove();
     };
 
+    var add_group = function() {
+        /* Add a localizable text field as the header of an app group. */
+        var $apps_widget = $('.apps-widget');
+        $apps_widget.find('.apps').append(nunjucks.env.render('fields/app_group.html', {}));
+        $apps_widget.find('.placeholder-text').remove();
+    };
+
     return {
+        add_group: add_group,
         append: append,
         get_app_ids: get_app_ids,
         render_append: render_append,
