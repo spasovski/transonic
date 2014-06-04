@@ -310,11 +310,6 @@
             display: none;
         }
     }
-    &[data-collection-type="promo"] {
-        .add-app-group {
-            display: inline-block;
-        }
-    }
     .float-wrap {
         float: left;
         width: 40%;
@@ -363,19 +358,41 @@
         }
     }
     .actions {
-        bottom: 9px;
+        bottom: 0;
         position: absolute;
-        right: 10px;
+        right: -2px;
         text-align: center;
         width: 50px;
 
-        a {
+        i, a {
             display: block;
             padding: 3px 0;
+        }
+        .reorder {
+            color: $light-gray;
+            font-size: 26px;
+
+            &:hover {
+                color: $sailor-blue;
+            }
+        }
+        .delete {
+            background: url(../img/pretty/close.svg) 50% no-repeat;
+            background-size: 18px auto;
+            height: 30px;
+            left: 5px;
+            position: relative;
+            width: 40px;
+
+            &:hover {
+                background: url(../img/pretty/close_active.svg) 50% no-repeat;
+                cursor: pointer;
+            }
         }
     }
     .add-app-group {
         bottom: 2px;
+        display: none;
         height: 30px;
         line-height: 30px;
         padding: 0;
@@ -383,5 +400,27 @@
         right: 3px;
         width: 150px;
     }
+    .app-group-input {
+        width: 90%;
+    }
+    .delete-app-group {
+        background: url(../img/pretty/close.svg) 50% no-repeat;
+        background-size: 18px auto;
+        height: 34px;
+        position: absolute;
+        right: 2px;
+        top: 17px;
+        width: 40px;
+
+        &:hover {
+            background: url(../img/pretty/close_active.svg) 50% no-repeat;
+            cursor: pointer;
+        }
+    }
 }
 
+.collections[data-collection-type="promo"] {
+    .add-app-group {
+        display: inline-block;
+    }
+}

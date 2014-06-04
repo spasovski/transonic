@@ -12,26 +12,29 @@ define('apps_widget',
     }
 
     z.page.on('click', '.apps-widget .actions .delete', function() {
-        // Remove.
-        var id = $(this).closest('.result').data('id');
-        $('.apps-widget .apps').find('[data-id="' +  id + '"]').remove();
+        /* Remove app. */
+        $(this).closest('.result').remove();
     })
-
+    .on('click', '.apps-widget .delete-app-group', function() {
+        /* Remove app group. */
+        $(this).closest('.result').remove();
+    })
     .on('click', '.apps-widget .actions .reorder', function() {
+        /* Reorder elements. */
         var $this = $(this);
         var $app = $this.closest('.result');
         var id = $app.data('id');
-        var all_ids = get_app_ids();
-        var pos = all_ids.indexOf(id);
         var is_prev = $this.hasClass('prev');
+        var $items = $this.closest('.apps-widget').find('.result:not(.hidden)');  // Hidden for the localized fields.
+        var pos = $items.index($app);
 
-        if ((is_prev && pos === 0) || (!is_prev && pos == all_ids.length - 1)) {
+        if ((is_prev && pos === 0) || (!is_prev && pos == $items.length - 1)) {
             // Don't swap if trying to move the first element up or last element down.
             return;
         }
 
-        var swap_id = is_prev ? all_ids[pos - 1] : all_ids[pos + 1];
-        var $swap_with = $('.apps-widget .apps').find('[data-id="' + swap_id + '"]');
+        var swap_pos = is_prev ? pos - 1 : pos + 1;
+        var $swap_with = $items.filter(':not(.hidden)').eq(swap_pos);
 
         if (is_prev) {
             $app.clone().insertBefore($swap_with);

@@ -1,5 +1,8 @@
 {% from "locale_switcher.html" import locale_input %}
 
 {% for lang in settings.languages %}
-  {{ locale_input('name', lang, name[lang], 'app-group', _('App Group Name')) }}
+  <div class="result app-group localized {% if lang != 'en-US' %}hidden{% endif %}" data-lang="{{ lang }}">
+    {{ locale_input('name', lang, name[lang], 'app-group-input', _('App Group Name')) }}
+    <span class="delete-result delete-app-group"></span>
+  </div>
 {% endfor %}

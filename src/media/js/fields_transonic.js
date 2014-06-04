@@ -31,6 +31,13 @@ define('fields_transonic',
         $('.collection-type.bg').attr('data-collection-type', this.value);
         $(this).closest('form').attr('data-collection-type', this.value);
         $('.form-errors').empty();
+
+        // Hide or show app groups when switching between tabs.
+        if (this.value == settings.COLL_PROMO) {
+            $('.result.app-group:not(.hidden)').show();
+        } else {
+            $('.result.app-group').hide();
+        }
     })
     .on('change', '.editorial-type select', function() {
         var $helptext = $('.editorial-helptext').hide();
@@ -112,7 +119,7 @@ define('fields_transonic',
     // Localization of text fields.
     .on('change', '#locale-switcher', function() {
         var lang = this.value;
-        $('.localized').hide()
-                       .filter('[data-lang=' + lang + ']').show();
+        $('.localized').addClass('hidden')
+                       .filter('[data-lang=' + lang + ']').removeClass('hidden');
     });
 });
