@@ -6,7 +6,7 @@ define('forms_transonic',
 
     var create_update_featured_app = function($form, slug) {
         // Create or update FeedApp. If pass in slug, then it's update.
-        var feedapp_data = {
+        var data = {
             app: $form.find('[name="app"]').val(),
             background_color: $form.find('.bg-color input:checked').val(),
             description: utils_local.build_localized_field('description'),
@@ -21,34 +21,18 @@ define('forms_transonic',
 
         // Validate.
         var def = defer.Deferred();
-        var errors = validate.featured_app(feedapp_data, $file_input);
+        var errors = validate.featured_app(data, $file_input);
         if (errors.length) {
             render_errors(errors);
             return def.reject(gettext('Sorry, we found some errors in the form.'));
         }
 
-        // Post FeedApp.
-        save_feed_app(feedapp_data, $file_input, slug).done(function(feed_app) {
-            // Upload background image if needed.
-            if ($file_input.val()) {
-                upload_feed_app_image(feed_app, $file_input).done(function(feed_image) {
-                    def.resolve(feed_app);
-                }).fail(function(error) {
-                    def.reject(error);
-                });
-            } else {
-                def.resolve(feed_app);
-            }
-        }).fail(function(xhr) {
-            def.reject(xhr.responseText);
-        });
-
-        return def.promise();
+        return save_feed_app(data, slug, $file_input);
     };
 
     var create_collection = function($form, slug) {
         // Create Feed Collection.
-        var collection_data = {
+        var data = {
             background_color: $form.find('.bg-color input:checked').val(),
             collection_type: settings.COLL_SLUGS[$form.find('.collection-type-choices input:checked').val()],  // TODO: change API to take a slug.
             description: utils_local.build_localized_field('description'),
@@ -61,7 +45,7 @@ define('forms_transonic',
         // Check whether we need to make app groups.
         var apps;
         var $items = $('.apps-widget .result');
-        if (collection_data.collection_type == settings.COLL_SLUGS[settings.COLL_PROMO] &&
+        if (data.collection_type == settings.COLL_SLUGS[settings.COLL_PROMO] &&
             $items.filter('.app-group').length) {
             // Validate app groups.
             var app_group_errors = validate.app_group($items);
@@ -75,15 +59,51 @@ define('forms_transonic',
         }
 
         // Validate.
-        var errors = validate.collection(collection_data, $file_input, apps);
+        var errors = validate.collection(data, $file_input, apps);
         if (errors.length) {
             render_errors(errors);
             return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
         }
 
-        // Post collection.
+        return save_collection(data, slug, apps);
+    };
+
+    function save_feed_app(data, slug, $file_input) {
+        // Post FeedApp.kwku
         var def = defer.Deferred();
-        save_collection(collection_data, slug).done(function(collection) {
+
+        function success(feed_app) {
+            // Upload background image if needed.
+            if ($file_input.val()) {
+                upload_feed_app_image(feed_app, $file_input).done(function(feed_image) {
+                    def.resolve(feed_app);
+                }).fail(function(error) {
+                    def.reject(error);
+                });
+            } else {
+                def.resolve(feed_app);
+            }
+        }
+
+        function fail(xhr) {
+            def.reject(xhr.responseText);
+        }
+
+        if (slug) {
+            // Update.
+            requests.put(urls.api.url('feed-app', [slug]), data).then(success, fail);
+        } else {
+            // Create.
+            requests.post(urls.api.url('feed-apps'), data).then(success, fail);
+        }
+
+        return def.promise();
+    }
+
+    function save_collection(data, slug, apps) {
+        var def = defer.Deferred();
+
+        function success(collection) {
             // Add apps.
             var apps_added = 0;
             for (var i = 0; i < apps.length; i++) {
@@ -94,47 +114,15 @@ define('forms_transonic',
                     }
                 });
             }
-        }).fail(function(err) {
-            if (!err) {
-                def.reject(gettext('Sorry, we found some errors in the form.'));
-                return;
-            }
-            def.reject(err.responseText);
-        });
-
-        return def.promise();
-    };
-
-    function save_feed_app(data, slug) {
-        // Validate feed app data and send create request.
-        if (slug) {
-            // Update.
-            return requests.put(urls.api.url('feed-app', [slug]), data);
-        } else {
-            // Create.
-            return requests.post(urls.api.url('feed-apps'), data);
         }
-    }
 
-    function upload_feed_app_image(feedapp, $file_input) {
-        // Upload feed app background image (header graphic).
-        var def = defer.Deferred();
-        var reader = new FileReader();
+        function fail(xhr) {
+            def.reject(xhr.responseText);
+        }
 
-        reader.onloadend = function() {
-            // Read from file input to data URL and send image to API upload endpoint.
-            requests.put(urls.api.url('feed-app-image', [feedapp.id]), reader.result).done(function(data) {
-                def.resolve(data);
-            });
-        };
-        reader.readAsDataURL($file_input[0].files[0]);
+        requests.post(urls.api.url('collections'), data).then(success, fail);
 
         return def.promise();
-    }
-
-    function save_collection(data) {
-        // Validate collection data and send create request.
-        return requests.post(urls.api.url('collections'), data);
     }
 
     function get_app_ids($items) {
@@ -165,6 +153,22 @@ define('forms_transonic',
         });
 
         return apps;
+    }
+
+    function upload_feed_app_image(feedapp, $file_input) {
+        // Upload feed app background image (header graphic).
+        var def = defer.Deferred();
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            // Read from file input to data URL and send image to API upload endpoint.
+            requests.put(urls.api.url('feed-app-image', [feedapp.id]), reader.result).done(function(data) {
+                def.resolve(data);
+            });
+        };
+        reader.readAsDataURL($file_input[0].files[0]);
+
+        return def.promise();
     }
 
     function add_app_to_collection(collection_id, app_id) {
