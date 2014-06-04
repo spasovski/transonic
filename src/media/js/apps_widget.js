@@ -85,14 +85,16 @@ define('apps_widget',
         /* Given an app object, render it in the widget. */
         var $apps_widget = $('.apps-widget');
         $apps_widget.find('.apps').append(app_select.render_result(app, true));
-        $apps_widget.find('.placeholder-text').remove();
+        $apps_widget.find('.placeholder-text').hide();
     };
 
     var add_group = function() {
         /* Add a localizable text field as the header of an app group. */
         var $apps_widget = $('.apps-widget');
-        $apps_widget.find('.apps').append(nunjucks.env.render('fields/app_group.html', {}));
-        $apps_widget.find('.placeholder-text').remove();
+        $apps_widget.find('.apps').append(nunjucks.env.render('fields/app_group.html', {
+            app_group_id: 'app-group-' + $('.app-group').length
+        }));
+        $apps_widget.find('.placeholder-text').hide();
     };
 
     return {

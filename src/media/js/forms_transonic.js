@@ -1,28 +1,20 @@
 define('forms_transonic',
-    ['app_selector', 'defer', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'nunjucks', 'requests', 'settings', 'storage', 'urls', 'utils', 'validate_transonic', 'z'],
-    function(app_select, defer, $, fakefilefield, l10n, log, notification, nunjucks, requests, settings, storage, urls, utils, validate, z) {
+    ['app_selector', 'defer', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'nunjucks', 'requests', 'settings', 'storage', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
+    function(app_select, defer, $, fakefilefield, l10n, log, notification, nunjucks, requests, settings, storage, urls, utils, utils_local, validate, z) {
     'use strict';
     var gettext = l10n.gettext;
-
-    function build_localized_field(name) {
-        var data = {};
-        $('.localized[data-name="' + name + '"]').each(function(i, field) {
-            data[this.getAttribute('data-lang')] = this.value;
-        });
-        return data;
-    }
 
     var create_update_featured_app = function($form, slug) {
         // Create or update FeedApp. If pass in slug, then it's update.
         var feedapp_data = {
             app: $form.find('[name="app"]').val(),
             background_color: $form.find('.bg-color input:checked').val(),
-            description: build_localized_field('description'),
+            description: utils_local.build_localized_field('description'),
             feedapp_type: $form.find('.featured-type-choices input:checked').val(),
             preview: $form.find('.screenshot li.selected').data('id'),
             pullquote_attribution: $form.find('[name="pq-attribution"]').val(),
             pullquote_rating: $form.find('.pq-rating input:checked').val(),
-            pullquote_text: build_localized_field('pq-text'),
+            pullquote_text: utils_local.build_localized_field('pq-text'),
             slug: $form.find('[name="slug"]').val(),
         };
         var $file_input = $form.find('[name="background-image-feed-banner"]');
@@ -58,35 +50,50 @@ define('forms_transonic',
         // Create Feed Collection.
         var collection_data = {
             background_color: $form.find('.bg-color input:checked').val(),
-            collection_type: settings.COLL_SLUGS[$form.find('.collection-type-choices input:checked').val()],
-            description: build_localized_field('description'),
+            collection_type: settings.COLL_SLUGS[$form.find('.collection-type-choices input:checked').val()],  // TODO: change API to take a slug.
+            description: utils_local.build_localized_field('description'),
             is_public: true,  // TODO: remove.
-            name: build_localized_field('name'),
+            name: utils_local.build_localized_field('name'),
             slug: $form.find('[name="slug"]').val(),
         };
         var $file_input = $form.find('[name="background-image-feed-banner"]');
-        var $apps = $('.apps-widget .result');
+
+        // Check whether we need to make app groups.
+        var apps;
+        var $items = $('.apps-widget .result');
+        if (collection_data.collection_type == settings.COLL_SLUGS[settings.COLL_PROMO] &&
+            $items.filter('.app-group').length) {
+            // Validate app groups.
+            var app_group_errors = validate.app_group($items);
+            if (app_group_errors.length) {
+                render_errors(app_group_errors);
+                return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
+            }
+            apps = get_app_groups($items);
+        } else {
+            apps = get_app_ids($items);
+        }
 
         // Validate.
-        var def = defer.Deferred();
-        var errors = validate.collection(collection_data, $file_input, $apps);
+        var errors = validate.collection(collection_data, $file_input, apps);
         if (errors.length) {
             render_errors(errors);
-            return def.reject(gettext('Sorry, we found some errors in the form.'));
+            return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
         }
 
         // Post collection.
-        save_collection(collection_data, $file_input, $apps, slug).done(function(collection) {
+        var def = defer.Deferred();
+        save_collection(collection_data, slug).done(function(collection) {
             // Add apps.
             var apps_added = 0;
-            $apps.each(function(i, app) {
-                add_app_to_collection(collection.id, app.getAttribute('data-id')).done(function() {
+            for (var i = 0; i < apps.length; i++) {
+                add_app_to_collection(collection.id, apps[i]).done(function(collection) {
                     // TODO: batch adds.
-                    if (++apps_added >= $apps.length) {
+                    if (++apps_added >= apps.length) {
                         def.resolve(collection);
                     }
                 });
-            });
+            }
         }).fail(function(err) {
             if (!err) {
                 def.reject(gettext('Sorry, we found some errors in the form.'));
@@ -128,6 +135,36 @@ define('forms_transonic',
     function save_collection(data) {
         // Validate collection data and send create request.
         return requests.post(urls.api.url('collections'), data);
+    }
+
+    function get_app_ids($items) {
+        // Return a list of app IDs.
+        return $.map($items.filter(':not(.app-group)'), function(app) {
+            return parseInt(app.getAttribute('data-id'), 10);
+        });
+    }
+
+    function get_app_groups($items) {
+        // If it is a promo collection with app groupings, create an array of objects by group.
+        var apps = [];
+        $items.filter('.app-group').each(function(i, app_group) {
+            var $app_group = $(app_group);
+            var group = {
+                name: utils_local.build_localized_field($app_group.find('input').data('name')),
+                apps: []
+            };
+
+            var $next = $app_group.next();
+            while ($next.length && !$next.hasClass('.app-group')) {
+                // Append apps until we get to the next group.
+                group.apps.push(parseInt($next.data('id'), 10));
+                $next = $next.next();
+            }
+
+            apps.push(group);
+        });
+
+        return apps;
     }
 
     function add_app_to_collection(collection_id, app_id) {

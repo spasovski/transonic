@@ -11,12 +11,14 @@
         <li class="android{% if device_types.indexOf('android') == -1 and device_types.indexOf('android-mobile') == -1 and device_types.indexOf('android-tablet') == -1 %} unavailable{% endif %}"></li>
         <li class="firefoxos{% if device_types.indexOf('firefoxos') == -1 %} unavailable{% endif %}"></li>
       </ul>
-      <ul class="disabled-regions" itemprop="disabled-regions">
-        <span>{{ _('Disabled:') }}</span>
-        {% for disabled_region in disabled_regions %}
-          <li class="{{ disabled_region }}"></li>
-        {% endfor %}
-      </ul>
+      {% if disabled_regions.length %}
+        <ul class="disabled-regions" itemprop="disabled-regions">
+          <span>{{ _('Disabled:') }}</span>
+          {% for disabled_region in disabled_regions %}
+            <li class="{{ disabled_region }}"></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
   </div>
   {% if with_actions %}
     <div class="actions">
