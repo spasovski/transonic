@@ -19,6 +19,7 @@ define('forms_transonic',
             slug: $form.find('[name="slug"]').val(),
         };
         var $file_input = $form.find('[name="background-image-feed-banner"]');
+        console.log(data);
 
         // Validate.
         var errors = validate.feed_app(data, $file_input);
@@ -47,6 +48,7 @@ define('forms_transonic',
             slug: $form.find('[name="slug"]').val(),
         };
         var $file_input = $form.find('[name="background-image-feed-banner"]');
+        console.log(data);
 
         // Validate.
         var errors = is_grouped ? validate.app_group($items) : [];
@@ -68,6 +70,7 @@ define('forms_transonic',
             type: $form.find('[name="type"]').val(),
             slug: $form.find('[name="slug"]').val(),
         };
+        console.log(data);
 
         // Validate.
         var errors = validate.brand(data);

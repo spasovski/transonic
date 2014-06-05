@@ -30,6 +30,7 @@ define('views/edit',
             endpoint = urls.api.base.url('collection', [slug]);
         } else if (feedType == 'brands') {
             title = format.format(gettext('Editing Editorial Brand: {0}'), slug);
+            endpoint = urls.api.base.url('feed-brand', [slug]);
         }
 
         builder.z('title', title);

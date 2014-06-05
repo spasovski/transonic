@@ -47,6 +47,7 @@
     <h2>{{ _('Collections') }}</h2>
   {% end %}
 
+  {% set b_types = brands_module.BRAND_TYPES %}
   {% defer (url=api('feed-brands')|urlparams(order='-created')) %}
     <h2>{{ _('Editorial Brands ({number})')|format({number: this.meta.total_count or 0}) }}</h2>
     <ul class="brands">
@@ -56,7 +57,10 @@
             {% if brand.apps.length %}
               <img class="icon" src="{{ brand.apps[0].icons['48'] }}">
             {% endif %}
-            <h3>{{ _('{name} ({num_apps} apps)')|format({name: brand.name, num_apps: brand.apps.length}) }}</h3>
+            <h3>
+              {{ _('{name} ({num_apps} apps)')|format({name: b_types[brand.type][0] if num_apps == 1 else b_types[brand.type][1],
+                                                       num_apps: brand.apps.length}) }}
+            </h3>
             <span class="type">{{ brands_module.BRAND_LAYOUTS[brand.layout] }}</span>
             <span class="delete" data-type="brand"></span>
           </a>

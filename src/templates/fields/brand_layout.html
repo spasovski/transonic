@@ -1,10 +1,16 @@
+{% set layout_selected = obj.layout if obj else brands_module.BRAND_LAYOUTS_CHOICES[0][0] %}
+
 <div class="brand-layout field">
   <label for="brand-layout" class="inline-label">{{ _('Layout ') }}</label>
   <select id="brand-layout" name="layout">
-      {% for layout, str in brands_module.BRAND_LAYOUTS_CHOICES %}
-        <option class="{{ layout }}" value="{{ layout }}" {{ 'selected' if loop.index0 == 0 }}>{{ str }}</option>
-      {% endfor %}
+    {% for layout, str in brands_module.BRAND_LAYOUTS_CHOICES %}
+      <option class="{{ layout }}" value="{{ layout }}" {{ 'selected' if layout_selected == layout }}>{{ str }}</option>
+    {% endfor %}
   </select>
-  <p class="brand-helptext grid">{{ _('Apps will be stacked three in a line, then vertically. Landing page will appear when there are over 6 apps.') }}</p>
-  <p class="brand-helptext list hidden">{{ _('Apps will be stacked vertically, one line per app. Landing page will appear when there are over 2 apps.') }}</p>
+  <p class="brand-helptext grid {{ 'hidden' if layout_selected != 'grid' }}">
+    {{ _('Apps will be stacked three in a line, then vertically. Landing page will appear when there are over 6 apps.') }}
+  </p>
+  <p class="brand-helptext list {{ 'hidden' if layout_selected != 'list' }}">
+    {{ _('Apps will be stacked vertically, one line per app. Landing page will appear when there are over 2 apps.') }}
+  </p>
 </div>

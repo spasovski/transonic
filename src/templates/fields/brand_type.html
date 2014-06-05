@@ -1,8 +1,10 @@
+{% set brand_type_selected = obj.type if obj else brands_module.BRAND_TYPES_CHOICES[0][0] %}
+
 <div class="brand-type field">
   <label for="brand-type" class="inline-label">{{ _('Title') }}</label>
   <select id="brand-type" name="type">
     {% for brand_type, str in brands_module.BRAND_TYPES_CHOICES %}
-      <option value="{{ brand_type }}" {% if loop.index0 == 0 %} selected{% endif %}>
+      <option value="{{ brand_type }}" {{ 'selected' if brand_type_selected == brand_type }}>
         {{ str[1] }}
       </option>
     {% endfor %}
