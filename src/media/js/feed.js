@@ -1,4 +1,4 @@
-define('brands',
+define('feed',
     ['l10n', 'utils_local'], function(l10n, utils_local) {
     'use strict';
     var gettext = l10n.gettext;
@@ -99,10 +99,37 @@ define('brands',
 
     var BRAND_LAYOUTS_CHOICES = utils_local.items(BRAND_LAYOUTS);
 
+    var FEEDAPP_ICON = 'icon';
+    var FEEDAPP_IMAGE = 'image';
+    var FEEDAPP_DESC = 'description';
+    var FEEDAPP_QUOTE = 'quote';
+    var FEEDAPP_PREVIEW = 'preview';
+
+    var FEEDAPP_TYPES = {
+        'icon': gettext('Icon'),
+        'image': gettext('Background Image'),
+        'description': gettext('Description'),
+        'quote': gettext('Quote'),
+        'preview': gettext('Screenshot'),
+    };
+
+    var COLL_PROMO = 'promo';
+    var COLL_LISTING = 'listing';
+    var COLL_OPERATOR = 'operator';
+
     return {
         BRAND_TYPES: BRAND_TYPES,
         BRAND_TYPES_CHOICES: BRAND_TYPES_CHOICES,
         BRAND_LAYOUTS: BRAND_LAYOUTS,
         BRAND_LAYOUTS_CHOICES: BRAND_LAYOUTS_CHOICES,
+        COLL_PROMO: COLL_PROMO,
+        COLL_LISTING: COLL_LISTING,
+        COLL_OPERATOR: COLL_OPERATOR,
+        FEEDAPP_ICON: FEEDAPP_ICON,
+        FEEDAPP_IMAGE: FEEDAPP_IMAGE,
+        FEEDAPP_DESC: FEEDAPP_DESC,
+        FEEDAPP_QUOTE: FEEDAPP_QUOTE,
+        FEEDAPP_PREVIEW: FEEDAPP_PREVIEW,
+        FEEDAPP_TYPES: FEEDAPP_TYPES,
     };
 });

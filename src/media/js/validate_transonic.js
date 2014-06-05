@@ -1,6 +1,6 @@
 define('validate_transonic',
-    ['defer', 'jquery', 'l10n', 'settings', 'utils_local',],
-    function(defer, $, l10n, settings, utils_local) {
+    ['defer', 'feed', 'jquery', 'l10n', 'utils_local',],
+    function(defer, $, l10n, utils_local) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -13,19 +13,19 @@ define('validate_transonic',
             errs.push(gettext('Slug is required.'));
         }
         if (!$file_input.val().length &&
-            [settings.FEEDAPP_TYPE_IMAGE].indexOf(data.feedapp_type) !== -1) {
+            [feed.FEEDAPP_IMAGE].indexOf(data.feedapp_type) !== -1) {
             errs.push(gettext('Background image is required.'));
         }
         if (!validate_localized_field(data.description) &&
-            [settings.FEEDAPP_TYPE_DESC].indexOf(data.feedapp_type) !== -1) {
+            [feed.FEEDAPP_DESC].indexOf(data.feedapp_type) !== -1) {
             errs.push(gettext('Description is required.'));
         }
         if (!data.preview &&
-            [settings.FEEDAPP_TYPE_PREVIEW].indexOf(data.feedapp_type) !== -1) {
+            [feed.FEEDAPP_PREVIEW].indexOf(data.feedapp_type) !== -1) {
             errs.push(gettext('Preview is required.'));
         }
         if (!validate_localized_field(data.pullquote_text) &&
-            [settings.FEEDAPP_TYPE_QUOTE].indexOf(data.feedapp_type) !== -1) {
+            [feed.FEEDAPP_QUOTE].indexOf(data.feedapp_type) !== -1) {
             errs.push(gettext('Quote text is required.'));
         }
         return errs;
@@ -43,7 +43,7 @@ define('validate_transonic',
             errs.push(gettext('Slug is required.'));
         }
         if (!$file_input.val().length &&
-            [settings.COLL_PROMO].indexOf(data.type) !== -1) {
+            [feed.COLL_PROMO].indexOf(data.type) !== -1) {
             errs.push(gettext('Background image is required.'));
         }
         return errs;

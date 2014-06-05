@@ -1,6 +1,6 @@
 define('forms_transonic',
-    ['app_selector', 'defer', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'nunjucks', 'requests', 'settings', 'storage', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
-    function(app_select, defer, $, fakefilefield, l10n, log, notification, nunjucks, requests, settings, storage, urls, utils, utils_local, validate, z) {
+    ['app_selector', 'defer', 'feed', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'nunjucks', 'requests', 'storage', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
+    function(app_select, defer, feed, $, fakefilefield, l10n, log, notification, nunjucks, requests, storage, urls, utils, utils_local, validate, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -36,7 +36,7 @@ define('forms_transonic',
         // Check for app groups first.
         var $items = $('.apps-widget .result');
         var type = $form.find('.collection-type-choices input:checked').val();
-        var is_grouped = type == settings.COLL_PROMO && $items.filter('.app-group').length;
+        var is_grouped = type == feed.COLL_PROMO && $items.filter('.app-group').length;
 
         // Gather data.
         var data = {

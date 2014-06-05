@@ -33,6 +33,6 @@ define('views/manage_listing',
     return function(builder, args) {
         builder.z('title', gettext('Existing Content'));
         builder.z('type', 'manage');
-        builder.start('manage/listing.html');
+        builder.start('manage_listing.html');
     };
 });

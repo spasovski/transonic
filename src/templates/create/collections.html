@@ -1,8 +1,8 @@
 {# This template is used for both creating and editing a featured app. #}
 {# Short abbreviations. #}
-{% set C_PROMO = settings.COLL_PROMO %}
-{% set C_LISTING = settings.COLL_LISTING %}
-{% set C_OPERATOR = settings.COLL_OPERATOR %}
+{% set C_PROMO = feed.COLL_PROMO %}
+{% set C_LISTING = feed.COLL_LISTING %}
+{% set C_OPERATOR = feed.COLL_OPERATOR %}
 {% set coll_type = obj.type if obj else C_PROMO %}
 
 <form class="transonic-form collections create" data-type="collections"

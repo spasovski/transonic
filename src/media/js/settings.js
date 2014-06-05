@@ -69,26 +69,9 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             '#2C393B',  // Intrepid Indigo.
         ],
 
-        text_color_choices: [
+        text_color_choices: [  // Defecated.
             '#000000',  // Pretty Dark.
             '#FFFFFF',  // A bit brighter than Pretty Dark.
         ],
-
-        FEEDAPP_TYPE_ICON: 'icon',
-        FEEDAPP_TYPE_IMAGE: 'image',
-        FEEDAPP_TYPE_DESC: 'description',
-        FEEDAPP_TYPE_QUOTE: 'quote',
-        FEEDAPP_TYPE_PREVIEW: 'preview',
-        FEEDAPP_TYPES: {
-            'icon': gettext('Icon'),
-            'image': gettext('Background Image'),
-            'description': gettext('Description'),
-            'quote': gettext('Quote'),
-            'preview': gettext('Screenshot'),
-        },
-
-        COLL_PROMO: 'promo',
-        COLL_LISTING: 'listing',
-        COLL_OPERATOR: 'operator',
     });
 });

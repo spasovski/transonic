@@ -1,8 +1,8 @@
-define('helpers_local', ['brands', 'nunjucks', 'urls', 'z'], function(brands, nunjucks, urls, z) {
+define('helpers_local', ['feed', 'nunjucks', 'urls', 'z'], function(feed, nunjucks, urls, z) {
     var filters = nunjucks.require('filters');
     var globals = nunjucks.require('globals');
 
-    globals.brands_module = brands;
+    globals.feed = feed;
 
     function indexOf(arr, val) {
         return arr.indexOf(val);

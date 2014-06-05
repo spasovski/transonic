@@ -1,6 +1,6 @@
 define('fields_transonic',
-    ['app_selector', 'apps_widget', 'jquery', 'jquery.fakefilefield', 'log', 'nunjucks', 'preview_tray', 'requests', 'settings', 'urls', 'utils', 'z'],
-    function(app_select, apps_widget, $, fakefilefield, log, nunjucks, preview_tray, requests, settings, urls, utils, z) {
+    ['app_selector', 'apps_widget', 'feed', 'jquery', 'jquery.fakefilefield', 'log', 'nunjucks', 'preview_tray', 'requests', 'urls', 'utils', 'z'],
+    function(app_select, apps_widget, feed, $, fakefilefield, log, nunjucks, preview_tray, requests, urls, utils, z) {
     'use strict';
 
     var imageUploads = {};  // keep track of drag-and-drop uploads to stuff into FormData later.
@@ -33,7 +33,7 @@ define('fields_transonic',
         $('.form-errors').empty();
 
         // Hide or show app groups when switching between tabs.
-        if (this.value == settings.COLL_PROMO) {
+        if (this.value == feed.COLL_PROMO) {
             $('.result.app-group:not(.hidden)').show();
         } else {
             $('.result.app-group').hide();

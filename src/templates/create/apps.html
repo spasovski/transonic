@@ -1,10 +1,10 @@
 {# This template is used for both creating and editing a featured app. #}
 {# Short abbreviations. #}
-{% set FT_ICON = settings.FEEDAPP_TYPE_ICON %}
-{% set FT_IMAGE = settings.FEEDAPP_TYPE_IMAGE%}
-{% set FT_DESC = settings.FEEDAPP_TYPE_DESC %}
-{% set FT_QUOTE = settings.FEEDAPP_TYPE_QUOTE %}
-{% set FT_PREVIEW = settings.FEEDAPP_TYPE_PREVIEW %}
+{% set FT_ICON = feed.FEEDAPP_ICON %}
+{% set FT_IMAGE = feed.FEEDAPP_IMAGE%}
+{% set FT_DESC = feed.FEEDAPP_DESC %}
+{% set FT_QUOTE = feed.FEEDAPP_QUOTE %}
+{% set FT_PREVIEW = feed.FEEDAPP_PREVIEW %}
 {% set feed_app_type = obj.feedapp_type if obj else FT_ICON %}
 
 <form class="transonic-form apps {{ 'edit' if obj else 'create' }}" data-type="apps"
