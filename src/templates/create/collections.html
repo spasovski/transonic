@@ -3,7 +3,7 @@
 {% set C_PROMO = settings.COLL_PROMO %}
 {% set C_LISTING = settings.COLL_LISTING %}
 {% set C_OPERATOR = settings.COLL_OPERATOR %}
-{% set coll_type = settings.COLL_IDS[obj.collection_type] if obj else C_PROMO %}
+{% set coll_type = obj.type if obj else C_PROMO %}
 
 <form class="transonic-form collections create" data-type="collections"
       data-collection-type="{{ coll_type }}">
@@ -52,10 +52,6 @@
     </div>
   </section>
 
-  <section class="island submit">
-    <h3>{{ _('Submit Collection') }}</h3>
-    <div class="form-errors"></div>
-    <button class="submit">{{ _('Submit') }}</button>
-  </section>
-
+  {% include "fields/submit.html" %}
+  {{ submit_footer(_('Collection'), obj) }}
 </form>

@@ -10,9 +10,6 @@
     {% include "apps_widget.html" %}
   </section>
 
-  <section class="island submit">
-    <h3>{{ _('Submit Editorial Brand') }}</h3>
-    <div class="form-errors"></div>
-    <button class="submit">{{ _('Submit') }}</button>
-  </section>
+  {% include "fields/submit.html" %}
+  {{ submit_footer(_('Editorial Brand'), obj) }}
 </form>

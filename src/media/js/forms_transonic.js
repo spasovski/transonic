@@ -35,22 +35,21 @@ define('forms_transonic',
         // Check for app groups first.
         var $items = $('.apps-widget .result');
         var type = $form.find('.collection-type-choices input:checked').val();
-        var has_groups = type == settings.COLL_PROMO && $items.filter('.app-group').length;
+        var is_grouped = type == settings.COLL_PROMO && $items.filter('.app-group').length;
 
         // Gather data.
         var data = {
-            apps: has_groups ? get_app_groups($items) : get_app_ids($items),
+            apps: is_grouped ? get_app_groups($items) : get_app_ids($items),
             background_color: $form.find('.bg-color input:checked').val(),
-            type: has_groups ? settings.COLL_PROMO_GRP: type,
+            type: type,
             description: utils_local.build_localized_field('description'),
-            is_public: true,  // TODO: remove.
             name: utils_local.build_localized_field('name'),
             slug: $form.find('[name="slug"]').val(),
         };
         var $file_input = $form.find('[name="background-image-feed-banner"]');
 
         // Validate.
-        var errors = has_groups ? validate.app_group($items) : [];
+        var errors = is_grouped ? validate.app_group($items) : [];
         errors = errors.concat(validate.collection(data, $file_input));
         if (errors.length) {
             render_errors(errors);

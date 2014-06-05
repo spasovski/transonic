@@ -43,7 +43,7 @@ define('validate_transonic',
             errs.push(gettext('Slug is required.'));
         }
         if (!$file_input.val().length &&
-            [settings.COLL_PROMO, settings.COLL_PROMO_GROUPED].indexOf(data.type) !== -1) {
+            [settings.COLL_PROMO].indexOf(data.type) !== -1) {
             errs.push(gettext('Background image is required.'));
         }
         return errs;

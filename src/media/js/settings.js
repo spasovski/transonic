@@ -88,7 +88,6 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         },
 
         COLL_PROMO: 'promo',
-        COLL_PROMO_GRP: 'promo-grp',
         COLL_LISTING: 'listing',
         COLL_OPERATOR: 'operator',
     });

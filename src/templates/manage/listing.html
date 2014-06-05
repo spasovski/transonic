@@ -15,7 +15,7 @@
             <img class="icon" src="{{ feed_app.app.icons['48'] }}">
             <h3>{{ '{name} ({slug})'|format({name: feed_app.app.name, slug: feed_app.slug}) }}</h3>
             <span class="type">{{ settings.FEEDAPP_TYPES[feed_app.feedapp_type] }}</span>
-            <span class="delete"></span>
+            <span class="delete" data-type="feed-app"></span>
           </a>
         </li>
       {% endfor %}
@@ -38,7 +38,7 @@
             {% endif %}
             <h3>{{ _('{name} ({num_apps} apps)')|format({name: collection.name, num_apps: collection.apps.length}) }}</h3>
             <span class="type">{{ settings.COLL_TYPES[collection.collection_type] }}</span>
-            <span class="delete"></span>
+            <span class="delete" data-type="collection"></span>
           </a>
         </li>
       {% endfor %}
@@ -47,13 +47,19 @@
     <h2>{{ _('Collections') }}</h2>
   {% end %}
 
-  {% defer (url='') %}
+  {% defer (url=api('feed-brands')|urlparams(order='-created')) %}
     <h2>{{ _('Editorial Brands ({number})')|format({number: this.meta.total_count or 0}) }}</h2>
     <ul class="brands">
       {% for brand in this.objects %}
-        <li class="brand">
-          <h3>{{ brand.name }}</h3>
-          <span class="delete"></span>
+        <li class="brand" data-slug="{{ brand.slug }}">
+          <a href="{{ url('edit', ['brands', brand.slug]) }}">
+            {% if brand.apps.length %}
+              <img class="icon" src="{{ brand.apps[0].icons['48'] }}">
+            {% endif %}
+            <h3>{{ _('{name} ({num_apps} apps)')|format({name: brand.name, num_apps: brand.apps.length}) }}</h3>
+            <span class="type">{{ brands_module.BRAND_LAYOUTS[brand.layout] }}</span>
+            <span class="delete" data-type="brand"></span>
+          </a>
         </li>
       {% endfor %}
     </ul>

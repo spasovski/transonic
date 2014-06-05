@@ -1,0 +1,19 @@
+{% macro submit_footer(type, obj) %}
+  <section class="island submit">
+    <h3>
+      {% if obj %}
+        {{ _('Update {type}')|format({type: type}) }}
+      {% else %}
+        {{ _('Submit {type}')|format({type: type}) }}
+      {% endif %}
+    </h3>
+    <div class="form-errors"></div>
+    <button class="submit">
+      {% if obj %}
+        {{ _('Update') }}
+      {% else %}
+        {{ _('Submit') }}
+      {% endif %}
+    </button>
+  </section>
+{% endmacro %}

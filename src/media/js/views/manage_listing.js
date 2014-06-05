@@ -17,8 +17,10 @@ define('views/manage_listing',
         }
 
         var endpoint = urls.api.url('feed-app', [$item.data('slug')]);
-        if ($this.parent().hasClass('.collection')) {
+        if ($this.hasClass('collection')) {
             endpoint = urls.api.url('collection', [$item.data('slug')]);
+        } else if ($this.hasClass('brand')) {
+            endpoint = urls.api.url('feed-brand', [$item.data('slug')]);
         }
 
         requests.del(endpoint).done(function(data) {
