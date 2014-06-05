@@ -28,7 +28,7 @@ define('views/edit',
         } else if (feedType == 'collections') {
             title = format.format(gettext('Editing Collection: {0}'), slug);
             endpoint = urls.api.base.url('collection', [slug]);
-        } else if (feedType == 'editorial') {
+        } else if (feedType == 'brands') {
             title = format.format(gettext('Editing Editorial Brand: {0}'), slug);
         }
 
@@ -57,8 +57,7 @@ define('views/edit',
                     }
                     $('.screenshots').html(nunjucks.env.render('preview_tray.html', {app: obj.app}));
                     preview_tray.populateTray.call($('.preview-tray')[0], preview_index);
-
-                } else if (feedType == 'collections') {
+                } else if (['collections', 'brands'].indexOf(feedType) !== -1) {
                     // App widget.
                     for (var i = 0; i < obj.apps.length; i++) {
                         apps_widget.render_append(obj.apps[i]);

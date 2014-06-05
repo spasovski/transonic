@@ -8,16 +8,23 @@ define('views/create',
         var $form = $(this).closest('form');
 
         if ($form.data('type') == 'apps') {
-            forms_transonic.create_update_featured_app($form).done(function(feed_element) {
+            forms_transonic.feed_app($form).done(function(feed_element) {
                 z.page.trigger('navigate', [urls.reverse('edit', ['apps', feed_element.slug])]);
                 notification.notification({message: gettext('Featured app successfully created')});
             }).fail(function(error) {
                 notification.notification({message: error});
             });
         } else if ($form.data('type') == 'collections') {
-            forms_transonic.create_collection($form).done(function(feed_element) {
+            forms_transonic.collection($form).done(function(feed_element) {
                 z.page.trigger('navigate', [urls.reverse('edit', ['collections', feed_element.slug])]);
                 notification.notification({message: gettext('Collection successfully created')});
+            }).fail(function(error) {
+                notification.notification({message: error});
+            });
+        } else {
+            forms_transonic.brand($form).done(function(brand) {
+                z.page.trigger('navigate', [urls.reverse('edit', ['brands', brand.slug])]);
+                notification.notification({message: gettext('Editorial brand successfully created')});
             }).fail(function(error) {
                 notification.notification({message: error});
             });
@@ -32,7 +39,7 @@ define('views/create',
             title = gettext('Creating a Featured App');
         } else if (feedType == 'collections') {
             title = gettext('Creating a Collection');
-        } else if (feedType == 'editorial') {
+        } else if (feedType == 'brands') {
             title = gettext('Creating an Editorial Brand');
         }
 

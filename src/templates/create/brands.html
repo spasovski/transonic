@@ -1,10 +1,9 @@
-<form class="transonic-form editorial">
-
+<form class="transonic-form brands create" data-type="brands">
   <section class="island">
     <h3>{{ title }}</h3>
-    {% include "fields/editorial_title.html" %}
+    {% include "fields/brand_type.html" %}
     {% include "fields/slug.html" %}
-    {% include "fields/editorial_type.html" %}
+    {% include "fields/brand_layout.html" %}
 
     <h2>{{ _('Apps') }}</h2>
     {% include "app_selector.html" %}
@@ -13,7 +12,7 @@
 
   <section class="island submit">
     <h3>{{ _('Submit Editorial Brand') }}</h3>
-    <button type="submit">{{ _('Submit') }}</button>
+    <div class="form-errors"></div>
+    <button class="submit">{{ _('Submit') }}</button>
   </section>
-
 </form>

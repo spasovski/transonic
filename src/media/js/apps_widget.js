@@ -71,8 +71,7 @@ define('apps_widget',
     };
 
     var append = function(id) {
-        /* For collections. */
-        if (get_app_ids().indexOf(id) !== -1) {
+        if (get_app_ids().indexOf(parseInt(id, 10)) !== -1) {
             return;
         }
         // Make app request to render app info template.

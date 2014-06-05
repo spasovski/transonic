@@ -39,13 +39,9 @@ define('fields_transonic',
             $('.result.app-group').hide();
         }
     })
-    .on('change', '.editorial-type select', function() {
-        var $helptext = $('.editorial-helptext').hide();
-        if ($(this).find('.table').prop('selected')) {
-            $helptext.filter('.table').show();
-        } else {
-            $helptext.filter('.list').show();
-        }
+    .on('change', '.brand-layout select', function() {
+        var $helptext = $('.brand-helptext').hide();
+        $helptext.filter('.' + this.value).show();
     })
     .on('app-selected', function(e, id) {
         if ($('.transonic-form').data('type') == 'apps') {

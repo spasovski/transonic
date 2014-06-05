@@ -1,0 +1,10 @@
+<div class="brand-type field">
+  <label for="brand-type" class="inline-label">{{ _('Title') }}</label>
+  <select id="brand-type" name="type">
+    {% for brand_type, str in brands_module.BRAND_TYPES_CHOICES %}
+      <option value="{{ brand_type }}" {% if loop.index0 == 0 %} selected{% endif %}>
+        {{ str[1] }}
+      </option>
+    {% endfor %}
+  </select>
+</div>

@@ -74,20 +74,6 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             '#FFFFFF',  // A bit brighter than Pretty Dark.
         ],
 
-        editorial_titles: [
-            [gettext('Awesome Game'), gettext('Awesome Games')],
-            [gettext('Best of the Best'), gettext('Best of the Best')],
-            [gettext('Community Pick'), gettext('Community Picks')],
-            [gettext('Editor\'s Pick'), gettext('Editor\'s Picks')],
-            [gettext('Essential'), gettext('Essentials')],
-            [gettext('Fresh App'), gettext('Fresh Apps')],
-            [gettext('Good Deal'), gettext('Good Deals')],
-            [gettext('Hidden Gem'), gettext('Hidden Gems')],
-            [gettext('Noteworthy'), gettext('Noteworthy')],
-            [gettext('Partner Highlight'), gettext('Partner Highlights')],
-            [gettext('Staff Recommendation'), gettext('Staff Recommendations')],
-        ],
-
         FEEDAPP_TYPE_ICON: 'icon',
         FEEDAPP_TYPE_IMAGE: 'image',
         FEEDAPP_TYPE_DESC: 'description',
@@ -102,22 +88,8 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         },
 
         COLL_PROMO: 'promo',
+        COLL_PROMO_GRP: 'promo-grp',
         COLL_LISTING: 'listing',
         COLL_OPERATOR: 'operator',
-        COLL_TYPES: {
-            0: gettext('Promo Collection'),  // Header graphic.
-            1: gettext('Listing Collection'),  // No header graphic.
-            2: gettext('Operator Shelf'),  // Tailored to operator.
-        },
-        COLL_SLUGS: {
-            'promo': 0,
-            'listing': 1,
-            'operator': 2,
-        },
-        COLL_IDS: {
-            0: 'promo',
-            1: 'listing',
-            2: 'operator',
-        }
     });
 });

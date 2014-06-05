@@ -4,7 +4,7 @@ define('validate_transonic',
     'use strict';
     var gettext = l10n.gettext;
 
-    var featured_app = function(data, $file_input) {
+    var feed_app = function(data, $file_input) {
         var errs = [];
         if (!data.app) {
             errs.push(gettext('App is required.'));
@@ -31,8 +31,11 @@ define('validate_transonic',
         return errs;
     };
 
-    var collection = function(data, $file_input, apps) {
+    var collection = function(data, $file_input) {
         var errs = [];
+        if (!data.apps.length) {
+            errs.push(gettext('Apps are required.'));
+        }
         if (!validate_localized_field(data.name)) {
             errs.push(gettext('Name is required.'));
         }
@@ -40,11 +43,19 @@ define('validate_transonic',
             errs.push(gettext('Slug is required.'));
         }
         if (!$file_input.val().length &&
-            [settings.COLL_SLUGS[settings.COLL_PROMO]].indexOf(data.collection_type) !== -1) {
+            [settings.COLL_PROMO, settings.COLL_PROMO_GROUPED].indexOf(data.type) !== -1) {
             errs.push(gettext('Background image is required.'));
         }
-        if (!apps.length) {
+        return errs;
+    };
+
+    var brand = function(data) {
+        var errs = [];
+        if (!data.apps.length) {
             errs.push(gettext('Apps are required.'));
+        }
+        if (!data.slug) {
+            errs.push(gettext('Slug is required.'));
         }
         return errs;
     };
@@ -87,8 +98,9 @@ define('validate_transonic',
 
     return {
         app_group: app_group,
-        featured_app: featured_app,
-        collection: collection
+        brand: brand,
+        collection: collection,
+        feed_app: feed_app,
     };
 });
 

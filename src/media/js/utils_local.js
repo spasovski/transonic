@@ -9,7 +9,21 @@ define('utils_local', ['jquery', 'log'], function($, log) {
         return data;
     };
 
+    var items = function(obj) {
+        // Like Python's dict.items().
+        var items = [];
+        var keys = Object.keys(obj);
+        for (var i = 0; i < keys.length; i++) {
+            var item = [];
+            item.push(keys[i]);
+            item.push(obj[keys[i]]);
+            items.push(item);
+        }
+        return items;
+    };
+
     return {
-        build_localized_field: build_localized_field
+        build_localized_field: build_localized_field,
+        items: items
     };
 });

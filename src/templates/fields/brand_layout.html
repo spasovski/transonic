@@ -1,0 +1,10 @@
+<div class="brand-layout field">
+  <label for="brand-layout" class="inline-label">{{ _('Layout ') }}</label>
+  <select id="brand-layout" name="layout">
+      {% for layout, str in brands_module.BRAND_LAYOUTS_CHOICES %}
+        <option class="{{ layout }}" value="{{ layout }}" {{ 'selected' if loop.index0 == 0 }}>{{ str }}</option>
+      {% endfor %}
+  </select>
+  <p class="brand-helptext grid">{{ _('Apps will be stacked three in a line, then vertically. Landing page will appear when there are over 6 apps.') }}</p>
+  <p class="brand-helptext list hidden">{{ _('Apps will be stacked vertically, one line per app. Landing page will appear when there are over 2 apps.') }}</p>
+</div>

@@ -4,8 +4,9 @@ define('forms_transonic',
     'use strict';
     var gettext = l10n.gettext;
 
-    var create_update_featured_app = function($form, slug) {
-        // Create or update FeedApp. If pass in slug, then it's update.
+    var feed_app = function($form, slug) {
+        /* Create or update FeedApp. */
+        // Gather data.
         var data = {
             app: $form.find('[name="app"]').val(),
             background_color: $form.find('.bg-color input:checked').val(),
@@ -20,21 +21,27 @@ define('forms_transonic',
         var $file_input = $form.find('[name="background-image-feed-banner"]');
 
         // Validate.
-        var def = defer.Deferred();
-        var errors = validate.featured_app(data, $file_input);
+        var errors = validate.feed_app(data, $file_input);
         if (errors.length) {
             render_errors(errors);
-            return def.reject(gettext('Sorry, we found some errors in the form.'));
+            return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
         }
 
         return save_feed_app(data, slug, $file_input);
     };
 
-    var create_collection = function($form, slug) {
-        // Create Feed Collection.
+    var collection = function($form, slug) {
+        /* Create or update FeedCollection. */
+        // Check for app groups first.
+        var $items = $('.apps-widget .result');
+        var type = $form.find('.collection-type-choices input:checked').val();
+        var has_groups = type == settings.COLL_PROMO && $items.filter('.app-group').length;
+
+        // Gather data.
         var data = {
+            apps: has_groups ? get_app_groups($items) : get_app_ids($items),
             background_color: $form.find('.bg-color input:checked').val(),
-            collection_type: settings.COLL_SLUGS[$form.find('.collection-type-choices input:checked').val()],  // TODO: change API to take a slug.
+            type: has_groups ? settings.COLL_PROMO_GRP: type,
             description: utils_local.build_localized_field('description'),
             is_public: true,  // TODO: remove.
             name: utils_local.build_localized_field('name'),
@@ -42,34 +49,39 @@ define('forms_transonic',
         };
         var $file_input = $form.find('[name="background-image-feed-banner"]');
 
-        // Check whether we need to make app groups.
-        var apps;
-        var $items = $('.apps-widget .result');
-        if (data.collection_type == settings.COLL_SLUGS[settings.COLL_PROMO] &&
-            $items.filter('.app-group').length) {
-            // Validate app groups.
-            var app_group_errors = validate.app_group($items);
-            if (app_group_errors.length) {
-                render_errors(app_group_errors);
-                return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
-            }
-            apps = get_app_groups($items);
-        } else {
-            apps = get_app_ids($items);
-        }
-
         // Validate.
-        var errors = validate.collection(data, $file_input, apps);
+        var errors = has_groups ? validate.app_group($items) : [];
+        errors = errors.concat(validate.collection(data, $file_input));
         if (errors.length) {
             render_errors(errors);
             return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
         }
 
-        return save_collection(data, slug, apps);
+        return save_collection(data, slug);
+    };
+
+    var brand = function($form, slug) {
+        /* Create or update FeedBrand. */
+        // Gather data.
+        var data = {
+            apps: get_app_ids($('.apps-widget .result')),
+            layout: $form.find('[name="layout"]').val(),
+            type: $form.find('[name="type"]').val(),
+            slug: $form.find('[name="slug"]').val(),
+        };
+
+        // Validate.
+        var errors = validate.brand(data);
+        if (errors.length) {
+            render_errors(errors);
+            return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
+        }
+
+        return save_brand(data, slug);
     };
 
     function save_feed_app(data, slug, $file_input) {
-        // Post FeedApp.kwku
+        // Post FeedApp.
         var def = defer.Deferred();
 
         function success(feed_app) {
@@ -100,27 +112,46 @@ define('forms_transonic',
         return def.promise();
     }
 
-    function save_collection(data, slug, apps) {
+    function save_collection(data, slug) {
         var def = defer.Deferred();
 
         function success(collection) {
-            // Add apps.
-            var apps_added = 0;
-            for (var i = 0; i < apps.length; i++) {
-                add_app_to_collection(collection.id, apps[i]).done(function(collection) {
-                    // TODO: batch adds.
-                    if (++apps_added >= apps.length) {
-                        def.resolve(collection);
-                    }
-                });
-            }
+            def.resolve(collection);
         }
 
         function fail(xhr) {
             def.reject(xhr.responseText);
         }
 
-        requests.post(urls.api.url('collections'), data).then(success, fail);
+        if (slug) {
+            // Update.
+            requests.put(urls.api.url('collection', [slug]), data).then(success, fail);
+        } else {
+            // Create.
+            requests.post(urls.api.url('collections'), data).then(success, fail);
+        }
+
+        return def.promise();
+    }
+
+    function save_brand(data, slug) {
+        var def = defer.Deferred();
+
+        function success(brand) {
+            def.resolve(brand);
+        }
+
+        function fail(xhr) {
+            def.reject(xhr.responseText);
+        }
+
+        if (slug) {
+            // Update.
+            requests.put(urls.api.url('feed-brand', [slug]), data).then(success, fail);
+        } else {
+            // Create.
+            requests.post(urls.api.url('feed-brands'), data).then(success, fail);
+        }
 
         return def.promise();
     }
@@ -171,12 +202,6 @@ define('forms_transonic',
         return def.promise();
     }
 
-    function add_app_to_collection(collection_id, app_id) {
-        // Add app to collection.
-        return requests.post(urls.api.url('collections-add-app', [collection_id]),
-                             {app: app_id});
-    }
-
     function save_feed_item(collection_id, feed_app_id) {
         // Validate feed app data and send create request.
         return requests.post(urls.api.url('feed-items'), {
@@ -192,7 +217,8 @@ define('forms_transonic',
     }
 
     return {
-        create_update_featured_app: create_update_featured_app,
-        create_collection: create_collection
+        brand: brand,
+        collection: collection,
+        feed_app: feed_app,
     };
 });
