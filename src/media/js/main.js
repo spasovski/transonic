@@ -67,21 +67,5 @@ function() {
     z.page.trigger('navigate', [window.location.pathname + window.location.search]);
     z.page.trigger('loaded');
 
-    // Debug page
-    (function() {
-        var to = false;
-        z.body.on('touchstart mousedown', '.wordmark', function(e) {
-            console.log('hold for debug...', e.type);
-            clearTimeout(to);
-            to = setTimeout(function() {
-                console.log('navigating to debug...');
-                z.page.trigger('navigate', ['/debug']);
-            }, 3000);
-        }).on('touchend mouseup', '.wordmark', function(e) {
-            console.log('debug hold released...', e.type);
-            clearTimeout(to);
-        });
-    })();
-
     console.log('Initialization complete');
 });
