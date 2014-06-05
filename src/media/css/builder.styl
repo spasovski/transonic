@@ -1,0 +1,49 @@
+@import 'lib';
+
+.feed-builder {
+    align-items: flex-start;
+    display: inline-flex;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+
+    h2 {
+        flex-basis: 100%;
+    }
+}
+
+.module-selector {
+    box-shadow: 0 0 1px 1px $cement-gray;
+    flex-basis: 49%;
+}
+
+.feed-column {
+    background: $barely-gray;
+    box-shadow: 0 0 1px 1px $cement-gray;
+    flex-basis: 49%;
+    padding: 20px;
+
+    .le-feed {
+        background: #fff;
+        border: 1px solid $cement-gray;
+        height: 480px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        overflow: scroll;
+    }
+    .submit {
+        float: right;
+    }
+    [name="feed-region"] {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+}
+
+// Adapt manage listing to feed builder.
+.feed-builder .manage-modules-listing {
+    .delete {
+        display: none;
+    }
+}

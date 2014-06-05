@@ -25,6 +25,7 @@
     </ul>
   {% placeholder %}
     <h2>{{ _('Featured Apps') }}</h2>
+  {% except %}
   {% end %}
 
   {% defer (url=api('collections')|urlparams(ordering='-created')) %}
@@ -45,6 +46,7 @@
     </ul>
   {% placeholder %}
     <h2>{{ _('Collections') }}</h2>
+  {% except %}
   {% end %}
 
   {% set b_types = feed.BRAND_TYPES %}
@@ -69,5 +71,6 @@
     </ul>
   {% placeholder %}
     <h2>{{ _('Editorial Brand') }}</h2>
+  {% except %}
   {% end %}
 </section>

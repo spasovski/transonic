@@ -1,4 +1,21 @@
-<section class="island">
+<section class="island feed-builder c">
   <h2>{{ _('Feed Builder') }}</h2>
-  <img src="http://i.imgur.com/pPSOiQc.gif">
+  <div class="module-selector">
+   {% include "manage_listing.html" %}
+  </div>
+  <div class="feed-column c">
+    <div class="feed-selector">
+      <h2>{{ _('Select a Feed to Modify') }}</h2>
+      <select name="feed-region">
+        {% for region_slug, region_name in settings.REGION_CHOICES_SLUG|items %}
+          <option value="{{ region_slug }}" {{ 'selected' if region_slug == 'us' }}>
+            {{ region_name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="le-feed">
+    </div>
+    <button class="button submit">{{ _('Publish') }}</button>
+  </div>
 </section>
