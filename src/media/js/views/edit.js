@@ -34,7 +34,7 @@ define('views/edit',
         }
 
         builder.z('title', title);
-        builder.z('type', feedType);
+        builder.z('type', 'manage');
 
         requests.get(endpoint).done(function(obj) {
             builder.start('create/' + feedType + '.html', {
