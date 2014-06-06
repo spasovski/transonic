@@ -48,7 +48,7 @@ function() {
             nunjucks.env.render('header.html'));
         $('#site-footer').html(
             nunjucks.env.render('footer.html'));
-        $('#nav').html(
+        $('#site-nav').html(
             nunjucks.env.render('nav.html'));
 
 
