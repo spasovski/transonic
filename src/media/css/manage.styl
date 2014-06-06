@@ -1,7 +1,8 @@
 @import 'lib';
 
-.manage-modules-listing {
-    li {
+.manage-modules-listing,
+.feed {
+    .feed-element {
         background: $faint-gray;
         border: 1px solid $faint-gray;
         border-radius: 10px;
@@ -11,6 +12,27 @@
         &:hover {
             border: 1px solid $border-blue;
             cursor: pointer;
+        }
+        &.feed-app {
+            background: $feed-app-red;
+
+            &:hover {
+                border: 1px solid darken($feed-app-red, 5%);
+            }
+        }
+        &.collection {
+            background: $collection-green;
+
+            &:hover {
+                border: 1px solid darken($collection-green, 5%);
+            }
+        }
+        &.brand {
+            background: $brand-blue;
+
+            &:hover {
+                border: 1px solid darken($brand-blue, 5%);
+            }
         }
         a {
             color: #000;
@@ -39,7 +61,21 @@
             cursor: pointer;
         }
     }
-    .loadmore button {
-        width: 100%;
+    .loadmore {
+        background: none;
+        border: 0;
+
+        &:hover {
+            background: none;
+            border: 0;
+        }
+        button {
+            background: none;
+            width: 100%;
+
+            &:hover {
+                background: $barely-gray;
+            }
+        }
     }
 }

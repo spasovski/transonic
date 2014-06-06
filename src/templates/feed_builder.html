@@ -6,15 +6,24 @@
   <div class="feed-column c">
     <div class="feed-selector">
       <h2>{{ _('Select a Feed to Modify') }}</h2>
-      <select name="feed-region">
+      <select class="feed-region-switcher" name="feed-region">
         {% for region_slug, region_name in settings.REGION_CHOICES_SLUG|items %}
-          <option value="{{ region_slug }}" {{ 'selected' if region_slug == 'us' }}>
+          <option value="{{ region_slug }}" {{ 'selected' if region_slug == 'restofworld' }}>
             {{ region_name }}
           </option>
         {% endfor %}
       </select>
     </div>
-    <div class="le-feed">
+    <div class="feeds">
+      {% for region_slug, region_name in settings.REGION_CHOICES_SLUG|items %}
+        <div class="feed localized {{ 'hidden' if region_slug != 'restofworld' }}"
+             data-region="{{ region_slug }}">
+          <h2 class="empty-results">
+            {{ _('No feed items in {region} feed')|format({region: region_name}) }}
+          </h2>
+          <div class="feed-items"></div>
+        </div>
+      {% endfor %}
     </div>
     <button class="button submit">{{ _('Publish') }}</button>
   </div>
