@@ -11,6 +11,7 @@ define('routes_api', [], function() {
         'feed-brands': '/api/v2/feed/brands/',
         'feed-brand': '/api/v2/feed/brands/{0}/',
         'feed-items': '/api/v2/feed/items/',
+        'feed-builder': '/api/v2/feed/builder/',
         'search': '/api/v1/apps/search/suggest?cache=1&vary=0',
     };
 });

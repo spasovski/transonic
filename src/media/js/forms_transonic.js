@@ -1,7 +1,8 @@
 define('forms_transonic',
-    ['app_selector', 'defer', 'feed', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'nunjucks', 'requests', 'storage', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
-    function(app_select, defer, feed, $, fakefilefield, l10n, log, notification, nunjucks, requests, storage, urls, utils, utils_local, validate, z) {
+    ['app_selector', 'defer', 'feed', 'format', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'nunjucks', 'requests', 'storage', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
+    function(app_select, defer, feed, format, $, fakefilefield, l10n, log, notification, nunjucks, requests, storage, urls, utils, utils_local, validate, z) {
     'use strict';
+    var format = format.format;
     var gettext = l10n.gettext;
 
     var feed_app = function($form, slug) {
@@ -82,9 +83,31 @@ define('forms_transonic',
         return save_brand(data, slug);
     };
 
-    var feed_items = function($feed) {
-        /* Create feed items! */
+    var feed_items = function($feeds, modified_regions) {
+        /* Create feed items!
+           Converts to object of regions pointing to feed-type/feed-element-id
+           pairs.
+           {
+               'us': [['app', 32], ['collection', 5], ['brand', 231]],
+           }
 
+           -- modified_regions - list of regions that we think may have been
+                                 modified so we'll just save it.
+        */
+        var data = {};
+        for (var i = 0; i < modified_regions.length; i++) {
+            var region = modified_regions[i];
+            data[region] = [];
+
+            var $region_feed = $feeds.find(format('.feed[data-region="{0}"]', [region]));
+            $region_feed.find('.feed-element').each(function(i, feed_element) {
+                data[region].push([feed_element.getAttribute('data-type'),
+                                   feed_element.getAttribute('data-id')]);
+            });
+        }
+        console.log(data);
+
+        return save_feed_items(data);
     };
 
     function save_feed_app(data, slug, $file_input) {
@@ -163,12 +186,9 @@ define('forms_transonic',
         return def.promise();
     }
 
-    function save_feed_item(collection_id, feed_app_id) {
-        // Validate feed app data and send create request.
-        return requests.post(urls.api.url('feed-items'), {
-            app: feed_app_id,
-            collection: collection_id,
-        });
+    function save_feed_items(data) {
+        // The GRAND DENOUEMENT.
+        return requests.put(urls.api.url('feed-builder'), data);
     }
 
     function get_app_ids($items) {
@@ -227,5 +247,6 @@ define('forms_transonic',
         brand: brand,
         collection: collection,
         feed_app: feed_app,
+        feed_items: feed_items,
     };
 });

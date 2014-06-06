@@ -10,7 +10,7 @@
     <h2>{{ _('Featured Apps ({number})')|format({number: this.meta.total_count}) }}</h2>
     <ul class="feed-apps">
       {% for feed_app in this.objects %}
-        <li class="feed-app feed-element" data-type="feed-app" data-id="{{ feed_app.id }}"
+        <li class="feed-app feed-element" data-type="app" data-id="{{ feed_app.id }}"
             data-slug="{{ feed_app.slug }}" {% if is_builder %}draggable="true"{% endif %}>
           <a{% if not is_builder %}href="{{ url('edit', ['apps', feed_app.slug]) }}"{% endif %}>
             <img class="icon" src="{{ feed_app.app.icons['48'] }}">
