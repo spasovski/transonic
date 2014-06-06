@@ -1,6 +1,6 @@
 define('apps_widget',
-    ['app_selector', 'jquery', 'nunjucks', 'requests', 'settings', 'underscore', 'urls', 'z'],
-    function(app_select, $, nunjucks, requests, settings, _, urls, z) {
+    ['app_selector', 'jquery', 'jquery-sortable', 'nunjucks', 'requests', 'settings', 'underscore', 'urls', 'z'],
+    function(app_select, $, sortable, nunjucks, requests, settings, _, urls, z) {
     'use strict';
 
     function get_app_ids() {
@@ -85,6 +85,7 @@ define('apps_widget',
         var $apps_widget = $('.apps-widget');
         $apps_widget.find('.apps').append(app_select.render_result(app, true));
         $apps_widget.find('.placeholder-text').hide();
+        $apps_widget.find('.apps').sortable();
     };
 
     var add_group = function() {

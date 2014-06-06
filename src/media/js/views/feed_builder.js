@@ -1,4 +1,4 @@
-define('views/feed_builder', ['format', 'l10n', 'utils', 'z'], function(format, l10n, utils, z) {
+define('views/feed_builder', ['jquery', 'jquery-sortable', 'format', 'l10n', 'utils', 'z'], function($, sortable, format, l10n, utils, z) {
     'use strict';
     var format = format.format;
     var gettext = l10n.gettext;
@@ -15,11 +15,6 @@ define('views/feed_builder', ['format', 'l10n', 'utils', 'z'], function(format, 
         remove($(this).closest('.feed-element'));
     });
 
-    function get_region_feed() {
-        var region = $('.feed-region-switcher :checked').val();
-        return $('.feed[data-region="' + region + '"]');
-    }
-
     function append($feed, $feed_element) {
         var type = $feed_element.data('type');
         var id = $feed_element.data('id');
@@ -27,16 +22,22 @@ define('views/feed_builder', ['format', 'l10n', 'utils', 'z'], function(format, 
             // Already exists.
             return;
         }
-        $feed.append($feed_element.clone());
         $feed.find('.empty-results').hide();
+        $feed.find('.feed-elements').append($feed_element.clone());
+        $('.feed-elements').sortable();
     }
 
     function remove($feed_element) {
-        var $parent = $feed_element.parent();
+        var $feed= $feed_element.closest('.feed');
         $feed_element.remove();
-        if (!$parent.find('.feed-element').length) {
-            $parent.find('.empty-results').show();
+        if (!$feed.find('.feed-element').length) {
+            $feed.find('.empty-results').show();
         }
+    }
+
+    function get_region_feed() {
+        var region = $('.feed-region-switcher :checked').val();
+        return $('.feed[data-region="' + region + '"]');
     }
 
     return function(builder) {

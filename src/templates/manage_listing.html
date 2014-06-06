@@ -11,7 +11,7 @@
     <ul class="feed-apps">
       {% for feed_app in this.objects %}
         <li class="feed-app feed-element" data-type="feed-app" data-id="{{ feed_app.id }}"
-            data-slug="{{ feed_app.slug }}">
+            data-slug="{{ feed_app.slug }}" {% if is_builder %}draggable="true"{% endif %}>
           <a{% if not is_builder %}href="{{ url('edit', ['apps', feed_app.slug]) }}"{% endif %}>
             <img class="icon" src="{{ feed_app.app.icons['48'] }}">
             <h3>{{ '{name} ({slug})'|format({name: feed_app.app.name, slug: feed_app.slug}) }}</h3>
@@ -34,7 +34,7 @@
     <ul class="collections">
       {% for collection in this.objects %}
         <li class="collection feed-element" data-type="collection" data-id="{{ collection.id }}"
-            data-slug="{{ collection.slug }}">
+            data-slug="{{ collection.slug }}" {% if is_builder %}draggable="true"{% endif %}>
           <a{% if not is_builder %}href="{{ url('edit', ['collections', collection.slug]) }}"{% endif %}>
             {% if collection.apps.length %}
               <img class="icon" src="{{ collection.apps[0].icons['48'] }}">
@@ -57,7 +57,7 @@
     <ul class="brands">
       {% for brand in this.objects %}
         <li class="brand feed-element" data-type="brand" data-id="{{ brand.id }}"
-            data-slug="{{ brand.slug }}">
+            data-slug="{{ brand.slug }}" {% if is_builder %}draggable="true"{% endif %}>
           <a{% if not is_builder %}href="{{ url('edit', ['brands', brand.slug]) }}"{% endif %}>
             {% if brand.apps.length %}
               <img class="icon" src="{{ brand.apps[0].icons['48'] }}">
