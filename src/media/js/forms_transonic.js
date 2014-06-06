@@ -82,6 +82,11 @@ define('forms_transonic',
         return save_brand(data, slug);
     };
 
+    var feed_items = function($feed) {
+        /* Create feed items! */
+
+    };
+
     function save_feed_app(data, slug, $file_input) {
         // Post FeedApp.
         var def = defer.Deferred();
@@ -158,6 +163,14 @@ define('forms_transonic',
         return def.promise();
     }
 
+    function save_feed_item(collection_id, feed_app_id) {
+        // Validate feed app data and send create request.
+        return requests.post(urls.api.url('feed-items'), {
+            app: feed_app_id,
+            collection: collection_id,
+        });
+    }
+
     function get_app_ids($items) {
         // Return a list of app IDs.
         return $.map($items.filter(':not(.app-group)'), function(app) {
@@ -202,14 +215,6 @@ define('forms_transonic',
         reader.readAsDataURL($file_input[0].files[0]);
 
         return def.promise();
-    }
-
-    function save_feed_item(collection_id, feed_app_id) {
-        // Validate feed app data and send create request.
-        return requests.post(urls.api.url('feed-items'), {
-            app: feed_app_id,
-            collection: collection_id,
-        });
     }
 
     function render_errors(errors) {
