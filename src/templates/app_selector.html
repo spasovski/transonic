@@ -4,13 +4,13 @@
          {{ 'disabled' if feed_type == 'apps' and obj }}>
     <img class="chosen-icon">
   </input>
-  <div class="results">
+  <ul class="results">
     <div class="paginator c" data-offset="0">
       {# L10n: `prev` stands for previous. #}
       <a class="prev">{{ _('Prev') }}</a>
       <a class="next">{{ _('Next') }}</a>
     </div>
-  </div>
+  </ul>
 
   <input name="app" type="hidden">
 </div>

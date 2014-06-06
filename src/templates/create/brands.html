@@ -1,4 +1,5 @@
-<form class="transonic-form brands create" data-type="brands">
+<form class="transonic-form brands {{ 'edit' if obj else 'create' }}" data-type="brands"
+      {% if obj %}data-slug="{{ obj.slug }}"{% endif %}>
   <section class="island">
     <h3>{{ title }}</h3>
     {% include "fields/brand_type.html" %}

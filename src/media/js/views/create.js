@@ -21,7 +21,7 @@ define('views/create',
             }).fail(function(error) {
                 notification.notification({message: error});
             });
-        } else {
+        } else if ($form.data('type') == 'brands') {
             forms_transonic.brand($form).done(function(brand) {
                 z.page.trigger('navigate', [urls.reverse('edit', ['brands', brand.slug])]);
                 notification.notification({message: gettext('Editorial brand successfully created')});

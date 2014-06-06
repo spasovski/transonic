@@ -5,8 +5,9 @@
 {% set C_OPERATOR = feed.COLL_OPERATOR %}
 {% set coll_type = obj.type if obj else C_PROMO %}
 
-<form class="transonic-form collections create" data-type="collections"
-      data-collection-type="{{ coll_type }}">
+<form class="transonic-form collections {{ 'edit' if obj else 'create' }}" data-type="collections"
+      data-collection-type="{{ coll_type }}"
+      {% if obj %}data-slug="{{ obj.slug }}"{% endif %}>
   <section class="island c">
     {% include "locale_switcher.html" %}
 

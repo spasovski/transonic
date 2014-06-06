@@ -1,6 +1,6 @@
 <li class="brand feed-element" data-type="brand" data-id="{{ brand.id }}"
     data-slug="{{ brand.slug }}" {% if is_builder %}draggable="true"{% endif %}>
-  <a{% if not is_builder %}href="{{ url('edit', ['brands', brand.slug]) }}"{% endif %}>
+  <a {% if not is_builder %}href="{{ url('edit', ['brands', brand.slug]) }}"{% endif %}>
     {% if brand.apps.length %}
       <img class="icon" src="{{ brand.apps[0].icons['48'] }}">
     {% endif %}

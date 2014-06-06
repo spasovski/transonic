@@ -4,12 +4,24 @@ define('views/edit',
     'use strict';
     var gettext = l10n.gettext;
 
-    z.body.on('click', '.transonic-form.edit .submit', utils._pd(function(e) {
+    z.body.on('click', '.transonic-form.edit button.submit', utils._pd(function(e) {
         var $form = $(this).closest('form');
 
         if ($form.data('type') == 'apps') {
-            forms_transonic.create_update_featured_app($form, $form.data('slug')).done(function(feed_element) {
+            forms_transonic.feed_app($form, $form.data('slug')).done(function(feed_element) {
                 notification.notification({message: gettext('Featured app successfully updated')});
+            }).fail(function(error) {
+                notification.notification({message: error});
+            });
+        } else if ($form.data('type') == 'collections') {
+            forms_transonic.collection($form, $form.data('slug')).done(function(feed_element) {
+                notification.notification({message: gettext('Collection successfully updated')});
+            }).fail(function(error) {
+                notification.notification({message: error});
+            });
+        } else if ($form.data('type') == 'brands') {
+            forms_transonic.brand($form, $form.data('slug')).done(function(feed_element) {
+                notification.notification({message: gettext('Editorial brand successfully updated')});
             }).fail(function(error) {
                 notification.notification({message: error});
             });

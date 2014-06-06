@@ -9,7 +9,6 @@ define('app_selector',
     z.page.on('loaded', function() {
         // Cache selectors.
         $app_selector = $('.app-selector');
-        $results = $app_selector.find('.results');
         $paginator = $app_selector.find('.paginator');
     })
 
@@ -67,7 +66,8 @@ define('app_selector',
         var search_url = urls.api.unsigned.params(
             'search', {'q': q, 'limit': 5, 'offset': offset});
         requests.get(search_url).done(function(data) {
-            $('.result', $results).remove();
+            var $results = $('.results');
+            $results.find('.result').remove();
 
             // Append results.
             for (var i = 0; i < data.objects.length; i++) {
