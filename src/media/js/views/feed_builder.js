@@ -1,5 +1,5 @@
-define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'format', 'l10n', 'notification', 'utils', 'z'],
-    function(forms_transonic, $, sortable, format, l10n, notification, utils, z) {
+define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'format', 'l10n', 'notification', 'nunjucks', 'requests',  'urls', 'utils', 'z'],
+    function(forms_transonic, $, sortable, format, l10n, notification, nunjucks, requests, urls, utils, z) {
     'use strict';
     var format = format.format;
     var gettext = l10n.gettext;
@@ -10,9 +10,21 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
     z.page.on('change', '.feed-region-switcher', function() {
         /* Look at a different feed. */
         var region = this.value;
-        $('.localized').addClass('hidden')
-                       .filter('[data-region=' + region + ']').removeClass('hidden');
-        modified_regions.push(region);
+
+        requests.get(urls.api.url('feed-items'), {'region': region, 'ordering': 'order'}).done(function(feed_items) {
+            var feed_items = feed_items.objects;
+            var $feed = $('.localized').addClass('hidden')
+                                       .filter('[data-region=' + region + ']').removeClass('hidden');
+            modified_regions.push(region);
+
+            for (var i = 0; i < feed_items.length; i++) {
+                var type = feed_items[i].item_type;
+                var context = {};
+                context[type] = feed_items[i][type];
+                var $feed_element = $(nunjucks.env.render(format('listing/{0}.html', [type]), context));
+                append($feed, $feed_element);
+            }
+        });
     })
     .on('click', '.feed-builder .manage-modules-listing .feed-element', function() {
         /* Add feed element to feed. */
@@ -63,6 +75,9 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
             is_builder: true  // To flip some stuff in the included manage_listing.html.
         }).done(function() {
             modified_regions = ['restofworld'];
+
+            // Load existing FeedItems.
+            $('.feed-region-switcher').trigger('change');
         });
     };
 });

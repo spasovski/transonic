@@ -60,6 +60,11 @@ define('validate_transonic',
         return errs;
     };
 
+    var feed_items = function(data) {
+        var errs = [];
+        return errs;
+    };
+
     var app_group = function($items) {
         var errs = [];
         if (!$items.filter('.result:not(.app-group)').length) {
@@ -101,6 +106,7 @@ define('validate_transonic',
         brand: brand,
         collection: collection,
         feed_app: feed_app,
+        feed_items: feed_items
     };
 });
 

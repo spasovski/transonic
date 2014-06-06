@@ -1,7 +1,7 @@
 <section class="island feed-builder c">
   <h2>{{ _('Feed Builder') }}</h2>
   <div class="module-selector">
-   {% include "manage_listing.html" %}
+   {% include "listing/listing.html" %}
   </div>
   <div class="feed-column c">
     <div class="feed-selector">
@@ -26,5 +26,6 @@
       {% endfor %}
     </div>
     <button class="button submit">{{ _('Publish') }}</button>
+    <div class="form-errors"></div>
   </div>
 </section>

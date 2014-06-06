@@ -107,6 +107,13 @@ define('forms_transonic',
         }
         console.log(data);
 
+        // Validate.
+        var errors = validate.feed_items(data);
+        if (errors.length) {
+            render_errors(errors);
+            return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
+        }
+
         return save_feed_items(data);
     };
 
@@ -238,7 +245,7 @@ define('forms_transonic',
     }
 
     function render_errors(errors) {
-        $('.submit .form-errors').html(nunjucks.env.render('errors/form_errors.html', {
+        $('.form-errors').html(nunjucks.env.render('errors/form_errors.html', {
             errors: errors
         }));
     }

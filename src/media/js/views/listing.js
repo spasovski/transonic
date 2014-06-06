@@ -1,4 +1,4 @@
-define('views/manage_listing',
+define('views/listing',
     ['format', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'urls', 'utils', 'z'],
     function(format, $, l10n, log, notification, requests, settings, nunjucks, urls, utils, z) {
     'use strict';
@@ -33,6 +33,6 @@ define('views/manage_listing',
     return function(builder, args) {
         builder.z('title', gettext('Existing Content'));
         builder.z('type', 'manage');
-        builder.start('manage_listing.html');
+        builder.start('listing/listing.html');
     };
 });
