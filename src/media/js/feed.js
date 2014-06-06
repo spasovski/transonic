@@ -117,6 +117,11 @@ define('feed',
     var COLL_LISTING = 'listing';
     var COLL_OPERATOR = 'operator';
 
+    var COLL_TYPES = {
+        'promo': gettext('Promo Collection'),
+        'listing': gettext('Listing Collection'),
+    };
+
     return {
         BRAND_TYPES: BRAND_TYPES,
         BRAND_TYPES_CHOICES: BRAND_TYPES_CHOICES,
@@ -125,6 +130,7 @@ define('feed',
         COLL_PROMO: COLL_PROMO,
         COLL_LISTING: COLL_LISTING,
         COLL_OPERATOR: COLL_OPERATOR,
+        COLL_TYPES: COLL_TYPES,
         FEEDAPP_ICON: FEEDAPP_ICON,
         FEEDAPP_IMAGE: FEEDAPP_IMAGE,
         FEEDAPP_DESC: FEEDAPP_DESC,

@@ -11,7 +11,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
         /* Look at a different feed. */
         var region = this.value;
 
-        requests.get(urls.api.url('feed-items'), {'region': region, 'ordering': 'order'}).done(function(feed_items) {
+        requests.get(urls.api.url('feed-items', [], {'region': region, 'ordering': 'order'})).done(function(feed_items) {
             var feed_items = feed_items.objects;
             var $feed = $('.localized').addClass('hidden')
                                        .filter('[data-region=' + region + ']').removeClass('hidden');
@@ -19,7 +19,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
 
             for (var i = 0; i < feed_items.length; i++) {
                 var type = feed_items[i].item_type;
-                var context = {};
+                var context = {is_builder: true};
                 context[type] = feed_items[i][type];
                 var $feed_element = $(nunjucks.env.render(format('listing/{0}.html', [type]), context));
                 append($feed, $feed_element);

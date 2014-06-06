@@ -1,6 +1,6 @@
 define('validate_transonic',
     ['defer', 'feed', 'jquery', 'l10n', 'utils_local',],
-    function(defer, $, l10n, utils_local) {
+    function(defer, feed, $, l10n, utils_local) {
     'use strict';
     var gettext = l10n.gettext;
 

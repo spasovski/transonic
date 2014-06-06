@@ -9,14 +9,14 @@ define('views/feed_modules_demo',
             var collections = result.objects;
 
             for (var i = 0; i < collections.length; i++) {
-                if (collections[i].collection_type < 2) { // User/Editor
+                if (collections[i].type < 2) { // User/Editor
                     previews.createEditorCollection($('.editor'), collections[i]);
                     previews.createUserCollection($('.user'), collections[i]);
-                } else if (collections[i].collection_type === 2) { // Featured App
+                } else if (collections[i].type === 2) { // Featured App
                     previews.createFeaturedApp($('.featured-app'), collections[i]);
-                } else if (collections[i].collection_type === 3) { // Mega
+                } else if (collections[i].type === 3) { // Mega
                     previews.createMegaCollection($('.mega-collection'), collections[i]);
-                } else if (collections[i].collection_type === 4) { // Op Shelf
+                } else if (collections[i].type === 4) { // Op Shelf
                     previews.createOperatorShelf($('.operator-shelf'), collections[i]);
                 }
             }
