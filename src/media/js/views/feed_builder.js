@@ -36,10 +36,15 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
     })
     .on('click', '.feed-builder .submit', utils._pd(function() {
         /* Publish changes. */
+        var $this = $(this);
+        $this.html(gettext('Publishing...')).attr('disabled', true);
+
         forms_transonic.feed_items($('.feeds'), modified_regions).done(function() {
             notification.notification({message: gettext('Feed changes successfully published!')});
+            $this.html(gettext('Publish')).removeAttr('disabled');
         }).fail(function(err) {
             notification.notification({message: gettext('Sorry, there was an error publishing your changes.')});
+            $this.html(gettext('Publish')).removeAttr('disabled');
         });
     }));
 

@@ -5,28 +5,40 @@ define('views/edit',
     var gettext = l10n.gettext;
 
     z.body.on('click', '.transonic-form.edit button.submit', utils._pd(function(e) {
-        var $form = $(this).closest('form');
+        var $this = $(this);
+        var $form = $this.closest('form');
+        $this.html(gettext('Updating...')).attr('disabled', true);
 
         if ($form.data('type') == 'apps') {
             forms_transonic.feed_app($form, $form.data('slug')).done(function(feed_element) {
                 notification.notification({message: gettext('Featured app successfully updated')});
+                resetButton($this);
             }).fail(function(error) {
                 notification.notification({message: error});
+                resetButton($this);
             });
         } else if ($form.data('type') == 'collections') {
             forms_transonic.collection($form, $form.data('slug')).done(function(feed_element) {
                 notification.notification({message: gettext('Collection successfully updated')});
+                resetButton($this);
             }).fail(function(error) {
                 notification.notification({message: error});
+                resetButton($this);
             });
         } else if ($form.data('type') == 'brands') {
             forms_transonic.brand($form, $form.data('slug')).done(function(feed_element) {
                 notification.notification({message: gettext('Editorial brand successfully updated')});
+                resetButton($this);
             }).fail(function(error) {
                 notification.notification({message: error});
+                resetButton($this);
             });
         }
     }));
+
+    function resetButton($btn) {
+        $btn.html(gettext('Update')).removeAttr('disabled');
+    }
 
     return function(builder, args) {
         var feedType = args[0];

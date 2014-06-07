@@ -4,7 +4,7 @@ define('validate_transonic',
     'use strict';
     var gettext = l10n.gettext;
 
-    var feed_app = function(data, $file_input) {
+    var feed_app = function(data, $file_input, $preview) {
         var errs = [];
         if (!data.app) {
             errs.push(gettext('App is required.'));
@@ -13,7 +13,8 @@ define('validate_transonic',
             errs.push(gettext('Slug is required.'));
         }
         if (!$file_input.val().length &&
-            [feed.FEEDAPP_IMAGE].indexOf(data.feedapp_type) !== -1) {
+            [feed.FEEDAPP_IMAGE].indexOf(data.feedapp_type) !== -1 &&
+            !$preview.attr('src')) {
             errs.push(gettext('Background image is required.'));
         }
         if (!validate_localized_field(data.description) &&
@@ -31,7 +32,7 @@ define('validate_transonic',
         return errs;
     };
 
-    var collection = function(data, $file_input) {
+    var collection = function(data, $file_input, $preview) {
         var errs = [];
         if (!data.apps.length) {
             errs.push(gettext('Apps are required.'));
@@ -43,7 +44,8 @@ define('validate_transonic',
             errs.push(gettext('Slug is required.'));
         }
         if (!$file_input.val().length &&
-            [feed.COLL_PROMO].indexOf(data.type) !== -1) {
+            [feed.COLL_PROMO].indexOf(data.type) !== -1 &&
+            !$preview.attr('src')) {
             errs.push(gettext('Background image is required.'));
         }
         return errs;

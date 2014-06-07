@@ -5,7 +5,9 @@ define('views/create',
     var gettext = l10n.gettext;
 
     z.body.on('click', '.transonic-form.create button.submit', utils._pd(function(e) {
-        var $form = $(this).closest('form');
+        var $this = $(this);
+        var $form = $this.closest('form');
+        $this.html(gettext('Submitting...')).attr('disabled', true);
 
         if ($form.data('type') == 'apps') {
             forms_transonic.feed_app($form).done(function(feed_element) {
@@ -13,6 +15,7 @@ define('views/create',
                 notification.notification({message: gettext('Featured app successfully created')});
             }).fail(function(error) {
                 notification.notification({message: error});
+                $this.html(gettext('Submit')).removeAttr('disabled');
             });
         } else if ($form.data('type') == 'collections') {
             forms_transonic.collection($form).done(function(feed_element) {
@@ -20,6 +23,7 @@ define('views/create',
                 notification.notification({message: gettext('Collection successfully created')});
             }).fail(function(error) {
                 notification.notification({message: error});
+                $this.html(gettext('Submit')).removeAttr('disabled');
             });
         } else if ($form.data('type') == 'brands') {
             forms_transonic.brand($form).done(function(brand) {
@@ -27,6 +31,7 @@ define('views/create',
                 notification.notification({message: gettext('Editorial brand successfully created')});
             }).fail(function(error) {
                 notification.notification({message: error});
+                $this.html(gettext('Submit')).removeAttr('disabled');
             });
         }
     }));

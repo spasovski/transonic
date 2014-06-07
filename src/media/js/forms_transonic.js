@@ -4,6 +4,7 @@ define('forms_transonic',
     'use strict';
     var format = format.format;
     var gettext = l10n.gettext;
+    var console = log('forms_transonic');
 
     var feed_app = function($form, slug) {
         /* Create or update FeedApp. */
@@ -20,10 +21,11 @@ define('forms_transonic',
             slug: $form.find('[name="slug"]').val(),
         };
         var $file_input = $form.find('[name="background-image-feed-banner"]');
-        console.log(data);
+        var $preview = $form.find('.fileinput .preview');
+        console.log(JSON.stringify(data));
 
         // Validate.
-        var errors = validate.feed_app(data, $file_input);
+        var errors = validate.feed_app(data, $file_input, $preview);
         if (errors.length) {
             render_errors(errors);
             return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
@@ -49,11 +51,12 @@ define('forms_transonic',
             slug: $form.find('[name="slug"]').val(),
         };
         var $file_input = $form.find('[name="background-image-feed-banner"]');
-        console.log(data);
+        var $preview = $form.find('.fileinput .preview');
+        console.log(JSON.stringify(data));
 
         // Validate.
         var errors = is_grouped ? validate.app_group($items) : [];
-        errors = errors.concat(validate.collection(data, $file_input));
+        errors = errors.concat(validate.collection(data, $file_input, $preview));
         if (errors.length) {
             render_errors(errors);
             return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
@@ -71,7 +74,7 @@ define('forms_transonic',
             type: $form.find('[name="type"]').val(),
             slug: $form.find('[name="slug"]').val(),
         };
-        console.log(data);
+        console.log(JSON.stringify(data));
 
         // Validate.
         var errors = validate.brand(data);
@@ -105,7 +108,7 @@ define('forms_transonic',
                                    feed_element.getAttribute('data-id')]);
             });
         }
-        console.log(data);
+        console.log(JSON.stringify(data));
 
         // Validate.
         var errors = validate.feed_items(data);
