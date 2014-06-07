@@ -59,7 +59,7 @@ define('forms_transonic',
             return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
         }
 
-        return save_collection(data, slug);
+        return save_collection(data, slug, $file_input);
     };
 
     var brand = function($form, slug) {
@@ -124,7 +124,7 @@ define('forms_transonic',
         function success(feed_app) {
             // Upload background image if needed.
             if ($file_input.val()) {
-                upload_feed_app_image(feed_app, $file_input).done(function(feed_image) {
+                upload_feed_image(feed_app, 'feed-app-image', $file_input).done(function(feed_image) {
                     def.resolve(feed_app);
                 }).fail(function(error) {
                     def.reject(error);
@@ -149,11 +149,19 @@ define('forms_transonic',
         return def.promise();
     }
 
-    function save_collection(data, slug) {
+    function save_collection(data, slug, $file_input) {
         var def = defer.Deferred();
 
         function success(collection) {
-            def.resolve(collection);
+           if ($file_input.val()) {
+                upload_feed_image(collection, 'collection-image', $file_input).done(function(feed_image) {
+                    def.resolve(collection);
+                }).fail(function(error) {
+                    def.reject(error);
+                });
+            } else {
+                def.resolve(collection);
+            }
         }
 
         function fail(xhr) {
@@ -228,14 +236,14 @@ define('forms_transonic',
         return apps;
     }
 
-    function upload_feed_app_image(feedapp, $file_input) {
+    function upload_feed_image(obj, endpoint, $file_input) {
         // Upload feed app background image (header graphic).
         var def = defer.Deferred();
         var reader = new FileReader();
 
         reader.onloadend = function() {
             // Read from file input to data URL and send image to API upload endpoint.
-            requests.put(urls.api.url('feed-app-image', [feedapp.id]), reader.result).done(function(data) {
+            requests.put(urls.api.url(endpoint, [obj.id]), reader.result).done(function(data) {
                 def.resolve(data);
             });
         };
