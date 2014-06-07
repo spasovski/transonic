@@ -5,7 +5,7 @@
 {% set FT_DESC = feed.FEEDAPP_DESC %}
 {% set FT_QUOTE = feed.FEEDAPP_QUOTE %}
 {% set FT_PREVIEW = feed.FEEDAPP_PREVIEW %}
-{% set feed_app_type = obj.feedapp_type if obj else FT_ICON %}
+{% set feed_app_type = obj.type if obj else FT_ICON %}
 
 <form class="transonic-form apps {{ 'edit' if obj else 'create' }}" data-type="apps"
       {% if obj %}data-slug="{{ obj.slug }}"{% endif %}>
