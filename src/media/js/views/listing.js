@@ -1,6 +1,6 @@
 define('views/listing',
-    ['format', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'urls', 'utils', 'z'],
-    function(format, $, l10n, log, notification, requests, settings, nunjucks, urls, utils, z) {
+    ['format', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'z'],
+    function(format, $, l10n, log, notification, requests, settings, nunjucks, _, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -28,7 +28,16 @@ define('views/listing',
         });
 
         $item.remove();
-    }));
+    }))
+    .on('keypress', '.search-elements', _.debounce(function() {
+        var $this = $(this);
+
+        if ($this.val().length > 1) {
+            requests.get(urls.api.url('feed-element-search', [], {'q': $this.val()})).done(function(data) {
+                console.log(data);
+            });
+        }
+    }, 250));
 
     return function(builder, args) {
         builder.z('title', gettext('Existing Content'));

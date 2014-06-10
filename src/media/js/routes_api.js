@@ -13,6 +13,7 @@ define('routes_api', [], function() {
         'feed-brand': '/api/v2/feed/brands/{0}/',
         'feed-items': '/api/v2/feed/items/',
         'feed-builder': '/api/v2/feed/builder/',
+        'feed-element-search': '/api/v2/feed/elements/search/',
         'search': '/api/v1/apps/search/suggest?cache=1&vary=0',
     };
 });
