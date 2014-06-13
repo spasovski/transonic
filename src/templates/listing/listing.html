@@ -5,50 +5,77 @@
   </li>
 {% endmacro %}
 
+{% macro feed_apps(apps, response) %}
+  <h2>{{ _('Featured Apps ({number})')|format({number: this.meta.total_count or apps.length}) }}</h2>
+  <ul class="feed-apps element-listing">
+    {% for app in apps %}
+      {% include "listing/app.html" %}
+    {% endfor %}
+    {% if not apps.length %}
+      <p class="no-results">{{ _('No featured apps found') }}</p>
+    {% endif %}
+    {% if response and response.meta.next %}
+      {{ more_button(response.meta.next) }}
+    {% endif %}
+  </ul>
+{% endmacro %}
+
+{% macro feed_collections(collections, response) %}
+  <h2>{{ _('Collections ({number})')|format({number: this.meta.total_count or collections.length}) }}</h2>
+  <ul class="collections element-listing">
+    {% for collection in collections %}
+      {% include "listing/collection.html" %}
+    {% endfor %}
+    {% if not collections.length %}
+      <p class="no-results">{{ _('No collections found') }}</p>
+    {% endif %}
+    {% if response and response.meta.next %}
+      {{ more_button(response.meta.next) }}
+    {% endif %}
+  </ul>
+{% endmacro %}
+
+{% macro feed_brands(brands, response) %}
+  {% set b_types = feed.BRAND_TYPES %}
+  <h2>{{ _('Editorial Brands ({number})')|format({number: this.meta.total_count or brands.length}) }}</h2>
+  <ul class="brands element-listing">
+    {% for brand in brands %}
+      {% include "listing/brand.html" %}
+    {% endfor %}
+    {% if not brands.length %}
+      <p class="no-results">{{ _('No brands found') }}</p>
+    {% endif %}
+    {% if response.meta.next %}
+      {{ more_button(response.meta.next) }}
+    {% endif %}
+  </ul>
+{% endmacro %}
+
 <section class="manage-modules-listing island">
   <input class="search-elements" type="search" placeholder="{{ _('Search for a feed element...') }}">
 
-  <div class="feed-api-results">
+  <div class="feed-api-results search-results">
     {% defer (url=api('feed-apps')|urlparams(ordering='-created'), paginate='ul.feed-apps') %}
-        <h2>{{ _('Featured Apps ({number})')|format({number: this.meta.total_count}) }}</h2>
-      <ul class="feed-apps element-listing">
-        {% for app in this.objects %}
-          {% include "listing/app.html" %}
-        {% endfor %}
-        {% if response.meta.next %}
-          {{ more_button(response.meta.next) }}
-        {% endif %}
-      </ul>
+      {{ feed_apps(this.objects, response) }}
     {% placeholder %}
       <h2>{{ _('Featured Apps') }}</h2>
     {% except %}
     {% end %}
 
     {% defer (url=api('collections')|urlparams(ordering='-created')) %}
-      <h2>{{ _('Collections ({number})')|format({number: this.meta.total_count}) }}</h2>
-      <ul class="collections element-listing">
-        {% for collection in this.objects %}
-          {% include "listing/collection.html" %}
-        {% endfor %}
-      </ul>
+      {{ feed_collections(this.objects, response) }}
     {% placeholder %}
       <h2>{{ _('Collections') }}</h2>
     {% except %}
     {% end %}
 
-    {% set b_types = feed.BRAND_TYPES %}
     {% defer (url=api('feed-brands')|urlparams(order='-created')) %}
-      <h2>{{ _('Editorial Brands ({number})')|format({number: this.meta.total_count or 0}) }}</h2>
-      <ul class="brands element-listing">
-        {% for brand in this.objects %}
-          {% include "listing/brand.html" %}
-        {% endfor %}
-      </ul>
+      {{ feed_brands(this.objects, response) }}
     {% placeholder %}
       <h2>{{ _('Editorial Brand') }}</h2>
     {% except %}
     {% end %}
   </div>
 
-  <div class="feed-search-results"></div>
+  <div class="feed-search-results search-results"></div>
 </section>

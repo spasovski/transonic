@@ -34,8 +34,14 @@ define('views/listing',
 
         if ($this.val().length > 1) {
             requests.get(urls.api.url('feed-element-search', [], {'q': $this.val()})).done(function(data) {
-                console.log(data);
+                $('.feed-api-results').hide();
+                $('.feed-search-results').html(nunjucks.env.render('search_results.html', {
+                    data: data
+                })).show();
             });
+        } else {
+            $('.feed-api-results').show();
+            $('.feed-search-results').hide();
         }
     }, 250));
 
