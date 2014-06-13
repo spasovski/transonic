@@ -59,6 +59,7 @@
       {{ feed_apps(this.objects, response) }}
     {% placeholder %}
       <h2>{{ _('Featured Apps') }}</h2>
+      <p class="no-results">{{ _('Loading...') }}</p>
     {% except %}
     {% end %}
 
@@ -66,6 +67,7 @@
       {{ feed_collections(this.objects, response) }}
     {% placeholder %}
       <h2>{{ _('Collections') }}</h2>
+      <p class="no-results">{{ _('Loading...') }}</p>
     {% except %}
     {% end %}
 
@@ -73,6 +75,7 @@
       {{ feed_brands(this.objects, response) }}
     {% placeholder %}
       <h2>{{ _('Editorial Brand') }}</h2>
+      <p class="no-results">{{ _('Loading...') }}</p>
     {% except %}
     {% end %}
   </div>
