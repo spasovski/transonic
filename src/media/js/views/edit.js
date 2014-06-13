@@ -84,7 +84,18 @@ define('views/edit',
                     preview_tray.populateTray.call($('.preview-tray')[0], preview_index);
                 } else if (['collections', 'brands'].indexOf(feedType) !== -1) {
                     // App widget.
+                    var group = obj.apps.length && obj.apps[0].group;
+                    if (group) {
+                        apps_widget.add_group(obj.apps[0].group);
+                    }
                     for (var i = 0; i < obj.apps.length; i++) {
+                        if (obj.apps[i].group != group) {
+                            // If the current app's group is under a different group
+                            // than the previous one, that must mean we need to
+                            // render a new group.
+                            apps_widget.add_group(obj.apps[i].group);
+                            group = obj.apps[i].group;
+                        }
                         apps_widget.render_append(obj.apps[i]);
                     }
                 }

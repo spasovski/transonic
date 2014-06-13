@@ -1,6 +1,6 @@
 define('validate_transonic',
-    ['defer', 'feed', 'jquery', 'l10n', 'utils_local',],
-    function(defer, feed, $, l10n, utils_local) {
+    ['defer', 'feed', 'jquery', 'l10n', 'underscore', 'utils_local',],
+    function(defer, feed, $, l10n, _, utils_local) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -77,20 +77,32 @@ define('validate_transonic',
             // Check that app groups have no orphans.
             errs.push(gettext('Some apps are oprhaned and are not under a group.'));
         }
-        if ($items.closest('.apps-widget').find('.app-group + .app-group').length) {
+        if ($items.closest('.apps-widget').find('.app-group + .app-group, .app-group:last-child').length) {
             // Check that there are no empty groups.
             errs.push(gettext('Some groups are empty and do not contain any apps.'));
         }
+
+        var app_groups = [];
         $items.filter('.app-group').each(function(i, group) {
             // Check that app groups have a name.
             // It's a dynamically-generated l10n field so we have to pull the name and build the l10n object.
             var $group = $(group);
             var data = utils_local.build_localized_field($group.find('input').data('name'));
+            app_groups.push(JSON.stringify(data));
             if (!validate_localized_field(data)) {
                 errs.push(gettext('App group name is required.'));
                 return false;
             }
         });
+
+        for (var i = 0; i < app_groups.length; i++) {
+            // Check no duplicate group names.
+            if (app_groups.indexOf(app_groups[i]) !== i) {
+                errs.push(gettext('Duplicate group names are not allowed.'));
+                break;
+            }
+        }
+
         return errs;
     };
 

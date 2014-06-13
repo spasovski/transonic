@@ -88,10 +88,11 @@ define('apps_widget',
         $apps_widget.find('.apps').sortable();
     };
 
-    var add_group = function() {
+    var add_group = function(app_group) {
         /* Add a localizable text field as the header of an app group. */
         var $apps_widget = $('.apps-widget');
         $apps_widget.find('.apps').append(nunjucks.env.render('fields/app_group.html', {
+            app_group: app_group || {},
             app_group_id: 'app-group-' + $('.app-group').length
         }));
         $apps_widget.find('.placeholder-text').hide();

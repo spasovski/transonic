@@ -61,6 +61,7 @@ define('forms_transonic',
             render_errors(errors);
             return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
         }
+        $('.form-errors').empty();
 
         return save_collection(data, slug, $file_input);
     };
@@ -82,6 +83,7 @@ define('forms_transonic',
             render_errors(errors);
             return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
         }
+        $('.form-errors').empty();
 
         return save_brand(data, slug);
     };
@@ -116,6 +118,7 @@ define('forms_transonic',
             render_errors(errors);
             return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
         }
+        $('.form-errors').empty();
 
         return save_feed_items(data);
     };

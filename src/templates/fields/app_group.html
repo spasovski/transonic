@@ -3,7 +3,7 @@
 <div class="result app-group">
   {% for lang in settings.languages %}
     <div class="localized {% if lang != 'en-US' %}hidden{% endif %}" data-lang="{{ lang }}">
-      {{ locale_input(app_group_id, lang, name[lang], 'app-group-input', _('App Group Name')) }}
+      {{ locale_input(app_group_id, lang, app_group[lang], 'app-group-input', _('App Group Name')) }}
       <span class="delete-result delete-app-group"></span>
     </div>
   {% endfor %}
