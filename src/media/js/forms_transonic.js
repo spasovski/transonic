@@ -227,7 +227,7 @@ define('forms_transonic',
             };
 
             var $next = $app_group.next();
-            while ($next.length && !$next.hasClass('.app-group')) {
+            while ($next.length && !$next.hasClass('app-group')) {
                 // Append apps until we get to the next group.
                 group.apps.push(parseInt($next.data('id'), 10));
                 $next = $next.next();
