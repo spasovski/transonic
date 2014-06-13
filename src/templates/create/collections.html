@@ -35,6 +35,12 @@
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
 
+    <div class="collection-type operator
+                {{ 'hidden' if indexOf([C_OPERATOR], coll_type) == -1 }}">
+      {% include "fields/carrier.html" %}
+      {% include "fields/region.html" %}
+    </div>
+
     <div class="collection-type promo operator
                 {{ 'hidden' if indexOf([C_PROMO, C_OPERATOR], coll_type) == -1 }}">
       {% include "fields/colors.html" %}

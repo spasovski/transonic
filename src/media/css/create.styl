@@ -150,6 +150,11 @@
             box-shadow: none;
         }
     }
+    .inline-label + select {
+        border: 1px solid $light-gray;
+        padding: 6px;
+        vertical-align: middle;
+    }
     .background-image .inner {
         padding: 10px;
     }
@@ -329,15 +334,7 @@
 }
 
 .brands {
-    .brand-type,
-    .brand-layout {
-        select {
-            border: 1px solid $light-gray;
-            padding: 6px;
-            vertical-align: middle;
-        }
-    }
-    .brand-helptext {
+        .brand-helptext {
         font-weight: 300;
         font-size: 12px;
         padding-top: 8px;

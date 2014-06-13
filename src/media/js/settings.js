@@ -60,6 +60,27 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             've': gettext('Venezuela'),
         },
 
+        carriers: [
+            'america_movil',
+            'carrierless',
+            'china_unicom',
+            'deutsche_telekom',
+            'etisalat',
+            'hutchinson_three_group',
+            'kddi',
+            'kt',
+            'megafon',
+            'qtel',
+            'singtel',
+            'smart',
+            'sprint',
+            'telecom_italia_group',
+            'telefonica',
+            'telenor',
+            'tmn',
+            'vimpelcom'
+        ],
+
         bg_color_choices: [
             '#B90000',  // Raring Red.
             '#FF4E00',  // Oneric Orange.

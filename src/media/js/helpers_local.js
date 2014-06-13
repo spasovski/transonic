@@ -6,6 +6,14 @@ define('helpers_local', ['feed', 'nunjucks', 'urls', 'utils_local', 'z'], functi
 
     filters.items = utils_local.items;
 
+    filters.unslug = function(str) {
+        // Change underscores to spaces and text-transform uppercase.
+        return str.replace(/_/g, ' ')
+                  .replace(/(^| )(\w)/g, function(x) {
+                      return x.toUpperCase();
+                  });
+    };
+
     function indexOf(arr, val) {
         return arr.indexOf(val);
     }
