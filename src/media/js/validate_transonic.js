@@ -13,20 +13,20 @@ define('validate_transonic',
             errs.push(gettext('Slug is required.'));
         }
         if (!$file_input.val().length &&
-            [feed.FEEDAPP_IMAGE].indexOf(data.feedapp_type) !== -1 &&
+            [feed.FEEDAPP_IMAGE].indexOf(data.type) !== -1 &&
             !$preview.attr('src')) {
             errs.push(gettext('Background image is required.'));
         }
         if (!validate_localized_field(data.description) &&
-            [feed.FEEDAPP_DESC].indexOf(data.feedapp_type) !== -1) {
+            [feed.FEEDAPP_DESC].indexOf(data.type) !== -1) {
             errs.push(gettext('Description is required.'));
         }
         if (!data.preview &&
-            [feed.FEEDAPP_PREVIEW].indexOf(data.feedapp_type) !== -1) {
+            [feed.FEEDAPP_PREVIEW].indexOf(data.type) !== -1) {
             errs.push(gettext('Preview is required.'));
         }
         if (!validate_localized_field(data.pullquote_text) &&
-            [feed.FEEDAPP_QUOTE].indexOf(data.feedapp_type) !== -1) {
+            [feed.FEEDAPP_QUOTE].indexOf(data.type) !== -1) {
             errs.push(gettext('Quote text is required.'));
         }
         return errs;
