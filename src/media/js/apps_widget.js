@@ -44,14 +44,7 @@ define('apps_widget',
         $app.remove();
     });
 
-    var set = function(id) {
-        /* Fetch the app by ID and render. For featured apps.js. */
-        requests.get(urls.api.unsigned.url('app', [id])).done(function(app) {
-            render_set(app);
-        });
-    };
-
-    var render_set = function(app) {
+    var set = function(app) {
         /* Given an app object, render it in the widget. */
         if (_.isObject(app.name)) {
             // Choose an app name translation.
@@ -70,18 +63,12 @@ define('apps_widget',
         $app_selector.find('input[name="app"]').val(app.id);
     };
 
-    var append = function(id) {
-        if (get_app_ids().indexOf(parseInt(id, 10)) !== -1) {
+    var append = function(app) {
+        if (get_app_ids().indexOf(parseInt(app.id, 10)) !== -1) {
             return;
         }
-        // Make app request to render app info template.
-        requests.get(urls.api.unsigned.url('app', [id])).done(function(app) {
-            render_append(app);
-        });
-    };
 
-    var render_append = function(app) {
-        /* Given an app object, render it in the widget. */
+        // Render it in the widget.
         var $apps_widget = $('.apps-widget');
         $apps_widget.find('.apps').append(app_select.render_result(app, true));
         $apps_widget.find('.placeholder-text').hide();
@@ -102,8 +89,6 @@ define('apps_widget',
         add_group: add_group,
         append: append,
         get_app_ids: get_app_ids,
-        render_append: render_append,
-        render_set: render_set,
         set: set,
     };
 });

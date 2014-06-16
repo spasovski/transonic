@@ -43,16 +43,13 @@ define('fields_transonic',
         var $helptext = $('.brand-helptext').hide();
         $helptext.filter('.' + this.value).show();
     })
-    .on('app-selected', function(e, id) {
+    .on('app-selected', function(e, app) {
         if ($('.transonic-form').data('type') == 'apps') {
-            apps_widget.set(id);
-
-            requests.get(urls.api.unsigned.url('app', [id])).done(function(app) {
-                $('.screenshots').html(nunjucks.env.render('preview_tray.html', {app: app}));
-                z.page.trigger('populatetray');
-            });
+            apps_widget.set(app);
+            $('.screenshots').html(nunjucks.env.render('preview_tray.html', {app: app}));
+            z.page.trigger('populatetray');
         } else {
-            apps_widget.append(id);
+            apps_widget.append(app);
         }
     })
     .on('click', '.preview-tray li', utils._pd(function() {

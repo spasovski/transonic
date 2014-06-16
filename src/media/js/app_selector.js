@@ -6,6 +6,8 @@ define('app_selector',
     var $app_selector;
     var $results;
     var $paginator;
+    var results_map = {};
+
     z.page.on('loaded', function() {
         // Cache selectors.
         $app_selector = $('.app-selector');
@@ -35,7 +37,7 @@ define('app_selector',
         var $app_selector = $('.app-selector');
         $app_selector.find('input[name="app"]').val($this.data('id'));
         // Trigger with ID.
-        z.page.trigger('app-selected', [$this.attr('data-id')]);
+        z.page.trigger('app-selected', [results_map[$this.attr('data-id')]]);
     });
 
     function get_disabled_regions(app) {
@@ -72,6 +74,7 @@ define('app_selector',
             // Append results.
             for (var i = 0; i < data.objects.length; i++) {
                 $results.append(render_result(data.objects[i]));
+                results_map[data.objects[i].id] = data.objects[i];
             }
         });
     }

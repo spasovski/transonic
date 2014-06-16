@@ -71,7 +71,7 @@ define('views/edit',
 
                 if (feedType == 'apps') {
                     // App widget.
-                    apps_widget.render_set(obj.app);
+                    apps_widget.set(obj.app);
 
                     // Calculate which screenshot to initially select.
                     var preview_index = 0;
@@ -96,7 +96,7 @@ define('views/edit',
                             apps_widget.add_group(obj.apps[i].group);
                             group = obj.apps[i].group;
                         }
-                        apps_widget.render_append(obj.apps[i]);
+                        apps_widget.append(obj.apps[i]);
                     }
                 }
             });
