@@ -89,7 +89,7 @@ define('views/edit',
                         apps_widget.add_group(obj.apps[0].group);
                     }
                     for (var i = 0; i < obj.apps.length; i++) {
-                        if (obj.apps[i].group != group) {
+                        if (JSON.stringify(obj.apps[i].group) != JSON.stringify(group)) {
                             // If the current app's group is under a different group
                             // than the previous one, that must mean we need to
                             // render a new group.
