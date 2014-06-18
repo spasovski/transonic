@@ -10,9 +10,10 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
     z.page.on('change', '.feed-region-switcher', function() {
         /* Look at a different feed. */
         var region = this.value;
+        $('.feeds .loading').show();
 
         requests.get(urls.api.url('feed-items', [], {'region': region, 'ordering': 'order'})).done(function(feed_items) {
-            var feed_items = feed_items.objects;
+            feed_items = feed_items.objects;
             var $feed = $('.localized').addClass('hidden')
                                        .filter('[data-region=' + region + ']').removeClass('hidden');
             modified_regions.push(region);
@@ -24,6 +25,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
                 var $feed_element = $(nunjucks.env.render(format('listing/{0}.html', [type]), context));
                 append($feed, $feed_element);
             }
+            $('.feeds .loading').hide();
         });
     })
     .on('click', '.feed-builder .manage-modules-listing .feed-element', function() {
