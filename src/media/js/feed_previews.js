@@ -15,7 +15,7 @@ define('feed_previews', ['feed', 'l10n', 'templates', 'utils_local'],
         icons: {
             64: THUMB
         }
-    }
+    };
 
     var PREVIEW = {
         id: 1,
@@ -24,7 +24,7 @@ define('feed_previews', ['feed', 'l10n', 'templates', 'utils_local'],
         image_url: SAMPLE_BG,
         filetype: 'image/png',
         resource_uri: 'http://mozilla.org'
-    }
+    };
 
     var FEATURED_APP = {
         app: APP,
@@ -39,7 +39,7 @@ define('feed_previews', ['feed', 'l10n', 'templates', 'utils_local'],
         pullquote_text: 'Sample pullquote text of some awesome review from someone famous',
         slug: 'some-feed-app',
         url: 'http://mozilla.org'
-    }
+    };
 
     function createFeaturedApp($parent) {
         $parent.append(
