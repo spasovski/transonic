@@ -56,7 +56,7 @@ define('feed_previews',
         }
 
         var ctx = $.extend(true, {}, FEATURED_APP);
-        ctx.app = app;
+        ctx.app = app || ctx.app;
         ctx.background_color = $('input[name=bg-color]:checked').val();
 
         $parent.append(
