@@ -19,7 +19,7 @@
         <i class="fa fa-spinner fa-spin"></i>
       </div>
       {% for region_slug, region_name in settings.REGION_CHOICES_SLUG|items %}
-        <div class="feed localized {{ 'hidden' if region_slug != 'restofworld' }}"
+        <div class="region-feed localized {{ 'hidden' if region_slug != 'restofworld' }}"
              data-region="{{ region_slug }}">
           <h2 class="empty-results">
             {{ _('No feed items in {region} feed')|format({region: region_name}) }}

@@ -32,7 +32,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
         /* Add feed element to feed. */
         append(get_region_feed(), $(this));
     })
-    .on('click', '.feed-builder .feed .feed-element .delete', function() {
+    .on('click', '.feed-builder .region-feed .feed-element .delete', function() {
         /* Remove element from feed. */
         remove($(this).closest('.feed-element'));
     })
@@ -63,7 +63,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
     }
 
     function remove($feed_element) {
-        var $feed= $feed_element.closest('.feed');
+        var $feed= $feed_element.closest('.region-feed');
         $feed_element.remove();
         if (!$feed.find('.feed-element').length) {
             $feed.find('.empty-results').show();
@@ -72,7 +72,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
 
     function get_region_feed() {
         var region = $('.feed-region-switcher :checked').val();
-        return $('.feed[data-region="' + region + '"]');
+        return $('.region-feed[data-region="' + region + '"]');
     }
 
     return function(builder) {
