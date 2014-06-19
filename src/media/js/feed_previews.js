@@ -145,6 +145,14 @@ define('feed_previews',
                    .find('.desc').remove();
         } else if (type == feed.FEEDAPP_IMAGE) {
             createFeaturedApp($parent);
+        } else if (type ==feed.FEEDAPP_PREVIEW) {
+            createFeaturedTile($parent);
+            noQuote();
+            $parent.find('.tile-footer').addClass(type);
+            $('.slider .content').on('click', '.screenshot', function() {
+                var src = $(this).find('img').attr('src');
+                $('.feed-app-preview-container img').attr('src', src);
+            });
         }
 
         function noBackground() {
