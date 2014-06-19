@@ -88,6 +88,33 @@ define('forms_transonic',
         return save_brand(data, slug);
     };
 
+    var shelf = function($form, slug) {
+        /* Create or update FeedShelf. */
+        // Gather data.
+        var data = {
+            apps: get_app_ids($('.apps-widget .result')),
+            background_color: $form.find('.bg-color input:checked').val(),
+            carrier: $form.find('[name="carrier"]').val(),
+            description: utils_local.build_localized_field('description'),
+            name: utils_local.build_localized_field('name'),
+            region: $form.find('[name="region"]').val(),
+            slug: $form.find('[name="slug"]').val(),
+        };
+        var $file_input = $form.find('[name="background-image-feed-banner"]');
+        var $preview = $form.find('.fileinput .preview');
+        console.log(JSON.stringify(data));
+
+        // Validate.
+        var errors = validate.shelf(data, $file_input, $preview);
+        if (errors.length) {
+            render_errors(errors);
+            return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
+        }
+        $('.form-errors').empty();
+
+        return save_shelf(data, slug, $file_input);
+    };
+
     var feed_items = function($feeds, modified_regions) {
         /* Create feed items!
            Converts to object of regions pointing to feed-type/feed-element-id
@@ -207,6 +234,32 @@ define('forms_transonic',
         return def.promise();
     }
 
+    function save_shelf(data, slug, $file_input) {
+        var def = defer.Deferred();
+
+        function success(shelf) {
+            upload_feed_image(shelf, 'feed-shelf-image', $file_input).done(function(feed_image) {
+                def.resolve(shelf);
+            }).fail(function(error) {
+                def.reject(error);
+            });
+        }
+
+        function fail(xhr) {
+            def.reject(xhr.responseText);
+        }
+
+        if (slug) {
+            // Update.
+            requests.put(urls.api.url('feed-shelf', [slug]), data).then(success, fail);
+        } else {
+            // Create.
+            requests.post(urls.api.url('feed-shelves'), data).then(success, fail);
+        }
+
+        return def.promise();
+    }
+
     function save_feed_items(data) {
         // The GRAND DENOUEMENT.
         return requests.put(urls.api.url('feed-builder'), data);
@@ -269,5 +322,6 @@ define('forms_transonic',
         collection: collection,
         feed_app: feed_app,
         feed_items: feed_items,
+        shelf: shelf,
     };
 });

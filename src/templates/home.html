@@ -7,7 +7,7 @@
   </li>
 {% endmacro %}
 
-<section id="create-content" class="island">
+<section id="create-landing" class="island">
   <ul class="create c">
     {{ create_tab(url('create', ['apps']), media('transonic/img/featured.jpg'),
                   _('featured apps')) }}
@@ -15,5 +15,12 @@
                   _('collections')) }}
     {{ create_tab(url('create', ['brands']), media('transonic/img/editorial.jpg'),
                   _('editorial brands')) }}
+    <li class="shelf">
+      <h3>
+        <a href="{{ url('create', ['shelves']) }}">
+          {{ _('operator shelves') }}
+        </a>
+      </h3>
+    </li>
   </ul>
 </section>

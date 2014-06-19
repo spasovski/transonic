@@ -1,0 +1,41 @@
+{# This template is used for both creating and editing an operator shelf . #}
+
+<form class="transonic-form shelves {{ 'edit' if obj else 'create' }}" data-type="shelves"
+      {% if obj %}data-slug="{{ obj.slug }}"{% endif %}>
+  <section class="island c">
+    {% include "locale_switcher.html" %}
+
+    <h3>{{ title }}</h3>
+    <div class="float-wrap c">
+      {% include "fields/title.html" %}
+      {% include "fields/slug.html" %}
+    </div>
+    {% include "fields/description.html" %}
+  </section>
+
+  <section class="island customize">
+    <h3>{{ _('Customize') }}</h3>
+
+    <div>
+      {% include "fields/carrier.html" %}
+      {% include "fields/region.html" %}
+    </div>
+
+    <div>
+      {% include "fields/colors.html" %}
+    </div>
+
+    <div class="bg">
+      {% include "fields/background_images.html" %}
+    </div>
+
+    <div class="apps">
+      <h2>{{ _('Apps') }}</h2>
+      {% include "app_selector.html" %}
+      {% include "apps_widget.html" %}
+    </div>
+  </section>
+
+  {% include "fields/submit.html" %}
+  {{ submit_footer(_('Operator Shelf'), obj) }}
+</form>
