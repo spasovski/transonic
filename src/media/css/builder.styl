@@ -35,6 +35,7 @@
         margin: 0 auto;
         margin-bottom: 20px;
         overflow: scroll;
+        position: relative;
     }
     .submit {
         float: right;
@@ -78,4 +79,22 @@
 
 .feed-builder .feed .delete {
     top: 15px;
+}
+
+.feeds .loading {
+    background: rgba(180, 180, 180, .8);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+
+    .fa-spin {
+        color: #fff;
+        font-size: 36px;
+        position: relative;
+        top: 100px;
+    }
 }

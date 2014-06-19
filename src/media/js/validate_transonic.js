@@ -62,6 +62,23 @@ define('validate_transonic',
         return errs;
     };
 
+    var shelf = function(data, $file_input, $preview) {
+        var errs = [];
+        if (!data.apps.length) {
+            errs.push(gettext('Apps are required.'));
+        }
+        if (!validate_localized_field(data.name)) {
+            errs.push(gettext('Name is required.'));
+        }
+        if (!data.slug) {
+            errs.push(gettext('Slug is required.'));
+        }
+        if (!$file_input.val().length && !$preview.attr('src')) {
+            errs.push(gettext('Background image is required.'));
+        }
+        return errs;
+    };
+
     var feed_items = function(data) {
         var errs = [];
         return errs;
@@ -119,6 +136,7 @@ define('validate_transonic',
         app_group: app_group,
         brand: brand,
         collection: collection,
+        shelf: shelf,
         feed_app: feed_app,
         feed_items: feed_items
     };

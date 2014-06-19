@@ -1,6 +1,6 @@
 @import 'lib';
 
-#create-content .create > li {
+#create-landing .create > li {
     float: left;
     height: 300px;
     margin: 20px 0 0;
@@ -13,6 +13,23 @@
         position: absolute;
         text-align: center;
         width: 100%;
+    }
+    &.shelf {
+        border-top: 1px solid $cement-gray;
+        height: 60px;
+        width: 100%;
+
+        a {
+            border-radius: 0 0 8px 8px;
+            padding: 20px 40%;
+
+            &:hover {
+                background: $faint-gray;
+            }
+        }
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 
@@ -305,7 +322,8 @@
     }
 }
 
-.collections {
+.collections,
+.shelves {
     &[data-collection-type="promo"],
     &[data-collection-type="listing"] {
         .background-image {

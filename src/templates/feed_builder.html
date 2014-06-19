@@ -15,6 +15,9 @@
       </select>
     </div>
     <div class="feeds">
+      <div class="loading">
+        <i class="fa fa-spinner fa-spin"></i>
+      </div>
       {% for region_slug, region_name in settings.REGION_CHOICES_SLUG|items %}
         <div class="feed localized {{ 'hidden' if region_slug != 'restofworld' }}"
              data-region="{{ region_slug }}">

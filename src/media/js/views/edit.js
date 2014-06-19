@@ -4,35 +4,33 @@ define('views/edit',
     'use strict';
     var gettext = l10n.gettext;
 
+    function update($btn, $form, form_updater, success_msg) {
+        form_updater($form, $form.data('slug')).done(function(feed_element) {
+            notification.notification({message: success_msg});
+            resetButton($btn);
+        }).fail(function(error) {
+            notification.notification({message: error});
+            resetButton($btn);
+        });
+    }
+
     z.body.on('click', '.transonic-form.edit button.submit', utils._pd(function(e) {
         var $this = $(this);
         var $form = $this.closest('form');
         $this.html(gettext('Updating...')).attr('disabled', true);
 
         if ($form.data('type') == 'apps') {
-            forms_transonic.feed_app($form, $form.data('slug')).done(function(feed_element) {
-                notification.notification({message: gettext('Featured app successfully updated')});
-                resetButton($this);
-            }).fail(function(error) {
-                notification.notification({message: error});
-                resetButton($this);
-            });
+            update($this, $form, forms_transonic.feed_app,
+                   gettext('Featured app successfully updated'));
         } else if ($form.data('type') == 'collections') {
-            forms_transonic.collection($form, $form.data('slug')).done(function(feed_element) {
-                notification.notification({message: gettext('Collection successfully updated')});
-                resetButton($this);
-            }).fail(function(error) {
-                notification.notification({message: error});
-                resetButton($this);
-            });
+            update($this, $form, forms_transonic.collection,
+                   gettext('Collection successfully updated'));
         } else if ($form.data('type') == 'brands') {
-            forms_transonic.brand($form, $form.data('slug')).done(function(feed_element) {
-                notification.notification({message: gettext('Editorial brand successfully updated')});
-                resetButton($this);
-            }).fail(function(error) {
-                notification.notification({message: error});
-                resetButton($this);
-            });
+            update($this, $form, forms_transonic.brand,
+                   gettext('Editorial brand successfully updated'));
+        } else if ($form.data('type') == 'shelves') {
+            update($this, $form, forms_transonic.shelf,
+                   gettext('Operator shelf successfully updated'));
         }
     }));
 
@@ -55,6 +53,9 @@ define('views/edit',
         } else if (feedType == 'brands') {
             title = format.format(gettext('Editing Editorial Brand: {0}'), slug);
             endpoint = urls.api.base.url('feed-brand', [slug]);
+        } else if (feedType == 'shelves') {
+            title = format.format(gettext('Editing Operator Shelf: {0}'), slug);
+            endpoint = urls.api.base.url('feed-shelf', [slug]);
         }
 
         builder.z('title', title);
@@ -82,7 +83,7 @@ define('views/edit',
                     }
                     $('.screenshots').html(nunjucks.env.render('preview_tray.html', {app: obj.app}));
                     preview_tray.populateTray.call($('.preview-tray')[0], preview_index);
-                } else if (['collections', 'brands'].indexOf(feedType) !== -1) {
+                } else if (['collections', 'brands', 'shelves'].indexOf(feedType) !== -1) {
                     // App widget.
                     var group = obj.apps.length && obj.apps[0].group;
                     if (group) {
