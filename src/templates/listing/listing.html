@@ -51,6 +51,21 @@
   </ul>
 {% endmacro %}
 
+{% macro feed_shelves(shelves, response) %}
+  <h2>{{ _('Operator Shelves ({number})')|format({number: this.meta.total_count or shelves.length}) }}</h2>
+  <ul class="shelves element-listing">
+    {% for shelf in shelves %}
+      {% include "listing/shelf.html" %}
+    {% endfor %}
+    {% if not shelves.length %}
+      <p class="no-results">{{ _('No shelves found') }}</p>
+    {% endif %}
+    {% if response.meta.next %}
+      {{ more_button(response.meta.next) }}
+    {% endif %}
+  </ul>
+{% endmacro %}
+
 <section class="manage-modules-listing island">
   <input class="search-elements" type="search" placeholder="{{ _('Search for a feed element...') }}">
 
@@ -74,7 +89,15 @@
     {% defer (url=api('feed-brands')|urlparams(order='-created'), paginate='ul.brands') %}
       {{ feed_brands(this.objects, response) }}
     {% placeholder %}
-      <h2>{{ _('Editorial Brand') }}</h2>
+      <h2>{{ _('Editorial Brands') }}</h2>
+      <p class="no-results">{{ _('Loading...') }}</p>
+    {% except %}
+    {% end %}
+
+    {% defer (url=api('feed-shelves')|urlparams(order='-created'), paginate='ul.shelves') %}
+      {{ feed_shelves(this.objects, response) }}
+    {% placeholder %}
+      <h2>{{ _('Operator Shelves') }}</h2>
       <p class="no-results">{{ _('Loading...') }}</p>
     {% except %}
     {% end %}
