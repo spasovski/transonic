@@ -50,7 +50,8 @@ function() {
             nunjucks.env.render('footer.html'));
         $('#site-nav').html(
             nunjucks.env.render('nav.html'));
-
+        $('main').after(
+            nunjucks.env.render('preview_sidebar.html'));
 
         z.body.toggleClass('logged-in', require('user').logged_in());
         z.page.trigger('reloaded_chrome');
@@ -60,6 +61,8 @@ function() {
         e.preventDefault();
         console.log('← button pressed');
         require('navigation').back();
+    }).on('click', 'aside', function() {
+        $(this).toggleClass('active');
     });
 
     // Perform initial navigation.

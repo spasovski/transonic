@@ -79,7 +79,11 @@ h3 {
         width: 100%;
     }
     aside {
-        background-color: rgba(0,0,0,.3);
+        -moz-transition: -moz-transform .5s;
+        -webkit-transition: -webkit-transform .5s;
+        -moz-transform: translateX(280px);
+        -webkit-transform: translateX(280px);
+        background: $dark-gray;
         height: 100%;
         padding-top: 60px;
         position: fixed;
@@ -87,6 +91,14 @@ h3 {
         top: 0;
         width: 320px;
         z-index: 20;
+
+        &.active {
+            -moz-transform: translateX(0px);
+            -webkit-transform: translateX(0px);
+        }
+        &:hover {
+            cursor: pointer;
+        }
     }
 } // End of Desktop.
 
