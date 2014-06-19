@@ -1,5 +1,6 @@
-define('feed_previews', ['feed', 'l10n', 'templates', 'utils_local'],
-       function(feed, l10n, nunjucks, utils) {
+define('feed_previews',
+    ['feed', 'l10n', 'templates', 'utils_local'],
+    function(feed, l10n, nunjucks, utils) {
 
     var gettext = l10n.gettext;
     var hex2rgba = nunjucks.require('filters').hex2rgba;
@@ -42,8 +43,24 @@ define('feed_previews', ['feed', 'l10n', 'templates', 'utils_local'],
     };
 
     function createFeaturedApp($parent) {
+        var $result = $('.apps-widget .result');
+        var app = null;
+        if ($result.length) {
+            app = {
+                name: $result.find('.name').text(),
+                author: $result.find('.author').text(),
+                icons: {
+                    64: $result.find('.icon').attr('src')
+                }
+            };
+        }
+
+        var ctx = $.extend(true, {}, FEATURED_APP);
+        ctx.app = app;
+        ctx.background_color = $('input[name=bg-color]:checked').val();
+
         $parent.append(
-            nunjucks.env.render('tiles/collection_tile.html', FEATURED_APP)
+            nunjucks.env.render('tiles/collection_tile.html', ctx)
         );
     }
 
@@ -168,5 +185,5 @@ define('feed_previews', ['feed', 'l10n', 'templates', 'utils_local'],
 
     return {
         initLiveAppPreview: initLiveAppPreview
-    }
+    };
 });
