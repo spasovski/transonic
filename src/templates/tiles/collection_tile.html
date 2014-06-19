@@ -1,5 +1,5 @@
 <a href="#">
-  <section class="feed-item" style="background-color: {{ background_color|hex2rgba('.4') }}">
+  <section class="feed-item" style="background-color: {{ background_color|hex2rgba('.4') }}; background-image: url('{{ background_image }}');">
     {% if apps %}
       <ul class="app-icons">
         {% for app in apps %}

@@ -54,10 +54,12 @@ define('feed_previews',
                 }
             };
         }
+        var background_image = $('.background-image img.preview').attr('src');
 
         var ctx = $.extend(true, {}, FEATURED_APP);
         ctx.app = app || ctx.app;
         ctx.background_color = $('input[name=bg-color]:checked').val();
+        ctx.background_image = background_image || ctx.background_image;
 
         $parent.append(
             nunjucks.env.render('tiles/collection_tile.html', ctx)
@@ -87,13 +89,13 @@ define('feed_previews',
     }
 
     function initTextListeners() {
-        $('.description').on('change', '.localized:not(.hidden)', function() {
+        $('.description').on('keydown', '.localized:not(.hidden)', function() {
             $('.feed-app .desc').text($(this).val());
         });
-        $('.pq-text').on('change', '.localized:not(.hidden)', function() {
+        $('.pq-text').on('keydown', '.localized:not(.hidden)', function() {
             $('.feed-app blockquote p').text($(this).val());
         });
-        $('#pq-attribution').on('change', function() {
+        $('#pq-attribution').on('keydown', function() {
             $('.feed-app .quote-source').text($(this).val());
         });
     }
@@ -130,6 +132,7 @@ define('feed_previews',
 
         if (type == feed.FEEDAPP_ICON) {
             createFeaturedApp($parent);
+            noBackground();
         } else if (type == feed.FEEDAPP_DESC) {
             createFeaturedTile($parent);
             noPreview();
@@ -142,6 +145,10 @@ define('feed_previews',
                    .find('.desc').remove();
         } else if (type == feed.FEEDAPP_IMAGE) {
             createFeaturedApp($parent);
+        }
+
+        function noBackground() {
+            $parent.find('.feed-item').css('background-image', '');
         }
 
         function noPreview() {
@@ -174,7 +181,7 @@ define('feed_previews',
     }
 
     function initLiveAppPreview($parent) {
-        refreshApp($parent, feed.FEEDAPP_ICON);
+        refreshApp($parent, $('.featured-type-choices input:checked').val());
         initTypeSelector($parent);
         initColourSelector();
         initAppSelector();
