@@ -1,3 +1,5 @@
+{# This template is used both by the Manage Existing Content page and Feed Builder page. #}
+
 {% macro more_button(next_page_url) %}
   <li class="loadmore">
     <button class="button alt" data-url="{{ (apiHost(next_page_url) + next_page_url)|safe }}">{{ _('More') }}</button>
@@ -94,13 +96,15 @@
     {% except %}
     {% end %}
 
-    {% defer (url=api('feed-shelves')|urlparams(order='-created'), paginate='ul.shelves') %}
-      {{ feed_shelves(this.objects, response) }}
-    {% placeholder %}
-      <h2>{{ _('Operator Shelves') }}</h2>
-      <p class="no-results">{{ _('Loading...') }}</p>
-    {% except %}
-    {% end %}
+    {% if not is_builder %}
+      {% defer (url=api('feed-shelves')|urlparams(order='-created'), paginate='ul.shelves') %}
+        {{ feed_shelves(this.objects, response) }}
+      {% placeholder %}
+        <h2>{{ _('Operator Shelves') }}</h2>
+        <p class="no-results">{{ _('Loading...') }}</p>
+      {% except %}
+      {% end %}
+    {% endif %}
   </div>
 
   <div class="feed-search-results search-results"></div>
