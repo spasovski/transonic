@@ -1,18 +1,20 @@
-{# Currently used for a user/editor collection, featured app, operator shelf. #}
-
-<a href="{{ url }}">
-  <section class="collection-demo" style="background-color: {{ color|hex2rgba('.4') }}">
+<a href="#">
+  <section class="feed-item" style="background-color: {{ background_color|hex2rgba('.4') }}">
     {% if apps %}
       <ul class="app-icons">
         {% for app in apps %}
           <li><img src="{{ app.icons[64] }}" alt="{{ app.name }}"></li>
         {% endfor %}
       </ul>
+    {% elif app %}
+      <ul class="app-icons">
+          <li><img src="{{ app.icons[64] }}" alt="{{ app.name }}"></li>
+      </ul>
     {% endif %}
-    <div class="curve" style="background-color: {{ color|hex2rgba('.8') }}"></div>
+    <div class="curve" style="background-color: {{ background_color|hex2rgba('.8') }}"></div>
     <div class="info">
-      <h1>{{ name }}</h1>
-      <p class="author">{{ _('by') }} {{ author }}</p>
+      <h1>{{ app.name }}</h1>
+      <p class="author">{{ app.author }}</p>
     </div>
   </section>
 </a>

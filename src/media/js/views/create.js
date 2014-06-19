@@ -1,6 +1,6 @@
 define('views/create',
-    ['fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'templates', 'urls', 'utils', 'z'],
-    function(fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, nunjucks, urls, utils, z) {
+    ['feed_previews', 'fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'templates', 'urls', 'utils', 'z'],
+    function(previews, fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, nunjucks, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -55,6 +55,7 @@ define('views/create',
             'title': title,
         }).done(function() {
             $('.fileinput').fakeFileField();
+            previews.initLiveAppPreview($('.feed'));
         });
     };
 });

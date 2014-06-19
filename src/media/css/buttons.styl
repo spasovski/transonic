@@ -23,7 +23,8 @@
     &:hover, &:focus, &:active {
         color: darken($white, 10%);
     }
-    &:active {
+    // To override specifity of selector in `site.styl` (bug 980646 / bug 969187).
+    &:not([disabled]):active {
         btn-shadow-active();
         border: 1px solid darken(#1793e5, 10%);
     }
@@ -112,6 +113,50 @@
         &.fat {
             display: block;
             width: 100%;
+        }
+    }
+}
+
+.mkt-tile .button {
+    background: $breezy-blue;
+    border-radius: 5px;
+    border: 0;
+    bottom: 0;
+    box-shadow: 0 1px 0 darken($breezy-blue, 10%);
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    min-width: 65px;
+    padding: 0;
+    position: absolute;
+    right: 0;
+
+    &:not([disabled]):hover {
+        color: $white;
+    }
+    &[disabled] {
+        background: $seavan-salt-white;
+        box-shadow: none;
+    }
+}
+
+.loadmore {
+    // TODO: apply this loadmore button style site-wide.
+    bottom: -65px;
+    left: 10px;
+    padding: 15px 0;
+    position: absolute;
+    width: unquote('calc(100% - 20px)');
+
+    button {
+        background: $earl-gray;
+        border: 0;
+        box-shadow: 0 1px 1px 0 $london-fog-gray;
+        color: $white;
+
+        &:hover {
+            background: $earl-gray;
+            color: $white;
         }
     }
 }

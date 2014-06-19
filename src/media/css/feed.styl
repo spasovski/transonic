@@ -1,0 +1,449 @@
+@import 'lib';
+
+$view-all-blue = #5BBAFF;
+
+$mobile-tile-width = 300px;
+$horizontal-tile-padding = 10px;
+$vertical-tile-padding = 15px;
+$vertical-margin = 18px;
+$vertical-text-margin = 10px;
+$vertical-tile-margin = 10px;
+
+// Main container for feed elements on the homepage.
+.feed {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 10px 0;
+    width: $mobile-tile-width;
+
+    .mkt-tile {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 1px 1px $cement-gray;
+        color: $hungry-text;
+        margin-bottom: $vertical-tile-margin;
+        padding: $vertical-tile-padding $horizontal-tile-padding;
+        position: relative;
+
+        img {
+            float: left;
+        }
+        .icon {
+            margin-right: 0;
+        }
+        .info {
+            float: left;
+            height: 64px;
+            margin-left: 10px;
+            position: relative;
+            width: 205px;
+        }
+        .author.lineclamp {
+            max-width: 125px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .author,
+        h3 {
+            font-size: 12px;
+            line-height: $vertical-margin;
+        }
+        .author {
+            margin-top: -2px;
+        }
+        h3 {
+            color: $hungry-text;
+            font-weight: 500;
+            padding: $vertical-text-margin 0 0;
+        }
+        .rating {
+            padding: 5px 0;
+        }
+        .description .desc {
+            padding-top: 15px;
+        }
+        .desc {
+            background-color: #fff;
+            color: $hungry-text;
+        }
+    }
+    .content-rating,
+    .rating .cnt,
+    .price {
+        display: none;
+    }
+    .group-subheader {
+        margin-bottom: $vertical-margin;
+    }
+}
+
+.app-link {
+    height: 100%;
+    position: relative;
+    width: 100%;
+
+    &:hover, :active {
+        text-decoration: none;
+    }
+}
+
+.feed-app {
+    // For feed item type == 'quote'.
+    blockquote {
+        line-height: 23px;
+        margin: 0;
+        padding: 0 10px;
+        text-align: center;
+
+        + .quote-source {
+            font-size: 11px;
+            margin-top: 5px;
+            text-align: center;
+        }
+    }
+    .quote {
+        color: #fff;
+        left: -10px;
+        padding: 5px 0 15px;
+        position: relative;
+        top: 15px;
+        width: $mobile-tile-width;
+    }
+    .preview {
+        .desc {
+            margin: -20px 0 0;
+            padding: 15px 0 0;
+
+            + img {
+                margin-top: 10px;
+            }
+        }
+        .feed-app-preview-container {
+            border-radius: 0 0 5px 5px;
+            overflow: hidden;
+            margin: 15px 0 -16px -10px;
+            height: 150px;
+            width: $mobile-tile-width;
+
+            .feed-app-preview {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+    .tile-footer {
+        border-radius: 0 0 5px 5px;
+        clear: both;
+        font-size: 14px;
+        line-height: 20px;
+
+        .stars {
+            left: 50%;
+            margin: 15px 0 10px -32px;
+            position: relative;
+        }
+    }
+}
+
+// Editorial brands.
+.feed-brand {
+    li {
+        position: relative;
+
+        a:hover {
+            text-decoration: none;
+        }
+    }
+    .view-all {
+        color: $view-all-blue;
+        border-bottom: 1px solid $view-all-blue;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 16px;
+        margin: $vertical-margin auto 0 50%;
+        padding-bottom: 10px;
+        text-align: center;
+        transform: translate(-50%, 0);
+        width: 170px;
+
+        &:before,
+        &:after {
+            border-left: 1px solid $view-all-blue;
+            bottom: 0;
+            content: "";
+            height: 5px;
+            position: absolute;
+            width: 0;
+        }
+        &:before {
+            left: 0;
+        }
+        &:after {
+            right: 0;
+        }
+    }
+}
+
+.feed .multi-app-tile.mkt-tile {
+    background-color: #fff;
+
+    img {
+        height: 60px;
+        width: 60px;
+    }
+    .feed-tile-header {
+        color: $hungry-text;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 22px;
+        padding: 5px 0 0;
+    }
+    .app-list {
+        clear: both;
+        display: inline-block;
+        list-style-type: none;
+
+        img {
+            margin-bottom: 8px;
+        }
+    }
+    .app-name {
+        color: $hungry-text;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: $vertical-margin;
+    }
+    .mini-app {
+        height: 60px;
+        margin-top: $vertical-margin;
+
+        .info {
+            height: 60px;
+        }
+    }
+}
+
+// Editorial brand grid layout.
+.feed .feed-layout-grid.multi-app-tile {
+    .app {
+        float: left;
+        height: 120px;
+        margin: 0 20px 0 0;
+        width: 80px;
+
+         &:nth-child(3n) {
+            margin-right: 0;
+        }
+        .info {
+            margin-left: 0;
+        }
+
+    }
+    .author,
+    .stars {
+        display: none;
+    }
+    .button,
+    .button[disabled] {
+        background: transparent;
+        color: $breezy-blue;
+        cursor: pointer;
+        height: 20px;
+        line-height: 20px;
+        margin: -20px 0 0;
+        padding: 0;
+        position: static;
+        text-align: left;
+        width: auto;
+    }
+    .app-list .button:hover {
+        color: $breezy-blue;
+    }
+    .mini-app {
+        height: 110px;
+        margin-top: $vertical-margin;
+
+        img {
+            margin-bottom: $vertical-text-margin;
+        }
+        .info {
+            height: 30px;
+        }
+    }
+}
+
+
+// Editorial brand list layout.
+.feed-layout-list {
+    a {
+        color: $hungry-text;
+        position: relative;
+    }
+    h2 {
+        padding: 4px 0 0;
+    }
+    .button {
+        top: 35px;
+        right: 0;
+    }
+}
+
+// Colored or image background feed tiles.
+.feed-item {
+    background-size: cover;
+    border-radius: 5px;
+    height: 142px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    width: $mobile-tile-width;
+
+    .curve,
+    .alt-curve {
+        border-radius: 50%;
+        height: 400px;
+        left: -350px;
+        position: absolute;
+        top: 30px;
+        width: 1000px;
+        z-index: 10;
+    }
+    .info {
+        padding: 0 10px;
+        position: absolute;
+        top: 85px;
+        z-index: 15;
+    }
+    h1 {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 25px;
+    }
+    .author {
+        font-size: 12px;
+        line-height: $vertical-margin;
+    }
+    h1, .author, img {
+        color: #fff;
+    }
+    .app-icons {
+        height: 60px;
+        left: 50%;
+        position: absolute;
+        top: 15px;
+        transform: translate(-50%, 0);
+        white-space: nowrap;
+        z-index: 15;
+
+        li {
+            display: inline-block;
+            margin-right: 20px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        li, img {
+            height: 60px;
+            width: 60px;
+        }
+        + .curve {
+            top: 30px;
+        }
+    }
+    &.mega {
+        min-height: 175px;
+
+        .curve {
+            top: 15px;
+        }
+        .alt-curve {
+            top: 85px;
+        }
+        .info {
+            top: 33px;
+        }
+        .desc {
+            color: #fff;
+            font-size: 15px;
+            padding: 0 10px;
+            position: absolute;
+            top: 100px;
+            z-index: 15;
+        }
+        &.full {
+            min-height: 225px;
+
+            .curve {
+                top: 30px;
+            }
+            .info {
+                top: 83px;
+            }
+            .alt-curve {
+                top: 135px;
+            }
+            .desc {
+                top: 150px;
+            }
+        }
+    }
+    &.shelf {
+        height: 90px;
+
+        .curve {
+            top: 50px;
+        }
+        .info {
+            top: 60px;
+        }
+        .desc, .author {
+            display: none;
+        }
+    }
+}
+
+.feed-landing {
+    &.feed {
+        padding-top: 0;
+    }
+    .feed-item {
+        border-radius: 0;
+        position: relative;
+        right: 10px;
+        width: 320px;
+
+        .curve,
+        .alt-curve {
+            left: -340px;
+        }
+        &.mega.full .desc {
+            top: 155px;
+        }
+    }
+}
+
+.app-list {
+    .loadmore {
+        bottom: -65px;
+        left: 10px;
+        padding: 15px 0;
+        position: absolute;
+        width: unquote('calc(100% - 20px)');
+
+        button {
+            background: $earl-gray;
+            border: 0;
+            box-shadow: 0 1px 1px 0 $london-fog-gray;
+            color: $white;
+
+            &:hover {
+                background: $earl-gray;
+                color: $white;
+            }
+        }
+    }
+}

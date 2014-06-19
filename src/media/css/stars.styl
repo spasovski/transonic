@@ -1,0 +1,44 @@
+@import 'lib';
+
+/* TODO: Separate stars.styl for fireplace also. */
+.rating, .stars {
+    height: 12px;
+}
+
+.stars {
+    background: url(../img/pretty/stars_small.svg) no-repeat;
+    &.white {
+        background: url(../img/pretty/stars_small_white.svg) no-repeat;
+    }
+    display: inline-block;
+    hidetext();
+    margin-right: 4px;
+    vertical-align: top;
+    width: 64px;
+    &.stars-4 { background-position: -13px 0; }
+    &.stars-3 { background-position: -26px 0; }
+    &.stars-2 { background-position: -39px 0; }
+    &.stars-1 { background-position: -52px 0; }
+    &.stars-0 { background-position: -65px 0; }
+}
+
+.html-rtl .stars {
+    margin: 0 0 0 4px;
+}
+
+tinyStars() {
+    .stars {
+        background-size: auto 9px;
+        height: 9px;
+        &.stars-4 { background-position: -10px 0; }
+        &.stars-3 { background-position: -20px 0; }
+        &.stars-2 { background-position: -29px 0; }
+        &.stars-1 { background-position: -39px 0; }
+        &.stars-0 { background-position: -49px 0; }
+        width: 48px;
+    }
+}
+
+.feed .info {
+    tinyStars();
+}

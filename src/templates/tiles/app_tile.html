@@ -1,0 +1,27 @@
+{% include '_macros/stars.html' %}
+
+<a href="#" class="app-link">
+  <div class="product mkt-tile feed-app">
+    <img class="icon" src="{{ icons[64] }}" height="64" width="64">
+    <div class="info">
+      <h3>{{ name }}</h3>
+      <div class="author lineclamp vital subdetail">
+        {{ author }}
+      </div>
+      <div class="price vital">$0.83</div>
+      <div class="rating">{{ stars(3) }}</div>
+      <button class="button product install paid">$0.83</button>
+    </div>
+    <div class="tile-footer">
+      <p class="desc">No description yet.</p>
+      <div class="feed-app-preview-container">
+        <img class="feed-app-preview" src="/media/img/sample_bg.jpg">
+      </div>
+      <p class="stars large white stars-1">1</p>
+      <blockquote>
+        <p>"Quote missing."</p>
+      </blockquote>
+      <p class="quote-source">- quote author missing</p>
+    </div>
+  </div>
+</a>
