@@ -96,16 +96,17 @@ define('feed_previews',
             $('.feed-app blockquote p').text($(this).val());
         });
         $('#pq-attribution').on('keydown', function() {
-            $('.feed-app .quote-source').text($(this).val());
+            $('.feed-app .quote-source').text('- ' + $(this).val());
         });
     }
 
     function initRatingSelector() {
-        $('.pq-rating .choices').on('change', 'input[name=pq-rating]', function() {
+        z.page.on('change', 'input[name=pq-rating]', function() {
+            console.log("LOL");
             var rating = $(this).val();
 
             $('p.stars')
-                .removeClass('stars-1 stars-2 stars-3 stars-4 stars-5')
+                .removeClass('stars-0 stars-1 stars-2 stars-3 stars-4 stars-5')
                 .addClass('stars-' + rating);
         });
     }
