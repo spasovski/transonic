@@ -30,14 +30,14 @@ define('feed_previews',
     var FEATURED_APP = {
         app: APP,
         background_color: BG_COLOUR,
-        description: 'A sample description',
+        description: '',
         type: 'icon',
-        background_image: SAMPLE_BG,
+        background_image: '',
         id: 1,
         preview: PREVIEW,
-        pullquote_attribute: 'Kevin Ngo',
-        pullquote_rating: 3,
-        pullquote_text: 'Sample pullquote text of some awesome review from someone famous',
+        pullquote_attribute: '',
+        pullquote_rating: 0,
+        pullquote_text: '',
         slug: 'some-feed-app',
         url: 'http://mozilla.org'
     };
@@ -185,8 +185,16 @@ define('feed_previews',
                 }
             };
         }
+
+        var ctx = $.extend(true, {}, FEATURED_APP);
+        ctx.app = app || ctx.app;
+        ctx.pullquote_attribute = $('[name="pq-attribution"]').val() || ctx.pullquote_attribute;
+        ctx.pullquote_rating = $('.pq-rating input:checked').val() || ctx.pullquote_rating;
+        ctx.pullquote_text = $('.pq-text .localized:not(.hidden').val() || ctx.pullquote_text;
+        ctx.description = $('.description .localized:not(.hidden').val() || ctx.description;
+
         $parent.append(
-            nunjucks.env.render('tiles/app_tile.html', app || APP)
+            nunjucks.env.render('tiles/app_tile.html', ctx)
         );
     }
 

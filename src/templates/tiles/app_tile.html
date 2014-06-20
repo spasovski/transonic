@@ -2,26 +2,26 @@
 
 <a href="#" class="app-link">
   <div class="product mkt-tile feed-app">
-    <img class="icon" src="{{ icons[64] }}" height="64" width="64">
+    <img class="icon" src="{{ app.icons[64] }}" height="64" width="64">
     <div class="info">
-      <h3>{{ name }}</h3>
+      <h3>{{ app.name }}</h3>
       <div class="author lineclamp vital subdetail">
-        {{ author }}
+        {{ app.author }}
       </div>
       <div class="price vital">$0.83</div>
       <div class="rating">{{ stars(3) }}</div>
       <button class="button product install paid">$0.83</button>
     </div>
     <div class="tile-footer">
-      <p class="desc">No description yet.</p>
+      <p class="desc">{{ description }}</p>
       <div class="feed-app-preview-container">
         <img class="feed-app-preview" src="/media/img/sample_bg.jpg">
       </div>
-      <p class="stars large white stars-1">1</p>
+      <p class="stars large white stars-{{ pullquote_rating }}">{{ pullquote_rating }}</p>
       <blockquote>
-        <p>"Quote missing."</p>
+        <p>{{ pullquote_text }}</p>
       </blockquote>
-      <p class="quote-source">- quote author missing</p>
+      <p class="quote-source">- {{ pullquote_attribute }}</p>
     </div>
   </div>
 </a>
