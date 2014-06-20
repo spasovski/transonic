@@ -15,6 +15,7 @@ define('routes_api', [], function() {
         'feed-shelves': '/api/v2/feed/shelves/',
         'feed-shelf': '/api/v2/feed/shelves/{0}/',
         'feed-shelf-image': '/api/v2/feed/shelves/{0}/image/',
+        'feed-shelf-publish': '/api/v2/feed/shelves/{0}/publish/',
         'feed-items': '/api/v2/feed/items/',
         'feed-builder': '/api/v2/feed/builder/',
         'feed-element-search': '/api/v2/feed/elements/search/',

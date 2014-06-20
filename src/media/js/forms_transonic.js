@@ -260,6 +260,22 @@ define('forms_transonic',
         return def.promise();
     }
 
+    function publish_shelf($form, slug) {
+        var def = defer.Deferred();
+
+        function success(shelf) {
+            def.resolve(shelf);
+        }
+
+        function fail(xhr) {
+            def.reject(xhr.responseText);
+        }
+
+        requests.put(urls.api.url('feed-shelf-publish', [slug])).then(success, fail);
+
+        return def.promise();
+    }
+
     function save_feed_items(data) {
         // The GRAND DENOUEMENT.
         return requests.put(urls.api.url('feed-builder'), data);
@@ -323,5 +339,6 @@ define('forms_transonic',
         feed_app: feed_app,
         feed_items: feed_items,
         shelf: shelf,
+        publish_shelf: publish_shelf,
     };
 });

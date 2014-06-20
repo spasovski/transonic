@@ -32,10 +32,23 @@ define('views/edit',
             update($this, $form, forms_transonic.shelf,
                    gettext('Operator shelf successfully updated'));
         }
+    }))
+    .on('click', '.transonic-form.edit button.publish', utils._pd(function() {
+        var $this = $(this);
+        var $form = $this.closest('form');
+        $this.html(gettext('Publishing...')).attr('disabled', true);
+
+        forms_transonic.publish_shelf($form, $form.data('slug')).done(function() {
+            notification.notification({message: gettext('Operator shelf published')});
+            resetButton($this, gettext('Publish'));
+        }).fail(function(error) {
+            notification.notification({message: error});
+            resetButton($this);
+        });
     }));
 
-    function resetButton($btn) {
-        $btn.html(gettext('Update')).removeAttr('disabled');
+    function resetButton($btn, text) {
+        $btn.html(text || gettext('Update')).removeAttr('disabled');
     }
 
     return function(builder, args) {

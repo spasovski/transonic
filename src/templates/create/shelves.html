@@ -37,5 +37,15 @@
   </section>
 
   {% include "fields/submit.html" %}
+
+  {% if obj %}
+    <section class="island publish">
+      <h3>{{ _('Publish Operator Shelf') }}</h3>
+      <p>{{ _('If you updated this operator shelf above, make sure to submit your update first.') }}</p>
+      <div class="form-errors"></div>
+      <button class="publish">{{ _('Publish') }}</button>
+    </section>
+  {% endif %}
+
   {{ submit_footer(_('Operator Shelf'), obj) }}
 </form>
