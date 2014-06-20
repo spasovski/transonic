@@ -207,7 +207,12 @@ define('feed_previews',
         initPreviewImage();
     }
 
+    function empty() {
+        $('.feed').empty();
+    }
+
     return {
+        empty: empty,
         initLiveAppPreview: initLiveAppPreview
     };
 });

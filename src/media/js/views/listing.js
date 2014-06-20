@@ -1,6 +1,6 @@
 define('views/listing',
-    ['format', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'z'],
-    function(format, $, l10n, log, notification, requests, settings, nunjucks, _, urls, utils, z) {
+    ['feed_previews', 'format', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'z'],
+    function(feed_previews, format, $, l10n, log, notification, requests, settings, nunjucks, _, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -49,5 +49,7 @@ define('views/listing',
         builder.z('title', gettext('Existing Content'));
         builder.z('type', 'manage');
         builder.start('listing/listing.html');
+
+        feed_previews.empty();
     };
 });

@@ -1,4 +1,4 @@
-define('views/home', ['l10n'], function(l10n) {
+define('views/home', ['feed_previews', 'l10n'], function(feed_previews, l10n) {
 
     var gettext = l10n.gettext;
 
@@ -6,5 +6,7 @@ define('views/home', ['l10n'], function(l10n) {
         builder.z('title', gettext('Curation Tools'));
         builder.z('type', 'create');
         builder.start('home.html');
+
+        feed_previews.empty();
     };
 });
