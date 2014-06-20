@@ -1,6 +1,6 @@
 define('feed_previews',
-    ['feed', 'l10n', 'templates', 'utils_local'],
-    function(feed, l10n, nunjucks, utils) {
+    ['feed', 'l10n', 'templates', 'utils_local', 'z'],
+    function(feed, l10n, nunjucks, utils, z) {
 
     var gettext = l10n.gettext;
     var hex2rgba = nunjucks.require('filters').hex2rgba;
@@ -149,12 +149,10 @@ define('feed_previews',
             createFeaturedTile($parent);
             noQuote();
             $parent.find('.tile-footer').addClass(type);
-            setTimeout(function() {
-                $('.content').on('click', '.thumbnail', function() {
-                    var src = $(this).find('img').attr('src');
-                    $('.feed-app-preview-container img').attr('src', src);
-                });
-            }, 10);
+            z.page.on('click', '.screenshots .thumbnail', function() {
+                var src = $(this).find('img').attr('src');
+                $('.feed-app-preview-container img').attr('src', src);
+            });
         }
 
         function noBackground() {
@@ -192,6 +190,7 @@ define('feed_previews',
         ctx.pullquote_rating = $('.pq-rating input:checked').val() || ctx.pullquote_rating;
         ctx.pullquote_text = $('.pq-text .localized:not(.hidden').val() || ctx.pullquote_text;
         ctx.description = $('.description .localized:not(.hidden').val() || ctx.description;
+        ctx.preview = $('.screenshots li.selected img').attr('src') || ctx.preview.image_url;
 
         $parent.append(
             nunjucks.env.render('tiles/app_tile.html', ctx)
