@@ -1,6 +1,7 @@
 define('routes_api', [], function() {
     return {
         'login': '/api/v1/account/login/',
+        'logout': '/api/v1/account/logout/',
 
         'app': '/api/v1/apps/app/{0}/?cache=1&vary=0',
         'collections': '/api/v2/feed/collections/?limit=5',

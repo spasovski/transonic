@@ -5,6 +5,8 @@ var root = '^/curate/';
 // Please leave quotes around keys! They're needed for Space Heater.
 var routes = window.routes = [
     {'pattern': '^/$', 'view_name': 'home'},
+    {'pattern': root + 'login$', 'view_name': 'login'},
+    {'pattern': root + '403$', 'view_name': '403'},
     {'pattern': root + '$', 'view_name': 'home'},
     {'pattern': root + 'create/([^/<>"\']+)$', 'view_name': 'create'},
     {'pattern': root + 'manage$', 'view_name': 'listing'},

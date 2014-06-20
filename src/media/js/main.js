@@ -29,6 +29,8 @@ define(
     ],
 function() {
     var console = require('log')('main');
+    var urls = require('urls');
+    var user = require('user');
     var z = require('z');
 
     console.log('Dependencies resolved, starting init');
@@ -41,9 +43,9 @@ function() {
     });
 
     // Do some last minute template compilation.
+    var nunjucks = require('templates');
     z.page.on('reload_chrome', function() {
         console.log('Reloading chrome');
-        var nunjucks = require('templates');
         $('#site-header').html(
             nunjucks.env.render('header.html'));
         $('#site-footer').html(
@@ -63,6 +65,22 @@ function() {
         require('navigation').back();
     }).on('click', 'aside', function() {
         $(this).toggleClass('active');
+    });
+
+    z.page.on('loaded logged_in', function() {
+        if (user.logged_in() && !user.get_permission('curator') &&
+            !user.get_permission('admin')) {
+            z.page.trigger('navigate', [urls.reverse('403')]);
+        }
+    });
+
+    z.page.on('navigate', function(e, url) {
+        if (url == urls.reverse('login')) {
+            return;
+        }
+        if (!user.logged_in()) {
+            z.page.trigger('navigate', [urls.reverse('login')]);
+        }
     });
 
     // Perform initial navigation.
