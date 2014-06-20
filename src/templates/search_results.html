@@ -1,5 +1,6 @@
-{% from "listing/listing.html" import feed_apps, feed_brands, feed_collections %}
+{% from "listing/listing.html" import feed_apps, feed_brands, feed_collections, feed_shelves %}
 
 {{ feed_apps(data.apps) }}
 {{ feed_collections(data.collections) }}
 {{ feed_brands(data.brands) }}
+{{ feed_shelves(data.shelves) }}
