@@ -238,11 +238,15 @@ define('forms_transonic',
         var def = defer.Deferred();
 
         function success(shelf) {
-            upload_feed_image(shelf, 'feed-shelf-image', $file_input).done(function(feed_image) {
+            if ($file_input.val()) {
+                upload_feed_image(shelf, 'feed-shelf-image', $file_input).done(function(feed_image) {
+                    def.resolve(shelf);
+                }).fail(function(error) {
+                    def.reject(error);
+                });
+            } else {
                 def.resolve(shelf);
-            }).fail(function(error) {
-                def.reject(error);
-            });
+            }
         }
 
         function fail(xhr) {
