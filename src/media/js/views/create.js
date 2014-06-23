@@ -57,7 +57,11 @@ define('views/create',
             'title': title,
         }).done(function() {
             $('.fileinput').fakeFileField();
-            feed_previews.initLiveAppPreview($('.feed'));
+            if (feedType == 'brands') {
+                feed_previews.initBrandPreview();
+            } else {
+                feed_previews.initLiveAppPreview($('.feed'));
+            }
         });
     };
 });

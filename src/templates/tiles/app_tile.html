@@ -8,9 +8,9 @@
       <div class="author lineclamp vital subdetail">
         {{ app.author }}
       </div>
-      <div class="price vital">$0.83</div>
-      <div class="rating">{{ stars(3) }}</div>
-      <button class="button product install paid">$0.83</button>
+      <div class="price vital">{{ app.price }}</div>
+      <div class="rating">{{ stars(app.rating) }}</div>
+      <button class="button product install paid">{{ app.price }}</button>
     </div>
     <div class="tile-footer">
       <p class="desc">{{ description }}</p>

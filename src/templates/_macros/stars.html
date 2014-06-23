@@ -1,4 +1,7 @@
-{% macro stars(rating, detailpage=false, aggregate=True) %}
-  {% set rating = rating|round %}
-  <span class="stars large stars-{{ rating }}"></span>
+{% macro stars(rating) %}
+  {% if rating < 6 %}
+    <span class="stars large stars-{{ rating|round }}">{{ rating|round }}</span>
+  {% else %}
+    {{ rating }}
+  {% endif %}
 {% endmacro %}

@@ -9,13 +9,16 @@ define('feed_previews',
     var SAMPLE_BG = '/media/img/sample_bg.jpg';
     var THUMB = 'https://marketplace.cdn.mozilla.net/img/uploads/addon_icons/461/461685-64.png';
     var BG_COLOUR = '#b90000';
+    var MAX_BRAND_APPS = 6;
 
     var APP = {
         name: 'A Sample App',
         author: 'Kevin Ngo',
         icons: {
             64: THUMB
-        }
+        },
+        rating: 3,
+        price: '$0.81'
     };
 
     var PREVIEW = {
@@ -175,13 +178,16 @@ define('feed_previews',
     function createFeaturedTile($parent) {
         var $result = $('.apps-widget .result');
         var app = null;
+
         if ($result.length) {
             app = {
                 name: $result.find('.name').text(),
                 author: $result.find('.author').text(),
                 icons: {
                     64: $result.find('.icon').attr('src')
-                }
+                },
+                rating: getRating($result),
+                price: $result.find('.price').text()
             };
         }
 
@@ -198,6 +204,48 @@ define('feed_previews',
         );
     }
 
+    function createBrandTile() {
+        var apps = [APP, APP, APP];
+        var $results = $('.apps-widget .result');
+
+        if ($results.length) {
+            apps = [];
+            $results.each(function(i) {
+                var $this = $(this);
+
+                if (i < MAX_BRAND_APPS) {
+                    apps.push({
+                        icons: {64: $this.find('.icon').attr('src')},
+                        name: $this.find('.name').text(),
+                        author: $this.find('.author').text(),
+                        rating: getRating($this),
+                        price: $this.find('.price').text()
+                    });
+                }
+            });
+        }
+
+        var ctx = {
+            apps: apps,
+            layout: $('#brand-layout').val(),
+            type: $('#brand-type').val(),
+            url: 'http://mozilla.org'
+        };
+
+        $('.feed').append(
+            nunjucks.env.render('tiles/brand_tile.html', ctx)
+        )
+    }
+
+    // Extract rating info from a DOM app tile.
+    function getRating($app) {
+        if ($app.find('.rating .stars').length) {
+            return $app.find('.rating .stars').text();
+        } else {
+            return $app.find('.rating').text();
+        }
+    }
+
     function initLiveAppPreview($parent) {
         refreshApp($parent, $('.featured-type-choices input:checked').val());
         initTypeSelector($parent);
@@ -208,12 +256,37 @@ define('feed_previews',
         initPreviewImage();
     }
 
+    function initBrandListeners() {
+        $('.app-selector').on('click', '.results li', function() {
+            setTimeout(function() {
+                z.page.trigger('refreshbrand');
+            }, 100);
+        });
+        z.page.on('change', '#brand-type, #brand-layout', function() {
+            z.page.trigger('refreshbrand');
+        }).on('click', '.apps-widget .actions .delete, .apps-widget .reorder', function() {
+            z.page.trigger('refreshbrand');
+        });
+    }
+
+    function initBrandPreview() {
+        z.page.on('refreshbrand', refreshBrand);
+        refreshBrand();
+        initBrandListeners();
+    }
+
+    function refreshBrand() {
+        empty();
+        createBrandTile();
+    }
+
     function empty() {
         $('.feed').empty();
     }
 
     return {
         empty: empty,
+        initBrandPreview: initBrandPreview,
         initLiveAppPreview: initLiveAppPreview
     };
 });

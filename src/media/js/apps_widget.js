@@ -72,7 +72,12 @@ define('apps_widget',
         var $apps_widget = $('.apps-widget');
         $apps_widget.find('.apps').append(app_select.render_result(app, true));
         $apps_widget.find('.placeholder-text').hide();
-        $apps_widget.find('.apps').sortable();
+        $apps_widget.find('.apps').sortable({
+            // This doesn't work but *should*.
+            update: function() {
+                z.page.trigger('refreshbrand');
+            }
+        });
     };
 
     var add_group = function(app_group) {

@@ -1,0 +1,31 @@
+{% include '_macros/stars.html' %}
+
+{% macro mini_tile(app) %}
+  <li class="app mini-app">
+    <a href="#" class="app-link c">
+      <img src="{{ app.icons[64] }}" alt="{{ app.name }}">
+      <div class="info">
+        <h2 class="app-name elliflow">{{ app.name }}</h2>
+        <p class="author elliflow">{{ app.author }}</p>
+        <div class="rating">{{ stars(app.rating) }}</div>
+      </div>
+      <button class="button product install paid">{{ app.price }}</button>
+    </a>
+  </li>
+{% endmacro %}
+
+<section class="feed-brand feed-layout-{{ layout }} multi-app-tile mkt-tile c">
+  <img src="" alt="" class="brand" style="border: 1px solid #ddd;">
+  <div class="info">
+    {% if apps.length > 1 %}
+      <h1 class="feed-tile-header">{{ feed.BRAND_TYPES[type][1] }}</h1>
+    {% else %}
+      <h1 class="feed-tile-header">{{ feed.BRAND_TYPES[type][0] }}</h1>
+    {% endif %}
+  </div>
+  <ul class="app-list">
+    {% for app in apps %}
+      {{ mini_tile(app) }}
+    {% endfor %}
+  </ul>
+</section>

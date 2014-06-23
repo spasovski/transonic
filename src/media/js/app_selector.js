@@ -59,6 +59,8 @@ define('app_selector',
             icon: app.icons['48'],
             id: app.id,
             name: utils.translate(app.name),
+            price: app.payment_required ? app.price_locale : gettext('Free'),
+            rating: app.ratings.count ? app.ratings.average : gettext('Not yet rated'),
             with_actions: with_actions,
         });
     };
