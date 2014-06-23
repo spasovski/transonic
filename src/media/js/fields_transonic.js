@@ -5,7 +5,12 @@ define('fields_transonic',
 
     var imageUploads = {};  // keep track of drag-and-drop uploads to stuff into FormData later.
 
-    z.page.on('change', '.colors input', function() {
+    z.page.on('keypress', 'form', function(e) {
+        if (e.keyCode == 13) {
+            return false;
+        }
+    })
+    .on('change', '.colors input', function() {
         // Sync color previews and inputs.
         var $this = $(this);
         var $parent = $(this).closest('.colors');
