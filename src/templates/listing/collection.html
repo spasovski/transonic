@@ -1,10 +1,12 @@
 <li class="collection feed-element" data-type="collection" data-id="{{ collection.id }}"
     data-slug="{{ collection.slug }}" {% if is_builder %}draggable="true"{% endif %}>
   <a {% if not is_builder %}href="{{ url('edit', ['collections', collection.slug]) }}"{% endif %}>
-    {% if collection.apps.length %}
-      <img class="icon" src="{{ collection.apps[0].icons['48'] }}">
+    {% if collection.app_count or collection.apps.length %}
+      <img class="icon" src="{{ collection.preview_icon or collection.apps[0].icons['48'] }}">
     {% endif %}
-    <h3 class="elliflow">{{ _('{name} ({num_apps} apps)')|format({name: collection.name, num_apps: collection.apps.length}) }}</h3>
+    <h3 class="elliflow">{{ _('{name} ({num_apps} apps)')|format(
+                            {name: collection.name,
+                             num_apps: collection.app_count or collection.apps.length}) }}</h3>
     <span class="type">{{ feed.COLL_TYPES[collection.type] }}</span>
     <span class="delete" data-type="collection"></span>
   </a>

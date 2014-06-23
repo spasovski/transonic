@@ -71,7 +71,7 @@
   <input class="search-elements" type="search" placeholder="{{ _('Search for a feed element...') }}">
 
   <div class="feed-api-results search-results">
-    {% defer (url=api('feed-apps')|urlparams(ordering='-created'), paginate='ul.feed-apps') %}
+    {% defer (url=api('feed-apps-list')|urlparams(ordering='-created'), paginate='ul.feed-apps') %}
       {{ feed_apps(this.objects, response) }}
     {% placeholder %}
       <h2>{{ _('Featured Apps') }}</h2>
@@ -79,7 +79,7 @@
     {% except %}
     {% end %}
 
-    {% defer (url=api('collections')|urlparams(ordering='-created'), paginate='ul.collections') %}
+    {% defer (url=api('collections-list')|urlparams(ordering='-created'), paginate='ul.collections') %}
       {{ feed_collections(this.objects, response) }}
     {% placeholder %}
       <h2>{{ _('Collections') }}</h2>
@@ -87,7 +87,7 @@
     {% except %}
     {% end %}
 
-    {% defer (url=api('feed-brands')|urlparams(order='-created'), paginate='ul.brands') %}
+    {% defer (url=api('feed-brands-list')|urlparams(order='-created'), paginate='ul.brands') %}
       {{ feed_brands(this.objects, response) }}
     {% placeholder %}
       <h2>{{ _('Editorial Brands') }}</h2>
@@ -96,7 +96,7 @@
     {% end %}
 
     {% if not is_builder %}
-      {% defer (url=api('feed-shelves')|urlparams(order='-created'), paginate='ul.shelves') %}
+      {% defer (url=api('feed-shelves-list')|urlparams(order='-created'), paginate='ul.shelves') %}
         {{ feed_shelves(this.objects, response) }}
       {% placeholder %}
         <h2>{{ _('Operator Shelves') }}</h2>
