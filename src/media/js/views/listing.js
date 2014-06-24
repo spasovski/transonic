@@ -1,6 +1,6 @@
 define('views/listing',
-    ['feed_previews', 'format', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'z'],
-    function(feed_previews, format, $, l10n, log, notification, requests, settings, nunjucks, _, urls, utils, z) {
+    ['cache', 'feed_previews', 'format', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'z'],
+    function(cache, feed_previews, format, $, l10n, log, notification, requests, settings, nunjucks, _, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -25,9 +25,12 @@ define('views/listing',
 
         requests.del(endpoint).done(function(data) {
             notification.notification({message: gettext('Successfully deleted')});
+            $item.remove();
+            cache.flush();
+        }).fail(function() {
+            notification.notification({message: gettext('Sorry, we had an error deleting that')});
         });
 
-        $item.remove();
     }))
     .on('keypress', '.search-elements', _.debounce(function() {
         var $this = $(this);
