@@ -7,6 +7,7 @@
       <a href="{{ detail_url }}" target="_blank">{{ name }}</a>
     </h3>
     <div class="author" itemprop="author">{{ author or _('No Author') }}</div>
+    <div class="rating">{{ stars(rating) }}</div>
     <div class="compat-info">
       <ul class="device-types" itemprop="device-types">
         <li class="desktop{% if device_types.indexOf('desktop') == -1 %} unavailable{% endif %}"></li>
@@ -23,6 +24,7 @@
       {% endif %}
     </div>
   </div>
+  <div class="price">{{ price }}</div>
   {% if with_actions %}
     <div class="actions">
       <i class="reorder prev fa fa-caret-up"></i>

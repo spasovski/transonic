@@ -57,7 +57,7 @@ h3 {
     }
     main,
     .site-header > nav {
-        margin: 0 auto;
+        margin: 0 0 0 50px;
         width: 940px;
     }
     .container {
@@ -79,11 +79,7 @@ h3 {
         width: 100%;
     }
     aside {
-        -moz-transition: -moz-transform .5s;
-        -webkit-transition: -webkit-transform .5s;
-        -moz-transform: translateX(280px);
-        -webkit-transform: translateX(280px);
-        background: $medium-gray;
+        background-color: rgba(0,0,0,.6);
         height: 100%;
         padding-top: 14px;
         position: fixed;
@@ -92,16 +88,9 @@ h3 {
         width: 320px;
         z-index: 20;
 
-        &.active {
-            -moz-transform: translateX(0px);
-            -webkit-transform: translateX(0px);
-        }
-        &:hover {
-            cursor: pointer;
-        }
         .preview-header {
             color: #fff;
-            padding-bottom: 12px;
+            line-height: 25px;
             padding-left: 20px;
         }
     }

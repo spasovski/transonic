@@ -40,6 +40,7 @@
         border: solid $light-gray;
         border-width: 0 1px 1px;
         padding: 15px 5px 10px 10px;
+        position: relative;
         transition(background .1s);
 
         &:hover {
@@ -75,6 +76,14 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+        .rating {
+            font-size: 12px;
+        }
+    }
+    .price {
+        font-size: 12px;
+        position: absolute;
+        top: 70px;
     }
     .compat-info {
         .device-types {

@@ -45,42 +45,6 @@ define('feed_previews',
         url: 'http://mozilla.org'
     };
 
-    function createFeaturedApp($parent) {
-        var $result = $('.apps-widget .result');
-        var app = null;
-        if ($result.length) {
-            app = {
-                name: $result.find('.name').text(),
-                author: $result.find('.author').text(),
-                icons: {
-                    64: $result.find('.icon').attr('src')
-                }
-            };
-        }
-        var background_image = $('.background-image img.preview').attr('src');
-
-        var ctx = $.extend(true, {}, FEATURED_APP);
-        ctx.app = app || ctx.app;
-        ctx.background_color = $('input[name=bg-color]:checked').val();
-        ctx.background_image = background_image || ctx.background_image;
-
-        $parent.append(
-            nunjucks.env.render('tiles/collection_tile.html', ctx)
-        );
-    }
-
-    function initAppSelector() {
-        $('.app-selector').on('click', '.results li', function() {
-            var name = $(this).find('.name').text();
-            var author = $(this).find('.author').text();
-            var $preview = $('.feed-item, .feed-app');
-
-            $preview.find('h1, h3').text(name);
-            $preview.find('.icon, .app-icons img').attr('src', $(this).find('.icon').attr('src'));
-            $preview.find('.author').text(author);
-        });
-    }
-
     function initColourSelector() {
         $('.colors').on('change', 'input[name=bg-color]', function() {
             var colour = $(this).val();
@@ -103,17 +67,6 @@ define('feed_previews',
         });
     }
 
-    function initRatingSelector() {
-        z.page.on('change', 'input[name=pq-rating]', function() {
-            console.log("LOL");
-            var rating = $(this).val();
-
-            $('p.stars')
-                .removeClass('stars-0 stars-1 stars-2 stars-3 stars-4 stars-5')
-                .addClass('stars-' + rating);
-        });
-    }
-
     function initPreviewImage() {
         $('.background-image .realfileinput').on('change', function() {
             setTimeout(function() {
@@ -125,59 +78,12 @@ define('feed_previews',
         });
     }
 
-    function initTypeSelector($parent) {
-        $('input[name=featured-type]').on('change', function() {
-            refreshApp($parent, $(this).val());
-        });
-    }
-
-    function refreshApp($parent, type) {
-        $parent.empty();
-
-        if (type == feed.FEEDAPP_ICON) {
-            createFeaturedApp($parent);
-            noBackground();
-        } else if (type == feed.FEEDAPP_DESC) {
-            createFeaturedTile($parent);
-            noPreview();
-            noQuote();
-        } else if (type == feed.FEEDAPP_QUOTE) {
-            createFeaturedTile($parent);
-            noPreview();
-            $parent.find('.tile-footer')
-                   .css('background-color', BG_COLOUR)
-                   .find('.desc').remove();
-        } else if (type == feed.FEEDAPP_IMAGE) {
-            createFeaturedApp($parent);
-        } else if (type == feed.FEEDAPP_PREVIEW) {
-            createFeaturedTile($parent);
-            noQuote();
-            $parent.find('.tile-footer').addClass(type);
-            z.page.on('click', '.screenshots .thumbnail', function() {
-                var src = $(this).find('img').attr('src');
-                $('.feed-app-preview-container img').attr('src', src);
-            });
-        }
-
-        function noBackground() {
-            $parent.find('.feed-item').css('background-image', '');
-        }
-
-        function noPreview() {
-            $parent.find('.tile-footer')
-                   .addClass(type)
-                   .find('.feed-app-preview-container').remove();
-        }
-
-        function noQuote() {
-            $parent.find('blockquote, p.stars, .quote-source')
-                   .remove();
-        }
-    }
-
-    function createFeaturedTile($parent) {
+    function refreshAppTile() {
+        var $feed = $('.feed');
+        $feed.empty();
         var $result = $('.apps-widget .result');
         var app = null;
+        var type = $('.featured-type-choices input:checked').val();
 
         if ($result.length) {
             app = {
@@ -199,9 +105,55 @@ define('feed_previews',
         ctx.description = $('.description .localized:not(.hidden').val() || ctx.description;
         ctx.preview = $('.screenshots li.selected img').attr('src') || ctx.preview.image_url;
 
-        $parent.append(
-            nunjucks.env.render('tiles/app_tile.html', ctx)
-        );
+        if (type == feed.FEEDAPP_ICON) {
+            $feed.append(
+                nunjucks.env.render('tiles/collection_tile.html', ctx)
+            );
+            noBackground();
+        } else if (type == feed.FEEDAPP_DESC) {
+            $feed.append(
+                nunjucks.env.render('tiles/app_tile.html', ctx)
+            );
+            noPreview();
+            noQuote();
+        } else if (type == feed.FEEDAPP_QUOTE) {
+            $feed.append(
+                nunjucks.env.render('tiles/app_tile.html', ctx)
+            );
+            noPreview();
+            $feed.find('.tile-footer')
+                 .css('background-color', BG_COLOUR)
+                 .find('.desc').remove();
+        } else if (type == feed.FEEDAPP_IMAGE) {
+            $feed.append(
+                nunjucks.env.render('tiles/collection_tile.html', ctx)
+            );
+        } else if (type == feed.FEEDAPP_PREVIEW) {
+            $feed.append(
+                nunjucks.env.render('tiles/app_tile.html', ctx)
+            );
+            noQuote();
+            $feed.find('.tile-footer').addClass(type);
+            z.page.on('click', '.screenshots .thumbnail', function() {
+                var src = $(this).find('img').attr('src');
+                $('.feed-app-preview-container img').attr('src', src);
+            });
+        }
+
+        function noBackground() {
+            $feed.find('.feed-item').css('background-image', '');
+        }
+
+        function noPreview() {
+            $feed.find('.tile-footer')
+                 .addClass(type)
+                 .find('.feed-app-preview-container').remove();
+        }
+
+        function noQuote() {
+            $feed.find('blockquote, p.stars, .quote-source')
+                 .remove();
+        }
     }
 
     function createBrandTile() {
@@ -246,13 +198,21 @@ define('feed_previews',
         }
     }
 
-    function initLiveAppPreview($parent) {
-        refreshApp($parent, $('.featured-type-choices input:checked').val());
-        initTypeSelector($parent);
+    function initLiveAppPreview() {
+        refreshAppTile();
+        $('input[name=featured-type]').on('change', refreshAppTile);
         initColourSelector();
-        initAppSelector();
+        $('.app-selector').on('click', '.results li', function() {
+            setTimeout(refreshAppTile, 100);
+        });
         initTextListeners();
-        initRatingSelector();
+        z.page.on('change', 'input[name=pq-rating]', function() {
+            var rating = $(this).val();
+
+            $('p.stars')
+                .removeClass('stars-0 stars-1 stars-2 stars-3 stars-4 stars-5')
+                .addClass('stars-' + rating);
+        });
         initPreviewImage();
     }
 

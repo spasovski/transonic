@@ -60,7 +60,7 @@ define('views/create',
             if (feedType == 'brands') {
                 feed_previews.initBrandPreview();
             } else {
-                feed_previews.initLiveAppPreview($('.feed'));
+                feed_previews.initLiveAppPreview();
             }
         });
     };
