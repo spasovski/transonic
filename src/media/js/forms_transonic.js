@@ -1,6 +1,6 @@
 define('forms_transonic',
-    ['app_selector', 'defer', 'feed', 'format', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'nunjucks', 'requests', 'storage', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
-    function(app_select, defer, feed, format, $, fakefilefield, l10n, log, notification, nunjucks, requests, storage, urls, utils, utils_local, validate, z) {
+    ['app_selector', 'cache', 'defer', 'feed', 'format', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'nunjucks', 'requests', 'storage', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
+    function(app_select, cache, defer, feed, format, $, fakefilefield, l10n, log, notification, nunjucks, requests, storage, urls, utils, utils_local, validate, z) {
     'use strict';
     var format = format.format;
     var gettext = l10n.gettext;
@@ -31,6 +31,7 @@ define('forms_transonic',
             return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
         }
 
+        cache.flush();
         return save_feed_app(data, slug, $file_input);
     };
 
@@ -63,6 +64,7 @@ define('forms_transonic',
         }
         $('.form-errors').empty();
 
+        cache.flush();
         return save_collection(data, slug, $file_input);
     };
 
@@ -85,6 +87,7 @@ define('forms_transonic',
         }
         $('.form-errors').empty();
 
+        cache.flush();
         return save_brand(data, slug);
     };
 
@@ -112,6 +115,7 @@ define('forms_transonic',
         }
         $('.form-errors').empty();
 
+        cache.flush();
         return save_shelf(data, slug, $file_input);
     };
 
