@@ -92,13 +92,13 @@ define('feed_previews',
     }
 
     function initTextListeners() {
-        $('.description').on('keydown', '.localized:not(.hidden)', function() {
+        $('.description').on('keyup input', '.localized:not(.hidden)', function() {
             $('.feed-app .desc').text($(this).val());
         });
-        $('.pq-text').on('keydown', '.localized:not(.hidden)', function() {
+        $('.pq-text').on('keyup input', '.localized:not(.hidden)', function() {
             $('.feed-app blockquote p').text($(this).val());
         });
-        $('#pq-attribution').on('keydown', function() {
+        $('#pq-attribution').on('keyup input', function() {
             $('.feed-app .quote-source').text('- ' + $(this).val());
         });
     }
