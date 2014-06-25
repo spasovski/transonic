@@ -28,9 +28,6 @@ $vertical-tile-margin = 10px;
         img {
             float: left;
         }
-        .icon {
-            margin-right: 0;
-        }
         .info {
             float: left;
             height: 64px;
@@ -38,7 +35,7 @@ $vertical-tile-margin = 10px;
             position: relative;
             width: 205px;
         }
-        .author.lineclamp {
+        .elliflow {
             max-width: 125px;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -58,7 +55,6 @@ $vertical-tile-margin = 10px;
             padding: $vertical-text-margin 0 0;
         }
         .rating {
-            font-size: 12px;
             padding: 5px 0;
         }
         .description .desc {
@@ -115,10 +111,6 @@ $vertical-tile-margin = 10px;
         .desc {
             margin: -20px 0 0;
             padding: 15px 0 0;
-
-            + img {
-                margin-top: 10px;
-            }
         }
         .feed-app-preview-container {
             border-radius: 0 0 5px 5px;
@@ -126,11 +118,6 @@ $vertical-tile-margin = 10px;
             margin: 15px 0 -16px -10px;
             height: 150px;
             width: $mobile-tile-width;
-
-            .feed-app-preview {
-                width: 100%;
-                height: auto;
-            }
         }
     }
     .tile-footer {
@@ -242,6 +229,9 @@ $vertical-tile-margin = 10px;
         }
 
     }
+    .app-name.elliflow {
+        max-width: 80px;
+    }
     .author,
     .stars {
         display: none;
@@ -249,7 +239,6 @@ $vertical-tile-margin = 10px;
     .button,
     .button[disabled] {
         background: transparent;
-        box-shadow: none;
         color: $breezy-blue;
         cursor: pointer;
         height: 20px;
@@ -406,13 +395,30 @@ $vertical-tile-margin = 10px;
             display: none;
         }
     }
+    &.grouped-collection,
+    &.shelf.shelf-landing {
+        height: 150px;
+
+        .curve {
+            top: 80px;
+        }
+        .info {
+            bottom: 30px;
+            top: auto;
+        }
+    }
 }
 
 .feed-landing {
     &.feed {
         padding-top: 0;
     }
-    .feed-item {
+    &.feed-app-landing,
+    &.brand-landing {
+        margin-top: $vertical-tile-margin;
+    }
+    &.collection-landing .feed-item,
+    &.shelf-landing .feed-item {
         border-radius: 0;
         position: relative;
         right: 10px;
@@ -424,6 +430,18 @@ $vertical-tile-margin = 10px;
         }
         &.mega.full .desc {
             top: 155px;
+        }
+    }
+    &.shelf-landing {
+        .feed-item {
+            margin-bottom: 0;
+        }
+        .desc {
+            color: $hungry-text;
+            font-size: 15px;
+            font-weight: light;
+            line-height: 22px;
+            padding: 20px;
         }
     }
 }
