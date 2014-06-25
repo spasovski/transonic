@@ -82,6 +82,7 @@ define('views/edit',
                 'title': title,
             }).done(function() {
                 $('.fileinput').fakeFileField();
+                fields_transonic.highlight_localized();
 
                 if (feedType == 'apps') {
                     // App widget.

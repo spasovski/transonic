@@ -1,6 +1,6 @@
 define('fields_transonic',
-    ['app_selector', 'apps_widget', 'feed', 'jquery', 'jquery.fakefilefield', 'log', 'nunjucks', 'preview_tray', 'requests', 'urls', 'utils', 'z'],
-    function(app_select, apps_widget, feed, $, fakefilefield, log, nunjucks, preview_tray, requests, urls, utils, z) {
+    ['app_selector', 'apps_widget', 'feed', 'jquery', 'jquery.fakefilefield', 'log', 'nunjucks', 'preview_tray', 'requests', 'underscore', 'urls', 'utils', 'z'],
+    function(app_select, apps_widget, feed, $, fakefilefield, log, nunjucks, preview_tray, requests, _, urls, utils, z) {
     'use strict';
 
     var imageUploads = {};  // keep track of drag-and-drop uploads to stuff into FormData later.
@@ -119,5 +119,29 @@ define('fields_transonic',
         var lang = this.value;
         $('.localized').addClass('hidden')
                        .filter('[data-lang=' + lang + ']').removeClass('hidden');
-    });
+    })
+    .on('input', '.localized', function() {
+        highlight_localized();
+    })
+
+    // Highlight languages that have been localized.
+    function highlight_localized() {
+        var localized = $('.localized');
+        $('#locale-switcher option').each(function(i, option) {
+            var lang = option.value;
+
+            var vals = $.map(localized.filter('[data-lang=' + lang + ']'), function(field) {
+                return field.value;
+            });
+            if (_.any(vals, function(val) { return val; })) {
+                option.classList.add('highlighted');
+            } else {
+                option.classList.remove('highlighted');
+            }
+        });
+    };
+
+    return {
+        highlight_localized: highlight_localized
+    }
 });
