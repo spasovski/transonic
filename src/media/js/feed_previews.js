@@ -97,8 +97,8 @@ define('feed_previews',
         return brand;
     }
 
-    z.page.on('change keyup input', 'input, textarea, select', _.debounce(refresh, 250));
-    z.page.on('refresh_preview', _.debounce(refresh, 250));
+    z.page.on('change keyup input', 'input, textarea, select', _.throttle(refresh, 250));
+    z.page.on('refresh_preview', _.throttle(refresh, 250));
 
     function refresh() {
         empty();
@@ -116,18 +116,18 @@ define('feed_previews',
 
         if ([feed.FEEDAPP_ICON, feed.FEEDAPP_IMAGE].indexOf(feed_app.type) !== -1) {
              $feed.append(
-                nunjucks.env.render('tiles/collection_tile.html', feed_app)
+                nunjucks.env.render('feed_previews/collection.html', feed_app)
             );
         } else {
             $feed.append(
-                nunjucks.env.render('tiles/app_tile.html', feed_app)
+                nunjucks.env.render('feed_previews/feed_app.html', feed_app)
             );
         }
     }
 
     function refresh_brand_preview() {
         $('.feed').append(
-            nunjucks.env.render('tiles/brand_tile.html', brand_factory())
+            nunjucks.env.render('feed_previews/brand.html', brand_factory())
         )
     }
 

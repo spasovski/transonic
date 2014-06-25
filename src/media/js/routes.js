@@ -12,7 +12,6 @@ var routes = window.routes = [
     {'pattern': root + 'manage$', 'view_name': 'listing'},
     {'pattern': root + 'manage/([^/<>"\']+)/([^/<>"\']+)$', 'view_name': 'edit'},
     {'pattern': root + 'feed$', 'view_name': 'feed_builder'},
-    {'pattern': root + 'demo$', 'view_name': 'feed_modules_demo'},
 ];
 
 // Only `require.js` has `window.require.defined`, so we can use this to
