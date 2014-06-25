@@ -11,6 +11,8 @@ define('validate_transonic',
         }
         if (!data.slug) {
             errs.push(gettext('Slug is required.'));
+        } else if (!validate_slug(data.slug)) {
+            errs.push(gettext('Slug is invalid.'));
         }
         if (!$file_input.val().length &&
             [feed.FEEDAPP_IMAGE].indexOf(data.type) !== -1 &&
@@ -42,6 +44,8 @@ define('validate_transonic',
         }
         if (!data.slug) {
             errs.push(gettext('Slug is required.'));
+        } else if (!validate_slug(data.slug)) {
+            errs.push(gettext('Slug is invalid.'));
         }
         if (!$file_input.val().length &&
             [feed.COLL_PROMO].indexOf(data.type) !== -1 &&
@@ -58,6 +62,8 @@ define('validate_transonic',
         }
         if (!data.slug) {
             errs.push(gettext('Slug is required.'));
+        } else if (!validate_slug(data.slug)) {
+            errs.push(gettext('Slug is invalid.'));
         }
         return errs;
     };
@@ -72,6 +78,8 @@ define('validate_transonic',
         }
         if (!data.slug) {
             errs.push(gettext('Slug is required.'));
+        } else if (!validate_slug(data.slug)) {
+            errs.push(gettext('Slug is invalid.'));
         }
         if (!$file_input.val().length && !$preview.attr('src')) {
             errs.push(gettext('Background image is required.'));
@@ -129,6 +137,12 @@ define('validate_transonic',
             if (data[lang].length) {
                 return true;
             }
+        }
+    }
+
+    function validate_slug(slug) {
+        if (slug.match(/^[^\/<>"']+$/)) {
+            return true;
         }
     }
 
