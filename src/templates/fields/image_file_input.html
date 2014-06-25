@@ -6,7 +6,8 @@
         <img class="preview" {% if src %}src="{{ src }}"{% endif %}>
         <input type="text" disabled></input>
       </div>
-      <input type="file" name="background-image-{{ slug }}" class="realfileinput">
+      <input type="file" accept="image/*" name="background-image-{{ slug }}"
+             class="realfileinput">
     </div>
   </div>
 {% endmacro %}
