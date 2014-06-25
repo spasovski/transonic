@@ -11,158 +11,73 @@ define('feed_previews',
     var BG_COLOUR = '#b90000';
     var MAX_BRAND_APPS = 6;
 
-    var APP = {
-        name: 'A Sample App',
-        author: 'Kevin Ngo',
-        icons: {
-            64: THUMB
-        },
-        rating: 3,
-        price: '$0.81'
-    };
+    function app_factory() {
+        var app = {
+            name: 'A Sample App',
+            author: 'Kevin Ngo',
+            icons: {
+                64: THUMB
+            },
+            rating: 3,
+            price: '$0.81'
+        };
 
-    var PREVIEW = {
-        id: 1,
-        position: 1,
-        thumbnail_url: THUMB,
-        image_url: SAMPLE_BG,
-        filetype: 'image/png',
-        resource_uri: 'http://mozilla.org'
-    };
-
-    var FEATURED_APP = {
-        app: APP,
-        background_color: BG_COLOUR,
-        description: '',
-        type: 'icon',
-        background_image: '',
-        id: 1,
-        preview: PREVIEW,
-        pullquote_attribute: '',
-        pullquote_rating: 0,
-        pullquote_text: '',
-        slug: 'some-feed-app',
-        url: 'http://mozilla.org'
-    };
-
-    function initColourSelector() {
-        $('.colors').on('change', 'input[name=bg-color]', function() {
-            var colour = $(this).val();
-
-            $('.feed-item').css('background-color', hex2rgba(colour, 0.4));
-            $('.curve').css('background-color', hex2rgba(colour, 0.8));
-            $('.tile-footer.quote').css('background-color', colour);
-            $('.feed-app-preview-container').css('background-color', colour);
-        });
-    }
-
-    function initTextListeners() {
-        $('.description').on('keyup input', '.localized:not(.hidden)', function() {
-            $('.feed-app .desc').text($(this).val());
-        });
-        $('.pq-text').on('keyup input', '.localized:not(.hidden)', function() {
-            $('.feed-app blockquote p').text($(this).val());
-        });
-        $('#pq-attribution').on('keyup input', function() {
-            $('.feed-app .quote-source').text('- ' + $(this).val());
-        });
-    }
-
-    function initPreviewImage() {
-        $('.background-image .realfileinput').on('change', function() {
-            setTimeout(function() {
-                var src = $('.background-image img.preview').attr('src');
-                var ugly = 'url(' + src + ')';
-
-                $('.feed-item').css('background-image', ugly);
-            }, 100);
-        });
-    }
-
-    function refreshAppTile() {
-        var $feed = $('.feed');
-        $feed.empty();
         var $result = $('.apps-widget .result');
-        var app = null;
-        var type = $('.featured-type-choices input:checked').val();
-
         if ($result.length) {
-            app = {
+            var app = $.extend(true, app, {
                 name: $result.find('.name').text(),
                 author: $result.find('.author').text(),
                 icons: {
                     64: $result.find('.icon').attr('src')
                 },
-                rating: getRating($result),
-                price: $result.find('.price').text()
-            };
-        }
-
-        var ctx = $.extend(true, {}, FEATURED_APP);
-        ctx.app = app || ctx.app;
-        ctx.pullquote_attribute = $('[name="pq-attribution"]').val() || ctx.pullquote_attribute;
-        ctx.pullquote_rating = $('.pq-rating input:checked').val() || ctx.pullquote_rating;
-        ctx.pullquote_text = $('.pq-text .localized:not(.hidden').val() || ctx.pullquote_text;
-        ctx.description = $('.description .localized:not(.hidden').val() || ctx.description;
-        ctx.preview = $('.screenshots li.selected img').attr('src') || ctx.preview.image_url;
-
-        if (type == feed.FEEDAPP_ICON) {
-            $feed.append(
-                nunjucks.env.render('tiles/collection_tile.html', ctx)
-            );
-            noBackground();
-        } else if (type == feed.FEEDAPP_DESC) {
-            $feed.append(
-                nunjucks.env.render('tiles/app_tile.html', ctx)
-            );
-            noPreview();
-            noQuote();
-        } else if (type == feed.FEEDAPP_QUOTE) {
-            $feed.append(
-                nunjucks.env.render('tiles/app_tile.html', ctx)
-            );
-            noPreview();
-            $feed.find('.tile-footer')
-                 .css('background-color', BG_COLOUR)
-                 .find('.desc').remove();
-        } else if (type == feed.FEEDAPP_IMAGE) {
-            $feed.append(
-                nunjucks.env.render('tiles/collection_tile.html', ctx)
-            );
-        } else if (type == feed.FEEDAPP_PREVIEW) {
-            $feed.append(
-                nunjucks.env.render('tiles/app_tile.html', ctx)
-            );
-            noQuote();
-            $feed.find('.tile-footer').addClass(type);
-            z.page.on('click', '.screenshots .thumbnail', function() {
-                var src = $(this).find('img').attr('src');
-                $('.feed-app-preview-container img').attr('src', src);
+                rating: $result.data('rating'),
+                price: $result.data('price')
             });
-        }
+        };
 
-        function noBackground() {
-            $feed.find('.feed-item').css('background-image', '');
-        }
-
-        function noPreview() {
-            $feed.find('.tile-footer')
-                 .addClass(type)
-                 .find('.feed-app-preview-container').remove();
-        }
-
-        function noQuote() {
-            $feed.find('blockquote, p.stars, .quote-source')
-                 .remove();
-        }
+        return app;
     }
 
-    function createBrandTile() {
-        var apps = [APP, APP, APP];
-        var $results = $('.apps-widget .result');
+    function preview_factory() {
+        return {
+            id: 1,
+            position: 1,
+            thumbnail_url: THUMB,
+            image_url: SAMPLE_BG,
+            filetype: 'image/png',
+            resource_uri: 'http://mozilla.org'
+        };
+    };
 
+    function feed_app_factory() {
+        return {
+            app: app_factory(),
+            background_color: $('.bg-color input:checked').val() || BG_COLOUR,
+            background_image: $('.background-image-input .preview').attr('src') || '',
+            description: $('.description .localized:not(.hidden').val() || '',
+            id: 1,
+            preview: $('.screenshots li.selected img').attr('src') || preview_factory().image_url,
+            pullquote_attribution: $('[name="pq-attribution"]').val() || '',
+            pullquote_rating: $('.pq-rating input:checked').val() || 0,
+            pullquote_text: $('.pq-text .localized:not(.hidden').val() || '',
+            slug: 'some-feed-app',
+            type: $('.featured-type-choices input:checked').val() || 'icon',
+            url: 'http://mozilla.org'
+        };
+    };
+
+    function brand_factory() {
+        var brand = {
+            apps: [app_factory(), app_factory(), app_factory()],
+            layout: $('#brand-layout').val() || 'grid',
+            type: $('#brand-type').val() || 'apps-for-albania',
+            url: 'http://mozilla.org'
+
+        }
+
+        var $results = $('.apps-widget .result');
         if ($results.length) {
-            apps = [];
+            var apps = [];
             $results.each(function(i) {
                 var $this = $(this);
 
@@ -171,74 +86,49 @@ define('feed_previews',
                         icons: {64: $this.find('.icon').attr('src')},
                         name: $this.find('.name').text(),
                         author: $this.find('.author').text(),
-                        rating: getRating($this),
-                        price: $this.find('.price').text()
+                        rating: $this.data('rating'),
+                        price: $this.data('price')
                     });
                 }
             });
+            brand.apps = apps;
         }
 
-        var ctx = {
-            apps: apps,
-            layout: $('#brand-layout').val(),
-            type: $('#brand-type').val(),
-            url: 'http://mozilla.org'
-        };
-
-        $('.feed').append(
-            nunjucks.env.render('tiles/brand_tile.html', ctx)
-        )
+        return brand;
     }
 
-    // Extract rating info from a DOM app tile.
-    function getRating($app) {
-        if ($app.find('.rating .stars').length) {
-            return $app.find('.rating .stars').text();
-        } else {
-            return $app.find('.rating').text();
-        }
-    }
+    z.page.on('change keyup input', 'input, textarea, select', _.debounce(refresh, 250));
+    z.page.on('refresh_preview', _.debounce(refresh, 250));
 
-    function initLiveAppPreview() {
-        refreshAppTile();
-        $('input[name=featured-type]').on('change', refreshAppTile);
-        initColourSelector();
-        $('.app-selector').on('click', '.results li', function() {
-            setTimeout(refreshAppTile, 100);
-        });
-        initTextListeners();
-        z.page.on('change', 'input[name=pq-rating]', function() {
-            var rating = $(this).val();
-
-            $('p.stars')
-                .removeClass('stars-0 stars-1 stars-2 stars-3 stars-4 stars-5')
-                .addClass('stars-' + rating);
-        });
-        initPreviewImage();
-    }
-
-    function initBrandListeners() {
-        $('.app-selector').on('click', '.results li', function() {
-            setTimeout(function() {
-                z.page.trigger('refreshbrand');
-            }, 100);
-        });
-        z.page.on('change', '#brand-type, #brand-layout', function() {
-            z.page.trigger('refreshbrand');
-        }).on('click', '.apps-widget .actions .delete, .apps-widget .reorder', function() {
-            z.page.trigger('refreshbrand');
-        });
-    }
-
-    function initBrandPreview() {
-        z.page.on('refreshbrand', refreshBrand);
-        refreshBrand();
-        initBrandListeners();
-    }
-
-    function refreshBrand() {
+    function refresh() {
         empty();
-        createBrandTile();
+        var type = $('.transonic-form').data('type');
+        if (type == 'apps') {
+            refresh_feed_app_preview();
+        } else if (type == 'brands') {
+            refresh_brand_preview();
+        }
+    }
+
+    function refresh_feed_app_preview() {
+        var $feed = $('.feed');
+        var feed_app = feed_app_factory();
+
+        if ([feed.FEEDAPP_ICON, feed.FEEDAPP_IMAGE].indexOf(feed_app.type) !== -1) {
+             $feed.append(
+                nunjucks.env.render('tiles/collection_tile.html', feed_app)
+            );
+        } else {
+            $feed.append(
+                nunjucks.env.render('tiles/app_tile.html', feed_app)
+            );
+        }
+    }
+
+    function refresh_brand_preview() {
+        $('.feed').append(
+            nunjucks.env.render('tiles/brand_tile.html', brand_factory())
+        )
     }
 
     function empty() {
@@ -247,7 +137,7 @@ define('feed_previews',
 
     return {
         empty: empty,
-        initBrandPreview: initBrandPreview,
-        initLiveAppPreview: initLiveAppPreview
+        feed_app: refresh_feed_app_preview,
+        brand: refresh_brand_preview,
     };
 });

@@ -14,10 +14,12 @@ define('apps_widget',
     z.page.on('click', '.apps-widget .actions .delete', function() {
         /* Remove app. */
         $(this).closest('.result').remove();
+        z.page.trigger('refresh_preview');
     })
     .on('click', '.apps-widget .delete-app-group', function() {
         /* Remove app group. */
         $(this).closest('.result').remove();
+        z.page.trigger('refresh_preview');
     })
     .on('click', '.apps-widget .actions .reorder', function() {
         /* Reorder elements. */
@@ -42,6 +44,7 @@ define('apps_widget',
             $app.clone().insertAfter($swap_with);
         }
         $app.remove();
+        z.page.trigger('refresh_preview');
     });
 
     var set = function(app) {
@@ -61,6 +64,7 @@ define('apps_widget',
                      .text();
         $app_selector.find('.result').remove();
         $app_selector.find('input[name="app"]').val(app.id);
+        z.page.trigger('refresh_preview');
     };
 
     var append = function(app) {
@@ -73,6 +77,7 @@ define('apps_widget',
         $apps_widget.find('.apps').append(app_select.render_result(app, true));
         $apps_widget.find('.placeholder-text').hide();
         $apps_widget.find('.apps').sortable();
+        z.page.trigger('refresh_preview');
     };
 
     var add_group = function(app_group) {
@@ -83,6 +88,7 @@ define('apps_widget',
             app_group_id: 'app-group-' + $('.app-group').length
         }));
         $apps_widget.find('.placeholder-text').hide();
+        z.page.trigger('refresh_preview');
     };
 
     return {

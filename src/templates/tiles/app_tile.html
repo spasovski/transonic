@@ -12,16 +12,27 @@
       <div class="rating">{{ stars(app.rating) }}</div>
       <button class="button product install paid">{{ app.price }}</button>
     </div>
-    <div class="tile-footer">
-      <p class="desc">{{ description }}</p>
-      <div class="feed-app-preview-container"
-           style="background-color: {{ background_color }};
-                  background-image: url({{ preview }});"></div>
-      <p class="stars large white stars-{{ pullquote_rating }}">{{ pullquote_rating }}</p>
-      <blockquote>
-        <p>{{ pullquote_text }}</p>
-      </blockquote>
-      <p class="quote-source">&mdash; {{ pullquote_attribute }}</p>
+    <div class="tile-footer {{ type }}"
+       {% if type == feed.FEEDAPP_QUOTE %}style="background: {{ background_color }};"{% endif %}>
+      {% if type == feed.FEEDAPP_DESC %}
+        <p class="desc">{{ description }}</p>
+      {% elif type == feed.FEEDAPP_QUOTE %}
+        <p class="stars large white stars-{{ pullquote_rating }}">
+          {{ pullquote_rating }}
+        </p>
+        <blockquote><p>{{ pullquote_text }}</p></blockquote>
+        <p class="quote-source">
+          {{ _('&mdash; {attribution}')|format(
+               {attribution: pullquote_attribution}) }}
+        </p>
+      {% elif type == feed.FEEDAPP_PREVIEW %}
+        {% if description %}
+          <p class="desc">{{ description }}</p>
+        {% endif %}
+        <div class="feed-app-preview-container"
+             style="background-color: {{ background_color }};
+                    background-image: url({{ preview }});"></div>
+      {% endif %}
     </div>
   </div>
 </a>
