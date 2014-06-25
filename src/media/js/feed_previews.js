@@ -18,7 +18,9 @@ define('feed_previews',
             icons: {
                 64: THUMB
             },
-            rating: 3,
+            ratings: {
+                average: 3
+            },
             price: '$0.81'
         };
 
@@ -30,7 +32,9 @@ define('feed_previews',
                 icons: {
                     64: $result.find('.icon').attr('src')
                 },
-                rating: $result.data('rating'),
+                ratings: {
+                    average: $result.data('rating')
+                },
                 price: $result.data('price')
             });
         };

@@ -7,7 +7,13 @@
       <div class="info">
         <h2 class="app-name elliflow">{{ app.name }}</h2>
         <p class="author elliflow">{{ app.author }}</p>
-        <div class="rating">{{ stars(app.rating) }}</div>
+        <div class="rating">
+          {% if app.ratings.average %}
+            {{ stars(app.ratings.average) }}
+          {% else %}
+            <span class="cnt long">{{ _('Not yet rated') }}</span>
+          {% endif %}
+        </div>
       </div>
       <button class="button product install paid">{{ app.price }}</button>
     </a>

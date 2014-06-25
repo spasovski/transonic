@@ -60,7 +60,7 @@ define('app_selector',
             id: app.id,
             name: utils.translate(app.name),
             price: app.payment_required ? app.price_locale : gettext('Free'),
-            rating: app.ratings.count ? app.ratings.average : gettext('Not yet rated'),
+            rating: app.ratings.average,
             with_actions: with_actions
         });
     };
