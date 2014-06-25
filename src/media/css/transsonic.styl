@@ -78,6 +78,13 @@ h3 {
         padding: 48px 0;
         width: 100%;
     }
+    [data-page-type~=home],
+    [data-page-type~=listing],
+    [data-page-type~=builder] {
+        aside.feed-previews {
+            display: none;
+        }
+    }
     aside.feed-previews {
         -moz-transition: -moz-transform .5s;
         -webkit-transition: -webkit-transform .5s;

@@ -50,7 +50,7 @@ define('views/listing',
 
     return function(builder, args) {
         builder.z('title', gettext('Existing Content'));
-        builder.z('type', 'manage');
+        builder.z('type', 'manage listing');
         builder.start('listing/listing.html');
 
         feed_previews.empty();
