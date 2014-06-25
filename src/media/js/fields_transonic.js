@@ -114,6 +114,13 @@ define('fields_transonic',
        $(this).closest('.background-image-input').addClass('filled');
     })
 
+    .on('paste', 'input, textarea', function(e) {
+        var max = this.getAttribute("maxlength");
+        if (max) {
+            e.clipboardData.getData('text/plain').slice(0, max);
+        }
+    })
+
     // Localization of text fields.
     .on('change', '#locale-switcher', function() {
         var lang = this.value;

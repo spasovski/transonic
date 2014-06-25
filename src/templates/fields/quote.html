@@ -30,5 +30,5 @@
 <div class="pq-attribution field">
   <label class="inline-label">{{ _('Attribution') }}</label>
   <input id="pq-attribution" name="pq-attribution" type="text" placeholder="some-user-1"
-         {% if obj %}value="{{ obj.pullquote_attribution }}"{% endif %}>
+         maxlength=50 {% if obj %}value="{{ obj.pullquote_attribution }}"{% endif %}>
 </div>
