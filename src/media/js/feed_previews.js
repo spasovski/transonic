@@ -90,7 +90,9 @@ define('feed_previews',
                         icons: {64: $this.find('.icon').attr('src')},
                         name: $this.find('.name').text(),
                         author: $this.find('.author').text(),
-                        rating: $this.data('rating'),
+                        ratings: {
+                            average: $this.data('rating')
+                        },
                         price: $this.data('price')
                     });
                 }
