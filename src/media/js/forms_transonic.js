@@ -135,7 +135,7 @@ define('forms_transonic',
             var region = modified_regions[i];
             data[region] = [];
 
-            var $region_feed = $feeds.find(format('.feed[data-region="{0}"]', [region]));
+            var $region_feed = $feeds.find(format('.region-feed[data-region="{0}"]', [region]));
             $region_feed.find('.feed-element').each(function(i, feed_element) {
                 data[region].push([feed_element.getAttribute('data-type'),
                                    feed_element.getAttribute('data-id')]);
