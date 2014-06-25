@@ -23,7 +23,7 @@
 
   <label>{{ _('Quote') }}</label>
   {% for lang in settings.languages %}
-    {{ locale_textarea('pq-text', lang, pq_text[lang]) }}
+    {{ locale_textarea('pq-text', lang, pq_text[lang], 300) }}
   {% endfor %}
 </div>
 
