@@ -14,18 +14,21 @@
   </li>
 {% endmacro %}
 
-<section class="feed-brand feed-layout-{{ layout }} multi-app-tile mkt-tile c">
+<section class="feed-brand feed-layout-{{ brand.layout }} multi-app-tile mkt-tile c">
+  {# TODO: `src` based on the brand `brand.type`. Nuke inline style. #}
   <img src="" alt="" class="brand" style="border: 1px solid #ddd;">
   <div class="info">
-    {% if apps.length > 1 %}
-      <h1 class="feed-tile-header">{{ feed.BRAND_TYPES[type][1] }}</h1>
-    {% else %}
-      <h1 class="feed-tile-header">{{ feed.BRAND_TYPES[type][0] }}</h1>
-    {% endif %}
+    <h1 class="feed-tile-header">{{ feed.get_brand_name(brand) }}</h1>
   </div>
   <ul class="app-list">
-    {% for app in apps %}
-      {{ mini_tile(app) }}
+    {% for app in brand.apps %}
+      {# Show the first X apps, hide the rest. #}
+      {{ mini_tile(app, hidden=loop.index0 >= feed.MAX_BRAND_APPS, landing=landing) }}
     {% endfor %}
   </ul>
+  {% if not landing %}
+    <a href="#" class="view-all">
+      {{ _('View all apps') }}
+    </a>
+  {% endif %}
 </section>

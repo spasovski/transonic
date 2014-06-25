@@ -124,7 +124,9 @@ define('feed_previews',
 
     function refresh_brand_preview() {
         $('.feed').append(
-            nunjucks.env.render('feed_previews/brand.html', brand_factory())
+            nunjucks.env.render('feed_previews/brand.html', {
+                brand: brand_factory()
+            })
         )
     }
 

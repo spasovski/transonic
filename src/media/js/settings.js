@@ -12,7 +12,13 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         param_whitelist: ['q', 'sort'],
         api_param_blacklist: null,
 
-        model_prototypes: {},
+        // Just to make feed.js work.
+        model_prototypes: {
+            'feed-app': 'slug',
+            'feed-brand': 'slug',
+            'feed-collection': 'slug',
+            'feed-shelf': 'slug',
+        },
 
         fragment_error_template: 'errors/fragment.html',
         pagination_error_template: 'errors/pagination.html',
