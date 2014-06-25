@@ -79,7 +79,11 @@ h3 {
         width: 100%;
     }
     aside {
-        background-color: rgba(0,0,0,.6);
+        -moz-transition: -moz-transform .5s;
+        -webkit-transition: -webkit-transform .5s;
+        -moz-transform: translateX(280px);
+        -webkit-transform: translateX(280px);
+        background: $medium-gray;
         height: 100%;
         padding-top: 14px;
         position: fixed;
@@ -88,6 +92,13 @@ h3 {
         width: 320px;
         z-index: 20;
 
+        &.active {
+            -moz-transform: translateX(0px);
+            -webkit-transform: translateX(0px);
+        }
+        &:hover {
+            cursor: pointer;
+        }
         .preview-header {
             color: #fff;
             line-height: 25px;
