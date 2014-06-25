@@ -1,38 +1,62 @@
 {% include '_macros/stars.html' %}
 
+{% set color = feed_app.background_color %}
+
 <a href="#" class="app-link">
-  <div class="product mkt-tile feed-app">
-    <img class="icon" src="{{ app.icons[64] }}" height="64" width="64">
-    <div class="info">
-      <h3 class="name">{{ app.name }}</h3>
-      <div class="author lineclamp vital subdetail">
-        {{ app.author }}
-      </div>
-      <div class="price vital">{{ app.price }}</div>
-      <div class="rating">{{ stars(app.rating) }}</div>
-      <button class="button product install paid">{{ app.price }}</button>
-    </div>
-    <div class="tile-footer {{ type }}"
-       {% if type == feed.FEEDAPP_QUOTE %}style="background: {{ background_color }};"{% endif %}>
-      {% if type == feed.FEEDAPP_DESC %}
-        <p class="desc">{{ description }}</p>
-      {% elif type == feed.FEEDAPP_QUOTE %}
-        <p class="stars large white stars-{{ pullquote_rating }}">
-          {{ pullquote_rating }}
-        </p>
-        <blockquote><p>{{ pullquote_text }}</p></blockquote>
-        <p class="quote-source">
-          {{ _('&mdash; {attribution}')|format(
-               {attribution: pullquote_attribution}) }}
-        </p>
-      {% elif type == feed.FEEDAPP_PREVIEW %}
-        {% if description %}
-          <p class="desc">{{ description }}</p>
-        {% endif %}
-        <div class="feed-app-preview-container"
-             style="background-color: {{ background_color }};
-                    background-image: url({{ preview }});"></div>
+  {% if indexOf([feed.FEEDAPP_ICON, feed.FEEDAPP_IMAGE], feed_app.type) != -1 %}
+    <section class="feed-item"
+             {% if not feed_app.description and not feed_app.background_image %}
+               style="background-color: {{ color|hex2rgba('.4') }}"
+             {% elif feed_app.background_image %}
+               style="background-image: url({{ feed_app.background_image }})"
+             {% endif %}>
+      {% if feed_app.type == feed.FEEDAPP_ICON %}
+        <ul class="app-icons">
+          <li><img src="{{ feed_app.app.icons[64] }}" alt="{{ feed_app.app.name }}"></li>
+        </ul>
       {% endif %}
+      <div class="curve" style="background-color: {{ color|hex2rgba('.6') }}"></div>
+      <div class="info">
+        <h1>{{ feed_app.app.name }}</h1>
+        <p class="author">{{ feed_app.app.author }}</p>
+      </div>
+      <div class="alt-curve" style="background-color: {{ color|hex2rgba('.8') }}"></div>
+    </section>
+  {% else %}
+    <div class="product mkt-tile feed-app">
+      <img class="icon" src="{{ app.icons[64] }}" height="64" width="64">
+      <div class="info">
+        <h3 class="name">{{ app.name }}</h3>
+        <div class="author lineclamp vital subdetail">
+          {{ app.author }}
+        </div>
+        <div class="price vital">{{ app.price }}</div>
+        <div class="rating">{{ stars(app.rating) }}</div>
+        <button class="button product install paid">{{ app.price }}</button>
+      </div>
+      <div class="tile-footer {{ feed_app.type }}"
+           {% if feed_app.type == feed.FEEDAPP_QUOTE %}style="background: {{ feed_app.background_color }};"{% endif %}>
+        {% if feed_app.type == feed.FEEDAPP_DESC %}
+          <p class="desc">{{ feed_app.description }}</p>
+        {% elif feed_app.type == feed.FEEDAPP_QUOTE %}
+          <p class="stars large white stars-{{ feed_app.pullquote_rating }}">
+            {{ feed_app.pullquote_rating }}
+          </p>
+          <blockquote><p>{{ feed_app.pullquote_text }}</p></blockquote>
+          <p class="quote-source">
+            {{ _('&mdash; {attribution}')|format(
+                 {attribution: feed_app.pullquote_attribution}) }}
+          </p>
+        {% elif feed_app.type == feed.FEEDAPP_PREVIEW %}
+          {% if feed_app.description %}
+            <p class="desc">{{ feed_app.description }}</p>
+          {% endif %}
+          <div class="feed-app-preview-container"
+               style="background-color: {{ feed_app.background_color }};
+                      background-image: url({{ feed_app.preview.image_url }});"></div>
+        {% endif %}
+      </div>
     </div>
   </div>
+  {% endif %}
 </a>

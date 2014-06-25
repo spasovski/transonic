@@ -43,7 +43,7 @@ define('feed_previews',
             id: 1,
             position: 1,
             thumbnail_url: THUMB,
-            image_url: SAMPLE_BG,
+            image_url: $('.screenshots li.selected img').attr('src') || SAMPLE_BG,
             filetype: 'image/png',
             resource_uri: 'http://mozilla.org'
         };
@@ -56,7 +56,7 @@ define('feed_previews',
             background_image: $('.background-image-input .preview').attr('src') || '',
             description: $('.description .localized:not(.hidden').val() || '',
             id: 1,
-            preview: $('.screenshots li.selected img').attr('src') || preview_factory().image_url,
+            preview: preview_factory(),
             pullquote_attribution: $('[name="pq-attribution"]').val() || '',
             pullquote_rating: $('.pq-rating input:checked').val() || 0,
             pullquote_text: $('.pq-text .localized:not(.hidden').val() || '',
@@ -114,15 +114,12 @@ define('feed_previews',
         var $feed = $('.feed');
         var feed_app = feed_app_factory();
 
-        if ([feed.FEEDAPP_ICON, feed.FEEDAPP_IMAGE].indexOf(feed_app.type) !== -1) {
-             $feed.append(
-                nunjucks.env.render('feed_previews/collection.html', feed_app)
-            );
-        } else {
-            $feed.append(
-                nunjucks.env.render('feed_previews/feed_app.html', feed_app)
-            );
-        }
+        $feed.append(
+            nunjucks.env.render('feed_previews/feed_app.html', {
+                app: feed_app.app,
+                feed_app: feed_app
+            })
+        );
     }
 
     function refresh_brand_preview() {
