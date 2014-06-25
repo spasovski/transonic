@@ -52,6 +52,7 @@ define('feed_previews',
             $('.feed-item').css('background-color', hex2rgba(colour, 0.4));
             $('.curve').css('background-color', hex2rgba(colour, 0.8));
             $('.tile-footer.quote').css('background-color', colour);
+            $('.feed-app-preview-container').css('background-color', colour);
         });
     }
 

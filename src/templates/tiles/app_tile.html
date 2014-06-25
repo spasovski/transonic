@@ -14,9 +14,9 @@
     </div>
     <div class="tile-footer">
       <p class="desc">{{ description }}</p>
-      <div class="feed-app-preview-container">
-        <img class="feed-app-preview" src="{{ preview }}">
-      </div>
+      <div class="feed-app-preview-container"
+           style="background-color: {{ background_color }};
+                  background-image: url({{ preview }});"></div>
       <p class="stars large white stars-{{ pullquote_rating }}">{{ pullquote_rating }}</p>
       <blockquote>
         <p>{{ pullquote_text }}</p>
