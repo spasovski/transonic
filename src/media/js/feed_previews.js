@@ -42,14 +42,36 @@ define('feed_previews',
         return app;
     }
 
+    function multi_app_factory() {
+        var apps = [];
+        var $results = $('.apps-widget .result');
+
+        if (!$results.length) {
+            return apps;
+        }
+
+        $results.each(function(i) {
+            var $this = $(this);
+
+            apps.push({
+                icons: {64: $this.find('.icon').attr('src')},
+                name: $this.find('.name').text(),
+                author: $this.find('.author').text(),
+                ratings: {
+                    average: $this.data('rating')
+                },
+                price: $this.data('price')
+            });
+        });
+
+        return apps;
+    }
+
     function preview_factory() {
         return {
-            id: 1,
-            position: 1,
             thumbnail_url: THUMB,
             image_url: $('.screenshots li.selected img').attr('src') || SAMPLE_BG,
             filetype: 'image/png',
-            resource_uri: 'http://mozilla.org'
         };
     };
 
@@ -59,48 +81,36 @@ define('feed_previews',
             background_color: $('.bg-color input:checked').val() || BG_COLOUR,
             background_image: $('.background-image-input .preview').attr('src') || '',
             description: $('.description .localized:not(.hidden').val() || '',
-            id: 1,
             preview: preview_factory(),
             pullquote_attribution: $('[name="pq-attribution"]').val() || '',
             pullquote_rating: $('.pq-rating input:checked').val() || 0,
             pullquote_text: $('.pq-text .localized:not(.hidden').val() || '',
-            slug: 'some-feed-app',
             type: $('.featured-type-choices input:checked').val() || 'icon',
-            url: 'http://mozilla.org'
         };
     };
 
     function brand_factory() {
-        var brand = {
-            apps: [app_factory(), app_factory(), app_factory()],
+        var apps = multi_app_factory();
+        apps = apps.length ? apps : [app_factory(), app_factory(), app_factory()];
+        return {
+            apps: apps,
             layout: $('#brand-layout').val() || 'grid',
             type: $('#brand-type').val() || 'apps-for-albania',
-            url: 'http://mozilla.org'
 
         }
+    }
 
-        var $results = $('.apps-widget .result');
-        if ($results.length) {
-            var apps = [];
-            $results.each(function(i) {
-                var $this = $(this);
-
-                if (i < MAX_BRAND_APPS) {
-                    apps.push({
-                        icons: {64: $this.find('.icon').attr('src')},
-                        name: $this.find('.name').text(),
-                        author: $this.find('.author').text(),
-                        ratings: {
-                            average: $this.data('rating')
-                        },
-                        price: $this.data('price')
-                    });
-                }
-            });
-            brand.apps = apps;
+    function collection_factory() {
+        var apps = multi_app_factory();
+        apps = apps.length ? apps : [app_factory(), app_factory(), app_factory()];
+        return {
+            apps: apps,
+            background_color: $('.bg-color input:checked').val() || BG_COLOUR,
+            background_image: $('.background-image-input .preview').attr('src') || '',
+            description: $('.description .localized:not(.hidden').val() || '',
+            name: $('.name .localized:not(.hidden').val() || '',
+            type: $('.collection-type-choices input:checked').val() || feed.COLL_PROMO,
         }
-
-        return brand;
     }
 
     z.page.on('change keyup input', 'input, textarea, select', _.throttle(refresh, 250));
@@ -113,6 +123,8 @@ define('feed_previews',
             refresh_feed_app_preview();
         } else if (type == 'brands') {
             refresh_brand_preview();
+        } else if (type=='collections') {
+            refresh_collection_preview();
         }
     }
 
@@ -133,7 +145,15 @@ define('feed_previews',
             nunjucks.env.render('feed_previews/brand.html', {
                 brand: brand_factory()
             })
-        )
+        );
+    }
+
+    function refresh_collection_preview() {
+        $('.feed').append(
+            nunjucks.env.render('feed_previews/collection.html', {
+                coll: collection_factory()
+            })
+        ) ;
     }
 
     function empty() {
@@ -144,5 +164,7 @@ define('feed_previews',
         empty: empty,
         feed_app: refresh_feed_app_preview,
         brand: refresh_brand_preview,
+        collection: refresh_collection_preview,
+        refresh: refresh,
     };
 });

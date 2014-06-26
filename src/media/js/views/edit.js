@@ -114,8 +114,7 @@ define('views/edit',
                         apps_widget.append(obj.apps[i]);
                     }
                 }
-
-                feed_previews.initLiveAppPreview($('.feed'));
+                feed_previews.refresh();
             });
         });
     };

@@ -107,6 +107,7 @@ define('fields_transonic',
 
        reader.onloadend = function() {
            preview.attr('src', reader.result);
+           z.page.trigger('refresh_preview');
        };
        if (file) {
            reader.readAsDataURL(file);

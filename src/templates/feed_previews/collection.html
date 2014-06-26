@@ -1,0 +1,22 @@
+{% set color = coll.background_color %}
+
+<a href="#" class="fanchor">
+  <section class="feed-item full {{ 'mega' if coll.description }}"
+                  {% if not coll.description and not coll.background_image %}
+                    style="background-color: {{ color|hex2rgba('.4') }}"
+                  {% elif coll.background_image %}
+                    style="background-image: url({{ coll.background_image }})"
+                 {% endif %}>
+    <ul class="app-icons">
+      {% for app in coll.apps %}
+        <li><img src="{{ app.icons[64] }}" alt="{{ app.name }}"></li>
+      {% endfor %}
+    </ul>
+    <div class="curve" style="background-color: {{ color|hex2rgba('.6') }}"></div>
+    <div class="info">
+      <h1 class="name">{{ coll.name }}</h1>
+    </div>
+    <div class="alt-curve" style="background-color: {{ color|hex2rgba('.8') }}"></div>
+    <div class="desc">{{ coll.description }}</div>
+  </section>
+</a>
