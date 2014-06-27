@@ -83,6 +83,14 @@ function() {
         }
     });
 
+    z.page.on('click', '.loadmore', function() {
+        var $btn = $(this).find('button');
+        $btn.text(gettext('Loading...'));
+        z.page.one('loaded_more', function() {
+            $btn.text(gettext('More'));
+        });
+    });
+
     // Perform initial navigation.
     console.log('Triggering initial navigation');
     z.page.trigger('navigate', [window.location.pathname + window.location.search]);

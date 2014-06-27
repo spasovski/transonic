@@ -2,7 +2,7 @@
     data-slug="{{ app.slug }}" {% if is_builder %}draggable="true"{% endif %}>
   <a {% if not is_builder %}href="{{ url('edit', ['apps', app.slug]) }}"{% endif %}>
     <img class="icon" src="{{ app.app.icons['48'] }}">
-    <h3>{{ '{name} ({slug})'|format({name: app.app.name, slug: app.slug}) }}</h3>
+    <h3 class="elliflow">{{ '{name} ({slug})'|format({name: app.app.name, slug: app.slug}) }}</h3>
     <span class="type">{{ feed.FEEDAPP_TYPES[app.type] }}</span>
     <span class="delete" data-type="feed-app"></span>
   </a>

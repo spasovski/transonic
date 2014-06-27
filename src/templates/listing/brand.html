@@ -4,7 +4,7 @@
     {% if brand.apps.length %}
       <img class="icon" src="{{ brand.apps[0].icons['48'] }}">
     {% endif %}
-    <h3>
+    <h3 class="elliflow">
       {{ _('{name} ({num_apps} apps)')|format({name: b_types[brand.type][0] if num_apps == 1 else b_types[brand.type][1],
                                                num_apps: brand.apps.length}) }}
     </h3>
