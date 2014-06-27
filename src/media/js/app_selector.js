@@ -18,6 +18,8 @@ define('app_selector',
         $paginator.attr('data-offset', 0);
         if (this.value.length > 2) {
             search_handler(this.value, 0);
+        } else {
+            $app_selector.find('.results').empty();
         }
     }, 250))
 
