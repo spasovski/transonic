@@ -3,13 +3,9 @@ define('feed_previews',
     function(feed, l10n, nunjucks, utils, z) {
 
     var gettext = l10n.gettext;
-    var hex2rgba = nunjucks.require('filters').hex2rgba;
 
     // Constants are constant.
-    var SAMPLE_BG = '/media/img/sample_bg.jpg';
     var THUMB = 'https://marketplace.cdn.mozilla.net/img/uploads/addon_icons/461/461685-64.png';
-    var BG_COLOUR = '#b90000';
-    var MAX_BRAND_APPS = 6;
 
     function app_factory() {
         var app = {
@@ -70,7 +66,7 @@ define('feed_previews',
     function preview_factory() {
         return {
             thumbnail_url: THUMB,
-            image_url: $('.screenshots li.selected img').attr('src') || SAMPLE_BG,
+            image_url: $('.screenshots li.selected img').attr('src'),
             filetype: 'image/png',
         };
     };
@@ -78,8 +74,8 @@ define('feed_previews',
     function feed_app_factory() {
         return {
             app: app_factory(),
-            background_color: $('.bg-color input:checked').val() || BG_COLOUR,
-            background_image: $('.background-image-input .preview').attr('src') || SAMPLE_BG,
+            background_color: $('.bg-color input:checked').val(),
+            background_image: $('.background-image-input .preview').attr('src'),
             description: $('.description .localized:not(.hidden').val() || '',
             preview: preview_factory(),
             pullquote_attribution: $('[name="pq-attribution"]').val() || '',
@@ -105,8 +101,8 @@ define('feed_previews',
         apps = apps.length ? apps : [app_factory(), app_factory(), app_factory()];
         return {
             apps: apps,
-            background_color: $('.bg-color input:checked').val() || BG_COLOUR,
-            background_image: $('.background-image-input .preview').attr('src') || SAMPLE_BG,
+            background_color: $('.bg-color input:checked').val(),
+            background_image: $('.background-image-input .preview').attr('src'),
             description: $('.description .localized:not(.hidden').val() || '',
             name: $('.name .localized:not(.hidden').val() || '',
         }
@@ -117,8 +113,8 @@ define('feed_previews',
         apps = apps.length ? apps : [app_factory(), app_factory(), app_factory()];
         return {
             apps: apps,
-            background_color: $('.bg-color input:checked').val() || BG_COLOUR,
-            background_image: $('.background-image-input .preview').attr('src') || SAMPLE_BG,
+            background_color: $('.bg-color input:checked').val(),
+            background_image: $('.background-image-input .preview').attr('src'),
             description: $('.description .localized:not(.hidden').val() || '',
             name: $('.name .localized:not(.hidden').val() || '',
             type: $('.collection-type-choices input:checked').val() || feed.COLL_PROMO,
