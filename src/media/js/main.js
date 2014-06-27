@@ -74,6 +74,10 @@ function() {
         }
     });
 
+    z.page.on('logged_out', function() {
+        z.page.trigger('navigate', [urls.reverse('login')]);
+    });
+
     z.page.on('navigate', function(e, url) {
         if (url == urls.reverse('login')) {
             return;
