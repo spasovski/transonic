@@ -79,7 +79,7 @@ define('feed_previews',
         return {
             app: app_factory(),
             background_color: $('.bg-color input:checked').val() || BG_COLOUR,
-            background_image: $('.background-image-input .preview').attr('src') || '',
+            background_image: $('.background-image-input .preview').attr('src') || SAMPLE_BG,
             description: $('.description .localized:not(.hidden').val() || '',
             preview: preview_factory(),
             pullquote_attribution: $('[name="pq-attribution"]').val() || '',
@@ -106,7 +106,19 @@ define('feed_previews',
         return {
             apps: apps,
             background_color: $('.bg-color input:checked').val() || BG_COLOUR,
-            background_image: $('.background-image-input .preview').attr('src') || '',
+            background_image: $('.background-image-input .preview').attr('src') || SAMPLE_BG,
+            description: $('.description .localized:not(.hidden').val() || '',
+            name: $('.name .localized:not(.hidden').val() || '',
+        }
+    }
+
+    function shelf_factory() {
+        var apps = multi_app_factory();
+        apps = apps.length ? apps : [app_factory(), app_factory(), app_factory()];
+        return {
+            apps: apps,
+            background_color: $('.bg-color input:checked').val() || BG_COLOUR,
+            background_image: $('.background-image-input .preview').attr('src') || SAMPLE_BG,
             description: $('.description .localized:not(.hidden').val() || '',
             name: $('.name .localized:not(.hidden').val() || '',
             type: $('.collection-type-choices input:checked').val() || feed.COLL_PROMO,
@@ -123,8 +135,10 @@ define('feed_previews',
             refresh_feed_app_preview();
         } else if (type == 'brands') {
             refresh_brand_preview();
-        } else if (type=='collections') {
+        } else if (type == 'collections') {
             refresh_collection_preview();
+        } else if (type == 'shelves') {
+            refresh_shelf_preview();
         }
     }
 
@@ -156,15 +170,20 @@ define('feed_previews',
         ) ;
     }
 
+    function refresh_shelf_preview() {
+        $('.feed').append(
+            nunjucks.env.render('feed_previews/shelf.html', {
+                shelf: shelf_factory()
+            })
+        ) ;
+    }
+
     function empty() {
         $('.feed').empty();
     }
 
     return {
         empty: empty,
-        feed_app: refresh_feed_app_preview,
-        brand: refresh_brand_preview,
-        collection: refresh_collection_preview,
         refresh: refresh,
     };
 });

@@ -1,0 +1,10 @@
+{% set color = shelf.background_color %}
+
+<a href="{{ url('feed/feed_shelf', [shelf.slug]) }}" class="fanchor">
+  <section class="feed-item shelf {{ 'shelf-landing' if landing }}" style="background-image: url({{ shelf.background_image }})">
+    <div class="curve" style="background-color: {{ color|hex2rgba('.6') }}"></div>
+    <div class="info">
+      <h1 class="name">{{ shelf.name }}</h1>
+    </div>
+  </section>
+</a>
