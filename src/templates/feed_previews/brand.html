@@ -1,7 +1,7 @@
 {% include '_macros/stars.html' %}
 
-{% macro mini_tile(app) %}
-  <li class="app mini-app">
+{% macro mini_tile(app, hidden, landing) %}
+  <li class="app mini-app {{ 'hidden' if hidden }}">
     <a href="#" class="app-link c">
       <img src="{{ app.icons[64] }}" alt="{{ app.name }}">
       <div class="info">
@@ -32,7 +32,7 @@
       {{ mini_tile(app, hidden=loop.index0 >= feed.MAX_BRAND_APPS, landing=landing) }}
     {% endfor %}
   </ul>
-  {% if not landing %}
+  {% if not landing and brand.apps.length > feed.MAX_BRAND_APPS %}
     <a href="#" class="view-all">
       {{ _('View all apps') }}
     </a>
