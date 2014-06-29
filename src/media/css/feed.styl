@@ -2,6 +2,7 @@
 
 $view-all-blue = #5BBAFF;
 
+$feed-column-width = 320px;
 $mobile-tile-width = 300px;
 $horizontal-tile-padding = 10px;
 $vertical-tile-padding = 15px;
@@ -9,13 +10,35 @@ $vertical-margin = 18px;
 $vertical-text-margin = 10px;
 $vertical-tile-margin = 10px;
 
+@media $at-least-desktop {
+    section.feed {
+        margin-bottom: $vertical-tile-margin;
+    }
+    ul.feed {
+        max-width: $feed-column-width * 2;
+
+        .feed-item-item {
+            margin: 0;
+            right: none;
+        }
+    }
+}
+
 // Main container for feed elements on the homepage.
 .feed {
     list-style-type: none;
     margin: 0 auto;
-    padding: 10px 0;
-    width: $mobile-tile-width;
+    padding: 0 0 10px;
+    position: relative;
+    width: 100%;
+    max-width: $feed-column-width;
 
+    .feed-item-item {
+        margin: 0 auto 0 auto;
+        max-width: $mobile-tile-width;
+        right: 0;
+        width: $mobile-tile-width;
+    }
     .mkt-tile {
         background-color: #fff;
         border-radius: 5px;
@@ -25,7 +48,7 @@ $vertical-tile-margin = 10px;
         padding: $vertical-tile-padding $horizontal-tile-padding;
         position: relative;
 
-        img {
+        .icon {
             float: left;
         }
         .info {
@@ -179,6 +202,8 @@ $vertical-tile-margin = 10px;
 
 .feed .multi-app-tile.mkt-tile {
     background-color: #fff;
+    margin: 0 auto;
+    max-width: $mobile-tile-width;
 
     img {
         height: 60px;
@@ -195,6 +220,7 @@ $vertical-tile-margin = 10px;
         clear: both;
         display: inline-block;
         list-style-type: none;
+        width: $mobile-tile-width;
 
         img {
             margin-bottom: 8px;
@@ -274,6 +300,9 @@ $vertical-tile-margin = 10px;
 
 // Editorial brand list layout.
 .feed-layout-list {
+    li {
+        width: unquote('calc(100% - 20px)');
+    }
     .rating .cnt {
         bottom: 5px;
         font-size: 11px;
@@ -287,9 +316,13 @@ $vertical-tile-margin = 10px;
     h2 {
         padding: 4px 0 0;
     }
-    .button {
-        top: 35px;
-        right: 0;
+    .loadmore {
+        margin: 0;
+        padding-top: 50px;
+
+        button {
+            height: 35px;
+        }
     }
 }
 
@@ -468,24 +501,9 @@ $vertical-tile-margin = 10px;
     }
 }
 
-.app-list {
-    .loadmore {
-        bottom: -65px;
-        left: 10px;
-        padding: 15px 0;
-        position: absolute;
-        width: unquote('calc(100% - 20px)');
-
-        button {
-            background: $earl-gray;
-            border: 0;
-            box-shadow: 0 1px 1px 0 $london-fog-gray;
-            color: $white;
-
-            &:hover {
-                background: $earl-gray;
-                color: $white;
-            }
-        }
-    }
+#page .feed-item-item .icon.deferred {
+    height: 64px;
+    margin: 0;
+    position: static;
+    width: 64px;
 }
