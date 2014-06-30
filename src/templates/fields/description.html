@@ -4,4 +4,5 @@
   {% for lang in settings.languages %}
     {{ locale_textarea('description', lang, desc[lang], 300) }}
   {% endfor %}
+  <p class="help-text">{{ _('Maximum 300 characters.') }}</p>
 </div>

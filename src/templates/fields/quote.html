@@ -25,6 +25,7 @@
   {% for lang in settings.languages %}
     {{ locale_textarea('pq-text', lang, pq_text[lang], 300) }}
   {% endfor %}
+  <p class="help-text">{{ _('Maximum 300 characters.') }}</p>
 </div>
 
 <div class="pq-attribution field">
