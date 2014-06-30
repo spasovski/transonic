@@ -7,6 +7,16 @@ define('feed_previews',
     // Constants are constant.
     var THUMB = 'https://marketplace.cdn.mozilla.net/img/uploads/addon_icons/461/461685-64.png';
 
+    String.prototype.escape = function() {
+        var tagsToReplace = {
+            '<': '&lt;',
+            '>': '&gt;'
+        };
+        return this.replace(/[&<>]/g, function(tag) {
+            return tagsToReplace[tag] || tag;
+        });
+    };
+
     function app_factory() {
         var app = {
             name: 'A Sample App',
@@ -76,11 +86,11 @@ define('feed_previews',
             app: app_factory(),
             background_color: $('.bg-color input:checked').val(),
             background_image: $('.background-image-input .preview').attr('src'),
-            description: $('.description .localized:not(.hidden').val() || '',
+            description: $('.description .localized:not(.hidden').val().escape() || '',
             preview: preview_factory(),
-            pullquote_attribution: $('[name="pq-attribution"]').val() || '',
+            pullquote_attribution: $('[name="pq-attribution"]').val().escape() || '',
             pullquote_rating: $('.pq-rating input:checked').val() || 0,
-            pullquote_text: $('.pq-text .localized:not(.hidden').val() || '',
+            pullquote_text: $('.pq-text .localized:not(.hidden').val().escape() || '',
             type: $('.featured-type-choices input:checked').val() || 'icon',
         };
     };
@@ -103,8 +113,8 @@ define('feed_previews',
             apps: apps,
             background_color: $('.bg-color input:checked').val(),
             background_image: $('.background-image-input .preview').attr('src'),
-            description: $('.description .localized:not(.hidden').val() || '',
-            name: $('.name .localized:not(.hidden').val() || '',
+            description: $('.description .localized:not(.hidden').val().escape() || '',
+            name: $('.name .localized:not(.hidden').val().escape() || '',
         }
     }
 
@@ -115,8 +125,8 @@ define('feed_previews',
             apps: apps,
             background_color: $('.bg-color input:checked').val(),
             background_image: $('.background-image-input .preview').attr('src'),
-            description: $('.description .localized:not(.hidden').val() || '',
-            name: $('.name .localized:not(.hidden').val() || '',
+            description: $('.description .localized:not(.hidden').val().escape() || '',
+            name: $('.name .localized:not(.hidden').val().escape() || '',
             type: $('.collection-type-choices input:checked').val() || feed.COLL_PROMO,
         }
     }

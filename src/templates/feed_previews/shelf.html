@@ -5,7 +5,7 @@
     <section class="feed-item shelf {{ 'shelf-landing' if landing }}" style="background-image: url({{ shelf.background_image }})">
       <div class="curve" style="background-color: {{ color|hex2rgba('.6') }}"></div>
       <div class="info">
-        <h1 class="name">{{ shelf.name }}</h1>
+        <h1 class="name">{{ shelf.name|safe }}</h1>
       </div>
     </section>
   </a>
