@@ -89,21 +89,23 @@ h3 {
         }
     }
     aside.feed-previews {
+        background: $medium-gray;
+        border-radius: 5px;
         left: 50%;
-        margin: 0 0 0 150px;
+        margin: 21px 0 0 150px;
         padding-top: 14px;
         position: relative;
         top: -220px;
         width: 320px;
 
         .preview-header {
-            color: $dark-gray;
-            line-height: 25px;
-            padding-left: 20px;
+            color: #fff;
+            margin-bottom: 10px;
+            padding-left: 10px;
         }
     }
-    .island.submit {
-        width: 50%;
+    section.submit {
+        width: unquote('calc(100% - 340px)');
     }
 } // End of Desktop.
 
@@ -159,6 +161,7 @@ body.dragging, body.dragging * {
         border-radius: 0;
         height: 100%;
         left: inherit;
+        margin-top: 0;
         position: fixed;
         right: 0;
         top: 0;
@@ -168,7 +171,7 @@ body.dragging, body.dragging * {
             color: #fff;
         }
     }
-    .island.submit {
+    section.submit {
         width: 100%;
     }
 }
