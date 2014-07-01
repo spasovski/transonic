@@ -76,7 +76,13 @@ define('apps_widget',
         var $apps_widget = $('.apps-widget');
         $apps_widget.find('.apps').append(app_select.render_result(app, true));
         $apps_widget.find('.placeholder-text').hide();
-        $apps_widget.find('.apps').sortable();
+        $apps_widget.find('.apps').sortable({
+            onDrop: function($item) {
+                $item.removeClass('dragged').removeAttr('style')
+                z.body.removeClass('dragging');
+                z.page.trigger('refresh_preview');
+            }
+        });
         z.page.trigger('refresh_preview');
     };
 
