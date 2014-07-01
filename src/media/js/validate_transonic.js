@@ -31,6 +31,11 @@ define('validate_transonic',
             [feed.FEEDAPP_QUOTE].indexOf(data.type) !== -1) {
             errs.push(gettext('Quote text is required.'));
         }
+        if (!validate_localized_field(data.pullquote_text) &&
+            [feed.FEEDAPP_QUOTE].indexOf(data.type) === -1 &&
+            data.pullquote_rating || data.pullquote_attribution) {
+            errs.push(gettext('Quote text is required if quote rating or quote attribution is set.'));
+        }
         return errs;
     };
 
