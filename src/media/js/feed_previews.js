@@ -27,7 +27,9 @@ define('feed_previews',
             ratings: {
                 average: 3
             },
-            price: '$0.81'
+            price: '$0.81',
+            price_locale: '$0.81',
+            slug: 'test-slug'
         };
 
         var $result = $('.apps-widget .result');
@@ -41,7 +43,8 @@ define('feed_previews',
                 ratings: {
                     average: $result.data('rating')
                 },
-                price: $result.data('price')
+                price: $result.data('price'),
+                price_locale: $result.data('price')
             });
         };
 
@@ -66,7 +69,9 @@ define('feed_previews',
                 ratings: {
                     average: $this.data('rating')
                 },
-                price: $this.data('price')
+                price: $this.data('price'),
+                price_locale: $this.data('price'),
+                slug: 'test-slug',
             });
         });
 
@@ -131,57 +136,41 @@ define('feed_previews',
         }
     }
 
+    // Listeners.
     z.page.on('change keyup input', 'input, textarea, select', _.throttle(refresh, 250));
     z.page.on('refresh_preview', _.throttle(refresh, 250));
 
     function refresh() {
         empty();
+
         var type = $('.transonic-form').data('type');
         if (type == 'apps') {
-            refresh_feed_app_preview();
+            refresh_preview(feed_app_factory(), 'app');
         } else if (type == 'brands') {
-            refresh_brand_preview();
+            refresh_preview(brand_factory(), 'brand');
         } else if (type == 'collections') {
-            refresh_collection_preview();
+            refresh_preview(collection_factory(), 'collection');
         } else if (type == 'shelves') {
-            refresh_shelf_preview();
+            refresh_preview(shelf_factory(), 'shelf');
         }
     }
 
-    function refresh_feed_app_preview() {
-        var $feed = $('.feed');
-        var feed_app = feed_app_factory();
 
-        $feed.append(
-            nunjucks.env.render('feed_previews/feed_app.html', {
-                app: feed_app.app,
-                feed_app: feed_app
+    function refresh_preview(obj, item_type) {
+        // Stub out Fireplace-specific helpers.
+        var stub_globals = nunjucks.require('globals');
+        stub_globals.app_incompat = function() {};
+        stub_globals.has_installed = function() {};
+        stub_globals.imgAlreadyDeferred = function() {return true;};
+
+        $('.feed').append(
+            nunjucks.env.render('feed_item_preview.html', {
+                cast_app: function() {},
+                obj: obj,
+                item_type: item_type,
+                url: function() {return '#';},
             })
         );
-    }
-
-    function refresh_brand_preview() {
-        $('.feed').append(
-            nunjucks.env.render('feed_previews/brand.html', {
-                brand: brand_factory()
-            })
-        );
-    }
-
-    function refresh_collection_preview() {
-        $('.feed').append(
-            nunjucks.env.render('feed_previews/collection.html', {
-                coll: collection_factory()
-            })
-        ) ;
-    }
-
-    function refresh_shelf_preview() {
-        $('.feed').append(
-            nunjucks.env.render('feed_previews/shelf.html', {
-                shelf: shelf_factory()
-            })
-        ) ;
     }
 
     function empty() {

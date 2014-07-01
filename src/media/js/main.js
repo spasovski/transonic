@@ -41,7 +41,7 @@ function() {
         console.log('Hiding splash screen');
         $('#splash-overlay').addClass('hide');
         $('main').after(
-            nunjucks.env.render('feed_previews.html'));
+            nunjucks.env.render('feed_aside.html'));
     });
 
     // Do some last minute template compilation.
