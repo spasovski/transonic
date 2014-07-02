@@ -15,25 +15,25 @@ define('validate_transonic',
             errs.push(gettext('Slug is invalid.'));
         }
         if (!$file_input.val().length &&
-            [feed.FEEDAPP_IMAGE].indexOf(data.type) !== -1 &&
+            data.type == feed.FEEDAPP_IMAGE &&
             !$preview.attr('src')) {
             errs.push(gettext('Background image is required.'));
         }
         if (!validate_localized_field(data.description) &&
-            [feed.FEEDAPP_DESC].indexOf(data.type) !== -1) {
+            data.type == feed.FEEDAPP_DESC) {
             errs.push(gettext('Description is required.'));
         }
         if (!data.preview &&
-            [feed.FEEDAPP_PREVIEW].indexOf(data.type) !== -1) {
+            data.type == feed.FEEDAPP_PREVIEW) {
             errs.push(gettext('Preview is required.'));
         }
         if (!validate_localized_field(data.pullquote_text) &&
-            [feed.FEEDAPP_QUOTE].indexOf(data.type) !== -1) {
+            data.type == feed.FEEDAPP_QUOTE) {
             errs.push(gettext('Quote text is required.'));
         }
         if (!validate_localized_field(data.pullquote_text) &&
-            [feed.FEEDAPP_QUOTE].indexOf(data.type) === -1 &&
-            data.pullquote_rating || data.pullquote_attribution) {
+            data.type != feed.FEEDAPP_QUOTE &&
+            (data.pullquote_rating || data.pullquote_attribution)) {
             errs.push(gettext('Quote text is required if quote rating or quote attribution is set.'));
         }
         return errs;
@@ -53,7 +53,7 @@ define('validate_transonic',
             errs.push(gettext('Slug is invalid.'));
         }
         if (!$file_input.val().length &&
-            [feed.COLL_PROMO].indexOf(data.type) !== -1 &&
+            data.type == feed.COLL_PROMO &&
             !$preview.attr('src')) {
             errs.push(gettext('Background image is required.'));
         }
