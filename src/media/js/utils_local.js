@@ -1,5 +1,4 @@
 define('utils_local', ['jquery', 'log'], function($, log) {
-
     var console = log('utils_local');
 
     var build_localized_field = function(name) {

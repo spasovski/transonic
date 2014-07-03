@@ -29,6 +29,7 @@ define('fields_transonic',
         // Tab between different featured types (graphic, desc, pull quote).
         $('.featured-details').hide().filter('.' + this.getAttribute('data-type')).show();
         $('.form-errors').empty();
+        $('.char-count').html('&nbsp;');
     })
     .on('change', '.collection-type-choices input', function(e) {
         // To help CSS toggle background image upload widgets for different collection types.

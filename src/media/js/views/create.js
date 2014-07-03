@@ -61,15 +61,20 @@ define('views/create',
             $('.fileinput').fakeFileField();
             feed_previews.refresh();
 
+            var sel = 'textarea[name*="description"]:not(.hidden)';
+            sel += ', textarea[name*="pq-text"]:not(.hidden)';
+
             // Character counter based from utils.
-            $('textarea[name*="description"]:not(.hidden)').on('input', function() {
+            $(sel).on('input', function() {
                 var $el = $(this);
                 var max = parseInt($el.attr('maxlength'), 10);
-                var left = max - $el.val().length;
-                // L10n: {n} is the number of characters left.
-                $('.char-count').html(ngettext('<b>{n}</b> character left.',
-                                 '<b>{n}</b> characters left.', {n: left}))
-                  .toggleClass('error', left < 0);
+                var remaining = max - $el.val().length;
+                // L10n: {n} is the number of characters remaining.
+                $('.char-count').html(
+                    ngettext('<b>{n}</b> character remaining.',
+                             '<b>{n}</b> characters remaining.',
+                             {n: remaining})
+                );
             });
         });
     };
