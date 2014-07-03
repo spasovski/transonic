@@ -20,6 +20,7 @@ define('views/create',
         var $this = $(this);
         var $form = $this.closest('form');
         $this.html(gettext('Submitting...')).attr('disabled', true);
+        $form.find('.form-errors').empty();
 
         if ($form.data('type') == 'apps') {
             create($this, $form, forms_transonic.feed_app, 'apps',

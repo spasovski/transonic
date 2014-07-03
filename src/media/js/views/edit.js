@@ -18,6 +18,7 @@ define('views/edit',
         var $this = $(this);
         var $form = $this.closest('form');
         $this.html(gettext('Updating...')).attr('disabled', true);
+        $form.find('.form-errors').empty();
 
         if ($form.data('type') == 'apps') {
             update($this, $form, forms_transonic.feed_app,
