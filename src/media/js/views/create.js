@@ -1,6 +1,6 @@
 define('views/create',
-    ['feed_previews', 'fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'templates', 'urls', 'utils', 'z'],
-    function(feed_previews, fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, nunjucks, urls, utils, z) {
+    ['feed_previews', 'fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'templates', 'urls', 'utils', 'utils_local', 'z'],
+    function(feed_previews, fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, nunjucks, urls, utils, utils_local, z) {
 
     'use strict';
     var gettext = l10n.gettext;
@@ -58,6 +58,7 @@ define('views/create',
         }).done(function() {
             $('.fileinput').fakeFileField();
             feed_previews.refresh();
+            utils_local.betterCharCount();
         });
     };
 });
