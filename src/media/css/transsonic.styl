@@ -57,8 +57,11 @@ h3 {
     }
     main,
     .site-header > nav {
-        margin: 0 0 0 50px;
-        width: 840px;
+        margin: 0 auto;
+        width: 1150px;
+    }
+    .site-header > nav {
+        padding: 0 15px;
     }
     .container {
         &.product-details,
@@ -117,6 +120,64 @@ h3 {
     }
 } // End of Desktop.
 
+
+@media $static-preview {
+    body {
+        min-height: 100%;
+    }
+
+    main {
+        margin: 0 auto;
+        max-width: $desktop-content;
+
+        [data-page-type~=create] & #page {
+            float: left;
+            width: 772px;  /* 772 - 15 - 363 */
+        }
+        [data-page-type~=create] & aside.feed-previews {
+            float: right;
+            position: static;
+            transform: none;
+            width: 363px;
+        }
+    }
+
+    aside.feed-previews {
+        background: 0;
+        padding-top: 0;
+
+        h3 {
+            background: $blue-action-primary;
+            bottom: 0;
+            color: $white;
+            font-size: 12px;
+            font-weight: bold;
+            height: 30px;
+            left: 0;
+            padding: 7px 21px 0;
+            position: absolute;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        .phone {
+            background: $black;
+            border-radius: 50px 50px 0 0;
+            padding: 50px 0 20px;
+            position: relative;
+        }
+
+        .screen {
+            background: $light-gray-grayscale-primary;
+            margin: 0 auto;
+            padding: 10px;
+            width: 320px;
+        }
+    }
+
+}
+
+
 .form-errors ul {
     color: $red;
     padding: 10px 0;
@@ -149,9 +210,6 @@ body.dragging, body.dragging * {
 [data-page-type~=login] {
     p {
         margin-bottom : 18px;
-    }
-    #site-nav {
-        display: none;
     }
 }
 

@@ -1,5 +1,5 @@
-<div class="app-selector top-hat-field">
-  <label for="app-selector">{{ _('App Selector') }}</label>
+<div class="app-selector top-hat-field field">
+  <label for="app-selector">{{ _('App') }}</label>
   <input id="app-selector" type="search" placeholder="{{ _('Search for an app...') }}"
          {{ 'disabled' if feed_type == 'apps' and obj }} autocomplete="off">
     <img class="chosen-icon">
@@ -11,6 +11,8 @@
       <a class="next">{{ _('Next Page &raquo;') }}</a>
     </div>
   </ul>
-
   <input name="app" type="hidden">
+  <div class="loading">
+    <i class="fa fa-spinner fa-spin"></i>
+  </div>
 </div>

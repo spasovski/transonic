@@ -99,7 +99,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
 
     return function(builder) {
         builder.z('title', gettext('Feed Builder'));
-        builder.z('type', 'builder');
+        builder.z('type', 'publish');
         builder.start('feed_builder.html', {
             is_builder: true  // To flip some stuff in the included manage_listing.html.
         }).done(function() {

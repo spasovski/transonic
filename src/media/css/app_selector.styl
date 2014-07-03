@@ -1,67 +1,122 @@
 @import 'lib';
 
+.app-selector {
+    position: relative;
+}
+
 .app-selector,
 .selected-app,
 .apps-widget {
     display: inline-block;
-    width: 320px;
+
+    &.focused input {
+        border-color: $blue-action-primary;
+    }
+
+    .loading {
+        color: $blue-action-primary;
+        display: none;
+        font-size: 20px;
+        position: absolute;
+        top: 9px;
+        right: 9px;
+    }
+
+    #app-selector {
+        background: url(../img/pretty/search.svg) 9px 50% no-repeat;
+        background-size: 18px auto;
+        padding-left: 40px !important;
+    }
 
     input {
         height: 42px;
-        padding-left: 10px;
+        padding: 0 40px 0 10px !important;
         width: 100%;
     }
     .paginator {
+        margin-bottom: 1px;
+
         a {
-            background: $breezy-blue;
-            border: 1px solid $light-gray;
-            border-top-width: 0;
+            background: $blue-action-primary;
             color: #fff;
             display: inline-block;
             float: left;
-            padding: 10px 0;
+            font-size: 12px;
+            line-height: 1;
+            padding: 6px 0;
             text-align: center;
+            text-transform: uppercase;
             transition(background .1s);
             width: 50%;
 
             &:hover {
                 cursor: pointer;
-                background: lighten($breezy-blue, 10%);
+                background: lighten($blue-action-primary, 10%);
                 text-decoration: none;
             }
+
             &:last-child {
                 border-left-width: 0;
             }
+
+            &.prev{
+                border-right: 1px solid $white;
+            }
+
+            &.disabled,
+            &.disabled:hover {
+                background-color: #f1f1f1;
+                cursor: auto;
+            }
+
         }
 
         &:last-child {
             display: none;
         }
+
     }
+
+    .results {
+        border: 1px solid $blue-action-primary;
+        border-radius: 0 0 5px 5px;
+        border-top: 0;
+        background: none repeat scroll 0% 0% #FFF;
+        position: absolute;
+        right: 1px;
+        top: 35px;
+        width: 300px;
+        z-index: 1000;
+    }
+
     .result {
-        border: solid $light-gray;
-        border-width: 0 1px 1px;
+        transition(background .1s);
+        border-top: 1px solid $light-gray-grayscale-primary;
         padding: 15px 5px 10px 10px;
         position: relative;
-        transition(background .1s);
 
         &:hover {
             cursor: pointer;
             background: $faint-blue;
         }
-        &:last-child {
-            border-radius: 0 0 5px 5px;
-        }
+
         &.selected {
             background: $shadow-blue;
         }
+
+    }
+    .no-results {
+        border-top: 1px solid $light-gray-grayscale-primary !important;
+        font-size: 14px;
+        padding: 15px 5px 10px 10px;
     }
     .icon {
-        float: left;
-        margin: 0 10px 10px 0;
+        left: 10px;
+        position: absolute;
+        top: 15px;
     }
     .info {
-        float: left;
+        padding-left: 58px;
 
         .name {
             font-size: 18px;
@@ -154,6 +209,50 @@
         }
     }
 }
+
+.apps-widget-single {
+    position: relative;
+
+    // Make this look disabled on edit page.
+    [data-page-type="edit"] & {
+        color: #7F7F7F;
+
+        .delete {
+            display: none;
+        }
+    }
+
+    label {
+        position: relative;
+        top: -2px;
+    }
+
+    .fake-field {
+        padding-top: 7px !important;
+    }
+
+    .delete {
+        background: url(../img/pretty/close.svg) 50% no-repeat;
+        background-size: 18px auto;
+        display: inline-block;
+        height: 30px;
+        overflow: hidden;
+        padding-top: 30px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        width: 30px;
+
+        &:hover {
+            background: url(../img/pretty/close_active.svg) 50% no-repeat;
+            cursor: pointer;
+        }
+    }
+}
+
+
+
+
 for region in ar br cl cn co de es gr hu it me mx pe pl rs uk us uy ve restofworld
     .disabled-regions .{region} {
         background-image: url(unquote('../img/icons/regions/' + region + '.png'));

@@ -7,35 +7,20 @@
 {% set FT_PREVIEW = feed.FEEDAPP_PREVIEW %}
 {% set feed_app_type = obj.type if obj else FT_ICON %}
 
+    {% include "locale_switcher.html" %}
 <form class="transonic-form apps {{ 'edit' if obj else 'create' }}" data-type="apps"
       {% if obj %}data-slug="{{ obj.slug }}"{% endif %}>
   <section class="island">
-    {% include "locale_switcher.html" %}
 
     <h3>{{ title }}</h3>
 
     {% include "app_selector.html" %}
-    {% include "apps_widget.html" %}
+    {% include "apps_widget_single.html" %}
 
     {% include "fields/slug.html" %}
+    {% include "fields/featured_type.html" %}
+
   </section>
-
-  {% macro featured_type(name, type, val, obj_val) %}
-    {# Tabs for the type of featured app. #}
-    <input id="featured-type-{{ type }}" type="radio"
-           name="featured-type" value="{{ val }}"
-           data-type="{{ type }}"
-           {% if obj_val == val %} checked{%endif%} />
-    <label for="featured-type-{{ type }}">{{ name }}</label>
-  {% endmacro %}
-
-  <fieldset class="featured-type-choices tabs">
-    {{ featured_type(_('Icon'), 'icon', FT_ICON, feed_app_type) }}
-    {{ featured_type(_('Header Graphic'), 'background-image', FT_IMAGE, feed_app_type) }}
-    {{ featured_type(_('Description'), 'description', FT_DESC, feed_app_type) }}
-    {{ featured_type(_('Quote'), 'quote', FT_QUOTE, feed_app_type) }}
-    {{ featured_type(_('Screenshot'), 'screenshot', FT_PREVIEW, feed_app_type) }}
-  </fieldset>
 
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>

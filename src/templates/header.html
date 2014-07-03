@@ -3,8 +3,9 @@
   <a href="{{ url('home') }}" class="project">{{ _('Curation Tools') }}</a>
   <span class="flex-shift"></span>
   <span class="flex-span"></span>
-  <a href="/settings" class="only-logged-in email">
-    <b>{{ user.get_setting('email') }}</b></a>
-  <a class="logout only-logged-in" href="#">{{ _('Sign Out') }}</a>
-  <a class="header-button persona only-logged-out" href="#">{{ _('Sign In') }}</a>
+  <a class="create nav-link only-logged-in" href="{{ url('home') }}">{{ _('Create') }}</a>
+  <a class="edit nav-link only-logged-in" href="{{ url('listing') }}">{{ _('Edit') }}</a>
+  <a class="publish nav-link only-logged-in" href="{{ url('feed_builder') }}">{{ _('Publish') }}</a>
+  <a class="logout nav-link only-logged-in" href="#">{{ _('Sign Out') }}</a>
+  <a class="persona nav-link only-logged-out" href="#">{{ _('Sign In') }}</a>
 </nav>

@@ -1,6 +1,6 @@
 {# pq stands for pullquote. #}
 
-<div class="pq-rating field">
+<div class="pq-rating field row">
   {% set rating_selected = obj.pullquote_rating if obj else 0 %}
 
   <label class="inline-label">{{ _('Rating') }}</label>
@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<div class="pq-text field top-hat-field half">
+<div class="pq-text field has-textarea top-hat-field half">
   {% set pq_text = obj.pullquote_text if obj else {} %}
 
   <label>{{ _('Quote') }}</label>

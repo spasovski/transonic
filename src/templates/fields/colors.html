@@ -21,7 +21,4 @@
   </div>
 {% endmacro %}
 
-<div class="color-fields">
-  {{ color_field('bg-color', _('Background'), settings.bg_color_choices) }}
-  {# {{ color_field('text-color', _('Text'), settings.text_color_choices) }} #}
-</div>
+{{ color_field('bg-color', _('Background'), settings.bg_color_choices) }}

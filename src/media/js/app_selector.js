@@ -4,6 +4,7 @@ define('app_selector',
     'use strict';
 
     var $app_selector;
+    var $spinner;
     var $results;
     var $paginator;
     var results_map = {};
@@ -12,19 +13,26 @@ define('app_selector',
         // Cache selectors.
         $app_selector = $('.app-selector');
         $paginator = $app_selector.find('.paginator');
+        $spinner = $('.loading');
+        $results = $('.results').hide();
     })
 
-    .on('keypress', '.app-selector input', _.debounce(function() {
+    .on('keypress input', '.app-selector input', _.debounce(function() {
         $paginator.attr('data-offset', 0);
         if (this.value.length > 2) {
+            $spinner.show();
+            $app_selector.addClass('focused');
             search_handler(this.value, 0);
         } else {
-            $app_selector.find('.results').empty();
+            $app_selector.removeClass('focused');
+            $results.hide();
         }
     }, 250))
 
-    .on('click', '.app-selector .paginator a', function() {
-        var offset = parseInt($paginator.attr('data-offset'), 10) || 0;
+    .on('click', '.app-selector .paginator a:not(.disabled)', function() {
+        var offset = parseInt($paginator.attr('data-offset'), 10);
+        $results.hide();
+        $spinner.show();
         if ($(this).hasClass('prev')) {
             offset = offset - 5;
         } else {
@@ -34,11 +42,14 @@ define('app_selector',
         search_handler($('.app-selector input').val(), offset);
     })
 
-    .on('click', '.app-selector .result', function() {
+    .on('click', '.app-selector .result', function(evt) {
+        evt.preventDefault();  // To prevent click-off to app detail page.
         var $this = $(this);
         var $app_selector = $('.app-selector');
         $app_selector.find('input[name="app"]').val($this.data('id'));
         // Trigger with ID.
+        $results.hide();
+        $app_selector.removeClass('focused');
         z.page.trigger('app-selected', [results_map[$this.attr('data-id')]]);
     });
 
@@ -72,18 +83,45 @@ define('app_selector',
         var search_url = urls.api.unsigned.params(
             'search', {'q': q, 'limit': 5, 'offset': offset});
         requests.get(search_url).done(function(data) {
-            var $results = $('.results');
             $results.find('.result').remove();
+            $results.show();
 
             // Append results.
-            for (var i = 0; i < data.objects.length; i++) {
-                $results.append(render_result(data.objects[i]));
-                results_map[data.objects[i].id] = data.objects[i];
+            if (data.objects.length === 0) {
+                var no_results = nunjucks.env.render('app_selector_no_results.html', {});
+                $paginator.hide();
+                $results.append(no_results);
+            } else {
+                $paginator.show();
+                for (var i = 0; i < data.objects.length; i++) {
+                    $results.append(render_result(data.objects[i]));
+                    results_map[data.objects[i].id] = data.objects[i];
+                }
             }
+
+            var $next = $paginator.find('.next');
+            var $prev = $paginator.find('.prev');
+            if (!data.meta.previous && !data.meta.next) {
+                $paginator.hide();
+            } else {
+                $paginator.show();
+                if (data.meta.previous) {
+                    $prev.removeClass('disabled');
+                } else {
+                    $prev.addClass('disabled');
+                }
+                if (data.meta.next) {
+                    $next.removeClass('disabled');
+                } else {
+                    $next.addClass('disabled');
+                }
+            }
+
+            $spinner.hide();
         });
     }
 
     return {
-        render_result: render_result,
+        render_result: render_result
     };
 });

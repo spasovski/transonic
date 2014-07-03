@@ -1,6 +1,6 @@
 define('apps_widget',
-    ['app_selector', 'jquery', 'jquery-sortable', 'nunjucks', 'requests', 'settings', 'underscore', 'urls', 'z'],
-    function(app_select, $, sortable, nunjucks, requests, settings, _, urls, z) {
+    ['app_selector', 'jquery', 'jquery-sortable', 'nunjucks', 'requests', 'settings', 'underscore', 'utils', 'urls', 'z'],
+    function(app_select, $, sortable, nunjucks, requests, settings, _, utils, urls, z) {
     'use strict';
 
     function get_app_ids() {
@@ -16,11 +16,19 @@ define('apps_widget',
         $(this).closest('.result').remove();
         z.page.trigger('refresh_preview');
     })
+
+    .on('click', '[data-page-type="create"] .apps-widget-single .delete', function() {
+        $('.app-selector').show().find('input[name="app"]').val('');
+        $('.apps-widget-single').hide();
+        $('#app-selector').focus();
+    })
+
     .on('click', '.apps-widget .delete-app-group', function() {
         /* Remove app group. */
         $(this).closest('.result').remove();
         z.page.trigger('refresh_preview');
     })
+
     .on('click', '.apps-widget .actions .reorder', function() {
         /* Reorder elements. */
         var $this = $(this);
@@ -48,20 +56,35 @@ define('apps_widget',
     });
 
     var set = function(app) {
+        var $app_selector = $('.app-selector');
+        var $apps_widget = $('.apps-widget-single');
+
+        if (!app) {
+            $app_selector.show();
+            $apps_widget.hide();
+            $app_selector.find('input[name="app"]').val('');
+            return;
+        }
+
+
+
         /* Given an app object, render it in the widget. */
         if (_.isObject(app.name)) {
             // Choose an app name translation.
             app.name = app.name['en-US'] || app.name[Object.keys(app.name)[0]];
         }
 
-        // Hard-code JQuery because it is run async.
-        $('.apps-widget .apps').html(app_select.render_result(app));
-
         // Set placeholder and hide results list.
-        var $app_selector = $('.app-selector');
-        $app_selector.find('#app-selector').val('')
-                     .attr('placeholder', app.name)
-                     .text();
+        var fake_input = nunjucks.env.render('apps_widget_single.html', {
+            icon: app.icons['48'],
+            name: utils.translate(app.name)
+        });
+        $apps_widget.replaceWith(fake_input);
+
+        $app_selector.hide();
+        $apps_widget.show();
+
+        $app_selector.find('#app-selector').val('').text();
         $app_selector.find('.result').remove();
         $app_selector.find('input[name="app"]').val(app.id);
         z.page.trigger('refresh_preview');

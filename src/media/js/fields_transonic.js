@@ -25,9 +25,10 @@ define('fields_transonic',
         var rating = $parent.find('input:checked').val();
         $parent.find('.choices').attr('data-rating', rating);
     })
-    .on('change', '.featured-type-choices input', function(e) {
+    .on('change input', '.featured-type-choices', function(e) {
         // Tab between different featured types (graphic, desc, pull quote).
-        $('.featured-details').hide().filter('.' + this.getAttribute('data-type')).show();
+        console.log(this);
+        $('.featured-details').hide().filter('.' + this.options[this.selectedIndex].getAttribute('data-type')).show();
         $('.form-errors').empty();
         utils_local.initCharCounter();
     })

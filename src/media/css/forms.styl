@@ -19,21 +19,17 @@ button, input[type=button], input[type=reset], input[type=submit] {
     cursor: pointer;
 }
 
-label {
-    display: block;
-    font-weight: 400;
-}
-
 input::-webkit-input-placeholder {
-    color: $gray;
+    color: $placeholder-grey;
 }
 
 input:-moz-placeholder {
-    color: $gray;
+    color: $placeholder-grey;
     text-overflow: ellipsis;  // Firefox 18 and below
 }
 
 input::-moz-placeholder {
+    color: $placeholder-grey;
     text-overflow: ellipsis;  // Firefox 19+
 }
 
@@ -53,21 +49,193 @@ input[placeholder] {
 }
 
 form {
-    input[type=email], input[type=text], textarea {
-        padding: 5px;
-        &[disabled], &[readonly] {
-            background: $seavan-salt-white;
-            color: $earl-gray;
-            cursor: not-allowed;
-        }
+    .field,
+    .help-text {
+        display: block;
     }
-    input[type=email], input[type=text], #search-q, textarea {
+    label,
+    input,
+    select,
+    textarea,
+    .fake-field {
+        display: inline-block;
+    }
+
+    .field {
+        margin: 20px 0
+        width: 425px;
+    }
+
+    label {
+        color: $label-grey;
+        font-size: 14px;
+        margin-right: 10px;
+        text-align: right;
+        width: 110px;
+
+    }
+
+    .help-text {
+        color: $label-grey;
+        font-size: 13px;
+        font-style: italic;
+        margin: 5px 0 0 125px;
+        text-align: right;
+    }
+
+    input[type=email],
+    input[type=text],
+    input[type=search],
+    textarea,
+    .pretty-select,
+    .fake-field {
+        background-color: #fff;
+        border: 1px solid #cbcbcb;
+        border-radius: 5px;
+        font-weight: normal;
+        font-size: 20px;
+        height: 40px;
+        padding: 0px 10px;
+        width: 300px;
+
         &:focus {
-            border-color: $sailor-blue;
-            box-shadow: 0 0 2px $sailor-blue inset;
+            border-color: $blue-action-primary;
         }
     }
+
+    .has-textarea {
+        width: 525px;
+
+        textarea {
+            height: 125px;
+            width: 400px;
+        }
+    }
+
+
+    .has-pretty-select {
+
+        label {
+            padding-top: 13px;
+            position: relative;
+            top: -14px;
+        }
+
+        .pretty-select {
+            cursor: pointer;
+            display: inline-block;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+
+            &:before {
+                // Custom dropdown arrow
+                dropdown();
+                color: $medium-gray;
+                content: '\25BC';
+                font-size: 16px;
+                top: 10px;
+                right: 6px;
+                z-index: 2;
+            }
+
+            &:after {
+                // Hide the native `<select>` arrow.
+                background: $white;
+                border-left: 1px solid $cement-gray;
+                content: "";
+                display: block;
+                height: 100%;
+                pointer-events: none;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 45px;
+                z-index: 1;
+            }
+
+            select {
+                -moz-padding-start: 10px;
+                appearance-none();
+                background: none;
+                border: 0;
+                cursor: pointer;
+                height: 40px;
+                outline: 0;
+                padding: 0px 10px 0px 7px;
+                width: 300px;
+
+                &:-moz-focusring {
+                    color: transparent;
+                    text-shadow: 0 0 0 #000;
+                }
+            }
+        }
+    }
+
+    .has-pretty-select {
+
+        label {
+            padding-top: 13px;
+            position: relative;
+            top: -14px;
+        }
+
+        .pretty-select {
+            cursor: pointer;
+            display: inline-block;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+
+            &:before {
+                // Custom dropdown arrow
+                dropdown();
+                color: $medium-gray;
+                content: '\25BC';
+                font-size: 16px;
+                top: 10px;
+                right: 6px;
+                z-index: 2;
+            }
+
+            &:after {
+                // Hide the native `<select>` arrow.
+                background: $white;
+                border-left: 1px solid $cement-gray;
+                content: "";
+                display: block;
+                height: 100%;
+                pointer-events: none;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 45px;
+                z-index: 1;
+            }
+
+            select {
+                -moz-padding-start: 10px;
+                appearance-none();
+                background: none;
+                border: 0;
+                cursor: pointer;
+                height: 40px;
+                outline: 0;
+                padding: 0px 10px 0px 7px;
+                width: 400px;
+
+                &:-moz-focusring {
+                    color: transparent;
+                    text-shadow: 0 0 0 #000;
+                }
+            }
+        }
+    }
+
 }
+
+
 
 textarea {
     display: block;
@@ -75,6 +243,7 @@ textarea {
     vertical-align: top;
 }
 
+/*
 .form-grid {
     diagonal-lines();
     width: 100%;
@@ -91,7 +260,6 @@ textarea {
         alt-btn-shadow();
         border-radius: 3px;
         border: 1px solid $primer-gray;
-        box-shadow: 0 1px 0 #fff, 0 1px 1px $seavan-salt-white inset;
         color: $london-fog-gray;
         font: 400 15px/28px $open-stack;
         height: 48px;
@@ -165,52 +333,7 @@ textarea {
         }
     }
 }
-
-@media $at-least-desktop {
-    .form-grid {
-        border: 1px solid $seavan-salt-white;
-        border-radius: 10px;
-        float: left;
-        margin-top: 30px;
-        padding: 3px 5px 8px;  // On desktop we want 18px above and below.
-        position: relative;
-        .simple-field {
-            float: left;
-            padding: 15px 10px 10px;
-            width: 50%;
-        }
-        footer {
-            position: absolute;
-            top: -90px;
-            right: -10px;
-            p {
-                float: left;
-            }
-            // Show only "Save Changes" and "Sign Out" buttons on tablet and larger.
-            a:nth-child(2) ~ a {
-                display: none;
-            }
-        }
-        footer, footer p {
-            border: 0;
-        }
-    }
-    #account-settings .secondary-header h2 {
-        // To accomodate the floated "Sign in" button.
-        max-width: calc(unquote('100% - 330px'));
-    }
-    .reviewer-tools {
-        display: none;
-    }
-}
-
-@media (min-width: 1024px) {
-    .form-grid {
-        .extras {
-            display: none;
-        }
-    }
-}
+*/
 
 // Because specificity
 .only-logged-in.button,
