@@ -61,11 +61,8 @@ define('views/create',
             $('.fileinput').fakeFileField();
             feed_previews.refresh();
 
-            var sel = 'textarea[name*="description"]:not(.hidden)';
-            sel += ', textarea[name*="pq-text"]:not(.hidden)';
-
             // Character counter based from utils.
-            $(sel).on('input', function() {
+            $('textarea[maxlength]').on('input', function() {
                 var $el = $(this);
                 var max = parseInt($el.attr('maxlength'), 10);
                 var remaining = max - $el.val().length;

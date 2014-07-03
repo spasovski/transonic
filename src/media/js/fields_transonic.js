@@ -29,7 +29,7 @@ define('fields_transonic',
         // Tab between different featured types (graphic, desc, pull quote).
         $('.featured-details').hide().filter('.' + this.getAttribute('data-type')).show();
         $('.form-errors').empty();
-        $('.char-count').html(gettext('300 characters remaining.'));
+        resetCounter();
     })
     .on('change', '.collection-type-choices input', function(e) {
         // To help CSS toggle background image upload widgets for different collection types.
@@ -128,6 +128,7 @@ define('fields_transonic',
         var lang = this.value;
         $('.localized').addClass('hidden')
                        .filter('[data-lang=' + lang + ']').removeClass('hidden');
+        resetCounter();
     })
     .on('input', '.localized', function() {
         highlight_localized();
@@ -149,6 +150,10 @@ define('fields_transonic',
             }
         });
     };
+
+    function resetCounter() {
+        $('.char-count').html(gettext('300 characters remaining.'));
+    }
 
     return {
         highlight_localized: highlight_localized
