@@ -53,7 +53,7 @@ define('feed_previews',
 
     function multi_app_factory() {
         var apps = [];
-        var $results = $('.apps-widget .result');
+        var $results = $('.apps-widget .result:not(.app-group)');
 
         if (!$results.length) {
             return apps;
