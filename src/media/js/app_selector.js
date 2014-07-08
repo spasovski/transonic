@@ -24,7 +24,7 @@ define('app_selector',
     }, 250))
 
     .on('click', '.app-selector .paginator a', function() {
-        var offset = parseInt($paginator.attr('data-offset'), 10);
+        var offset = parseInt($paginator.attr('data-offset'), 10) || 0;
         if ($(this).hasClass('prev')) {
             offset = offset - 5;
         } else {
