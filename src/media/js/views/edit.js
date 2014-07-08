@@ -49,7 +49,7 @@ define('views/edit',
     }));
 
     function resetButton($btn, text) {
-        $btn.html(text || gettext('Update')).removeAttr('disabled');
+        $btn.text(text || gettext('Update')).prop('disabled', false);
     }
 
     return function(builder, args) {

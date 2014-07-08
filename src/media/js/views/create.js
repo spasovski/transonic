@@ -12,7 +12,7 @@ define('views/create',
             notification.notification({message: success_msg});
         }).fail(function(error) {
             notification.notification({message: utils_local.build_error_msg(error)});
-            $btn.html(gettext('Submit')).removeAttr('disabled');
+            $btn.text(gettext('Submit')).prop('disabled', false);
         });
     }
 
