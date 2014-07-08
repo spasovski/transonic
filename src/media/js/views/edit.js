@@ -9,7 +9,7 @@ define('views/edit',
             notification.notification({message: success_msg});
             resetButton($btn);
         }).fail(function(error) {
-            notification.notification({message: error});
+            notification.notification({message: utils_local.build_error_msg(error)});
             resetButton($btn);
         });
     }

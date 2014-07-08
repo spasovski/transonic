@@ -1,6 +1,6 @@
 define('views/create',
-    ['feed_previews', 'fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'templates', 'urls', 'utils', 'z'],
-    function(feed_previews, fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, nunjucks, urls, utils, z) {
+    ['feed_previews', 'fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'templates', 'urls', 'utils', 'utils_local', 'z'],
+    function(feed_previews, fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, nunjucks, urls, utils, utils_local, z) {
 
     'use strict';
     var gettext = l10n.gettext;
@@ -11,7 +11,7 @@ define('views/create',
             z.page.trigger('navigate', [urls.reverse('edit', [feed_type, feed_element.slug])]);
             notification.notification({message: success_msg});
         }).fail(function(error) {
-            notification.notification({message: error});
+            notification.notification({message: utils_local.build_error_msg(error)});
             $btn.html(gettext('Submit')).removeAttr('disabled');
         });
     }
