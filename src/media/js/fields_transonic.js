@@ -132,7 +132,7 @@ define('fields_transonic',
     })
     .on('input', '.localized', function() {
         highlight_localized();
-    })
+    });
 
     // Highlight languages that have been localized.
     function highlight_localized() {
