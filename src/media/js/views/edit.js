@@ -37,7 +37,7 @@ define('views/edit',
     .on('click', '.transonic-form.edit button.publish', utils._pd(function() {
         var $this = $(this);
         var $form = $this.closest('form');
-        $this.html(gettext('Publishing...')).attr('disabled', true);
+        $this.text(gettext('Publishing...')).prop('disabled', true);
 
         forms_transonic.publish_shelf($form, $form.data('slug')).done(function() {
             notification.notification({message: gettext('Operator shelf published')});

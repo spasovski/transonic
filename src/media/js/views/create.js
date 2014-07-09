@@ -19,7 +19,7 @@ define('views/create',
     z.body.on('click', '.transonic-form.create button.submit', utils._pd(function(e) {
         var $this = $(this);
         var $form = $this.closest('form');
-        $this.html(gettext('Submitting...')).attr('disabled', true);
+        $this.text(gettext('Submitting...')).prop('disabled', true);
         $form.find('.form-errors').empty();
 
         if ($form.data('type') == 'apps') {
