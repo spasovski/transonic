@@ -44,7 +44,7 @@ define('views/edit',
             resetButton($this, gettext('Publish'));
         }).fail(function(error) {
             notification.notification({message: error});
-            resetButton($this);
+            resetButton($this, gettext('Publish'));
         });
     }));
 
