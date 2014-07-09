@@ -5,6 +5,7 @@ define('forms_transonic',
     var format = format.format;
     var gettext = l10n.gettext;
     var console = log('forms_transonic');
+    var FORM_ERR = {form: [gettext('Sorry, we found some errors in the form.')]};
 
     var feed_app = function($form, slug) {
         /* Create or update FeedApp. */
@@ -28,7 +29,7 @@ define('forms_transonic',
         var errors = validate.feed_app(data, $file_input, $preview);
         if (errors.length) {
             render_errors(errors);
-            return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
+            return defer.Deferred().reject(FORM_ERR);
         }
 
         cache.flush();
@@ -60,7 +61,7 @@ define('forms_transonic',
         errors = errors.concat(validate.collection(data, $file_input, $preview));
         if (errors.length) {
             render_errors(errors);
-            return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
+            return defer.Deferred().reject(FORM_ERR);
         }
         $('.form-errors').empty();
 
@@ -83,7 +84,7 @@ define('forms_transonic',
         var errors = validate.brand(data);
         if (errors.length) {
             render_errors(errors);
-            return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
+            return defer.Deferred().reject(FORM_ERR);
         }
         $('.form-errors').empty();
 
@@ -111,7 +112,7 @@ define('forms_transonic',
         var errors = validate.shelf(data, $file_input, $preview);
         if (errors.length) {
             render_errors(errors);
-            return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
+            return defer.Deferred().reject(FORM_ERR);
         }
         $('.form-errors').empty();
 
@@ -147,7 +148,7 @@ define('forms_transonic',
         var errors = validate.feed_items(data);
         if (errors.length) {
             render_errors(errors);
-            return defer.Deferred().reject(gettext('Sorry, we found some errors in the form.'));
+            return defer.Deferred().reject(FORM_ERR);
         }
         $('.form-errors').empty();
 

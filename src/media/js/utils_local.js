@@ -4,7 +4,9 @@ define('utils_local', ['jquery', 'log'], function($, log) {
     function build_error_msg(error) {
         // {'slug': ['This field is required.']} to 'This field is required.'.
         var errs = [];
-        error = JSON.parse(error);
+        if (typeof error === 'string') {
+            error = JSON.parse(error);
+        }
         error_keys = Object.keys(error);
         for (var i = 0; i < error_keys.length; i++) {
             errs.push(error[error_keys[i]][0]);
