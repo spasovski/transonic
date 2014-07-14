@@ -60,19 +60,7 @@ define('views/create',
         }).done(function() {
             $('.fileinput').fakeFileField();
             feed_previews.refresh();
-
-            // Character counter based from utils.
-            $('textarea[maxlength]').on('input', function() {
-                var $el = $(this);
-                var max = parseInt($el.attr('maxlength'), 10);
-                var remaining = max - $el.val().length;
-                // L10n: {n} is the number of characters remaining.
-                $('.char-count').html(
-                    ngettext('<b>{n}</b> character remaining.',
-                             '<b>{n}</b> characters remaining.',
-                             {n: remaining})
-                );
-            });
+            utils_local.initCharCounter();
         });
     };
 });

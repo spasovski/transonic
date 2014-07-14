@@ -5,17 +5,17 @@
 
   <label class="inline-label">{{ _('Rating') }}</label>
   <div class="choices-box">
-      <fieldset class="choices" data-rating="{{ rating_selected }}">
-        {% set rating_stars = [1, 2, 3, 4, 5] %}
-        {% for rating in rating_stars %}
-          <input id="pq-rating-{{ rating }}" type="radio" name="pq-rating"
-                 value="{{ rating }}"{{ 'checked' if rating_selected == rating }}>
-          <label for="pq-rating-{{ rating }}" class="rating">
-            <span class="star star-{{ rating }}">&#9733;</span>
-          </label>
-        {% endfor %}
-      </fieldset>
-    </div>
+    <fieldset class="choices" data-rating="{{ rating_selected }}">
+      {% set rating_stars = [1, 2, 3, 4, 5] %}
+      {% for rating in rating_stars %}
+        <input id="pq-rating-{{ rating }}" type="radio" name="pq-rating"
+               value="{{ rating }}"{{ 'checked' if rating_selected == rating }}>
+        <label for="pq-rating-{{ rating }}" class="rating">
+          <span class="star star-{{ rating }}">&#9733;</span>
+        </label>
+      {% endfor %}
+    </fieldset>
+  </div>
 </div>
 
 <div class="pq-text field top-hat-field half">
@@ -25,7 +25,7 @@
   {% for lang in settings.languages %}
     {{ locale_textarea('pq-text', lang, pq_text[lang], 300) }}
   {% endfor %}
-  <p class="help-text char-count">{{ _('Maximum 300 characters.') }}</p>
+  <p class="help-text char-count" data-for="pq-text">{{ _('Maximum 300 characters.') }}</p>
 </div>
 
 <div class="pq-attribution field">
