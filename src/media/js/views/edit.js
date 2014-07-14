@@ -1,6 +1,6 @@
 define('views/edit',
-    ['apps_widget', 'feed_previews', 'fields_transonic', 'format', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'preview_tray', 'requests', 'templates', 'urls', 'utils', 'z'],
-    function(apps_widget, feed_previews, fields_transonic, format, forms_transonic, $, fakefilefield, l10n, log, notification, preview_tray, requests, nunjucks, urls, utils, z) {
+    ['apps_widget', 'feed_previews', 'fields_transonic', 'format', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'preview_tray', 'requests', 'templates', 'urls', 'utils', 'utils_local', 'z'],
+    function(apps_widget, feed_previews, fields_transonic, format, forms_transonic, $, fakefilefield, l10n, log, notification, preview_tray, requests, nunjucks, urls, utils, utils_local, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -116,6 +116,7 @@ define('views/edit',
                     }
                 }
                 feed_previews.refresh();
+                utils_local.initCharCounter();
             });
         });
     };

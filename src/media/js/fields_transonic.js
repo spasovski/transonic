@@ -1,6 +1,6 @@
 define('fields_transonic',
-    ['app_selector', 'apps_widget', 'feed', 'jquery', 'jquery.fakefilefield', 'log', 'nunjucks', 'preview_tray', 'requests', 'underscore', 'urls', 'utils', 'z'],
-    function(app_select, apps_widget, feed, $, fakefilefield, log, nunjucks, preview_tray, requests, _, urls, utils, z) {
+    ['app_selector', 'apps_widget', 'feed', 'jquery', 'jquery.fakefilefield', 'log', 'nunjucks', 'preview_tray', 'requests', 'underscore', 'urls', 'utils', 'utils_local', 'z'],
+    function(app_select, apps_widget, feed, $, fakefilefield, log, nunjucks, preview_tray, requests, _, urls, utils, utils_local, z) {
     'use strict';
 
     var imageUploads = {};  // keep track of drag-and-drop uploads to stuff into FormData later.
@@ -29,7 +29,7 @@ define('fields_transonic',
         // Tab between different featured types (graphic, desc, pull quote).
         $('.featured-details').hide().filter('.' + this.getAttribute('data-type')).show();
         $('.form-errors').empty();
-        resetCounter();
+        utils_local.initCharCounter();
     })
     .on('change', '.collection-type-choices input', function(e) {
         // To help CSS toggle background image upload widgets for different collection types.
@@ -128,7 +128,7 @@ define('fields_transonic',
         var lang = this.value;
         $('.localized').addClass('hidden')
                        .filter('[data-lang=' + lang + ']').removeClass('hidden');
-        resetCounter();
+        utils_local.initCharCounter();
     })
     .on('input', '.localized', function() {
         highlight_localized();
@@ -150,10 +150,6 @@ define('fields_transonic',
             }
         });
     };
-
-    function resetCounter() {
-        $('.char-count').html(gettext('300 characters remaining.'));
-    }
 
     return {
         highlight_localized: highlight_localized

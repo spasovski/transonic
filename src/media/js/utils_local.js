@@ -22,6 +22,35 @@ define('utils_local', ['jquery', 'log'], function($, log) {
         return data;
     };
 
+    // Character counter based from utils.
+    // Don't use this on other projects - it's terrible.
+    function initCharCounter() {
+        function getRemaining($elm) {
+            var max = parseInt($elm.attr('maxlength'), 10);
+            return max - $elm.val().length;
+        }
+
+        $('.char-count').each(function() {
+            var $this = $(this);
+            var $textarea = $('textarea[data-name=' + $this.data('for') + ']:not(.hidden)');
+
+            $this.html(
+                ngettext('<b>{n}</b> character remaining.',
+                         '<b>{n}</b> characters remaining.',
+                         {n: getRemaining($textarea)})
+            );
+        });
+
+        $('textarea[maxlength]').off('input').on('input', function() {
+            // L10n: {n} is the number of characters remaining.
+            $('.char-count').html(
+                ngettext('<b>{n}</b> character remaining.',
+                         '<b>{n}</b> characters remaining.',
+                         {n: getRemaining($(this))})
+            );
+        });
+    }
+
     function items(obj) {
         // Like Python's dict.items().
         var items = [];
@@ -38,6 +67,7 @@ define('utils_local', ['jquery', 'log'], function($, log) {
     return {
         build_error_msg: build_error_msg,
         build_localized_field: build_localized_field,
+        initCharCounter: initCharCounter,
         items: items
     };
 });
