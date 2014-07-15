@@ -32,6 +32,7 @@ define('shothandles', ['z'], function(z) {
         } else {
             slider.toNext();
         }
+        z.page.trigger('refresh_preview');
     });
 
     return {attachHandles: attachHandles};

@@ -15,6 +15,7 @@ define('preview_tray',
     z.page.on('click', '.dot', function() {
         var $this = $(this);
         $this.closest('.preview-tray')[0].slider.moveToPoint($this.index());
+        z.page.trigger('refresh_preview');
     });
 
     var populateTray = function(point) {
@@ -52,6 +53,7 @@ define('preview_tray',
             $pointer.eq(slider.currentPoint).addClass('current');
             $tray.find('li').removeClass('selected')
                             .eq(slider.currentPoint).addClass('selected');
+            z.page.trigger('refresh_preview');
         }
         setActiveDot();
 

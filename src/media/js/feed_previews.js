@@ -81,7 +81,8 @@ define('feed_previews',
     function preview_factory() {
         return {
             thumbnail_url: THUMB,
-            image_url: $('.screenshots li.selected img').attr('src'),
+            image_size: $('.screenshots li.selected .screenshot').data('image-size'),
+            image_url: $('.screenshots li.selected .screenshot').attr('href'),
             filetype: 'image/png',
         };
     };
