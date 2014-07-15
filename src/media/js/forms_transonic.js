@@ -26,6 +26,7 @@ define('forms_transonic',
 
         // Validate.
         var errors = validate.feed_app(data, $file_input, $preview);
+        errors = errors.concat(validate.image($file_input));
         if (errors.length) {
             return defer.Deferred().reject(errors);
         }
@@ -57,6 +58,7 @@ define('forms_transonic',
         // Validate.
         var errors = is_grouped ? validate.app_group($items) : [];
         errors = errors.concat(validate.collection(data, $file_input, $preview));
+        errors = errors.concat(validate.image($file_input));
         if (errors.length) {
             return defer.Deferred().reject(errors);
         }
@@ -106,6 +108,7 @@ define('forms_transonic',
 
         // Validate.
         var errors = validate.shelf(data, $file_input, $preview);
+        errors = errors.concat(validate.image($file_input));
         if (errors.length) {
             return defer.Deferred().reject(errors);
         }
@@ -326,7 +329,6 @@ define('forms_transonic',
             });
         };
         reader.readAsDataURL($file_input[0].files[0]);
-
         return def.promise();
     }
 

@@ -136,6 +136,14 @@ define('validate_transonic',
         return errs;
     };
 
+    function image($file_input) {
+        // Check if image is JPG/PNG.
+        if (!$file_input[0].files[0].name.match(/\.(jpg|jpeg|png)$/)) {
+            return [gettext('Uploaded image must be in JPG/PNG format.')];
+        }
+        return [];
+    }
+
     function validate_localized_field(data) {
         /* Check if l10n object has a value for at least one language. */
         for (var lang in data) {
@@ -157,7 +165,8 @@ define('validate_transonic',
         collection: collection,
         shelf: shelf,
         feed_app: feed_app,
-        feed_items: feed_items
+        feed_items: feed_items,
+        image: image
     };
 });
 
