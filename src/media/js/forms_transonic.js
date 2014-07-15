@@ -5,7 +5,6 @@ define('forms_transonic',
     var format = format.format;
     var gettext = l10n.gettext;
     var console = log('forms_transonic');
-    var FORM_ERR = {form: [gettext('Sorry, we found some errors in the form.')]};
 
     var feed_app = function($form, slug) {
         /* Create or update FeedApp. */
@@ -28,8 +27,7 @@ define('forms_transonic',
         // Validate.
         var errors = validate.feed_app(data, $file_input, $preview);
         if (errors.length) {
-            render_errors(errors);
-            return defer.Deferred().reject(FORM_ERR);
+            return defer.Deferred().reject(errors);
         }
 
         cache.flush();
@@ -60,8 +58,7 @@ define('forms_transonic',
         var errors = is_grouped ? validate.app_group($items) : [];
         errors = errors.concat(validate.collection(data, $file_input, $preview));
         if (errors.length) {
-            render_errors(errors);
-            return defer.Deferred().reject(FORM_ERR);
+            return defer.Deferred().reject(errors);
         }
         $('.form-errors').empty();
 
@@ -83,8 +80,7 @@ define('forms_transonic',
         // Validate.
         var errors = validate.brand(data);
         if (errors.length) {
-            render_errors(errors);
-            return defer.Deferred().reject(FORM_ERR);
+            return defer.Deferred().reject(errors);
         }
         $('.form-errors').empty();
 
@@ -111,8 +107,7 @@ define('forms_transonic',
         // Validate.
         var errors = validate.shelf(data, $file_input, $preview);
         if (errors.length) {
-            render_errors(errors);
-            return defer.Deferred().reject(FORM_ERR);
+            return defer.Deferred().reject(errors);
         }
         $('.form-errors').empty();
 
@@ -147,8 +142,7 @@ define('forms_transonic',
         // Validate.
         var errors = validate.feed_items(data);
         if (errors.length) {
-            render_errors(errors);
-            return defer.Deferred().reject(FORM_ERR);
+            return defer.Deferred().reject(errors);
         }
         $('.form-errors').empty();
 
@@ -334,12 +328,6 @@ define('forms_transonic',
         reader.readAsDataURL($file_input[0].files[0]);
 
         return def.promise();
-    }
-
-    function render_errors(errors) {
-        $('.form-errors').html(nunjucks.env.render('errors/form_errors.html', {
-            errors: errors
-        }));
     }
 
     return {

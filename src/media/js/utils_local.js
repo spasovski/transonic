@@ -1,8 +1,8 @@
-define('utils_local', ['jquery', 'log'], function($, log) {
+define('utils_local', ['jquery', 'log', 'notification', 'nunjucks'], function($, log, notification, nunjucks) {
     var console = log('utils_local');
 
     function build_error_msg(error) {
-        // {'slug': ['This field is required.']} to 'This field is required.'.
+        // {'slug': ['This field is required.']} to ['This field is required.'].
         var errs = [];
         if (typeof error === 'string') {
             error = JSON.parse(error);
@@ -11,7 +11,7 @@ define('utils_local', ['jquery', 'log'], function($, log) {
         for (var i = 0; i < error_keys.length; i++) {
             errs.push(error[error_keys[i]][0]);
         }
-        return errs.join(' ');
+        return errs;
     }
 
     function build_localized_field(name) {
@@ -21,6 +21,14 @@ define('utils_local', ['jquery', 'log'], function($, log) {
         });
         return data;
     };
+
+    function handle_error(errors) {
+        if (typeof errors === 'string') {
+            errors = build_error_msg(errors);
+        }
+        notification.notification({message: gettext('Sorry, we found some errors in the form.')});
+        render_errors(errors);
+    }
 
     // Character counter based from utils.
     // Don't use this on other projects - it's terrible.
@@ -64,10 +72,18 @@ define('utils_local', ['jquery', 'log'], function($, log) {
         return items;
     };
 
+    function render_errors(errors) {
+        $('.form-errors').html(nunjucks.env.render('errors/form_errors.html', {
+            errors: errors
+        }));
+    }
+
     return {
         build_error_msg: build_error_msg,
         build_localized_field: build_localized_field,
+        handle_error: handle_error,
         initCharCounter: initCharCounter,
-        items: items
+        items: items,
+        render_errors: render_errors
     };
 });

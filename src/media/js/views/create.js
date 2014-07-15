@@ -11,7 +11,7 @@ define('views/create',
             z.page.trigger('navigate', [urls.reverse('edit', [feed_type, feed_element.slug])]);
             notification.notification({message: success_msg});
         }).fail(function(error) {
-            notification.notification({message: utils_local.build_error_msg(error)});
+            utils_local.handle_error(error);
             $btn.text(gettext('Submit')).prop('disabled', false);
         });
     }

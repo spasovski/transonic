@@ -9,7 +9,7 @@ define('views/edit',
             notification.notification({message: success_msg});
             resetButton($btn);
         }).fail(function(error) {
-            notification.notification({message: utils_local.build_error_msg(error)});
+            utils_local.handle_error(error);
             resetButton($btn);
         });
     }
@@ -43,7 +43,7 @@ define('views/edit',
             notification.notification({message: gettext('Operator shelf published')});
             resetButton($this, gettext('Publish'));
         }).fail(function(error) {
-            notification.notification({message: error});
+            utils_local.handle_error(error);
             resetButton($this, gettext('Publish'));
         });
     }));
