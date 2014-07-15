@@ -138,7 +138,8 @@ define('validate_transonic',
 
     function image($file_input) {
         // Check if image is JPG/PNG.
-        if (!$file_input[0].files[0].name.match(/\.(jpg|jpeg|png)$/)) {
+        if ($file_input.files &&
+            !$file_input[0].files[0].name.match(/\.(jpg|jpeg|png)$/)) {
             return [gettext('Uploaded image must be in JPG/PNG format.')];
         }
         return [];
