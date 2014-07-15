@@ -4,15 +4,13 @@ define('helpers_local', ['feed', 'nunjucks', 'urls', 'utils_local', 'z'], functi
 
     globals.feed = feed;
 
-    filters.items = utils_local.items;
-
-    filters.unslug = function(str) {
+    function unslug(str) {
         // Change underscores to spaces and text-transform uppercase.
         return str.replace(/_/g, ' ')
                   .replace(/(^| )(\w)/g, function(x) {
                       return x.toUpperCase();
                   });
-    };
+    }
 
     function indexOf(arr, val) {
         return arr.indexOf(val);
@@ -24,10 +22,22 @@ define('helpers_local', ['feed', 'nunjucks', 'urls', 'utils_local', 'z'], functi
         api_base: urls.api.base.url,
     };
 
+    var filters_map = {
+        items: utils_local.items,
+        unslug: unslug
+    };
+
     // Put the helpers into the nunjucks global.
     for (var i in helpers) {
         if (helpers.hasOwnProperty(i)) {
             globals[i] = helpers[i];
+        }
+    }
+
+    for (var i in filters_map) {
+        if (filters_map.hasOwnProperty(i)) {
+            nunjucks.env.addFilter(i, filters_map[i]);
+            filters[i] = filters_map[i];
         }
     }
 
