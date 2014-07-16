@@ -23,7 +23,7 @@
 
   <label>{{ _('Quote') }}</label>
   {% for lang in settings.languages %}
-    {{ locale_textarea('pq-text', lang, pq_text[lang], 300) }}
+    {{ locale_textarea('pq-text', lang, pq_text[lang]|safe, 300) }}
   {% endfor %}
   <p class="help-text char-count" data-for="pq-text">{{ _('Maximum 300 characters.') }}</p>
 </div>
