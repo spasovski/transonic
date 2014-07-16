@@ -87,25 +87,29 @@ form {
 
             .color-box {
                 display: inline-block;
-                height: 25px;
-                width: 75px;
+                height: 40px;
+                width: 80px;
                 vertical-align: middle;
-
-                &.selected-color {
-                    width: 25px;
-                }
             }
 
             .color {
                 margin-right: -3px;
-            }
+                position: relative;
 
-            .selected-text {
-                border-right: 1px solid $light-gray;
-                display: inline-block;
-                margin-right: 8px;
-                padding-right: 8px;
-                width: 68px;
+                &.selected:before {
+                    color: $white;
+                    content: '\2713';
+                    font-size: 24px;
+                    font-weight: 100;
+                    height: 24px;
+                    left: 50%;
+                    line-height: 1;
+                    margin: -12px 0 0 -12px;
+                    position: absolute;
+                    text-align: center;
+                    top: 50%;
+                    width: 24px;
+                }
             }
         }
     }
@@ -163,69 +167,6 @@ form {
             padding: 6px;
             vertical-align: middle;
         }
-        .background-image .inner {
-            padding: 10px;
-        }
-        .background-image-input {
-            display: inline-block;
-            margin-left: 20px;
-
-            p {
-                position: relative;
-                text-align: center;
-                top: 5px;
-            }
-            [data-fileinput-fake] {
-                border: 1px dotted $light-gray;
-                display: block;
-                height: 200px;
-                width: 200px;
-                margin: 20px auto;
-                overflow: hidden;
-                position: relative;
-                text-align: center;
-                vertical-align: top;
-
-                &:hover {
-                    cursor: pointer;
-                }
-                img {
-                    position: absolute;
-                    left: 0;
-                    max-width: 100%;
-                    top: 0;
-                }
-                input {
-                    border: 0;
-                    border-radius: 5px;
-                    bottom: 0;
-                    display: none;
-                    font-weight: 300;
-                    left: 0;
-                    position: absolute;
-                    right: 0;
-                    text-align: center;
-
-                    &:hover {
-                        cursor: default;
-                    }
-                    &[disabled] {
-                        background-color: #fff;
-                        border-radius: 10px;
-                        color: $dark-gray;
-                    }
-                }
-            }
-            &.filled [data-fileinput-fake] {
-                border: 2px solid $green;
-                position: relative;
-
-                input {
-                    display: block;
-                    margin: 0 auto;
-                }
-            }
-        }
         .description .description-type .inner {
             padding: 5px;
         }
@@ -237,9 +178,114 @@ form {
         }
     */
 
+
+    .background-image .inner {
+        display: inline-block;
+        vertical-align: top;
+        width: 500px;
+    }
+    .background-image.field label {
+        vertical-align: top;
+    }
+    .background-image-input {
+        display: inline-block;
+
+        p {
+            position: relative;
+            text-align: center;
+            top: 5px;
+        }
+        [data-fileinput-fake] {
+            border: 2px dashed $light-gray-grayscale-primary;
+            display: block;
+            height: 166px;
+            width: 200px;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            img {
+                position: absolute;
+                left: 0;
+                max-width: 100%;
+                top: 0;
+                z-index: 2;
+            }
+
+            input {
+                border: 0;
+                border-radius: 5px;
+                bottom: 0;
+                display: none;
+                font-weight: 300;
+                left: 0;
+                position: absolute;
+                right: 0;
+                text-align: center;
+
+                &:hover {
+                    cursor: default;
+                }
+
+                &[disabled] {
+                    background-color: #fff;
+                    border-radius: 10px;
+                    color: $dark-gray;
+                }
+            }
+
+            .instructions {
+                color: $gray-grayscale-primary;
+                font-size: 20px;
+                padding-top: 15px;
+                text-align: center;
+                z-index: 1;
+            }
+        }
+        &.filled [data-fileinput-fake] {
+            border-style: solid;
+            position: relative;
+
+            input {
+                display: block;
+                font-size: 13px;
+                height: 30px;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .field.screenshot {
+        width: 625px;
+
+        > label,
+        .screenshots {
+            vertical-align: top;
+        }
+
+        .screenshots {
+            display: inline-block;
+            width: 500px;
+        }
+
+        .placeholder-text {
+            color: $label-grey;
+            font-style: italic;
+        }
+    }
+
     .field.pq-rating {
         input {
             display: none;
+        }
+
+        > label,
+        .choices-box {
+            vertical-align: top;
         }
 
         fieldset {
@@ -256,33 +302,40 @@ form {
         }
 
         .choices-box {
-
+            display: inline-block;
+            height: 20px;
         }
+
         [data-rating="1"] {
             .star-1 {
                 color: $sailor-blue;
             }
         }
+
         [data-rating="2"] {
             .star-1, .star-2 {
                 color: $sailor-blue;
             }
         }
+
         [data-rating="3"] {
             .star-1, .star-2, .star-3 {
                 color: $sailor-blue;
             }
         }
+
         [data-rating="4"] {
              .star-1, .star-2, .star-3, .star-4 {
                 color: $sailor-blue;
             }
         }
+
         [data-rating="5"] {
             .star-1, .star-2, .star-3, .star-4, .star-5 {
                 color: $sailor-blue;
             }
         }
+
         .star {
             bottom: 10px;
             color: $light-gray;
@@ -348,7 +401,7 @@ form {
         padding: 10px;
     }
     .background-image.field {
-        width: 270px;
+        width: 625px;
     }
 }
 

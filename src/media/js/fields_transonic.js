@@ -12,11 +12,12 @@ define('fields_transonic',
     })
     .on('change', '.colors input', function() {
         // Sync color previews and inputs.
-        var $this = $(this);
         var $parent = $(this).closest('.colors');
-        var color = $this.attr('value');
-        $parent.find('.selected-color').css('background', color);
-        $parent.find('.selected-text').text(color);
+        var $labels = $parent.find('label');
+        console.log()
+        $labels.filter('.selected').removeClass('selected');
+        var newSelected = $labels.filter('[for=' + this.id + ']').addClass('selected');
+        console.log(newSelected);
     })
     .on('change', '.pq-rating input', function() {
         // Set rating data attribute to highlight stars.

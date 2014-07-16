@@ -18,12 +18,13 @@
     {% include "apps_widget_single.html" %}
 
     {% include "fields/slug.html" %}
-    {% include "fields/featured_type.html" %}
 
   </section>
 
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
+
+    {% include "fields/featured_type.html" %}
 
     {# The top line of classes determine what form fields are visible based upon the tab on change. #}
     {# The bottom line of classes determine what form fields are visible if we are editing an app and go directly to the page. #}

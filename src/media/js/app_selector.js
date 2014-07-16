@@ -1,12 +1,13 @@
 define('app_selector',
-    ['jquery', 'log', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'z'],
-    function($, log, requests, settings, nunjucks, _, urls, utils, z) {
+    ['jquery', 'format', 'l10n', 'log', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'z'],
+    function($, format, l10n, log, requests, settings, nunjucks, _, urls, utils, z) {
     'use strict';
 
     var $app_selector;
     var $spinner;
     var $results;
     var $paginator;
+    var gettext = l10n.gettext;
     var results_map = {};
 
     z.page.on('loaded', function() {
@@ -99,22 +100,35 @@ define('app_selector',
                 }
             }
 
+            var $desc = $paginator.find('.desc');
             var $next = $paginator.find('.next');
             var $prev = $paginator.find('.prev');
-            if (!data.meta.previous && !data.meta.next) {
+            var meta = data.meta;
+
+            if (!meta.previous && !meta.next) {
                 $paginator.hide();
             } else {
                 $paginator.show();
-                if (data.meta.previous) {
+
+                if (meta.previous) {
                     $prev.removeClass('disabled');
                 } else {
                     $prev.addClass('disabled');
                 }
-                if (data.meta.next) {
+
+                if (meta.next) {
                     $next.removeClass('disabled');
                 } else {
                     $next.addClass('disabled');
                 }
+
+                // L10n: {0} refers to the position of the first app on the page,
+                // {1} refers to the position of the last app on the page,
+                // and {2} refers to the total number of apps across all pages.
+                var desc = format.format(gettext('Apps {0}-{1} of {2}.'),
+                    (meta.offset + 1), (meta.offset + meta.limit), meta.total_count);
+                $desc.text(desc);
+
             }
 
             $spinner.hide();

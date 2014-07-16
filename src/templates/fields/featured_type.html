@@ -15,7 +15,8 @@
 {% endmacro %}
 
 <div class="field has-pretty-select">
-  <label for="featured-type">{{ _('Type') }}</label>
+  {# L10n: Describes an item's visual style #}
+  <label for="featured-type">{{ _('Style') }}</label>
   <div class="pretty-select">
     <select name="featured-type" class="featured-type-choices">
       {{ featured_type(_('Icon'), 'icon', FT_ICON, feed_app_type) }}
