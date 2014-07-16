@@ -71,24 +71,27 @@
   <input class="search-elements" type="search" placeholder="{{ _('Search for a feed element...') }}">
 
   <div class="feed-api-results search-results">
-    {% defer (url=api('feed-apps-list')|urlparams(ordering='-created'), paginate='ul.feed-apps') %}
-      {{ feed_apps(this.objects, response) }}
+    {% defer (url=api('feed-apps-list')|urlparams(ordering='-created'),
+              pluck='objects', as='feed-app', paginate='ul.feed-apps') %}
+      {{ feed_apps(this, response) }}
     {% placeholder %}
       <h2>{{ _('Featured Apps') }}</h2>
       <p class="no-results">{{ _('Loading...') }}</p>
     {% except %}
     {% end %}
 
-    {% defer (url=api('collections-list')|urlparams(ordering='-created'), paginate='ul.collections') %}
-      {{ feed_collections(this.objects, response) }}
+    {% defer (url=api('collections-list')|urlparams(ordering='-created'),
+              pluck='objects', as='feed-collection', paginate='ul.collections') %}
+      {{ feed_collections(this, response) }}
     {% placeholder %}
       <h2>{{ _('Collections') }}</h2>
       <p class="no-results">{{ _('Loading...') }}</p>
     {% except %}
     {% end %}
 
-    {% defer (url=api('feed-brands-list')|urlparams(order='-created'), paginate='ul.brands') %}
-      {{ feed_brands(this.objects, response) }}
+    {% defer (url=api('feed-brands-list')|urlparams(order='-created'),
+              pluck='objects', as='feed-brand', paginate='ul.brands') %}
+      {{ feed_brands(this, response) }}
     {% placeholder %}
       <h2>{{ _('Editorial Brands') }}</h2>
       <p class="no-results">{{ _('Loading...') }}</p>
@@ -96,8 +99,9 @@
     {% end %}
 
     {% if not is_builder %}
-      {% defer (url=api('feed-shelves-list')|urlparams(order='-created'), paginate='ul.shelves') %}
-        {{ feed_shelves(this.objects, response) }}
+      {% defer (url=api('feed-shelves-list')|urlparams(order='-created'),
+                pluck='objects', as='feed-shelf', paginate='ul.shelves') %}
+        {{ feed_shelves(this, response) }}
       {% placeholder %}
         <h2>{{ _('Operator Shelves') }}</h2>
         <p class="no-results">{{ _('Loading...') }}</p>

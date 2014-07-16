@@ -80,7 +80,6 @@ h3 {
     }
     [data-page-type~=home],
     [data-page-type~=listing],
-    [data-page-type~=builder],
     [data-page-type~=login] {
         aside.feed-previews {
             display: none;
@@ -93,6 +92,7 @@ h3 {
         -webkit-transform: translateX(0px);
         background: $medium-gray;
         height: 100%;
+        overflow: scroll;
         padding-top: 14px;
         position: fixed;
         right: 0;
@@ -156,4 +156,8 @@ body.dragging, body.dragging * {
 
 .button.persona {
     padding-top: 0;
+}
+
+.feed .additional-info {
+    display: none;
 }

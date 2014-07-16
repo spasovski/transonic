@@ -26,6 +26,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
                 append($feed, $feed_element);
             }
             $('.feeds .loading').hide();
+            z.page.trigger('refresh_preview');
         });
     })
     .on('click', '.feed-builder .manage-modules-listing .feed-element', function() {
@@ -60,6 +61,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
         $feed.find('.empty-results').hide();
         $feed.find('.feed-elements').append($feed_element.clone());
         $('.feed-elements').sortable();
+        z.page.trigger('refresh_preview');
     }
 
     function remove($feed_element) {
@@ -68,6 +70,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
         if (!$feed.find('.feed-element').length) {
             $feed.find('.empty-results').show();
         }
+        z.page.trigger('refresh_preview');
     }
 
     function get_region_feed() {

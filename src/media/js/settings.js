@@ -12,7 +12,7 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         param_whitelist: ['q', 'sort'],
         api_param_blacklist: null,
 
-        // Just to make feed.js work.
+        // Used for feed builder.
         model_prototypes: {
             'feed-app': 'slug',
             'feed-brand': 'slug',

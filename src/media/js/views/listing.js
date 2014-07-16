@@ -1,6 +1,6 @@
 define('views/listing',
-    ['cache', 'feed_previews', 'format', 'jquery', 'l10n', 'log', 'notification', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'z'],
-    function(cache, feed_previews, format, $, l10n, log, notification, requests, settings, nunjucks, _, urls, utils, z) {
+    ['cache', 'feed_previews', 'format', 'jquery', 'l10n', 'log', 'models', 'notification', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'z'],
+    function(cache, feed_previews, format, $, l10n, log, models, notification, requests, settings, nunjucks, _, urls, utils, z) {
     'use strict';
     var gettext = l10n.gettext;
 
@@ -39,14 +39,23 @@ define('views/listing',
             requests.get(urls.api.url('feed-element-search', [], {'q': $this.val()})).done(function(data) {
                 $('.feed-api-results').hide();
                 $('.feed-search-results').html(nunjucks.env.render('search_results.html', {
-                    data: data
+                    data: data,
                 })).show();
+
+                cast_search_results(data);
             });
         } else {
             $('.feed-api-results').show();
             $('.feed-search-results').hide();
         }
     }, 250));
+
+    function cast_search_results(data) {
+        models('feed-app').cast(data.apps);
+        models('feed-brand').cast(data.brands);
+        models('feed-collection').cast(data.collections);
+        models('feed-shelf').cast(data.shelves);
+    }
 
     return function(builder, args) {
         builder.z('title', gettext('Existing Content'));

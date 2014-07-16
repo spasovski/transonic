@@ -153,16 +153,33 @@ define('feed_previews',
             refresh_preview(collection_factory(), 'collection');
         } else if (type == 'shelves') {
             refresh_preview(shelf_factory(), 'shelf');
+        } else if ($('.feed-builder').length) {
+            refresh_feed_preview();
         }
     }
 
+    function refresh_feed_preview() {
+        stub_globals();
+
+        $('.region-feed:not(.hidden) .feed-elements li').each(function(i, feed_element) {
+            var $feed_element = $(feed_element);
+            var type = $feed_element.data('type');
+            var slug = $feed_element.data('slug');
+
+            var feed_element = require('models')('feed-' + type).lookup(slug);
+            $('.feed').append(
+                nunjucks.env.render('feed_item_preview.html', {
+                    cast_app: function() {},
+                    obj: feed_element,
+                    item_type: type,
+                    url: function() {return '#';}
+                })
+            );
+        });
+    }
 
     function refresh_preview(obj, item_type) {
-        // Stub out Fireplace-specific helpers.
-        var stub_globals = nunjucks.require('globals');
-        stub_globals.app_incompat = function() {};
-        stub_globals.has_installed = function() {};
-        stub_globals.imgAlreadyDeferred = function() {return true;};
+        stub_globals();
 
         $('.feed').append(
             nunjucks.env.render('feed_item_preview.html', {
@@ -173,6 +190,14 @@ define('feed_previews',
             })
         );
         clamp(document.querySelector('.feed .desc'), 4);
+    }
+
+    function stub_globals() {
+        // Stub out Fireplace-specific helpers.
+        var stub_globals = nunjucks.require('globals');
+        stub_globals.app_incompat = function() {};
+        stub_globals.has_installed = function() {};
+        stub_globals.imgAlreadyDeferred = function() {return true;};
     }
 
     function empty() {
