@@ -39,7 +39,7 @@ define('views/listing',
             requests.get(urls.api.url('feed-element-search', [], {'q': $this.val()})).done(function(data) {
                 $('.feed-api-results').hide();
                 $('.feed-search-results').html(nunjucks.env.render('search_results.html', {
-                    data: data,
+                    data: data
                 })).show();
 
                 cast_search_results(data);

@@ -1,5 +1,5 @@
-define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'format', 'l10n', 'notification', 'nunjucks', 'requests',  'urls', 'utils', 'z'],
-    function(forms_transonic, $, sortable, format, l10n, notification, nunjucks, requests, urls, utils, z) {
+define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'format', 'l10n', 'models', 'notification', 'nunjucks', 'requests',  'urls', 'utils', 'z'],
+    function(forms_transonic, $, sortable, format, l10n, models, notification, nunjucks, requests, urls, utils, z) {
     'use strict';
     var format = format.format;
     var gettext = l10n.gettext;
@@ -23,8 +23,11 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
                 var context = {is_builder: true};
                 context[type] = feed_items[i][type];
                 var $feed_element = $(nunjucks.env.render(format('listing/{0}.html', [type]), context));
+
+                models('feed-' + type).cast(feed_items[i][type]);
                 append($feed, $feed_element);
             }
+
             $('.feeds .loading').hide();
             z.page.trigger('refresh_preview');
         });
