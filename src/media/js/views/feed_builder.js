@@ -63,7 +63,11 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
         }
         $feed.find('.empty-results').hide();
         $feed.find('.feed-elements').append($feed_element.clone());
-        $('.feed-elements').sortable();
+        $('.feed-elements').sortable({
+            onDrop: function() {
+                z.page.trigger('refresh_preview');
+            }
+        });
         z.page.trigger('refresh_preview');
     }
 
