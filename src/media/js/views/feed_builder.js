@@ -20,7 +20,15 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
 
             for (var i = 0; i < feed_items.length; i++) {
                 var type = feed_items[i].item_type;
-                var context = {is_builder: true};
+                if (type == 'shelf') {
+                    // Don't render shelves because they are immutable in feed.
+                    continue;
+                }
+
+                var context = {
+                    feed: require('feed'),
+                    is_builder: true
+                };
                 context[type] = feed_items[i][type];
                 var $feed_element = $(nunjucks.env.render(format('listing/{0}.html', [type]), context));
 
