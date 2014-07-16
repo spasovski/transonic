@@ -68,7 +68,6 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
 
         carriers: [
             'america_movil',
-            'carrierless',
             'china_unicom',
             'deutsche_telekom',
             'etisalat',
