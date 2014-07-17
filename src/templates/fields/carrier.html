@@ -1,12 +1,14 @@
 {% set carrier_selected = obj.carrier if obj else settings.carriers[0] %}
 
-<div class="carrier field">
-  <label for="carrier" class="inline-label">{{ _('Carrier') }}</label>
-  <select id="carrier" name="carrier">
+<div class="field carrier has-pretty-select">
+  <label for="carrier">{{ _('Carrier') }}</label>
+  <div class="pretty-select">
+    <select id="carrier" name="carrier">
     {% for carrier in settings.carriers %}
       <option value="{{ carrier }}" {{ 'selected' if carrier_selected == carrier }}>
         {{ carrier|unslug }}
       </option>
     {% endfor %}
-  </select>
+    </select>
+  </div>
 </div>
