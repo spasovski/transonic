@@ -122,11 +122,15 @@ h3 {
         margin: 0 auto;
         max-width: $desktop-content;
 
-        [data-page-type~=create] & #page {
+        [data-page-type="create detail"] & #page,
+        [data-page-type="edit detail"] & #page,
+        [data-page-type="publish"] & #page {
             float: left;
             width: 772px;  /* 772 - 15 - 363 */
         }
-        [data-page-type~=create] & aside.feed-previews {
+        [data-page-type="create detail"] & aside.feed-previews,
+        [data-page-type="edit detail"] & aside.feed-previews,
+        [data-page-type="publish"] & aside.feed-previews {
             float: right;
             position: static;
             transform: none;
