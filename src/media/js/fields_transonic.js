@@ -47,10 +47,6 @@ define('fields_transonic',
             $('.result.app-group').hide();
         }
     })
-    .on('change', '.brand-layout select', function() {
-        var $helptext = $('.brand-helptext').hide();
-        $helptext.filter('.' + this.value).show();
-    })
     .on('app-selected', function(e, app) {
         if ($('.transonic-form').data('type') == 'apps') {
             apps_widget.set(app);
