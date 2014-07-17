@@ -10,6 +10,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
     z.page.on('change', '.feed-region-switcher', function() {
         /* Look at a different feed. */
         var region = this.value;
+        $('.feed-builder .submit').prop('disabled', true);
         $('.feeds .loading').show();
 
         requests.get(urls.api.url('feed-items', [], {'region': region, 'ordering': 'order'})).done(function(feed_items) {
@@ -37,6 +38,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
             }
 
             $('.feeds .loading').hide();
+            $('.feed-builder .submit').prop('disabled', false);
             z.page.trigger('refresh_preview');
         });
     })
