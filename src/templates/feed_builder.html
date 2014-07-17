@@ -5,7 +5,7 @@
   </div>
   <div class="feed-column c">
     <div class="feed-selector">
-      <h2>{{ _('Select a Feed to Modify') }}</h2>
+      <h2>{{ _('Select Feeds to Modify') }}</h2>
       <select class="feed-region-switcher" name="feed-region">
         {% for region_slug, region_name in settings.REGION_CHOICES_SLUG|items %}
           <option value="{{ region_slug }}" {{ 'selected' if region_slug == 'restofworld' }}>
