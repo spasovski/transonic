@@ -19,21 +19,25 @@ button, input[type=button], input[type=reset], input[type=submit] {
     cursor: pointer;
 }
 
-input::-webkit-input-placeholder {
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
     color: $placeholder-grey;
 }
 
-input:-moz-placeholder {
+input:-moz-placeholder,
+textarea:-moz-placeholder {
     color: $placeholder-grey;
     text-overflow: ellipsis;  // Firefox 18 and below
 }
 
-input::-moz-placeholder {
+input::-moz-placeholder,
+textarea::-moz-placeholder {
     color: $placeholder-grey;
     text-overflow: ellipsis;  // Firefox 19+
 }
 
-input[placeholder] {
+input[placeholder],
+textarea[placeholder] {
     text-overflow: ellipsis;
     // Because bug 673873 is stupidface.
     // Yes, the order matters. Firefox 18 (and below) is clownshoes.
