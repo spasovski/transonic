@@ -184,8 +184,12 @@ form {
         vertical-align: top;
         width: 500px;
     }
-    .background-image.field label {
-        vertical-align: top;
+    .background-image.field {
+        width: 625px;
+
+        label {
+            vertical-align: top;
+        }
     }
     .background-image-input {
         display: inline-block;
@@ -402,39 +406,6 @@ form {
     }
     .background-image.field {
         width: 625px;
-    }
-}
-
-.collections,
-.shelves {
-    .slug .inline-label {
-        min-width: 80px;
-    }
-    .background-image {
-        // TODO: remove if we have shelf landing background image.
-        width: 270px;
-    }
-    &[data-collection-type="promo"],
-    &[data-collection-type="listing"] {
-        .shelf-landing {
-            display: none;
-        }
-    }
-    .float-wrap {
-        float: left;
-        width: 40%;
-
-        input {
-            width: 70%;
-        }
-    }
-    .description.top-hat-field.half {
-        float: right;
-        position: relative
-        right: 100px;
-    }
-    .background-image {
-        display: inline-block;
     }
 }
 
