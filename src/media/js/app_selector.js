@@ -3,37 +3,27 @@ define('app_selector',
     function($, format, l10n, log, requests, settings, nunjucks, _, urls, utils, z) {
     'use strict';
 
-    var $app_selector;
-    var $spinner;
-    var $results;
-    var $paginator;
     var gettext = l10n.gettext;
     var results_map = {};
 
-    z.page.on('loaded', function() {
-        // Cache selectors.
-        $app_selector = $('.app-selector');
-        $paginator = $app_selector.find('.paginator');
-        $spinner = $('.loading');
-        $results = $('.results').hide();
-    })
-
-    .on('keypress input', '.app-selector input', _.debounce(function() {
-        $paginator.attr('data-offset', 0);
+    z.page.on('keypress input', '.app-selector input', _.debounce(function() {
+        var $app_selector = $('.app-selector');
+        $app_selector.find('.paginator').attr('data-offset', 0);
         if (this.value.length > 2) {
-            $spinner.show();
+            $('.loading').show();
             $app_selector.addClass('focused');
             search_handler(this.value, 0);
         } else {
             $app_selector.removeClass('focused');
-            $results.hide();
+            $('.results').hide();
         }
     }, 250))
 
     .on('click', '.app-selector .paginator a:not(.disabled)', function() {
+        var $paginator = $app_selector.find('.paginator');
         var offset = parseInt($paginator.attr('data-offset'), 10);
-        $results.hide();
-        $spinner.show();
+        $('.results').hide();
+        $('.loading').show();
         if ($(this).hasClass('prev')) {
             offset = offset - 5;
         } else {
@@ -45,11 +35,11 @@ define('app_selector',
 
     .on('click', '.app-selector .result', function(evt) {
         evt.preventDefault();  // To prevent click-off to app detail page.
-        var $this = $(this);
         var $app_selector = $('.app-selector');
+        var $this = $(this);
         $app_selector.find('input[name="app"]').val($this.data('id'));
         // Trigger with ID.
-        $results.hide();
+        $('.results').hide();
         $app_selector.removeClass('focused');
         z.page.trigger('app-selected', [results_map[$this.attr('data-id')]]);
     });
@@ -80,6 +70,9 @@ define('app_selector',
     };
 
     function search_handler(q, offset) {
+        var $paginator = $('.app-selector .paginator');
+        var $results = $('.results');
+
         // Search.
         var search_url = urls.api.unsigned.params(
             'search', {'q': q, 'limit': 5, 'offset': offset});
@@ -131,7 +124,7 @@ define('app_selector',
 
             }
 
-            $spinner.hide();
+            $('.loading').hide();
         });
     }
 
