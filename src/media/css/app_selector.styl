@@ -18,8 +18,8 @@
         display: none;
         font-size: 20px;
         position: absolute;
-        top: 9px;
         right: 9px;
+        top: 9px;
     }
 
     #app-selector {
@@ -65,7 +65,7 @@
 
             &.disabled,
             &.disabled:hover {
-                background-color: #f1f1f1;
+                background-color: $salt-flat-white;
                 cursor: auto;
             }
 
@@ -94,7 +94,7 @@
         right: 1px;
         top: 35px;
         width: 400px;
-        z-index: 1000;
+        z-index: 50;
     }
 
     .result {
@@ -228,7 +228,7 @@
     position: relative;
 
     // Make this look disabled on edit page.
-    [data-page-type="edit"] & {
+    [data-page-type~="edit"] & {
         color: #7F7F7F;
 
         .delete {

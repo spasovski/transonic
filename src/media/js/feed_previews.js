@@ -97,7 +97,7 @@ define('feed_previews',
             pullquote_attribution: $('[name="pq-attribution"]').val().escape() || '',
             pullquote_rating: $('.pq-rating input:checked').val() || 0,
             pullquote_text: $('.pq-text .localized:not(.hidden').val().escape() || '',
-            type: $('.featured-type-choices input:checked').val() || 'icon',
+            type: $('.featured-type-choices').val() || 'icon',
         };
     };
 
