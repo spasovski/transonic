@@ -60,7 +60,7 @@ define('app_selector',
             detail_url: settings.api_url + '/app/' + app.slug,
             device_types: app.device_types,
             disabled_regions: get_disabled_regions(app),
-            icon: app.icons['48'],
+            icon: app.icons['32'],
             id: app.id,
             name: utils.translate(app.name),
             price: app.payment_required ? app.price_locale : gettext('Free'),
@@ -77,6 +77,7 @@ define('app_selector',
         var search_url = urls.api.unsigned.params(
             'search', {'q': q, 'limit': 5, 'offset': offset});
         requests.get(search_url).done(function(data) {
+            console.log(data);
             $results.find('.result').remove();
             $results.show();
 

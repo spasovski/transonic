@@ -423,60 +423,86 @@ form {
         &:hover {
             background: none;
         }
+        &.dragged {
+            background-color: $white;
+            border: 0;
+
+            // !important to override the inline styles added by the JS library.
+            height: 62px !important;
+            width: 315px !important;
+
+            .compat-info,
+            .actions {
+                display: none;
+            }
+        }
     }
     .actions {
-        bottom: 0;
-        position: absolute;
-        right: -2px;
-        text-align: center;
-        width: 50px;
-
         i, a {
             display: block;
-            padding: 3px 0;
+            width: 40px;
         }
+
         .reorder {
             color: $light-gray;
-            font-size: 26px;
+            font-size: 20px;
+            height: 18px;
+            position: absolute;
+            text-align: center;
+            right: 0;
 
             &:hover {
                 color: $sailor-blue;
             }
+
+            &:first-child{
+                line-height: 22px;
+                top: 0;
+            }
+
+            &:last-child {
+                bottom: 0;
+                line-height: 14px;
+            }
         }
+
         .delete {
             background: url(../img/pretty/close.svg) 50% no-repeat;
-            background-size: 18px auto;
-            height: 30px;
-            left: 5px;
-            position: relative;
-            width: 40px;
+            background-size: 13px auto;
+            height: 26px;
+            position: absolute;
+            right: 0;
+            top: 18px;
 
             &:hover {
-                background: url(../img/pretty/close_active.svg) 50% no-repeat;
+                background-image: url(../img/pretty/close_active.svg);
                 cursor: pointer;
             }
         }
     }
     .add-app-group {
-        bottom: 2px;
-        display: none;
-        height: 30px;
-        line-height: 30px;
-        padding: 0;
         position: absolute;
-        right: 3px;
-        width: 150px;
+        top: 0;
+        right: 0;
+
+        i {
+            display: inline-block;
+            margin-right: 3px;
+        }
+
+        &:hover,
+        i {
+            color: $sailor-blue;
+        }
     }
     .app-group-input {
-        width: 90%;
+        width: 300px;
     }
     .delete-app-group {
         background: url(../img/pretty/close.svg) 50% no-repeat;
         background-size: 18px auto;
-        height: 34px;
-        position: absolute;
-        right: 2px;
-        top: 17px;
+        display: inline-block;
+        height: 40px;
         width: 40px;
 
         &:hover {

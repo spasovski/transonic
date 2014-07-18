@@ -34,13 +34,8 @@
     </div>
   </section>
 
-  <section class="island apps">
-    <h3>{{ _('Apps') }}</h3>
-    <div class="collection-type apps promo listing
-                {{ 'hidden' if indexOf([C_PROMO, C_LISTING], coll_type) == -1 }}">
-      {% include "app_selector.html" %}
-      {% include "apps_widget.html" %}
-    </div>
+  <section class="island apps apps-multiple">
+    {% include "apps_widget_multiple.html" %}
   </section>
 
   {% include "fields/submit.html" %}

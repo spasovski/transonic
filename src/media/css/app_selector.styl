@@ -124,19 +124,22 @@
         top: 15px;
     }
     .info {
-        padding-left: 58px;
+        padding-left: 42px;
 
+        > * {
+            display: inline-block;
+            vertical-align: top;
+        }
         .name {
             font-size: 18px;
-            padding-top: 0;
+            padding: 0;
+            width: 257px;
         }
         .author {
             font-size: 13px;
-            margin-bottom: 3px;
         }
         .name,
         .author {
-            max-width: 240px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -151,8 +154,12 @@
         top: 70px;
     }
     .compat-info {
+        > * {
+            display: inline-block;
+            vertical-align: top;
+        }
+
         .device-types {
-            float: left;
             margin-top: 5px;
 
             li {
@@ -195,7 +202,6 @@
         }
         .disabled-regions {
             border-left: 1px solid $light-gray;
-            float: left;
             margin: 5px 0 0 3px;
             max-width: 150px;
             padding-left: 8px;
@@ -259,6 +265,37 @@
 }
 
 
+.apps-multiple {
+    label {
+        display: block;
+        padding: 0 0 5px 10px;
+        position: relative;
+        text-align: left;
+        width: auto;
+
+        &[for="app-selector"] {
+            display: none;
+        }
+    }
+
+    .app-selector {
+        margin: 0 0 20px 10px;
+
+        .results {
+            left: 0;
+            right: auto;
+        }
+    }
+
+    .apps-widget {
+        display: block;
+    }
+
+    .app-group input,
+    .app-group span {
+        vertical-align: top;
+    }
+}
 
 
 for region in ar br cl cn co de es gr hu it me mx pe pl rs uk us uy ve restofworld
