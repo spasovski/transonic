@@ -80,12 +80,10 @@ define('feed_previews',
 
     function preview_factory() {
         return {
-            thumbnail_url: THUMB,
-            image_size: $('.screenshots li.selected .screenshot').data('image-size'),
-            image_url: $('.screenshots li.selected .screenshot').attr('href'),
-            filetype: 'image/png',
+            thumbnail_size: $('.screenshots li.selected .screenshot').data('image-size'),
+            thumbnail_url: $('.screenshots li.selected a').attr('href'),
         };
-    };
+    }
 
     function feed_app_factory() {
         return {

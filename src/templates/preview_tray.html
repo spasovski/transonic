@@ -3,8 +3,8 @@
     <ul class="content">
       {% for preview in app.previews %}
       <li itemscope itemtype="http://schema.org/ImageObject"
-          data-id="{{ preview.id }}" data-image-size="{{ preview.image_size }}">
-          <a class="screenshot thumbnail" href="{{ preview.image_url }}">
+          data-id="{{ preview.id }}" data-image-size="{{ preview.thumbnail_size }}">
+          <a class="screenshot thumbnail" href="{{ preview.thumbnail_url }}">
             <img alt="{{ _('screenshot') }}" src="{{ preview.thumbnail_url }}" draggable="false" itemprop="contentURL">
           </a>
         </li>
