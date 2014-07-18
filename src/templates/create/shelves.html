@@ -15,25 +15,16 @@
 
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
+    {% include "fields/carrier.html" %}
+    {% include "fields/region.html" %}
+    {% include "fields/colors.html" %}
+    {% include "fields/background_images.html" %}
+  </section>
 
-    <div>
-      {% include "fields/carrier.html" %}
-      {% include "fields/region.html" %}
-    </div>
-
-    <div>
-      {% include "fields/colors.html" %}
-    </div>
-
-    <div class="bg">
-      {% include "fields/background_images.html" %}
-    </div>
-
-    <div class="apps">
-      <h2>{{ _('Apps') }}</h2>
-      {% include "app_selector.html" %}
-      {% include "apps_widget.html" %}
-    </div>
+  <section class="island">
+    <h2>{{ _('Apps') }}</h2>
+    {% include "app_selector.html" %}
+    {% include "apps_widget.html" %}
   </section>
 
   {% include "fields/submit.html" %}

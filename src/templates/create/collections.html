@@ -18,20 +18,10 @@
     {% include "fields/description.html" %}
   </section>
 
-  {% macro collection_type(name, type, obj_type) %}
-    <input id="collection-type-{{ type }}" type="radio"
-           name="collection-type" value="{{ type }}"
-           {% if obj_type == type %} checked{%endif%} />
-    <label for="collection-type-{{ type }}">{{ name }}</label>
-  {% endmacro %}
-
-  <fieldset class="collection-type-choices tabs">
-    {{ collection_type(_('Promo'), C_PROMO, coll_type) }}
-    {{ collection_type(_('Listing'), C_LISTING, coll_type) }}
-  </fieldset>
-
   <section class="island customize">
     <h3>{{ _('Customize') }}</h3>
+
+    {% include "fields/collection_type.html" %}
 
     <div class="collection-type promo listing
                 {{ 'hidden' if indexOf([C_PROMO, C_LISTING], coll_type) == -1 }}">
@@ -42,13 +32,10 @@
                 {{ 'hidden' if indexOf([C_PROMO], coll_type) == -1 }}">
       {% include "fields/background_images.html" %}
     </div>
+  </section>
 
-    <div class="collection-type apps promo listing
-                {{ 'hidden' if indexOf([C_PROMO, C_LISTING], coll_type) == -1 }}">
-      <h2>{{ _('Apps') }}</h2>
-      {% include "app_selector.html" %}
-      {% include "apps_widget.html" %}
-    </div>
+  <section class="island apps apps-multiple">
+    {% include "apps_widget_multiple.html" %}
   </section>
 
   {% include "fields/submit.html" %}

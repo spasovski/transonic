@@ -33,79 +33,22 @@
     }
 }
 
-.transonic-form {
-    /* Generic form styling (applies to apps + collections + brands). */
-    .island:first-child > h3 {
-        font-weight: normal;
-    }
-    .field {
-        margin: 15px 0;
-    }
-    .help-text {
-        color: $light-gray;
-        display: inline-block;
-        font-style: italic;
-        margin-top: 5px;
+form {
 
-        &.no-italic {
-            font-style: normal;
-        }
-    }
-    .top-hat-field {
-        > label:first-child {
-            background: $light-gray;
-            border-radius: 5px 5px 0 0;
-            padding: 8px;
-            width: 100%;
-        }
-        .inner {
-            border: 1px solid $light-gray;
-            width: 100%;
-        }
-    }
-    .inline-label {
-        background: $light-gray;
-        border-radius: 5px 0 0 5px;
-        display: inline-block;
-        margin-right: -4px;
-        padding: 8px 20px;
-        vertical-align: middle;
-    }
-    .choices-box {
-        border: 1px solid $light-gray;
-        display: inline-block;
-        padding: 6px 0 6px 6px;
-        vertical-align: middle;
-        width: 66%;
-    }
-    textarea {
-        border: 1px solid $light-gray;
-        height: 150px;
-        width: 100%;
-    }
-    .top-hat-field.half {
-        display: inline-block;
-        vertical-align: top;
-        width: 45%;
-
-        &:first-child {
-            margin-right: 20px;
-        }
-        &.hidden {
-            display: none;
-        }
-    }
     fieldset {
         input {
             display: none;
         }
+
         label:hover {
             cursor: pointer;
         }
+
         input:checked + label:not(.color):not(.rating) {
             background: $sailor-blue;
             color: #fff;
         }
+
         &.vert-choices {
             border: 0;
             display: block;
@@ -116,48 +59,7 @@
             }
         }
     }
-    .publish p {
-        padding: 10px 0;
-    }
-    .publish button,
-    .submit button {
-        background: $sailor-blue;
-        border: 0;
-        border-radius: 2px;
-        color: #fff;
-        margin: 10px 0;
-        padding: 10px 15px;
-    }
-    .boring-text {
-        .help-text {
-            margin-left: 5px;
-        }
-        input {
-            width: 33%;
-        }
-    }
-    .color-fields .field {
-        display: inline-block;
-        width: 400px;
 
-        .colors {
-            .color-box {
-                border: 1px solid $light-gray;
-                border-radius: 3px;
-                display: inline-block;
-                height: 20px;
-                width: 20px;
-                vertical-align: middle;
-            }
-            .selected-text {
-                border-right: 1px solid $light-gray;
-                display: inline-block;
-                margin-right: 8px;
-                padding-right: 8px;
-                width: 68px;
-            }
-        }
-    }
     fieldset.choices {
         border: 0;
         display: inline-block;
@@ -167,35 +69,129 @@
             display: inline-block;
         }
     }
-    fieldset.tabs {
-        border: 0;
-        padding: 0;
+
+    .field.bg-color {
+        width: auto;
+
+        .colors {
+            display: inline-block;
+
+            input {
+                display: none;
+            }
+
+            label {
+                width: auto;
+            }
+
+            .color-box {
+                display: inline-block;
+                height: 40px;
+                width: 80px;
+                vertical-align: middle;
+            }
+
+            .color {
+                margin-right: -3px;
+                position: relative;
+
+                &.selected:before {
+                    color: $white;
+                    content: '\2713';
+                    font-size: 24px;
+                    font-weight: 100;
+                    height: 24px;
+                    left: 50%;
+                    line-height: 1;
+                    margin: -12px 0 0 -12px;
+                    position: absolute;
+                    text-align: center;
+                    top: 50%;
+                    width: 24px;
+                }
+            }
+        }
+    }
+
+
+    /*
+    .choices-box {
+        border: 1px solid $light-gray;
+        display: inline-block;
+        padding: 6px 0 6px 6px;
+        vertical-align: middle;
+        width: 66%;
+    }
+    .transonic-form {
+        .publish p {
+            padding: 10px 0;
+        }
+        .publish button,
+        .submit button {
+            background: $sailor-blue;
+            border: 0;
+            border-radius: 2px;
+            color: #fff;
+            margin: 10px 0;
+            padding: 10px 15px;
+        }
+        .boring-text {
+            .help-text {
+                margin-left: 5px;
+            }
+            input {
+                width: 33%;
+            }
+        }
+        fieldset.tabs {
+            border: 0;
+            padding: 0;
+
+            label {
+                border-radius: 2px 2px 0 0;
+                display: inline-block;
+                margin-left: 20px;
+                padding: 7px 15px;
+            }
+            input:checked + label {
+                background: #fff;
+                border: 1px solid $light-gray;
+                border-bottom-width: 0;
+                color: $dark-gray;
+                box-shadow: none;
+            }
+        }
+        .inline-label + select {
+            border: 1px solid $light-gray;
+            padding: 6px;
+            vertical-align: middle;
+        }
+        .description .description-type .inner {
+            padding: 5px;
+        }
+        .placeholder-text {
+            border: 1px solid $light-gray;
+            border-radius: 0 0 5px 5px;
+            font-weight: 300;
+            padding: 10px;
+        }
+    */
+
+
+    .background-image .inner {
+        display: inline-block;
+        vertical-align: top;
+        width: 500px;
+    }
+    .background-image.field {
+        width: 625px;
 
         label {
-            border-radius: 2px 2px 0 0;
-            display: inline-block;
-            margin-left: 20px;
-            padding: 7px 15px;
+            vertical-align: top;
         }
-        input:checked + label {
-            background: #fff;
-            border: 1px solid $light-gray;
-            border-bottom-width: 0;
-            color: $dark-gray;
-            box-shadow: none;
-        }
-    }
-    .inline-label + select {
-        border: 1px solid $light-gray;
-        padding: 6px;
-        vertical-align: middle;
-    }
-    .background-image .inner {
-        padding: 10px;
     }
     .background-image-input {
         display: inline-block;
-        margin-left: 20px;
 
         p {
             position: relative;
@@ -203,25 +199,26 @@
             top: 5px;
         }
         [data-fileinput-fake] {
-            border: 1px dotted $light-gray;
+            border: 2px dashed $light-gray-grayscale-primary;
             display: block;
-            height: 200px;
+            height: 166px;
             width: 200px;
-            margin: 20px auto;
             overflow: hidden;
             position: relative;
             text-align: center;
-            vertical-align: top;
 
             &:hover {
                 cursor: pointer;
             }
+
             img {
                 position: absolute;
                 left: 0;
                 max-width: 100%;
                 top: 0;
+                z-index: 2;
             }
+
             input {
                 border: 0;
                 border-radius: 5px;
@@ -236,65 +233,112 @@
                 &:hover {
                     cursor: default;
                 }
+
                 &[disabled] {
                     background-color: #fff;
                     border-radius: 10px;
                     color: $dark-gray;
                 }
             }
+
+            .instructions {
+                color: $gray-grayscale-primary;
+                font-size: 20px;
+                padding-top: 15px;
+                text-align: center;
+                z-index: 1;
+            }
         }
         &.filled [data-fileinput-fake] {
-            border: 2px solid $green;
+            border-style: solid;
             position: relative;
 
             input {
                 display: block;
+                font-size: 13px;
+                height: 30px;
                 margin: 0 auto;
             }
         }
     }
-    .description .description-type .inner {
-        padding: 5px;
-    }
-    .placeholder-text {
-        border: 1px solid $light-gray;
-        border-radius: 0 0 5px 5px;
-        font-weight: 300;
-        padding: 10px;
-    }
-    .pq-rating.field {
-        .choices-box {
-            height: 34px;
-            padding: 6px;
-            width: -moz-fit-content;
-            width: -webkit-fit-content;
 
+    .field.screenshot {
+        width: 625px;
+
+        > label,
+        .screenshots {
+            vertical-align: top;
         }
+
+        .screenshots {
+            display: inline-block;
+            width: 500px;
+        }
+
+        .placeholder-text {
+            color: $label-grey;
+            font-style: italic;
+        }
+    }
+
+    .field.pq-rating {
+        input {
+            display: none;
+        }
+
+        > label,
+        .choices-box {
+            vertical-align: top;
+        }
+
+        fieldset {
+            position: relative;
+            top: -3px;
+
+            label {
+                height: 20px;
+                margin: 0;
+                overflow: hidden;
+                padding: 0;
+                width: 20px;
+            }
+        }
+
+        .choices-box {
+            display: inline-block;
+            height: 20px;
+        }
+
         [data-rating="1"] {
             .star-1 {
                 color: $sailor-blue;
             }
         }
+
         [data-rating="2"] {
             .star-1, .star-2 {
                 color: $sailor-blue;
             }
         }
+
         [data-rating="3"] {
             .star-1, .star-2, .star-3 {
                 color: $sailor-blue;
             }
         }
+
         [data-rating="4"] {
              .star-1, .star-2, .star-3, .star-4 {
                 color: $sailor-blue;
             }
         }
+
         [data-rating="5"] {
             .star-1, .star-2, .star-3, .star-4, .star-5 {
                 color: $sailor-blue;
             }
         }
+
         .star {
             bottom: 10px;
             color: $light-gray;
@@ -302,6 +346,34 @@
             margin-right: 2px;
             position: relative;
         }
+    }
+
+}
+
+.fake-field {
+    padding: 8px 10px 0 40px !important;
+    position: relative;
+
+    img {
+        width: 21px;
+        height: 21px;
+        position: absolute;
+        top: 9px;
+        left: 9px;
+    }
+}
+*/
+
+.fake-field {
+    padding: 8px 10px 0 40px !important;
+    position: relative;
+
+    img {
+        width: 21px;
+        height: 21px;
+        position: absolute;
+        top: 9px;
+        left: 9px;
     }
 }
 
@@ -314,11 +386,6 @@
     select {
         display: inline-block;
     }
-}
-
-.transonic-form .app-selector {
-    margin: 10px 20px 0 0;
-    vertical-align: top;
 }
 
 .apps {
@@ -337,57 +404,13 @@
         padding: 10px;
     }
     .background-image.field {
-        width: 270px;
-    }
-}
-
-.collections,
-.shelves {
-    .slug .inline-label {
-        min-width: 80px;
-    }
-    .background-image {
-        // TODO: remove if we have shelf landing background image.
-        width: 270px;
-    }
-    &[data-collection-type="promo"],
-    &[data-collection-type="listing"] {
-        .shelf-landing {
-            display: none;
-        }
-    }
-    .float-wrap {
-        float: left;
-        width: 40%;
-
-        input {
-            width: 70%;
-        }
-    }
-    .description.top-hat-field.half {
-        float: right;
-        position: relative
-        right: 100px;
-    }
-    .background-image {
-        display: inline-block;
-    }
-}
-
-.brands {
-        .brand-helptext {
-        font-weight: 300;
-        font-size: 12px;
-        padding-top: 8px;
+        width: 625px;
     }
 }
 
 .apps-widget {
     margin-top: 10px;
 
-    label {
-        position: relative;
-    }
     .apps .result {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -400,60 +423,86 @@
         &:hover {
             background: none;
         }
+        &.dragged {
+            background-color: $white;
+            border: 0;
+
+            // !important to override the inline styles added by the JS library.
+            height: 62px !important;
+            width: 315px !important;
+
+            .compat-info,
+            .actions {
+                display: none;
+            }
+        }
     }
     .actions {
-        bottom: 0;
-        position: absolute;
-        right: -2px;
-        text-align: center;
-        width: 50px;
-
         i, a {
             display: block;
-            padding: 3px 0;
+            width: 40px;
         }
+
         .reorder {
             color: $light-gray;
-            font-size: 26px;
+            font-size: 20px;
+            height: 18px;
+            position: absolute;
+            text-align: center;
+            right: 0;
 
             &:hover {
                 color: $sailor-blue;
             }
+
+            &:first-child{
+                line-height: 22px;
+                top: 0;
+            }
+
+            &:last-child {
+                bottom: 0;
+                line-height: 14px;
+            }
         }
+
         .delete {
             background: url(../img/pretty/close.svg) 50% no-repeat;
-            background-size: 18px auto;
-            height: 30px;
-            left: 5px;
-            position: relative;
-            width: 40px;
+            background-size: 13px auto;
+            height: 26px;
+            position: absolute;
+            right: 0;
+            top: 18px;
 
             &:hover {
-                background: url(../img/pretty/close_active.svg) 50% no-repeat;
+                background-image: url(../img/pretty/close_active.svg);
                 cursor: pointer;
             }
         }
     }
     .add-app-group {
-        bottom: 2px;
-        display: none;
-        height: 30px;
-        line-height: 30px;
-        padding: 0;
         position: absolute;
-        right: 3px;
-        width: 150px;
+        top: 0;
+        right: 0;
+
+        i {
+            display: inline-block;
+            margin-right: 3px;
+        }
+
+        &:hover,
+        i {
+            color: $sailor-blue;
+        }
     }
     .app-group-input {
-        width: 90%;
+        width: 300px;
     }
     .delete-app-group {
         background: url(../img/pretty/close.svg) 50% no-repeat;
         background-size: 18px auto;
-        height: 34px;
-        position: absolute;
-        right: 2px;
-        top: 17px;
+        display: inline-block;
+        height: 40px;
         width: 40px;
 
         &:hover {

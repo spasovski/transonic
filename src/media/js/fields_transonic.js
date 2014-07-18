@@ -12,11 +12,12 @@ define('fields_transonic',
     })
     .on('change', '.colors input', function() {
         // Sync color previews and inputs.
-        var $this = $(this);
         var $parent = $(this).closest('.colors');
-        var color = $this.attr('value');
-        $parent.find('.selected-color').css('background', color);
-        $parent.find('.selected-text').text(color);
+        var $labels = $parent.find('label');
+        console.log()
+        $labels.filter('.selected').removeClass('selected');
+        var newSelected = $labels.filter('[for=' + this.id + ']').addClass('selected');
+        console.log(newSelected);
     })
     .on('change', '.pq-rating input', function() {
         // Set rating data attribute to highlight stars.
@@ -25,9 +26,10 @@ define('fields_transonic',
         var rating = $parent.find('input:checked').val();
         $parent.find('.choices').attr('data-rating', rating);
     })
-    .on('change', '.featured-type-choices input', function(e) {
+    .on('change input', '.featured-type-choices', function(e) {
         // Tab between different featured types (graphic, desc, pull quote).
-        $('.featured-details').hide().filter('.' + this.getAttribute('data-type')).show();
+        console.log(this);
+        $('.featured-details').hide().filter('.' + this.options[this.selectedIndex].getAttribute('data-type')).show();
         $('.form-errors').empty();
         utils_local.initCharCounter();
     })
@@ -44,10 +46,6 @@ define('fields_transonic',
         } else {
             $('.result.app-group').hide();
         }
-    })
-    .on('change', '.brand-layout select', function() {
-        var $helptext = $('.brand-helptext').hide();
-        $helptext.filter('.' + this.value).show();
     })
     .on('app-selected', function(e, app) {
         if ($('.transonic-form').data('type') == 'apps') {

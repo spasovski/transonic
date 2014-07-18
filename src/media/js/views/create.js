@@ -1,6 +1,6 @@
 define('views/create',
-    ['feed_previews', 'fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'templates', 'urls', 'utils', 'utils_local', 'z'],
-    function(feed_previews, fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, nunjucks, urls, utils, utils_local, z) {
+    ['apps_widget', 'feed_previews', 'fields_transonic', 'forms_transonic', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'requests', 'templates', 'urls', 'utils', 'utils_local', 'z'],
+    function(apps_widget, feed_previews, fields_transonic, forms_transonic, $, fakefilefield, l10n, log, notification, requests, nunjucks, urls, utils, utils_local, z) {
 
     'use strict';
     var gettext = l10n.gettext;
@@ -43,22 +43,25 @@ define('views/create',
 
         var title;
         if (feedType == 'apps') {
-            title = gettext('Creating a Featured App');
+            title = gettext('Create a Featured App');
         } else if (feedType == 'collections') {
-            title = gettext('Creating a Collection');
+            title = gettext('Create a Collection');
         } else if (feedType == 'brands') {
-            title = gettext('Creating an Editorial Brand');
+            title = gettext('Create an Editorial Brand');
         } else if (feedType == 'shelves') {
-            title = gettext('Creating an Operator Shelf');
+            title = gettext('Create an Operator Shelf');
         }
 
         builder.z('title', title);
-        builder.z('type', 'create');
+        builder.z('type', 'create detail');
         builder.start('create/' + feedType + '.html', {
             'feed_type': feedType,  // 'apps', 'collections', 'editorial', or 'shelves'.
             'title': title,
         }).done(function() {
             $('.fileinput').fakeFileField();
+            if (feedType == 'apps') {
+                apps_widget.set(null);
+            }
             feed_previews.refresh();
             utils_local.initCharCounter();
         });

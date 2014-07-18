@@ -1,6 +1,6 @@
 {% macro locale_textarea(name, lang, val, max) %}
   <textarea name="{{ name }}-{{ lang }}"
-            placeholder="This app is awesome! ({{ lang }})"
+            placeholder="(Localized in {{ lang }})"
             {% if max %}maxlength={{ max }}{% endif %}
             data-name="{{ name }}" data-lang="{{ lang }}"
             class="localized{% if lang != 'en-US' %} hidden{% endif %}">
@@ -10,7 +10,7 @@
 
 {% macro locale_input(name, lang, val, klass, placeholder) %}
   <input name="{{ name }}-{{ lang }}" type="text"
-         placeholder="{{ placeholder or 'My Awesome Gems'}} ({{ lang }})"
+         placeholder="{{ placeholder or 'Localized in'}} ({{ lang }})"
          data-name="{{ name }}" data-lang="{{ lang }}"
          class="localized{% if lang != 'en-US' %} hidden{% endif %} {{ klass if klass }}"
          value="{{ val }}">

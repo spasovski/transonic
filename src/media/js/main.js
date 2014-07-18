@@ -41,7 +41,7 @@ function() {
     z.page.one('loaded', function() {
         console.log('Hiding splash screen');
         $('#splash-overlay').addClass('hide');
-        $('main').after(
+        $('main').append(
             nunjucks.env.render('feed_aside.html'));
     });
 
@@ -53,8 +53,6 @@ function() {
             nunjucks.env.render('header.html'));
         $('#site-footer').html(
             nunjucks.env.render('footer.html'));
-        $('#site-nav').html(
-            nunjucks.env.render('nav.html'));
 
         z.body.toggleClass('logged-in', require('user').logged_in());
         z.page.trigger('reloaded_chrome');

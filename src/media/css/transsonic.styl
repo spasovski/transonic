@@ -57,8 +57,11 @@ h3 {
     }
     main,
     .site-header > nav {
-        margin: 0 0 0 50px;
-        width: 840px;
+        margin: 0 auto;
+        width: 1150px;
+    }
+    .site-header > nav {
+        padding: 0 15px;
     }
     .container {
         &.product-details,
@@ -69,14 +72,6 @@ h3 {
         &.form-grid {
             padding: 25px;
         }
-    }
-    #footer {
-        background: #fff;
-        border-top: 1px solid $cloud-gray;
-        margin: 1px 0 0;
-        max-width: inherit;
-        padding: 48px 0;
-        width: 100%;
     }
     [data-page-type~=home],
     [data-page-type~=listing],
@@ -117,6 +112,68 @@ h3 {
     }
 } // End of Desktop.
 
+
+@media $static-preview {
+    body {
+        min-height: 100%;
+    }
+
+    main {
+        margin: 0 auto;
+        max-width: $desktop-content;
+
+        [data-page-type="create detail"] & #page,
+        [data-page-type="edit detail"] & #page,
+        [data-page-type="publish"] & #page {
+            float: left;
+            width: 772px;  /* 772 - 15 - 363 */
+        }
+        [data-page-type="create detail"] & aside.feed-previews,
+        [data-page-type="edit detail"] & aside.feed-previews,
+        [data-page-type="publish"] & aside.feed-previews {
+            float: right;
+            position: static;
+            transform: none;
+            width: 363px;
+        }
+    }
+
+    aside.feed-previews {
+        background: 0;
+        padding-top: 0;
+
+        .phone {
+            background: $black;
+            border-radius: 50px 50px 0 0;
+            padding: 50px 0 20px;
+            position: relative;
+
+            > h3 {
+                background: $blue-action-primary;
+                bottom: 0;
+                color: $white;
+                font-size: 12px;
+                font-weight: bold;
+                height: 30px;
+                left: 0;
+                padding: 7px 21px 0;
+                position: absolute;
+                text-transform: uppercase;
+                width: 100%;
+            }
+        }
+
+        .screen {
+            background: $light-gray-grayscale-primary;
+            margin: 0 auto;
+            padding: 10px;
+            width: 320px;
+        }
+    }
+
+}
+
+
 .form-errors ul {
     color: $red;
     padding: 10px 0;
@@ -149,9 +206,6 @@ body.dragging, body.dragging * {
 [data-page-type~=login] {
     p {
         margin-bottom : 18px;
-    }
-    #site-nav {
-        display: none;
     }
 }
 

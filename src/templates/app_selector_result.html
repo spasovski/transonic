@@ -5,8 +5,8 @@
   <div class="info">
     <h3 class="name" itemprop="name">
       <a href="{{ detail_url }}" target="_blank">{{ name }}</a>
+      <div class="author" itemprop="author">{{ author or _('No Author') }}</div>
     </h3>
-    <div class="author" itemprop="author">{{ author or _('No Author') }}</div>
     <div class="compat-info">
       <ul class="device-types" itemprop="device-types">
         <li class="desktop{% if device_types.indexOf('desktop') == -1 %} unavailable{% endif %}"></li>
@@ -22,12 +22,12 @@
         </ul>
       {% endif %}
     </div>
+    {% if with_actions %}
+      <div class="actions">
+        <i class="reorder prev fa fa-caret-up"></i>
+        <a class="delete"></a>
+        <i class="reorder next fa fa-caret-down"></i>
+      </div>
+    {% endif %}
   </div>
-  {% if with_actions %}
-    <div class="actions">
-      <i class="reorder prev fa fa-caret-up"></i>
-      <a class="delete"></a>
-      <i class="reorder next fa fa-caret-down"></i>
-    </div>
-  {% endif %}
 </li>

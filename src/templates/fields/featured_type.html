@@ -1,0 +1,29 @@
+{% set FT_ICON = feed.FEEDAPP_ICON %}
+{% set FT_IMAGE = feed.FEEDAPP_IMAGE%}
+{% set FT_DESC = feed.FEEDAPP_DESC %}
+{% set FT_QUOTE = feed.FEEDAPP_QUOTE %}
+{% set FT_PREVIEW = feed.FEEDAPP_PREVIEW %}
+{% set feed_app_type = obj.type if obj else FT_ICON %}
+
+{% macro featured_type(name, type, val, obj_val) %}
+  {# Tabs for the type of featured app. #}
+  <option name="featured-type"
+          value="{{ val }}"
+          data-type="{{ type }}"
+          {% if obj_val == val %} selected="selected"{%endif%} />
+    {{ name }}</option>
+{% endmacro %}
+
+<div class="field has-pretty-select">
+  {# L10n: Describes an item's visual style #}
+  <label for="featured-type">{{ _('Style') }}</label>
+  <div class="pretty-select">
+    <select name="featured-type" class="featured-type-choices">
+      {{ featured_type(_('Icon'), 'icon', FT_ICON, feed_app_type) }}
+      {{ featured_type(_('Header Graphic'), 'background-image', FT_IMAGE, feed_app_type) }}
+      {{ featured_type(_('Description'), 'description', FT_DESC, feed_app_type) }}
+      {{ featured_type(_('Quote'), 'quote', FT_QUOTE, feed_app_type) }}
+      {{ featured_type(_('Screenshot'), 'screenshot', FT_PREVIEW, feed_app_type) }}
+    </select>
+  </div>
+</div>

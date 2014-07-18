@@ -1,0 +1,21 @@
+{% set C_PROMO = feed.COLL_PROMO %}
+{% set C_LISTING = feed.COLL_LISTING %}
+{% set coll_type = obj.type if obj else C_PROMO %}
+
+{% macro collection_type(name, type, obj_type) %}
+  <option name="collection-type"
+          value="{{ type }}"
+          {% if obj_type == type %} selected="selected"{%endif%} />
+    {{ name }}</option>
+{% endmacro %}
+
+<div class="field has-pretty-select">
+  {# L10n: Describes an item's visual style #}
+  <label for="collection-type">{{ _('Style') }}</label>
+  <div class="pretty-select">
+    <select name="collection-type" class="collection-type-choices">
+      {{ collection_type(_('Promo'), C_PROMO, coll_type) }}
+      {{ collection_type(_('Listing'), C_LISTING, coll_type) }}
+    </select>
+  </div>
+</div>
