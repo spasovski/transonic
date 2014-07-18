@@ -20,7 +20,7 @@ define('app_selector',
     }, 250))
 
     .on('click', '.app-selector .paginator a:not(.disabled)', function() {
-        var $paginator = $app_selector.find('.paginator');
+        var $paginator = $('.app_selector').find('.paginator');
         var offset = parseInt($paginator.attr('data-offset'), 10);
         $('.results').hide();
         $('.loading').show();
