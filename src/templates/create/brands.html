@@ -10,10 +10,8 @@
 
   </section>
 
-  <section class="island">
-    <h3>{{ _('Apps') }}</h3>
-    {% include "app_selector.html" %}
-    {% include "apps_widget.html" %}
+  <section class="island apps apps-multiple">
+    {% include "apps_widget_multiple.html" %}
   </section>
 
   {% include "fields/submit.html" %}
