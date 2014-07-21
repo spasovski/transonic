@@ -87,7 +87,7 @@
   {{ cast_app(brand.apps, true) }}
 {% endmacro %}
 
-{% macro feed_collection(coll) %}
+{% macro feed_collection(coll, preview_mode) %}
   {% set color = coll.background_color %}
   {% set desc = coll.description|translate(coll) %}
 
@@ -112,11 +112,13 @@
     </section>
   </a>
 
-  {{ feed.cast_collection(coll, true) }}
-  {{ cast_app(coll.apps, true) }}
+  {% if not preview_mode %}
+    {{ feed.cast_collection(coll, true) }}
+    {{ cast_app(coll.apps, true) }}
+  {% endif %}
 {% endmacro %}
 
-{% macro feed_shelf(shelf, landing) %}
+{% macro feed_shelf(shelf, landing, preview_mode) %}
   {% set color = shelf.background_color %}
 
   <a href="{{ url('feed/feed_shelf', [shelf.slug]) }}" class="fanchor">
@@ -128,8 +130,10 @@
     </section>
   </a>
 
-  {{ feed.cast_shelf(shelf, true) }}
-  {{ cast_app(shelf.apps, true) }}
+  {% if not preview_mode %}
+    {{ feed.cast_shelf(shelf, true) }}
+    {{ cast_app(shelf.apps, true) }}
+  {% endif %}
 {% endmacro %}
 
 {% macro feed_item(obj) %}

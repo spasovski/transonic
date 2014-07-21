@@ -162,6 +162,7 @@ define('feed_previews',
         $('.region-feed:not(.hidden) .feed-elements li').each(function(i, feed_element) {
             var $feed_element = $(feed_element);
             var type = $feed_element.data('type');
+            alert('type is ' + type);
             var slug = $feed_element.data('slug');
 
             var feed_element = require('models')('feed-' + type).lookup(slug);
@@ -187,6 +188,21 @@ define('feed_previews',
                 url: function() {return '#';},
             })
         );
+        if (item_type === 'collection') {
+            $('.phone.detail').show().find('.screen').append(
+                nunjucks.env.render('feed/feed_collection_content.html', {
+                    this: obj,
+                    preview_mode: true
+                })
+            );
+        } else if (item_type === 'shelf') {
+            $('.phone.detail').show().find('.screen').append(
+                nunjucks.env.render('feed/feed_shelf_content.html', {
+                    this: obj,
+                    preview_mode: true
+                })
+            );
+        }
         clamp(document.querySelector('.feed .desc'), 4);
     }
 
@@ -199,7 +215,7 @@ define('feed_previews',
     }
 
     function empty() {
-        $('.feed').empty();
+        $('.feed, .phone.detail .screen').empty();
     }
 
     return {
