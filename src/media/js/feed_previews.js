@@ -18,7 +18,7 @@ define('feed_previews',
     };
 
     function app_factory() {
-        var app = {
+        return $.extend({
             name: 'A Sample App',
             author: 'Kevin Ngo',
             icons: {
@@ -30,25 +30,7 @@ define('feed_previews',
             price: '$0.81',
             price_locale: '$0.81',
             slug: 'test-slug'
-        };
-
-        var $result = $('.apps-widget .result');
-        if ($result.length) {
-            var app = $.extend(true, app, {
-                name: $result.find('.name').text(),
-                author: $result.find('.author').text(),
-                icons: {
-                    64: $result.find('.icon').attr('src')
-                },
-                ratings: {
-                    average: $result.data('rating')
-                },
-                price: $result.data('price'),
-                price_locale: $result.data('price')
-            });
-        };
-
-        return app;
+        }, $('[name="app"]').data('app') || {});
     }
 
     function multi_app_factory() {
