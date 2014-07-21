@@ -58,15 +58,14 @@ define('apps_widget',
     var set = function(app) {
         var $app_selector = $('.app-selector');
         var $apps_widget = $('.apps-widget-single');
+        var $input = $app_selector.find('input[name="app"]');
 
         if (!app) {
             $app_selector.show();
             $apps_widget.hide();
-            $app_selector.find('input[name="app"]').val('');
+            $input.val('');
             return;
         }
-
-
 
         /* Given an app object, render it in the widget. */
         if (_.isObject(app.name)) {
@@ -86,7 +85,7 @@ define('apps_widget',
 
         $app_selector.find('#app-selector').val('').text();
         $app_selector.find('.result').remove();
-        $app_selector.find('input[name="app"]').val(app.id);
+        $input.val(app.id).data('app', app);
         z.page.trigger('refresh_preview');
     };
 
