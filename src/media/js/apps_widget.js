@@ -17,7 +17,7 @@ define('apps_widget',
         z.page.trigger('refresh_preview');
     })
 
-    .on('click', '[data-page-type="create"] .apps-widget-single .delete', function() {
+    .on('click', '[data-page-type~="create"] .apps-widget-single .delete', function() {
         $('.app-selector').show().find('input[name="app"]').val('');
         $('.apps-widget-single').hide();
         $('#app-selector').focus();
