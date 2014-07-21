@@ -13,7 +13,7 @@ define('forms_transonic',
             app: $form.find('[name="app"]').val(),
             background_color: $form.find('.bg-color input:checked').val(),
             description: utils_local.build_localized_field('description'),
-            type: $form.find('.featured-type-choices input:checked').val(),
+            type: $form.find('.featured-type-choices').val(),
             preview: $form.find('.screenshot li.selected').data('id'),
             pullquote_attribution: $form.find('[name="pq-attribution"]').val(),
             pullquote_rating: $form.find('.pq-rating input:checked').val(),
@@ -39,7 +39,7 @@ define('forms_transonic',
         /* Create or update FeedCollection. */
         // Check for app groups first.
         var $items = $('.apps-widget .result');
-        var type = $form.find('.collection-type-choices input:checked').val();
+        var type = $form.find('.collection-type-choices').val();
         var is_grouped = type == feed.COLL_PROMO && $items.filter('.app-group').length;
 
         // Gather data.
