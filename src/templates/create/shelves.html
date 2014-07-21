@@ -21,10 +21,8 @@
     {% include "fields/background_images.html" %}
   </section>
 
-  <section class="island">
-    <h2>{{ _('Apps') }}</h2>
-    {% include "app_selector.html" %}
-    {% include "apps_widget.html" %}
+  <section class="island apps apps-multiple">
+    {% include "apps_widget_multiple.html" %}
   </section>
 
   {% include "fields/submit.html" %}
