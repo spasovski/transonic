@@ -169,6 +169,14 @@ define('feed_previews',
                 url: function() {return '#';},
             })
         );
+        if (item_type === 'collection' || item_type === 'shelf') {
+            $('.phone.feed-landing').show().find('.screen').append(
+                nunjucks.env.render('feed/feed_preview_landing.html', {
+                    obj: obj,
+                    type: item_type
+                })
+            );
+        }
         clamp(document.querySelector('.feed .desc'), 4);
     }
 
@@ -181,7 +189,7 @@ define('feed_previews',
     }
 
     function empty() {
-        $('.feed').empty();
+        $('.feed, .phone.feed-landing .screen').empty();
     }
 
     return {
