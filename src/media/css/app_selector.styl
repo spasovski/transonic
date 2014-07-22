@@ -108,11 +108,11 @@
     .result {
         transition(background .1s);
         border-top: 1px solid $light-gray-grayscale-primary;
+        cursor: move;
         padding: 15px 5px 10px 10px;
         position: relative;
 
         &:hover {
-            cursor: pointer;
             background: $faint-blue;
         }
 
@@ -293,6 +293,12 @@
             left: 0;
             right: auto;
         }
+    }
+
+    .placeholder-text + .app-group + .result i.prev,
+    .placeholder-text + .result i.prev,
+    .result:last-child i.next {
+        display: none;
     }
 
     .apps-widget {
