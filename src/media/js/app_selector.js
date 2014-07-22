@@ -41,6 +41,7 @@ define('app_selector',
         // Trigger with ID.
         $('.results').hide();
         $app_selector.removeClass('focused');
+        $('#app-selector').val('');
         z.page.trigger('app-selected', [results_map[$this.attr('data-id')]]);
     });
 
