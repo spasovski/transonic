@@ -32,10 +32,11 @@ define('views/listing',
         });
 
     }))
-    .on('keypress', '.search-elements', _.debounce(function() {
+    .on('input', '.search-elements', _.debounce(function() {
         var $this = $(this);
 
         if ($this.val().length > 1) {
+            $('.search-clear').show();
             requests.get(urls.api.url('feed-element-search', [], {'q': $this.val()})).done(function(data) {
                 $('.feed-api-results').hide();
                 $('.feed-search-results').html(nunjucks.env.render('search_results.html', {
@@ -54,6 +55,7 @@ define('views/listing',
     }));
 
     function resetSearch() {
+        $('.search-clear').hide();
         $('.feed-api-results').show();
         $('.feed-search-results').hide();
     }
