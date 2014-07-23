@@ -4,7 +4,7 @@ define('views/listing',
     'use strict';
     var gettext = l10n.gettext;
 
-    z.body.on('click', '.manage-modules-listing .delete', utils._pd(function(e) {
+    z.body.on('click', '.manage-modules-listing .search-results .delete', utils._pd(function(e) {
         e.stopPropagation();
 
         // Delete.
@@ -45,10 +45,18 @@ define('views/listing',
                 cast_search_results(data);
             });
         } else {
-            $('.feed-api-results').show();
-            $('.feed-search-results').hide();
+            resetSearch();
         }
-    }, 250));
+    }, 250))
+    .on('click', '.search-elements ~ .search-clear', utils._pd(function() {
+        $('.search-elements').val('');
+        resetSearch();
+    }));
+
+    function resetSearch() {
+        $('.feed-api-results').show();
+        $('.feed-search-results').hide();
+    }
 
     function cast_search_results(data) {
         models('feed-app').cast(data.apps);

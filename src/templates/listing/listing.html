@@ -68,7 +68,8 @@
 {% endmacro %}
 
 <section class="manage-modules-listing island">
-  <input class="search-elements" type="search" placeholder="{{ _('Search for a feed element...') }}">
+  <input class="search-elements" type="search" required placeholder="{{ _('Search for a feed element...') }}">
+  <a href="#" class="delete search-clear" title="{{ _('Clear') }}">{{ _('Clear') }}</a>
 
   <div class="feed-api-results search-results">
     {% defer (url=api('feed-apps-list')|urlparams(ordering='-created'),

@@ -251,7 +251,33 @@ form {
 
 }
 
+.search-elements {
+    border: 1px solid $light-gray;
 
+    ~ .search-clear {
+        hidetext();
+        margin: 7px 5px 0 0;
+        transition(unquote('.3s opacity, .3s visibility'));
+    }
+    &:invalid {
+        box-shadow: none;
+
+        ~ .search-clear {
+            // Hide the X icon when the search field is empty.
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+    &:valid {
+        // Pad for the X icon.
+        padding-right: 34px;
+
+        ~ .search-clear {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
 
 textarea {
     display: block;
