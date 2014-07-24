@@ -1,44 +1,59 @@
 @import 'lib';
 
 .feed-builder {
-    align-items: flex-start;
-    display: inline-flex;
-    flex-wrap: wrap;
     position: relative;
     width: 100%;
-    justify-content: space-between;
 
-    .title {
-        font-weight: 400;
-        padding-bottom: 10px;
-    }
-    h2 {
-        flex-basis: 100%;
+    > section {
+        display: inline-block;
+        margin: 0 2.5%;
+        vertical-align: top;
+        width: 45%;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        > h2 {
+            line-height: 24px;
+            margin-bottom: 12px;
+        }
     }
 }
 
-.module-selector {
-    box-shadow: 0 0 1px 1px $cement-gray;
-    flex-basis: 49%;
+[data-page-type="publish"] {
+    .island {
+        box-shadow: none;
+    }
+
+    .manage-modules-listing {
+        .search-results > section,
+        .search-results > div {
+            display: block;
+            margin: 20px 0 0;
+            padding: 0;
+            width: auto;
+        }
+
+        form {
+            margin: 0;
+            width: 100%;
+        }
+    }
 }
 
 .feed-column {
     background: $barely-gray;
     box-shadow: 0 0 1px 1px $cement-gray;
-    flex-basis: 49%;
     padding: 20px;
 
-    .feeds {
-        background: #fff;
-        border: 1px solid $cement-gray;
-        height: 480px;
-        margin: 0 auto;
-        margin-bottom: 20px;
-        overflow: scroll;
-        position: relative;
-    }
     .submit {
-        float: right;
+        margin-top: 20px;
+        width: 100%;
     }
     [name="feed-region"] {
         background: #fff;
@@ -50,12 +65,21 @@
     }
     .empty-results {
         color: $cement-gray;
-        margin-top: 20px;
+        line-height: 24px;
+        padding: 20px 0;
         text-align: center;
     }
     .region-feed {
         padding: 0 5px;
     }
+
+    .feed-selector,
+    .pretty-select,
+    .pretty-select select {
+        margin-top: 0;
+        width: 100%;
+    }
+
     .feed-elements {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -63,10 +87,6 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-
-        .feed-element a {
-            position: static;
-        }
     }
 }
 
@@ -78,12 +98,9 @@
     }
 }
 
-.feed-builder .region-feed .delete {
-    top: 15px;
-}
-
 .feeds .loading {
     background: rgba(180, 180, 180, .8);
+    border-radius: 5px;
     height: 100%;
     left: 0;
     position: absolute;
