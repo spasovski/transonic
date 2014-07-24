@@ -1,5 +1,7 @@
 @import 'lib';
 
+$appx-flame-height = 680px;
+
 @-webkit-keyframes spin {
     from { -webkit-transform: rotate(0turn); }
     to { -webkit-transform: rotate(1turn); }
@@ -162,7 +164,7 @@ h3 {
 
             > h3 {
                 background: $blue-action-primary;
-                bottom: 0;
+                bottom: -10px;
                 color: $white;
                 font-size: 12px;
                 font-weight: bold;
@@ -177,7 +179,9 @@ h3 {
 
         .screen {
             background: $light-gray-grayscale-primary;
+            max-height: $appx-flame-height;
             margin: 0 auto;
+            overflow: scroll;
             padding: 10px;
             width: 320px;
         }
