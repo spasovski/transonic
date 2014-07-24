@@ -1,26 +1,14 @@
-{% macro create_tab(href, src, name) %}
-  <li>
-    <a href="{{ href }}">
-      <img src="{{ src }}" alt="{{ name }}">
-      <h3><a href="{{ href }}">{{ name }}</a></h3>
-    </a>
+{% macro create_tab(href, class, name) %}
+  <li class="create-{{ class }}">
+    <a href="{{ href }}">{{ name }}</a>
   </li>
 {% endmacro %}
 
 <section id="create-landing" class="island">
   <ul class="create c">
-    {{ create_tab(url('create', ['apps']), media('transonic/img/featured.jpg'),
-                  _('featured apps')) }}
-    {{ create_tab(url('create', ['collections']), media('transonic/img/collections.jpg'),
-                  _('collections')) }}
-    {{ create_tab(url('create', ['brands']), media('transonic/img/editorial.jpg'),
-                  _('editorial brands')) }}
-    <li class="shelf">
-      <h3>
-        <a href="{{ url('create', ['shelves']) }}">
-          {{ _('operator shelves') }}
-        </a>
-      </h3>
-    </li>
+    {{ create_tab(url('create', ['apps']), 'app', _('Featured App')) }}
+    {{ create_tab(url('create', ['collections']), 'collection', _('Collection')) }}
+    {{ create_tab(url('create', ['brands']), 'brand', _('Editorial Brand')) }}
+    {{ create_tab(url('create', ['shelves']), 'shelf', _('Operator shelf')) }}
   </ul>
 </section>
