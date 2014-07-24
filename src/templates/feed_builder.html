@@ -1,19 +1,26 @@
-<section class="island feed-builder c">
-  <h2 class="title">{{ _('Feed Builder') }}</h2>
-  <div class="module-selector">
-   {% include "listing/listing.html" %}
-  </div>
-  <div class="feed-column c">
-    <div class="feed-selector">
-      <h2>{{ _('Select Feeds to Modify') }}</h2>
-      <select class="feed-region-switcher" name="feed-region">
-        {% for region_slug, region_name in settings.REGION_CHOICES_SLUG|items %}
-          <option value="{{ region_slug }}" {{ 'selected' if region_slug == 'restofworld' }}>
-            {{ region_name }}
-          </option>
-        {% endfor %}
-      </select>
+<div class="feed-builder c">
+
+  <section class="island">
+    <div class="module-selector">
+     {% include "listing/listing.html" %}
     </div>
+  </section>
+  
+  <section class="island feed-column c">
+    <form>
+      <div class="field has-pretty-select feed-selector">
+        <div class="pretty-select">
+          <select class="feed-region-switcher" name="feed-region">
+          {% for region_slug, region_name in settings.REGION_CHOICES_SLUG|items %}
+            <option value="{{ region_slug }}" {{ 'selected' if region_slug == 'restofworld' }}>
+              {{ region_name }}
+            </option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+    </form>
+
     <div class="feeds">
       <div class="loading">
         <i class="fa fa-spinner fa-spin"></i>
@@ -22,14 +29,17 @@
         <div class="region-feed localized {{ 'hidden' if region_slug != 'restofworld' }}"
              data-region="{{ region_slug }}">
           <h2 class="empty-results">
-            {{ _('No feed items in {region} feed')|format({region: region_name}) }}
+            {{ _('No items in {region} feed')|format({region: region_name}) }}
           </h2>
           <ul class="feed-elements"></ul>
         </div>
       {% endfor %}
     </div>
+
     {# Disabled until feed_builder.js loads a feed. #}
     <button class="button submit" disabled>{{ _('Publish') }}</button>
     <div class="form-errors"></div>
-  </div>
-</section>
+
+  </section>
+
+</div>
