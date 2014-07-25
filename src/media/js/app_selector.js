@@ -1,6 +1,6 @@
 define('app_selector',
-    ['jquery', 'format', 'l10n', 'log', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'z'],
-    function($, format, l10n, log, requests, settings, nunjucks, _, urls, utils, z) {
+    ['jquery', 'format', 'l10n', 'log', 'requests', 'settings', 'templates', 'underscore', 'urls', 'utils', 'utils_local', 'z'],
+    function($, format, l10n, log, requests, settings, nunjucks, _, urls, utils, utils_local, z) {
     'use strict';
 
     var gettext = l10n.gettext;
@@ -42,6 +42,7 @@ define('app_selector',
         $('.results').hide();
         $app_selector.removeClass('focused');
         $('#app-selector').val('');
+        $('#slug').val(utils_local.slugify($this.find('.name a').text()));
         z.page.trigger('app-selected', [results_map[$this.attr('data-id')]]);
     });
 

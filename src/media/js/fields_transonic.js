@@ -4,6 +4,7 @@ define('fields_transonic',
     'use strict';
 
     var imageUploads = {};  // keep track of drag-and-drop uploads to stuff into FormData later.
+    var isEmptySlug = true;
 
     z.page.on('keypress', 'form', function(e) {
         if (e.keyCode == 13) {
@@ -128,8 +129,22 @@ define('fields_transonic',
                        .filter('[data-lang=' + lang + ']').removeClass('hidden');
         utils_local.initCharCounter();
     })
-    .on('input', '.localized', function() {
+
+    // Events for slug prefills for every feed item type.
+    .on('input change', '.name .localized', function() {
         highlight_localized();
+
+        if (isEmptySlug) {
+            $('#slug').val(utils_local.slugify($(this).val()));
+        }
+    })
+    .on('blur', '.name .localized', function() { // Stop prefilling slug once we defocus 'name'.
+        if ($('#slug').val().length) {
+            isEmptySlug = false;
+        }
+    })
+    .on('change', '#brand-type', function() {
+        $('#slug').val(utils_local.slugify($(this).val()));
     });
 
     // Highlight languages that have been localized.
