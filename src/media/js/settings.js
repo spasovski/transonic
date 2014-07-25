@@ -46,6 +46,7 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         REGION_CHOICES_SLUG: {
             'restofworld': gettext('Rest of World'),
             'ar': gettext('Argentina'),
+            'bd': gettext('Bangladesh'),
             'br': gettext('Brazil'),
             'cl': gettext('Chile'),
             'cn': gettext('China'),
@@ -70,7 +71,7 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'uk': gettext('United Kingdom'),
             'us': gettext('United States'),
             'uy': gettext('Uruguay'),
-            've': gettext('Venezuela'),
+            've': gettext('Venezuela')
         },
 
         carriers: [
