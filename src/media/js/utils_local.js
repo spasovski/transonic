@@ -72,6 +72,11 @@ define('utils_local', ['jquery', 'log', 'notification', 'nunjucks'], function($,
         return items;
     };
 
+    // Like django's except worse.
+    function slugify(str) {
+        return str.replace(/\s/g, '-').trim().toLowerCase();
+    }
+
     function render_errors(errors) {
         $('.form-errors').html(nunjucks.env.render('errors/form_errors.html', {
             errors: errors
@@ -84,6 +89,7 @@ define('utils_local', ['jquery', 'log', 'notification', 'nunjucks'], function($,
         handle_error: handle_error,
         initCharCounter: initCharCounter,
         items: items,
-        render_errors: render_errors
+        render_errors: render_errors,
+        slugify: slugify
     };
 });

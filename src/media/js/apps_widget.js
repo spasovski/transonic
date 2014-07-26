@@ -20,7 +20,8 @@ define('apps_widget',
     .on('click', '[data-page-type~="create"] .apps-widget-single .delete', function() {
         $('.app-selector').show().find('input[name="app"]').val('');
         $('.apps-widget-single').hide();
-        $('#app-selector').focus();
+        $('#app-selector').trigger('focus');
+        $('#slug').val('');
     })
 
     .on('click', '.apps-widget .delete-app-group', function() {
