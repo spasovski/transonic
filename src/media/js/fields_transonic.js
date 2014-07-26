@@ -33,10 +33,9 @@ define('fields_transonic',
         $('.form-errors').empty();
         utils_local.initCharCounter();
     })
-    .on('change', '.collection-type-choices input', function(e) {
+    .on('change', '.collection-type-choices', function(e) {
         // To help CSS toggle background image upload widgets for different collection types.
         $('.collection-type').hide().filter('.' + this.value).show();
-        $('.collection-type.bg').attr('data-collection-type', this.value);
         $(this).closest('form').attr('data-collection-type', this.value);
         $('.form-errors').empty();
 
