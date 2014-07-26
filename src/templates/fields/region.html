@@ -1,9 +1,10 @@
-{% set region_selected = obj.region if obj else 'restofworld' %}
+{% set region_selected = obj.region if obj else '' %}
 
 <div class="field region has-pretty-select">
   <label for="region">{{ _('Region') }}</label>
   <div class="pretty-select">
     <select id="region" name="region">
+    <option value="" {{ 'selected' if not region_selected }}>
     {% for region_slug, region_name in settings.REGION_CHOICES_SLUG|items %}
       <option value="{{ region_slug }}" {{ 'selected' if region_slug == region_selected }}>
         {{ region_name }}
