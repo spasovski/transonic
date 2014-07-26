@@ -1,6 +1,5 @@
 {% macro submit_footer(type, obj) %}
-  <section class="button-row">
-    <div class="form-errors"></div>
+  <section class="island submit c">
     <button type="submit" class="button submit">
       {% if obj %}
         {{ _('Update') }}
@@ -8,5 +7,6 @@
         {{ _('Submit') }}
       {% endif %}
     </button>
+    <div class="form-errors"></div>
   </section>
 {% endmacro %}
