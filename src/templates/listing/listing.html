@@ -8,7 +8,7 @@
 
 {% macro feed_apps(apps, response) %}
   <section>
-    <h2>{{ _('Featured Apps <em>({number})')|format({number: this.meta.total_count or apps.length}) }}</em></h2>
+    <h2>{{ _('Featured Apps <em>({number})')|format({number: response.meta.total_count or apps.length}) }}</em></h2>
     <ul class="feed-apps element-listing">
       {% for app in apps %}
         {% include "listing/app.html" %}
@@ -25,7 +25,7 @@
 
 {% macro feed_collections(collections, response) %}
   <section>
-    <h2>{{ _('Collections <em>({number})')|format({number: this.meta.total_count or collections.length}) }}</em></h2>
+    <h2>{{ _('Collections <em>({number})')|format({number: response.meta.total_count or collections.length}) }}</em></h2>
     <ul class="collections element-listing">
       {% for collection in collections %}
         {% include "listing/collection.html" %}
@@ -43,7 +43,7 @@
 {% macro feed_brands(brands, response) %}
   {% set b_types = feed.BRAND_TYPES %}
   <section>
-    <h2>{{ _('Editorial Brands <em>({number})')|format({number: this.meta.total_count or brands.length}) }}</em></h2>
+    <h2>{{ _('Editorial Brands <em>({number})')|format({number: response.meta.total_count or brands.length}) }}</em></h2>
     <ul class="brands element-listing">
       {% for brand in brands %}
         {% include "listing/brand.html" %}
@@ -60,7 +60,7 @@
 
 {% macro feed_shelves(shelves, response) %}
   <section>
-    <h2>{{ _('Operator Shelves <em>({number})')|format({number: this.meta.total_count or shelves.length}) }}</em></h2>
+    <h2>{{ _('Operator Shelves <em>({number})')|format({number: response.meta.total_count or shelves.length}) }}</em></h2>
     <ul class="shelves element-listing">
       {% for shelf in shelves %}
         {% include "listing/shelf.html" %}
