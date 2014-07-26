@@ -17,10 +17,12 @@ define('views/listing',
         }
 
         var endpoint = urls.api.url('feed-app', [$item.data('slug')]);
-        if ($this.hasClass('collection')) {
+        if ($this.data('type') == 'collection') {
             endpoint = urls.api.url('collection', [$item.data('slug')]);
-        } else if ($this.hasClass('brand')) {
+        } else if ($this.data('type') == 'brand') {
             endpoint = urls.api.url('feed-brand', [$item.data('slug')]);
+        } else if ($this.data('type') == 'shelf') {
+            endpoint = urls.api.url('feed-shelf', [$item.data('slug')]);
         }
 
         requests.del(endpoint).done(function(data) {
