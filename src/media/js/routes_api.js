@@ -20,7 +20,7 @@ define('routes_api', [], function() {
         'feed-shelf': '/api/v2/feed/shelves/{0}/',
         'feed-shelf-image': '/api/v2/feed/shelves/{0}/image/',
         'feed-shelf-publish': '/api/v2/feed/shelves/{0}/publish/',
-        'feed-items': '/api/v2/feed/items/?cache=0&vary=0',
+        'feed-items': '/api/v2/feed/get/?cache=0&vary=0',
         'feed-builder': '/api/v2/feed/builder/',
         'feed-element-search': '/api/v2/feed/elements/search/',
         'search': '/api/v1/apps/search/suggest?cache=1&vary=0',
