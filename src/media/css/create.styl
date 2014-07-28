@@ -198,15 +198,21 @@ form {
                 z-index: 1;
             }
         }
-        &.filled [data-fileinput-fake] {
-            border-style: solid;
-            position: relative;
+        &.filled  {
+            [data-fileinput-fake] {
+                border-style: solid;
+                position: relative;
 
-            input {
-                display: block;
-                font-size: 13px;
-                height: 30px;
-                margin: 0 auto;
+                input {
+                    display: block;
+                    font-size: 13px;
+                    height: 30px;
+                    margin: 0 auto;
+                }
+            }
+
+            .instructions {
+                display: none;
             }
         }
     }
