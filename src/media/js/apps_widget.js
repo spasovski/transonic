@@ -18,10 +18,12 @@ define('apps_widget',
     })
 
     .on('click', '[data-page-type~="create"] .apps-widget-single .delete', function() {
+        set(null);
         $('.app-selector').show().find('input[name="app"]').val('');
         $('.apps-widget-single').hide();
         $('#app-selector').trigger('focus');
         $('#slug').val('');
+        z.page.trigger('refresh_preview');
     })
 
     .on('click', '.apps-widget .delete-app-group', function() {
@@ -62,9 +64,9 @@ define('apps_widget',
         var $input = $app_selector.find('input[name="app"]');
 
         if (!app) {
+            $input.val('').data('app', null);
             $app_selector.show();
             $apps_widget.hide();
-            $input.val('');
             return;
         }
 
