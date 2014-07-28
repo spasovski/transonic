@@ -79,7 +79,6 @@ define('app_selector',
         var search_url = urls.api.unsigned.params(
             'search', {'q': q, 'limit': 5, 'offset': offset});
         requests.get(search_url).done(function(data) {
-            console.log(data);
             $results.find('.result').remove();
             $results.show();
 
