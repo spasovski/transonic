@@ -53,7 +53,7 @@ define('views/create',
         }
 
         builder.z('title', title);
-        builder.z('type', 'create detail');
+        builder.z('type', 'create detail ' + feedType);
         builder.start('create/' + feedType + '.html', {
             'feed_type': feedType,  // 'apps', 'collections', 'editorial', or 'shelves'.
             'title': title,

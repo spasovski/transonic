@@ -138,19 +138,26 @@ h3 {
         max-width: 1150px;
         min-width: 900px;
 
-        [data-page-type="create detail"] & #page,
-        [data-page-type="edit detail"] & #page,
-        [data-page-type="publish"] & #page {
+        [data-page-type~="create"][data-page-type~="detail"] & #page,
+        [data-page-type~="edit"][data-page-type~="detail"] & #page,
+        [data-page-type~="publish"] & #page {
             float: left;
             width: 772px;  /* 772 - 15 - 363 */
         }
-        [data-page-type="create detail"] & aside.feed-previews,
-        [data-page-type="edit detail"] & aside.feed-previews,
-        [data-page-type="publish"] & aside.feed-previews {
+
+        [data-page-type~="create"][data-page-type~="detail"] & aside.feed-previews,
+        [data-page-type~="edit"][data-page-type~="detail"] & aside.feed-previews,
+        [data-page-type~="publish"] & aside.feed-previews {
             float: right;
             position: static;
             transform: none;
             width: 363px;
+        }
+
+        [data-page-type~="brands"] .feed-landing,
+        [data-page-type~="apps"] .feed-landing,
+        [data-page-type~="publish"] {
+            display: none;
         }
     }
 
