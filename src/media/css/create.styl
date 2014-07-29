@@ -376,6 +376,7 @@ form {
 
         &:hover {
             background: none;
+            cursor: move;
         }
         &.dragged {
             background-color: $white;
@@ -388,49 +389,6 @@ form {
             .compat-info,
             .actions {
                 display: none;
-            }
-        }
-    }
-    .actions {
-        i, a {
-            display: block;
-            width: 40px;
-        }
-
-        .reorder {
-            color: $light-gray;
-            font-size: 20px;
-            height: 18px;
-            position: absolute;
-            text-align: center;
-            right: 0;
-
-            &:hover {
-                color: $sailor-blue;
-            }
-
-            &:first-child{
-                line-height: 22px;
-                top: 0;
-            }
-
-            &:last-child {
-                bottom: 0;
-                line-height: 14px;
-            }
-        }
-
-        .delete {
-            background: url(../img/pretty/close.svg) 50% no-repeat;
-            background-size: 13px auto;
-            height: 26px;
-            position: absolute;
-            right: 0;
-            top: 18px;
-
-            &:hover {
-                background-image: url(../img/pretty/close_active.svg);
-                cursor: pointer;
             }
         }
     }
@@ -484,5 +442,45 @@ option.highlighted {
     .form-errors {
         float: left;
         margin-left: 22px;
+    }
+}
+
+.actions {
+    i, a {
+        display: block;
+        width: 40px;
+    }
+    .reorder {
+        color: $light-gray;
+        font-size: 20px;
+        height: 18px;
+        position: absolute;
+        text-align: center;
+        right: 0;
+
+        &:hover {
+            color: $sailor-blue;
+        }
+        &:first-child{
+            line-height: 22px;
+            top: 0;
+        }
+        &:last-child {
+            bottom: 0;
+            line-height: 14px;
+        }
+    }
+    .delete {
+        background: url(../img/pretty/close.svg) 50% no-repeat;
+        background-size: 13px auto;
+        height: 26px;
+        position: absolute;
+        right: 0;
+        top: 18px;
+
+        &:hover {
+            background-image: url(../img/pretty/close_active.svg);
+            cursor: pointer;
+        }
     }
 }

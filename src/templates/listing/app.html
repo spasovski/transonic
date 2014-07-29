@@ -4,6 +4,7 @@
     <img class="icon" src="{{ app.app.icons['32'] }}">
     <h3 class="elliflow">{{ '{name} ({slug})'|format({name: app.app.name, slug: app.slug}) }}</h3>
     <span class="type">{{ feed.FEEDAPP_TYPES[app.type] }}</span>
-    <span class="delete" data-type="feed-app"></span>
+    <span class="delete-feed-element"></span>
   </a>
+  {% include "app_selector/app_selector_actions.html" %}
 </li>

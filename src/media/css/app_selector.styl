@@ -81,9 +81,7 @@
             line-height: 1;
             padding: 35px 15px 10px;
         }
-
     }
-
     .results {
         border: 1px solid $blue-action-primary;
         border-radius: 0 0 5px 5px;
@@ -96,7 +94,6 @@
         width: 400px;
         z-index: 50;
     }
-
     .placeholder-text {
         border-top: 1px solid $light-gray-grayscale-primary;
         color: $text;
@@ -104,11 +101,10 @@
         font-style: italic;
         padding: 10px 10px 5px;
     }
-
     .result {
         transition(background .1s);
         border-top: 1px solid $light-gray-grayscale-primary;
-        cursor: move;
+        cursor: pointer;
         padding: 15px 5px 10px 10px;
         position: relative;
 
@@ -119,7 +115,6 @@
         &.selected {
             background: $shadow-blue;
         }
-
     }
     .no-results {
         border-top: 1px solid $light-gray-grayscale-primary !important;
@@ -166,7 +161,6 @@
             display: inline-block;
             vertical-align: top;
         }
-
         .device-types {
             margin-top: 5px;
 
@@ -243,16 +237,13 @@
             display: none;
         }
     }
-
     label {
         position: relative;
         top: -2px;
     }
-
     .fake-field {
         padding-top: 7px !important;
     }
-
     .delete {
         background: url(../img/pretty/close.svg) 50% no-repeat;
         background-size: 18px auto;
@@ -285,7 +276,6 @@
             display: none;
         }
     }
-
     .app-selector {
         margin: 0 0 20px 10px;
 
@@ -294,17 +284,14 @@
             right: auto;
         }
     }
-
     .placeholder-text + .app-group + .result i.prev,
     .placeholder-text + .result i.prev,
     .result:last-child i.next {
         display: none;
     }
-
     .apps-widget {
         display: block;
     }
-
     .app-group input,
     .app-group span {
         vertical-align: top;

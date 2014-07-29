@@ -50,6 +50,30 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
         /* Remove element from feed. */
         remove($(this).closest('.feed-element'));
     })
+    .on('click', '.feed-builder .region-feed .feed-element .reorder', function() {
+         /* Reorder elements. */
+        var $this = $(this);
+        var $item = $this.closest('.feed-element');
+        var is_prev = $this.hasClass('prev');
+        var $items = $this.closest('.feed-elements').find('.feed-element');
+        var pos = $items.index($item);
+
+        if ((is_prev && pos === 0) || (!is_prev && pos == $items.length - 1)) {
+            // Don't swap if trying to move the first element up or last element down.
+            return;
+        }
+
+        var swap_pos = is_prev ? pos - 1 : pos + 1;
+        var $swap_with = $items.eq(swap_pos);
+
+        if (is_prev) {
+            $item.clone().insertBefore($swap_with);
+        } else {
+            $item.clone().insertAfter($swap_with);
+        }
+        $item.remove();
+        z.page.trigger('refresh_preview');
+    })
     .on('click', '.feed-builder .submit', utils._pd(function() {
         /* Publish changes. */
         var $this = $(this);

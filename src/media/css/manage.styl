@@ -81,8 +81,7 @@
     &:last-child {
         border-bottom: 0;
     }
-
-    a {
+    > a {
         display: block;
         min-height: 48px;
         padding: 8px 28px 8px 42px;
@@ -93,51 +92,46 @@
             text-decoration: underline;
         }
     }
-
     img {
         left: 0;
         position: absolute;
         top: 8px;
     }
-
     h3 {
         font-size: 13px;
         font-weight: 400;
         line-height: 1;
         padding: 2px 0 0;
     }
-
     .type {
         color: $dark-gray-grayscale-primary;
         font-size: 11px;
         font-weight: 300;
         line-height: 1;
     }
-
     .elliflow {
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-
-    .delete {
-        background: url(../img/pretty/close.svg) 50% no-repeat;
-        background-size: 14px auto;
-        cursor: pointer;
-        height: 24px;
-        margin-top: -12px;
-        position: absolute;
-        right: 0;
-        top: 50%;
-        width: 24px;
-
-        &:hover {
-            background-image: url(../img/pretty/close_active.svg);
-        }
-    }
 }
 
+.delete-feed-element {
+    background: url(../img/pretty/close.svg) 50% no-repeat;
+    background-size: 14px auto;
+    cursor: pointer;
+    height: 24px;
+    margin-top: -12px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 24px;
+
+    &:hover {
+        background-image: url(../img/pretty/close_active.svg);
+    }
+}
 
 .manage-modules-listing form {
     margin: -20px auto 30px;

@@ -4,7 +4,7 @@ define('views/listing',
     'use strict';
     var gettext = l10n.gettext;
 
-    z.body.on('click', '.manage-modules-listing .search-results .delete', utils._pd(function(e) {
+    z.body.on('click', '.manage-modules-listing .search-results .delete-feed-element', utils._pd(function(e) {
         e.stopPropagation();
 
         // Delete.

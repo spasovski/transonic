@@ -43,6 +43,9 @@
             margin: 0;
             width: 100%;
         }
+        .actions {
+            display: none;
+        }
     }
 }
 
@@ -88,11 +91,49 @@
         -ms-user-select: none;
         user-select: none;
     }
+    .feed-element {
+        position: relative;
+
+        > a {
+            max-width: 280px;
+
+            &:hover {
+                cursor: move;
+            }
+        }
+    }
+    .feed-element:first-child .prev,
+    .feed-element:last-child .next {
+        display: none;
+    }
+    .actions {
+        height: 50px;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        .reorder:hover {
+            cursor: pointer;
+        }
+        .reorder:first-child {
+            top: -2px;
+        }
+        .delete {
+            right: 0px;
+            top: 12px;
+        }
+        .reorder:last-child {
+            bottom: -2px;
+        }
+    }
+    .delete-feed-element {
+        display: none;
+    }
 }
 
 // Adapt manage listing to feed builder.
 .feed-builder .manage-modules-listing {
-    .delete,
+    .delete-feed-element,
     .shelves {
         display: none;
     }

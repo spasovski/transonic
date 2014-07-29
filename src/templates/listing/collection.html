@@ -8,6 +8,7 @@
                             {name: collection.name,
                              num_apps: collection.app_count or collection.apps.length}) }}</h3>
     <span class="type">{{ feed.COLL_TYPES[collection.type] }}</span>
-    <span class="delete" data-type="collection"></span>
+    <span class="delete-feed-element"></span>
   </a>
+  {% include "app_selector/app_selector_actions.html" %}
 </li>

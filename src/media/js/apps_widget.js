@@ -36,7 +36,6 @@ define('apps_widget',
         /* Reorder elements. */
         var $this = $(this);
         var $app = $this.closest('.result');
-        var id = $app.data('id');
         var is_prev = $this.hasClass('prev');
         var $items = $this.closest('.apps-widget').find('.result:not(.hidden)');  // Hidden for the localized fields.
         var pos = $items.index($app);
@@ -77,7 +76,7 @@ define('apps_widget',
         }
 
         // Set placeholder and hide results list.
-        var fake_input = nunjucks.env.render('apps_widget_single.html', {
+        var fake_input = nunjucks.env.render('apps_widget/apps_widget_single.html', {
             icon: app.icons['48'],
             name: utils.translate(app.name)
         });

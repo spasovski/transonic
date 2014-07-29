@@ -57,7 +57,7 @@ define('app_selector',
     }
 
     var render_result = function(app, with_actions) {
-        return nunjucks.env.render('app_selector_result.html', {
+        return nunjucks.env.render('app_selector/app_selector_result.html', {
             author: app.author,
             detail_url: settings.api_url + '/app/' + app.slug,
             device_types: app.device_types,
@@ -84,7 +84,8 @@ define('app_selector',
 
             // Append results.
             if (data.objects.length === 0) {
-                var no_results = nunjucks.env.render('app_selector_no_results.html', {});
+                var no_results = nunjucks.env.render(
+                    'app_selector/app_selector_no_results.html', {});
                 $paginator.hide();
                 $results.append(no_results);
             } else {

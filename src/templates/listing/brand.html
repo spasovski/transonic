@@ -9,6 +9,7 @@
                                                num_apps: brand.app_count or brand.apps.length}) }}
     </h3>
     <span class="type">{{ feed.BRAND_LAYOUTS[brand.layout] }}</span>
-    <span class="delete" data-type="brand"></span>
+    <span class="delete-feed-element"></span>
   </a>
+  {% include "app_selector/app_selector_actions.html" %}
 </li>

@@ -9,6 +9,7 @@
     <span class="type">
       {{ _('{carrier} - {region}')|format(
            {carrier: shelf.carrier|unslug, region: settings.REGION_CHOICES_SLUG[shelf.region]}) }}</span>
-    <span class="delete" data-type="shelf"></span>
+    <span class="delete-feed-element"></span>
   </a>
+  {% include "app_selector/app_selector_actions.html" %}
 </li>
