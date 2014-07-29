@@ -88,7 +88,8 @@ h3 {
         -webkit-transform: translateX(0px);
         background: $medium-gray;
         height: 100%;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: scroll;
         padding-top: 14px;
         position: fixed;
         right: 0;
@@ -129,7 +130,6 @@ h3 {
     body {
         min-height: 100%;
     }
-
     main {
         margin: 0 auto;
         max-width: 1150px;
@@ -141,7 +141,6 @@ h3 {
             float: left;
             width: 772px;  /* 772 - 15 - 363 */
         }
-
         [data-page-type~="create"][data-page-type~="detail"] & aside.feed-previews,
         [data-page-type~="edit"][data-page-type~="detail"] & aside.feed-previews,
         [data-page-type~="publish"] & aside.feed-previews {
@@ -150,14 +149,12 @@ h3 {
             transform: none;
             width: 363px;
         }
-
         [data-page-type~="brands"] .feed-landing,
         [data-page-type~="apps"] .feed-landing,
         [data-page-type~="publish"] {
             display: none;
         }
     }
-
     aside.feed-previews {
         background: 0;
         padding-top: 0;
@@ -171,7 +168,7 @@ h3 {
 
             > h3 {
                 background: $blue-action-primary;
-                bottom: -10px;
+                bottom: -20px;
                 color: $white;
                 font-size: 12px;
                 font-weight: bold;
@@ -183,10 +180,9 @@ h3 {
                 width: 100%;
             }
         }
-
         .screen {
             background: $light-gray-grayscale-primary;
-            max-height: $appx-flame-height;
+            height: $appx-flame-height;
             margin: 0 auto;
             overflow-x: hidden;
             overflow-y: scroll;

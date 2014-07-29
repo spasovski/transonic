@@ -3,7 +3,6 @@
 .button,
 .button:visited {
     // Bluish.
-    btn-shadow();
     background: $breezy-blue;
     border: 0;
     border-radius: 5px;
@@ -13,7 +12,7 @@
     height: 48px;
     min-width: 100px;
     white-space: nowrap;
-    padding: 3px 20px;
+    padding: 0 20px;
     text-align: center;
     text-decoration: none;
 
@@ -44,6 +43,11 @@
         &:focus {
             background: darken(#DA5132, 10%);
         }
+    }
+    &.gray {
+        border: 1px solid $cement-gray;
+        background-color: $seavan-salt-white;
+        color: $medium-gray;
     }
     // Waiting/Loading spinner.
     &.loading-submit {
@@ -115,21 +119,59 @@
 }
 
 .loadmore {
-    bottom: -65px;
-    left: 10px;
-    padding: 15px 0;
-    position: absolute;
-    width: unquote('calc(100% - 20px)');
+    list-style: none;
+    margin: 0 auto;
+    padding: 18px 10px;
+    position: relative;
+    width: 100%;
 
     button {
         background: $earl-gray;
         border: 0;
-        box-shadow: 0 1px 1px 0 $london-fog-gray;
+        box-shadow: none;
         color: $white;
+        display: block;
+        margin: auto;
+        padding: 0;
+        width: 100%;
 
         &:hover {
             background: $earl-gray;
             color: $white;
         }
+        &.hide,
+        &:not(.hide) + .spinner {
+            display: none;
+        }
     }
+    &.loading {
+        button {
+            visibility: hidden;
+        }
+        .throbber {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 32px;
+            height: 32px;
+            border-radius: 20px;
+            border: 4px solid #666;
+            border-color: #666 transparent;
+            animation(unquote('spin 1s linear infinite'));
+        }
+    }
+    span,
+    .throbber {
+        display: none;
+    }
+}
+
+.listing .loadmore,
+.reviews-listing .loadmore {
+    height: auto;
+    min-height: 78px;
 }
