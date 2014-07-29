@@ -12,6 +12,10 @@ $vertical-text-margin = 10px;
 $vertical-tile-margin = 10px;
 
 @media $at-least-desktop {
+    section.feed,
+    ul.feed  {
+        padding: 0;
+    }
     ul.feed {
         max-width: $feed-column-width * 2;
 
@@ -26,7 +30,7 @@ $vertical-tile-margin = 10px;
 .feed {
     list-style-type: none;
     margin: 0 auto;
-    padding: 0 0 10px;
+    padding: 10px 0;
     position: relative;
     width: 100%;
     max-width: $feed-column-width;
@@ -49,12 +53,14 @@ $vertical-tile-margin = 10px;
         .icon {
             float: left;
         }
-        .info {
+        .info,
+        .feed-tile-header-wrap {
             float: left;
             height: 64px;
-            margin-left: 10px;
             position: relative;
-            width: 205px;
+        }
+        .info {
+            margin-left: 10px;
         }
         .elliflow {
             max-width: 125px;
@@ -178,23 +184,6 @@ $vertical-tile-margin = 10px;
     }
     &.mkt-tile {
         position: relative;
-
-        .feed-tile-header {
-            margin-left: 60px;
-
-            &:before {
-                background-position: center;
-                background-repeat: no-repeat;
-                border-radius: 30px;
-                content: '';
-                display: block;
-                height: 60px;
-                left: -10px;
-                position: absolute;
-                top: 0;
-                width: 60px;
-            }
-        }
     }
     .view-all {
         color: $view-all-blue;
@@ -227,6 +216,50 @@ $vertical-tile-margin = 10px;
     }
 }
 
+.feed-tile-header {
+    margin-left: 60px;
+
+    &:before {
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 30px;
+        content: '';
+        display: block;
+        height: 60px;
+        left: -10px;
+        position: absolute;
+        top: 0;
+        width: 60px;
+    }
+}
+
+@media $at-least-desktop {
+    .feed-tile-header {
+        margin: 10px 0 0 75px;
+
+        &:before {
+            left: 0;
+        }
+    }
+    [data-page-type~="newpop"] .app-list {
+        position: relative;
+        top: 30px;
+    }
+}
+
+
+[data-page-type~="newpop"] {
+    .feed-tile-header:before {
+        background-color: $breezy-blue;
+    }
+    [data-type="popular"] .feed-tile-header:before {
+        background-image: url(../img/icons/brands/LocalCommunityFavourite-40px.png);
+    }
+    [data-type="new"] .feed-tile-header:before {
+        background-image: url(../img/icons/brands/appOfTheDay-40px.png);
+    }
+}
+
 .feed .multi-app-tile.mkt-tile {
     background-color: #fff;
     margin: 0 auto;
@@ -247,7 +280,7 @@ $vertical-tile-margin = 10px;
         clear: both;
         display: inline-block;
         list-style-type: none;
-        width: $mobile-tile-width;
+        width: 100%;
 
         img {
             margin-bottom: 8px;
@@ -327,9 +360,6 @@ $vertical-tile-margin = 10px;
 
 // Editorial brand list layout.
 .feed-layout-list {
-    li {
-        width: unquote('calc(100% - 20px)');
-    }
     .rating .cnt {
         bottom: 5px;
         font-size: 11px;
@@ -348,7 +378,7 @@ $vertical-tile-margin = 10px;
         padding-top: 50px;
 
         button {
-            height: 35px;
+            height: 45px;
         }
     }
 }
@@ -359,7 +389,6 @@ $vertical-tile-margin = 10px;
     border-radius: 5px;
     height: 142px;
     margin: 0 auto;
-    margin-bottom: 15px;
     overflow: hidden;
     position: relative;
     width: $mobile-tile-width;
@@ -496,13 +525,9 @@ $vertical-tile-margin = 10px;
     &.feed {
         padding-top: 0;
     }
-    &.feed-app-landing,
-    &.brand-landing {
-        margin-top: $vertical-tile-margin;
-    }
     &.collection-landing .feed-item,
     &.shelf-landing .feed-item {
-        border-radius: 0;
+        border-radius: 2px;
         position: relative;
         width: 320px;
 
@@ -526,9 +551,6 @@ $vertical-tile-margin = 10px;
             padding: 20px;
         }
     }
-    .column-b {
-        padding: 0 10px;
-    }
 }
 
 #page .feed-item-item .icon.deferred {
@@ -536,18 +558,6 @@ $vertical-tile-margin = 10px;
     margin: 0;
     position: static;
     width: 64px;
-}
-
-.category-header {
-    background: $note-gray;
-    margin-top: -6px;
-    padding: 10px 0;
-    text-align: center;
-    width: 100%;
-
-    h3 {
-        color: #fff;
-    }
 }
 
 // Editoral Brand colors.
@@ -666,23 +676,28 @@ $vertical-tile-margin = 10px;
     background-image: url(../img/icons/brands/countrySpecific-40px.png);
 }
 
+.column-b {
+    padding: $horizontal-tile-padding;
+    width: $feed-column-width;
+
+    .app .mkt-tile .info {
+        width: 205px;
+    }
+}
 
 @media $at-least-desktop {
-    .category-header {
-        display: none;
-    }
-    .category-header-desktop {
-        display: block;
-
-        .cur-cat {
-            &:hover {
-                cursor: default;
-            }
-        }
-    }
     [data-page-type~=leaf] {
+        .column-wrap {
+            margin: 0 auto;
+            padding: 0;
+            width: -moz-fit-content;
+            width: -webkit-fit-content;
+        }
         .column-a {
-            float: left;
+            border-radius: 5px;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: top;
             width: 320px;
 
             .fanchor + .desc {
@@ -691,17 +706,14 @@ $vertical-tile-margin = 10px;
             }
         }
         .column-b {
-            float: right;
-            padding: 0;
-            width: 360px;
+            display: inline-block;
+            padding: 0 $horizontal-tile-padding;
+            vertical-align: top;
         }
         .feed-landing.shelf-landing .feed-item {
             right: inherit;
         }
         .feed .mkt-tile {
-            .info {
-                width: 260px;
-            }
             .elliflow {
                 max-width: 180px;
             }
@@ -712,6 +724,7 @@ $vertical-tile-margin = 10px;
             max-width: $desktop-content;
 
             .app-list {
+                padding-bottom: 95px;
                 max-width: $desktop-content;
 
                 li {
@@ -729,7 +742,9 @@ $vertical-tile-margin = 10px;
                         margin-right: 0;
                     }
                     &.loadmore {
+                        bottom: 30px;
                         clear: both;
+                        position: absolute;
                         width: $desktop-content;
                     }
                 }
