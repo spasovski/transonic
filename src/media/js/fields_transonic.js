@@ -1,9 +1,10 @@
 define('fields_transonic',
-    ['app_selector', 'apps_widget', 'feed', 'jquery', 'jquery.fakefilefield', 'log', 'nunjucks', 'preview_tray', 'requests', 'underscore', 'urls', 'utils', 'utils_local', 'z'],
-    function(app_select, apps_widget, feed, $, fakefilefield, log, nunjucks, preview_tray, requests, _, urls, utils, utils_local, z) {
+    ['app_selector', 'apps_widget', 'feed', 'jquery', 'jquery.fakefilefield', 'log', 'nunjucks', 'preview_tray', 'requests', 'underscore', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
+    function(app_select, apps_widget, feed, $, fakefilefield, log, nunjucks, preview_tray, requests, _, urls, utils, utils_local, validator, z) {
     'use strict';
 
     var imageUploads = {};  // keep track of drag-and-drop uploads to stuff into FormData later.
+    var notify = require('notification').notification;
     var isEmptySlug = true;
 
     z.page.on('keypress', 'form', function(e) {
@@ -144,6 +145,14 @@ define('fields_transonic',
     })
     .on('change', '#brand-type', function() {
         $('#slug').val(utils_local.slugify($(this).val()));
+    })
+    .on('change', '.realfileinput', function() {
+        var $this = $(this);
+        var errs = validator.image($this);
+        if (errs.length) {
+            notify({message: errs[0]});
+            $this.val('');
+        }
     });
 
     // Highlight languages that have been localized.
