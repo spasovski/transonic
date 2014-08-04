@@ -31,15 +31,15 @@ define('fields_transonic',
     .on('change input', '.featured-type-choices', function(e) {
         // Tab between different featured types (graphic, desc, pull quote).
         $('.featured-details').hide().filter('.' + this.options[this.selectedIndex].getAttribute('data-type')).show();
-        $('.form-errors').empty();
         conditionally_required();
         utils_local.initCharCounter();
+        utils_local.clear_errors();
     })
     .on('change', '.collection-type-choices', function(e) {
         // To help CSS toggle background image upload widgets for different collection types.
         $('.collection-type').hide().filter('.' + this.value).show();
         $(this).closest('form').attr('data-collection-type', this.value);
-        $('.form-errors').empty();
+        utils_local.clear_errors();
 
         // Hide or show app groups when switching between tabs.
         if (this.value == feed.COLL_PROMO) {

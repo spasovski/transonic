@@ -1,5 +1,5 @@
 <ul>
-  {% for error in errors %}
-    <li>{{ error }}</li>
+  {% for field, message in errors %}
+    <li>{{ field }}: {{ message }}</li>
   {% endfor %}
 </ul>

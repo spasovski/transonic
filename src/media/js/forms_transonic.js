@@ -22,12 +22,11 @@ define('forms_transonic',
         };
         var $file_input = $form.find('[name="background-image-feed-banner"]');
         var $preview = $form.find('.fileinput .preview');
-        console.log(JSON.stringify(data));
 
         // Validate.
         var errors = validate.feed_app(data, $file_input, $preview);
-        errors = errors.concat(validate.image($file_input));
-        if (errors.length) {
+        $.extend(errors, validate.image($file_input));
+        if (!$.isEmptyObject(errors)) {
             return defer.Deferred().reject(errors);
         }
 
@@ -56,13 +55,13 @@ define('forms_transonic',
         console.log(JSON.stringify(data));
 
         // Validate.
-        var errors = is_grouped ? validate.app_group($items) : [];
-        errors = errors.concat(validate.collection(data, $file_input, $preview));
-        errors = errors.concat(validate.image($file_input));
-        if (errors.length) {
+        var errors = {};
+        $.extend(errors, is_grouped ? validate.app_group($items) : {});
+        $.extend(errors, validate.collection(data, $file_input, $preview));
+        $.extend(errors, validate.image($file_input));
+        if (!$.isEmptyObject(errors)) {
             return defer.Deferred().reject(errors);
         }
-        $('.form-errors').empty();
 
         cache.flush();
         return save_collection(data, slug, $file_input);
@@ -77,14 +76,12 @@ define('forms_transonic',
             type: $form.find('[name="type"]').val(),
             slug: $form.find('[name="slug"]').val(),
         };
-        console.log(JSON.stringify(data));
 
         // Validate.
         var errors = validate.brand(data);
-        if (errors.length) {
+        if (!$.isEmptyObject(errors)) {
             return defer.Deferred().reject(errors);
         }
-        $('.form-errors').empty();
 
         cache.flush();
         return save_brand(data, slug);
@@ -108,11 +105,10 @@ define('forms_transonic',
 
         // Validate.
         var errors = validate.shelf(data, $file_input, $preview);
-        errors = errors.concat(validate.image($file_input));
-        if (errors.length) {
+        $.extend(errors, validate.image($file_input));
+        if (!$.isEmptyObject(errors)) {
             return defer.Deferred().reject(errors);
         }
-        $('.form-errors').empty();
 
         cache.flush();
         return save_shelf(data, slug, $file_input);
@@ -147,7 +143,6 @@ define('forms_transonic',
         if (errors.length) {
             return defer.Deferred().reject(errors);
         }
-        $('.form-errors').empty();
 
         return save_feed_items(data);
     };

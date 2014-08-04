@@ -1,4 +1,4 @@
-<div class="description field has-textarea top-hat-field half">
+<div class="description field has-textarea top-hat-field half" data-error-field="description">
   {% set desc = obj.description if obj else {} %}
   <label data-required-types="description">{{ _('Description') }}</label>
   {% for lang in settings.languages %}
