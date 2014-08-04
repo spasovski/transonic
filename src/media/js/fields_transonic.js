@@ -30,9 +30,9 @@ define('fields_transonic',
     })
     .on('change input', '.featured-type-choices', function(e) {
         // Tab between different featured types (graphic, desc, pull quote).
-        console.log(this);
         $('.featured-details').hide().filter('.' + this.options[this.selectedIndex].getAttribute('data-type')).show();
         $('.form-errors').empty();
+        conditionally_required();
         utils_local.initCharCounter();
     })
     .on('change', '.collection-type-choices', function(e) {
@@ -155,6 +155,18 @@ define('fields_transonic',
         }
     });
 
+    function conditionally_required() {
+        /*
+        To conditionally require a field based on the value of .featured-type-choices, add the
+        data-required-types="" attribute to the field's label, setting it to a space-separated list
+        of the values of .featured-type-choices for which it should be required, e.g.
+
+        <label data-required-types="description quote">
+        */
+        $('[data-required-types]').removeClass('required');
+        $('[data-required-types*=' + $('.featured-type-choices').val() + ']').addClass('required');
+    }
+
     // Highlight languages that have been localized.
     function highlight_localized() {
         var localized = $('.localized');
@@ -173,6 +185,7 @@ define('fields_transonic',
     };
 
     return {
-        highlight_localized: highlight_localized
+        highlight_localized: highlight_localized,
+        conditionally_required: conditionally_required
     }
 });

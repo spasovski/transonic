@@ -1,5 +1,5 @@
 <div class="app-selector top-hat-field field">
-  <label for="app-selector">{{ _('App') }}</label>
+  <label for="app-selector"{% if not obj %} class="required"{% endif %}>{{ _('App') }}</label>
   <input id="app-selector" type="search" placeholder="{{ _('Search for an app...') }}"
          {{ 'disabled' if feed_type == 'apps' and obj }} autocomplete="off">
     <img class="chosen-icon">

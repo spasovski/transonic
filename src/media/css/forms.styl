@@ -89,7 +89,19 @@ form {
         margin-right: 10px;
         text-align: right;
         width: 110px;
+    }
 
+    label.required:before,
+    .apps-widget-multiple label.required:after {
+        color: $red;
+        content: '\2A'; // Asterisk
+        display: inline-block;
+        font-weight: bold;
+        margin: 0 3px;
+    }
+
+    .apps-widget-multiple label.required:before {
+        display: none;
     }
 
     .help-text {

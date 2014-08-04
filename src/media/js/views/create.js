@@ -59,6 +59,7 @@ define('views/create',
             'title': title,
         }).done(function() {
             $('.fileinput').fakeFileField();
+            fields_transonic.conditionally_required();
             if (feedType == 'apps') {
                 apps_widget.set(null);
             }
