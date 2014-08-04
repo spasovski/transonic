@@ -20,17 +20,14 @@ define('app_selector',
     }, 250))
 
     .on('click', '.app-selector .paginator a:not(.disabled)', function() {
-        var $paginator = $('.app_selector').find('.paginator');
-        var offset = parseInt($paginator.attr('data-offset') || 0, 10);
+        var $this = $(this);
+        var $paginator = $this.closest('.paginator');
         $('.results').hide();
         $('.loading').show();
-        if ($(this).hasClass('prev')) {
-            offset = offset - 5;
-        } else {
-            offset = offset + 5;
-        }
-        $paginator.attr('data-offset', offset);
+        var offset = parseInt($paginator.data('offset') || 0, 10);
+        offset = $this.hasClass('prev') ? (offset - 5) : (offset + 5);
         search_handler($('.app-selector input').val(), offset);
+        $paginator.data('offset', offset);
     })
 
     .on('click', '.app-selector .result', function(evt) {
