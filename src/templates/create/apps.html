@@ -10,7 +10,8 @@
     {% include "locale_switcher.html" %}
 <form class="transonic-form apps {{ 'edit' if obj else 'create' }}" data-type="apps"
       {% if obj %}data-slug="{{ obj.slug }}"{% endif %}>
-  <section class="island">
+      
+  <section class="island apps-single">
 
     <h3>{{ title }}</h3>
 
