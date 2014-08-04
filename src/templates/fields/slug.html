@@ -1,4 +1,4 @@
-<div class="slug field">
+<div class="slug field" data-error-field="slug">
   <label for="slug"{% if not obj %} class="required"{% endif %}>{{ _('Slug') }}</label>
   <input id="slug" name="slug" type="text" placeholder="my-slug"
          {{ 'disabled' if obj }} {% if obj %}value="{{ obj.slug }}"{% endif %}>

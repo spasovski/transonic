@@ -104,12 +104,37 @@ form {
         display: none;
     }
 
-    .help-text {
+    .help-text,
+    .error-msg {
         color: $label-grey;
         font-size: 13px;
         font-style: italic;
         margin: 5px 0 0 125px;
         text-align: right;
+    }
+
+    .apps-multiple .error-msg {
+        margin-left: 0;
+        text-align: left;
+    }
+
+    .has-error {
+        label,
+        .error-msg {
+            color: $red;
+        }
+
+        input[type=email],
+        input[type=text],
+        input[type=search],
+        textarea {
+            border-color: $red;
+            color: $red;
+
+            &:focus {
+                border-color: $red;
+            }
+        }
     }
 
     input[type=email],

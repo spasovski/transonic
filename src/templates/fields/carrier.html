@@ -1,6 +1,6 @@
 {% set carrier_selected = obj.carrier if obj else '' %}
 
-<div class="field carrier has-pretty-select">
+<div class="field carrier has-pretty-select" data-error-field="carrier">
   <label for="carrier" class="required">{{ _('Carrier') }}</label>
   <div class="pretty-select">
     <select id="carrier" name="carrier">

@@ -1,6 +1,6 @@
 {% include "fields/image_file_input.html" %}
 
-<div class="background-image field top-hat-field">
+<div class="background-image field top-hat-field" data-error-field="background-image">
   <label for="background-image" class="required">{{ _('Background Image') }}</label>
   <div class="inner">
     {{ image_file_input('', 'feed-banner', obj.background_image) }}
