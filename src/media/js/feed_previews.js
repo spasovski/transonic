@@ -169,11 +169,14 @@ define('feed_previews',
                 url: function() {return '#';},
             })
         );
-        if (item_type === 'collection' || item_type === 'shelf') {
+        // Everything but a featured app has a landing page.
+        if (item_type !== 'app') {
             $('.phone.feed-landing').show().find('.screen').append(
                 nunjucks.env.render('feed/feed_preview_landing.html', {
+                    landing: true,
                     obj: obj,
-                    type: item_type
+                    type: item_type,
+                    url: function() {return '#';}
                 })
             );
         }

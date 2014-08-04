@@ -1,6 +1,11 @@
-{% from '_macros/feed_item.html' import feed_shelf_landing, feed_collection_landing %}
-{% if type == 'shelf' %}
-  {{ feed_shelf_landing(obj, true) }}
+{% include "_macros/feed_item.html" %}
+
+{% if type == 'brand' %}
+<ul class="feed">
+  <li class="feed-item-item">{{ feed_brand(obj) }}</li>
+</ul>
+{% elif type == 'shelf' %}
+  {{ feed_shelf_landing(obj) }}
 {% else %}
-  {{ feed_collection_landing(obj, true) }}
+  {{ feed_collection_landing(obj) }}
 {% endif %}
