@@ -78,6 +78,12 @@ define('validate_transonic',
         if (!data.apps.length) {
             errs.push(gettext('Apps are required.'));
         }
+        if (!data.carrier) {
+            errs.push(gettext('Carrier is required.'));
+        }
+        if (!data.region) {
+            errs.push(gettext('Region is required.'));
+        }
         if (!validate_localized_field(data.name)) {
             errs.push(gettext('Name is required.'));
         }
