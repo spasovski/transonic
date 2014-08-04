@@ -21,7 +21,7 @@
 <div class="pq-text field has-textarea top-hat-field half">
   {% set pq_text = obj.pullquote_text if obj else {} %}
 
-  <label>{{ _('Quote') }}</label>
+  <label class="required">{{ _('Quote') }}</label>
   {% for lang in settings.languages %}
     {{ locale_textarea('pq-text', lang, pq_text[lang]|safe, 300) }}
   {% endfor %}

@@ -84,6 +84,7 @@ define('views/edit',
             }).done(function() {
                 $('.fileinput').fakeFileField();
                 fields_transonic.highlight_localized();
+                fields_transonic.conditionally_required();
 
                 if (feedType == 'apps') {
                     // App widget.
