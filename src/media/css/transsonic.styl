@@ -53,6 +53,10 @@ h3 {
     padding: 5px 0;
 }
 
+.screen {
+    padding: 0 10px;
+}
+
 @media $at-least-desktop {
     html {
         background: #fff;
@@ -84,8 +88,8 @@ h3 {
     aside.feed-previews {
         -moz-transition: -moz-transform .5s;
         -webkit-transition: -webkit-transform .5s;
-        -moz-transform: translateX(0px);
-        -webkit-transform: translateX(0px);
+        -moz-transform: translateX(277px);
+        -webkit-transform: translateX(277px);
         background: $medium-gray;
         height: 100%;
         overflow-x: hidden;
@@ -98,8 +102,8 @@ h3 {
         z-index: 20;
 
         &.active {
-            -moz-transform: translateX(277px);
-            -webkit-transform: translateX(277px);
+            -moz-transform: translateX(0);
+            -webkit-transform: translateX(0);
         }
         &:hover {
             cursor: pointer;
@@ -113,13 +117,9 @@ h3 {
         > .feed-landing {
             display: none;
 
-            .screen {
-                padding: 0;
-
-                .product.mkt-tile {
-                    // TODO: Addresses clearing issue incorrectly.
-                    height: 94px;
-                }
+            .screen .product.mkt-tile {
+                // TODO: Addresses clearing issue incorrectly.
+                height: 94px;
             }
         }
     }
@@ -181,8 +181,8 @@ h3 {
         }
         .screen {
             background: $light-gray-grayscale-primary;
-            max-height: $appx-flame-height;
             margin: 0 auto;
+            max-height: $appx-flame-height;
             min-height: 100px;
             overflow-x: hidden;
             overflow-y: scroll;
