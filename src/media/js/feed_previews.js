@@ -42,20 +42,29 @@ define('feed_previews',
             return apps;
         }
 
+        var grouped = $('.app-group').length;
+
         $results.each(function(i) {
             var $this = $(this);
 
-            apps.push({
-                icons: {64: $this.find('.icon').attr('src')},
-                name: $this.find('.name').text(),
+            var app = {
                 author: $this.find('.author').text(),
+                icons: {64: $this.find('.icon').attr('src')},
+                name: $this.find('a.name').text(),
                 ratings: {
                     average: $this.data('rating')
                 },
                 price: $this.data('price'),
                 price_locale: $this.data('price'),
                 slug: 'test-slug',
-            });
+            };
+
+            if (grouped) {
+                app.group = $($this.prevAll('.app-group')[0]).find(
+                    'input.localized:not(.hidden)').val();
+            }
+
+            apps.push(app);
         });
 
         return apps;
@@ -95,6 +104,7 @@ define('feed_previews',
 
     function collection_factory() {
         var apps = multi_app_factory();
+
         apps = apps.length ? apps : [app_factory(), app_factory(), app_factory()];
         return {
             apps: apps,
