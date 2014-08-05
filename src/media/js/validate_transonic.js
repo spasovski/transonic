@@ -64,7 +64,7 @@ define('validate_transonic',
 
     var brand = function(data) {
         var errs = {};
-        if (!data.app) {
+        if (!data.apps.length) {
             errs.apps = gettext('Apps are required.');
         }
         if (!data.slug) {
@@ -78,7 +78,7 @@ define('validate_transonic',
 
     var shelf = function(data, $file_input, $preview) {
         var errs = {};
-        if (!data.app) {
+        if (!data.apps.length) {
             errs.apps = gettext('Apps are required.');
         }
         if (!data.carrier) {
