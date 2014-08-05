@@ -55,7 +55,6 @@
                      classes=['feed-app'],
                      feed_app=feed_app,
                      tray=False,
-                     src='feed',
                      rating_link=False) }}
     {% endif %}
   </a>
@@ -66,7 +65,9 @@
 
   <section class="feed-brand feed-layout-{{ brand.layout }} multi-app-tile mkt-tile c" data-brand-type="{{ brand.type }}">
     <div class="feed-tile-header-wrap">
-      <h1 class="feed-tile-header" data-brand-color="{{ color }}">{{ feed.get_brand_name(brand) }}</h1>
+      <a href="{{ url('feed/feed_brand', [brand.slug])|urlparams(src='feed') }}" class="fanchor">
+        <h1 class="feed-tile-header" data-brand-color="{{ color }}">{{ feed.get_brand_name(brand) }}</h1>
+      </a>
     </div>
     <ul class="app-list">
       {% for app in brand.apps %}
@@ -133,8 +134,8 @@
         {% if coll.apps %}
           {% if coll.apps[0].group %}
             {% for group in feed.group_apps(coll.apps) %}
-              <section class="feed-layout-grid multi-app-tile mkt-tile c">
-                <h1 class="feed-tile-header">{{ group.name }}</h1>
+              <section class="feed-layout-grid multi-app-tile mkt-tile grouped c">
+                <h1 class="feed-tile-header grouped">{{ group.name }}</h1>
                 <ul class="app-list">
                   {% for app in group.apps %}
                     {{ mini_tile(app) }}
@@ -146,7 +147,7 @@
             <ol class="container c">
               {% for app in coll.apps %}
                 <li class="item result app c">
-                  {{ market_tile(app, src='feed', tray=False) }}
+                  {{ market_tile(app, src='collection', tray=False) }}
                 </li>
               {% endfor %}
             </ol>
@@ -171,7 +172,7 @@
       <ol class="container column-b c">
         {% for app in shelf.apps %}
           <li class="item result app c">
-            {{ market_tile(app, src='feed', tray=False) }}
+            {{ market_tile(app, src='shelf', tray=False) }}
           </li>
         {% endfor %}
       </ol>
