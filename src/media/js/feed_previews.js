@@ -6,6 +6,7 @@ define('feed_previews',
 
     // Constants are constant.
     var THUMB = 'https://marketplace.cdn.mozilla.net/img/uploads/addon_icons/461/461685-64.png';
+    var SAMPLE_BG = '/media/img/sample_bg.jpg';
 
     String.prototype.escape = function() {
         var tagsToReplace = {
@@ -100,7 +101,7 @@ define('feed_previews',
             background_color: $('.bg-color input:checked').val(),
             background_image: $('.background-image-input .preview').attr('src'),
             description: $('.description .localized:not(.hidden').val().escape() || '',
-            name: $('.name .localized:not(.hidden').val().escape() || '',
+            name: $('.name .localized:not(.hidden').val().escape() || 'A Sample Collection',
         }
     }
 
@@ -110,9 +111,9 @@ define('feed_previews',
         return {
             apps: apps,
             background_color: $('.bg-color input:checked').val(),
-            background_image: $('.background-image-input .preview').attr('src'),
+            background_image: $('.background-image-input .preview').attr('src') || SAMPLE_BG,
             description: $('.description .localized:not(.hidden').val().escape() || '',
-            name: $('.name .localized:not(.hidden').val().escape() || '',
+            name: $('.name .localized:not(.hidden').val().escape() || 'A Sample Shelf',
             type: $('.collection-type-choices input:checked').val() || feed.COLL_PROMO,
         }
     }
@@ -170,9 +171,8 @@ define('feed_previews',
                 url: function() {return '#';},
             })
         );
-        // Everything but a featured app has a landing page.
-        if (item_type !== 'app') {
-            $('.phone.feed-landing').show().find('.screen').append(
+        if (item_type != 'app') {
+            $('.phone.feed-landing').find('.screen').append(
                 nunjucks.env.render('feed/feed_preview_landing.html', {
                     landing: true,
                     obj: obj,
@@ -190,7 +190,7 @@ define('feed_previews',
         setTimeout(function() {
             $('.deferred').each(function(i, deferred) {
                 var $deferred = $(deferred);
-                $deferred.attr('src', $deferred.attr('data-src'));
+                $deferred.attr('src', $deferred.attr('data-src')).removeClass('deferred');
             });
         });
     }

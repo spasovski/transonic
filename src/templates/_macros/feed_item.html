@@ -175,7 +175,9 @@
     <div class="column-wrap">
       <div class="column-a">
         {{ feed_shelf(shelf, true) }}
-        <p class="desc">{{ shelf.description|translate(shelf) }}</p>
+        {% if shelf.description %}
+          <p class="desc">{{ shelf.description|translate(shelf) }}</p>
+        {% endif %}
       </div>
       {% if shelf.apps %}
         <ol class="container column-b c">
