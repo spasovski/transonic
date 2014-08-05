@@ -1,6 +1,6 @@
 define('forms_transonic',
-    ['app_selector', 'cache', 'defer', 'feed', 'format', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'notification', 'nunjucks', 'requests', 'storage', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
-    function(app_select, cache, defer, feed, format, $, fakefilefield, l10n, log, notification, nunjucks, requests, storage, urls, utils, utils_local, validate, z) {
+    ['app_selector', 'cache', 'defer', 'feed', 'format', 'jquery', 'jquery.fakefilefield', 'l10n', 'log', 'nunjucks', 'requests', 'storage', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
+    function(app_select, cache, defer, feed, format, $, fakefilefield, l10n, log, nunjucks, requests, storage, urls, utils, utils_local, validate, z) {
     'use strict';
     var format = format.format;
     var gettext = l10n.gettext;
@@ -263,6 +263,12 @@ define('forms_transonic',
 
     function publish_shelf($form, slug) {
         var def = defer.Deferred();
+        var method = 'put';
+
+        // Shelf published state is stored in the DOM, on the button itself.
+        if ($form.find('.button').data('is-published')) {
+            method = 'del';
+        }
 
         function success(shelf) {
             def.resolve(shelf);
@@ -272,7 +278,7 @@ define('forms_transonic',
             def.reject(xhr.responseText);
         }
 
-        requests.put(urls.api.url('feed-shelf-publish', [slug])).then(success, fail);
+        requests[method](urls.api.url('feed-shelf-publish', [slug])).then(success, fail);
 
         return def.promise();
     }
