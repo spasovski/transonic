@@ -156,6 +156,7 @@ define('feed_previews',
                 })
             );
         });
+        load_images();
     }
 
     function refresh_preview(obj, item_type) {
@@ -181,6 +182,17 @@ define('feed_previews',
             );
         }
         clamp(document.querySelector('.feed .desc'), 4);
+        load_images();
+    }
+
+    function load_images() {
+        // Mock image deferrer.
+        setTimeout(function() {
+            $('.deferred').each(function(i, deferred) {
+                var $deferred = $(deferred);
+                $deferred.attr('src', $deferred.attr('data-src'));
+            });
+        });
     }
 
     function stub_globals() {
