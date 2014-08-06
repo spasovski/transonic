@@ -1,9 +1,9 @@
 {% include "_macros/feed_item.html" %}
 
 {% if type == 'brand' %}
-<ul class="feed">
-  <li class="feed-item-item">{{ feed_brand(obj) }}</li>
-</ul>
+  <ul class="feed">
+    <li class="feed-item-item">{{ feed_brand(obj) }}</li>
+  </ul>
 {% elif type == 'shelf' %}
   {{ feed_shelf_landing(obj) }}
 {% else %}

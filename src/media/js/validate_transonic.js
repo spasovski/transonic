@@ -54,11 +54,6 @@ define('validate_transonic',
         } else if (!validate_slug(data.slug)) {
             errs.slug = gettext('App is invalid.');
         }
-        if (!$file_input.val().length &&
-            data.type == feed.COLL_PROMO &&
-            !$preview.attr('src')) {
-            errs['background-image'] = gettext('Background image is required.');
-        }
         return errs;
     };
 

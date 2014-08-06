@@ -70,6 +70,17 @@ define('feed_previews',
         return apps;
     }
 
+    function collection_apps_factory(n) {
+        var apps = multi_app_factory();
+        if (!apps.length) {
+            apps = [];
+            for (var i = 0; i < n; i++ ) {
+                apps.push(app_factory());
+            }
+        }
+        return apps;
+    }
+
     function preview_factory() {
         return {
             thumbnail_size: $('.screenshots li.selected .screenshot').data('image-size'),
@@ -92,26 +103,21 @@ define('feed_previews',
     };
 
     function brand_factory() {
-        var apps = multi_app_factory();
-        apps = apps.length ? apps : [app_factory(), app_factory(), app_factory()];
         return {
-            apps: apps,
+            apps: collection_apps_factory(feed.MAX_BRAND_APPS + 1),
             layout: $('#brand-layout').val() || 'grid',
             type: $('#brand-type').val() || 'apps-for-albania',
-
         }
     }
 
     function collection_factory() {
-        var apps = multi_app_factory();
-
-        apps = apps.length ? apps : [app_factory(), app_factory(), app_factory()];
         return {
-            apps: apps,
+            apps: collection_apps_factory(feed.MAX_BRAND_APPS + 1),
             background_color: $('.bg-color input:checked').val(),
             background_image: $('.background-image-input .preview').attr('src'),
             description: $('.description .localized:not(.hidden').val().escape() || '',
             name: $('.name .localized:not(.hidden').val().escape() || 'A Sample Collection',
+            type: $('.collection-type-choices').val()
         }
     }
 
