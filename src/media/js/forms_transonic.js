@@ -263,23 +263,25 @@ define('forms_transonic',
 
     function publish_shelf($form, slug) {
         var def = defer.Deferred();
-        var method = 'put';
-
-        // Shelf published state is stored in the DOM, on the button itself.
-        if ($form.find('.button').data('is-published')) {
-            method = 'del';
-        }
-
         function success(shelf) {
             def.resolve(shelf);
         }
-
         function fail(xhr) {
             def.reject(xhr.responseText);
         }
+        requests.put(urls.api.url('feed-shelf-publish', [slug])).then(success, fail);
+        return def.promise();
+    }
 
-        requests[method](urls.api.url('feed-shelf-publish', [slug])).then(success, fail);
-
+    function unpublish_shelf($form, slug) {
+        var def = defer.Deferred();
+        function success(shelf) {
+            def.resolve(shelf);
+        }
+        function fail(xhr) {
+            def.reject(xhr.responseText);
+        }
+        requests.del(urls.api.url('feed-shelf-publish', [slug])).then(success, fail);
         return def.promise();
     }
 
@@ -340,5 +342,6 @@ define('forms_transonic',
         feed_items: feed_items,
         shelf: shelf,
         publish_shelf: publish_shelf,
+        unpublish_shelf: unpublish_shelf,
     };
 });

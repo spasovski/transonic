@@ -29,22 +29,33 @@
 
   {% if obj %}
     {% set is_published = obj.is_published %}
+
     <section class="island publish">
-      <h3>{{ pubstrings.title_unpub if is_published else pubstrings.title_pub }}</h3>
-      <p class="publish-help help-text no-italic">
-        {% if is_published %}
-          {{ _('Note: This will unpublish the operator shelf.') }}
-        {% else %}
-          {{ _('Note: This will publish the operator shelf.') }}
-        {% endif %}
+      <h3 class="publish-toggle {{ 'hidden' if not is_published }}">
+        {{ _('Unpublish Operator Shelf') }}
+      </h3>
+      <h3 class="publish-toggle {{ 'hidden' if is_published }}">
+        {{ _('Publish Operator Shelf') }}
+      </h3>
+
+      <p class="publish-help help-text no-italic publish-toggle
+                {{ 'hidden' if not is_published }}">
+        {{ _('Note: This will unpublish the operator shelf.') }}
       </p>
-      <p class="publish-help help-text">{{ obj.carrier }} &mdash; {{ settings.REGION_CHOICES_SLUG[obj.region] }}</p>
+      <p class="publish-help help-text no-italic publish-toggle
+                {{ 'hidden' if is_published }}">
+        {{ _('Note: This will publish the operator shelf.') }}
+      </p>
+
+      <p class="publish-help help-text">
+        {{ obj.carrier }} &mdash; {{ settings.REGION_CHOICES_SLUG[obj.region] }}
+      </p>
+
       <div class="form-errors"></div>
-      {% if is_published %}
-        <button class="button publish" data-is-published="true">{{ pubstrings.btn_unpub }}</button>
-      {% else %}
-        <button class="button publish">{{ pubstrings.btn_pub }}</button>
-      {% endif %}
+
+      <button class="button publish" data-is-published="{{ is_published }}">
+        {{ pubstrings.btn_unpub if is_published else pubstrings.btn_pub }}
+      </button>
     </section>
   {% endif %}
 

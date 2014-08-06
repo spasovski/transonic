@@ -12,8 +12,6 @@ define('views/edit',
         action_unpub: gettext('Unpublishing&hellip;'),
         success_pub: gettext('Operator shelf published'),
         success_unpub: gettext('Operator shelf unpublished'),
-        title_pub: gettext('Publish Operator Shelf'),
-        title_unpub: gettext('Unpublish Operator Shelf')
     };
 
     function update($btn, $form, form_updater, success_msg) {
@@ -50,24 +48,38 @@ define('views/edit',
         var $this = $(this);
         var $form = $this.closest('form');
         var is_published = $this.data('is-published');
-        // Welcome to ternary hell.
+
+        // Disable button during request.
         $this.html(is_published ? pubstrings.action_unpub : pubstrings.action_pub)
              .prop('disabled', true);
 
-        forms_transonic.publish_shelf($form, $form.data('slug')).done(function() {
-            notification.notification({message: is_published ? pubstrings.success_unpub : pubstrings.success_pub});
-            resetButton($this, is_published ? pubstrings.btn_unpub : pubstrings.btn_pub, true);
-        }).fail(function(error) {
-            utils_local.handle_error(error);
-            resetButton($this, is_published ? pubstrings.btn_unpub : pubstrings.btn_pub);
-        });
+        if (!is_published) {
+            // Publish shelf.
+            forms_transonic.publish_shelf($form, $form.data('slug')).done(function() {
+                notification.notification({message: pubstrings.success_pub});
+                resetButton($this, pubstrings.btn_unpub);
+                $this.attr('data-is-published', true);
+                $('.publish-toggle').toggleClass('hidden');
+            }).fail(function(error) {
+                utils_local.handle_error(error);
+                resetButton($this, pubstrings.btn_pub);
+            });
+        } else {
+            // Unpublish shelf.
+            forms_transonic.unpublish_shelf($form, $form.data('slug')).done(function() {
+                notification.notification({message: pubstrings.success_unpub});
+                resetButton($this, pubstrings.btn_pub);
+                $this.attr('data-is-published', false);
+                $('.publish-toggle').toggleClass('hidden');
+            }).fail(function(error) {
+                utils_local.handle_error(error);
+                resetButton($this, pubstrings.btn_unpub);
+            });
+        }
     }));
 
-    function resetButton($btn, text, toggle_published) {
+    function resetButton($btn, text) {
         $btn.text(text || gettext('Update')).prop('disabled', false);
-        if (toggle_published) {
-            $btn.toggleClass('is-published');
-        }
     }
 
     return function(builder, args) {
