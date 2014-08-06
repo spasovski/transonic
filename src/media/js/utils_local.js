@@ -56,11 +56,6 @@ define('utils_local', ['jquery', 'log', 'notification', 'nunjucks', 'z'], functi
         return items;
     };
 
-    // Like django's except worse.
-    function slugify(str) {
-        return str.replace(/\s/g, '-').trim().toLowerCase();
-    }
-
     function clear_errors(error) {
         $('.form-errors').empty();
         $('.error-msg').remove();
@@ -103,7 +98,6 @@ define('utils_local', ['jquery', 'log', 'notification', 'nunjucks', 'z'], functi
         handle_error: handle_error,
         initCharCounter: initCharCounter,
         items: items,
-        render_errors: render_errors,
-        slugify: slugify
+        render_errors: render_errors
     };
 });
