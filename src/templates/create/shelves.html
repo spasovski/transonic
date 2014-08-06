@@ -28,11 +28,23 @@
   {% include "fields/submit.html" %}
 
   {% if obj %}
+    {% set is_published = obj.is_published %}
     <section class="island publish">
-      <h3>{{ _('Publish Operator Shelf') }}</h3>
-      <p class="publish-help help-text no-italic">{{ _('Note: This will unpublish existing operator shelves from the selected carrier and region if any are currently published.') }}</p>
+      <h3>{{ pubstrings.title_unpub if is_published else pubstrings.title_pub }}</h3>
+      <p class="publish-help help-text no-italic">
+        {% if is_published %}
+          {{ _('Note: This will unpublish the operator shelf.') }}
+        {% else %}
+          {{ _('Note: This will publish the operator shelf.') }}
+        {% endif %}
+      </p>
+      <p class="publish-help help-text">{{ obj.carrier }} &mdash; {{ settings.REGION_CHOICES_SLUG[obj.region] }}</p>
       <div class="form-errors"></div>
-      <button class="button publish">{{ _('Publish') }}</button>
+      {% if is_published %}
+        <button class="button publish" data-is-published="true">{{ pubstrings.btn_unpub }}</button>
+      {% else %}
+        <button class="button publish">{{ pubstrings.btn_pub }}</button>
+      {% endif %}
     </section>
   {% endif %}
 

@@ -4,6 +4,18 @@ define('views/edit',
     'use strict';
     var gettext = l10n.gettext;
 
+    // L10n: These are messages regarding the published state of operator shelves.
+    var pubstrings = {
+        btn_pub: gettext('Publish'),
+        btn_unpub: gettext('Unpublish'),
+        action_pub: gettext('Publishing&hellip;'),
+        action_unpub: gettext('Unpublishing&hellip;'),
+        success_pub: gettext('Operator shelf published'),
+        success_unpub: gettext('Operator shelf unpublished'),
+        title_pub: gettext('Publish Operator Shelf'),
+        title_unpub: gettext('Unpublish Operator Shelf')
+    };
+
     function update($btn, $form, form_updater, success_msg) {
         form_updater($form, $form.data('slug')).done(function(feed_element) {
             notification.notification({message: success_msg});
@@ -37,19 +49,25 @@ define('views/edit',
     .on('click', '.transonic-form.edit button.publish', utils._pd(function() {
         var $this = $(this);
         var $form = $this.closest('form');
-        $this.text(gettext('Publishing...')).prop('disabled', true);
+        var is_published = $this.data('is-published');
+        // Welcome to ternary hell.
+        $this.html(is_published ? pubstrings.action_unpub : pubstrings.action_pub)
+             .prop('disabled', true);
 
         forms_transonic.publish_shelf($form, $form.data('slug')).done(function() {
-            notification.notification({message: gettext('Operator shelf published')});
-            resetButton($this, gettext('Publish'));
+            notification.notification({message: is_published ? pubstrings.success_unpub : pubstrings.success_pub});
+            resetButton($this, is_published ? pubstrings.btn_unpub : pubstrings.btn_pub, true);
         }).fail(function(error) {
             utils_local.handle_error(error);
-            resetButton($this, gettext('Publish'));
+            resetButton($this, is_published ? pubstrings.btn_unpub : pubstrings.btn_pub);
         });
     }));
 
-    function resetButton($btn, text) {
+    function resetButton($btn, text, toggle_published) {
         $btn.text(text || gettext('Update')).prop('disabled', false);
+        if (toggle_published) {
+            $btn.toggleClass('is-published');
+        }
     }
 
     return function(builder, args) {
@@ -79,6 +97,7 @@ define('views/edit',
             builder.start('create/' + feedType + '.html', {
                 'feed_type': feedType,  // 'apps', 'collections', or 'editorial'.
                 'obj': obj,
+                'pubstrings': pubstrings,
                 'slug': slug,
                 'title': title,
             }).done(function() {
