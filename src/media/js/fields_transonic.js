@@ -5,7 +5,6 @@ define('fields_transonic',
 
     var imageUploads = {};  // keep track of drag-and-drop uploads to stuff into FormData later.
     var notify = require('notification').notification;
-    var isEmptySlug = true;
 
     z.page.on('keypress', 'form', function(e) {
         if (e.keyCode == 13) {
@@ -132,19 +131,22 @@ define('fields_transonic',
 
     // Events for slug prefills for every feed item type.
     .on('input change', '.name .localized', function() {
+        var $slug = $('#slug');
         highlight_localized();
 
-        if (isEmptySlug) {
-            $('#slug').val(utils_local.slugify($(this).val()));
+        if (!$slug.data('dirty')) {
+            $slug.val(utils.slugify($(this).val()));
         }
     })
     .on('blur', '.name .localized', function() { // Stop prefilling slug once we defocus 'name'.
-        if ($('#slug').val().length) {
-            isEmptySlug = false;
+        var $slug = $('#slug');
+
+        if ($slug.val().length) {
+            $slug.data('dirty', true);
         }
     })
     .on('change', '#brand-type', function() {
-        $('#slug').val(utils_local.slugify($(this).val()));
+        $('#slug').val(utils.slugify($(this).val()));
     })
     .on('change', '.realfileinput', function() {
         var $this = $(this);
