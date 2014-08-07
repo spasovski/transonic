@@ -561,17 +561,33 @@ $vertical-tile-margin = 10px;
         &.full {
             min-height: 235px;
 
+            .has-background& {
+                min-height: 175px;
+            }
+
             .curve {
                 top: 30px;
             }
             .info {
                 top: 83px;
+
+                .has-background& {
+                    top: 50px;
+                }
             }
             .alt-curve {
                 top: 135px;
+
+                .has-background& {
+                    top: 85px;
+                }
             }
             .desc {
                 top: 150px;
+
+                .has-background& {
+                    top: 110px;
+                }
             }
         }
     }
@@ -619,6 +635,9 @@ $vertical-tile-margin = 10px;
         &.mega.full .desc {
             top: 155px;
         }
+        &.mega.full.has-background .desc {
+            top: 110px;
+        }        
     }
     &.shelf-landing {
         .feed-item {
