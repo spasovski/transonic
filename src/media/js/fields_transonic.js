@@ -126,6 +126,7 @@ define('fields_transonic',
         var lang = this.value;
         $('.localized').addClass('hidden')
                        .filter('[data-lang=' + lang + ']').removeClass('hidden');
+        z.page.trigger('refresh_preview');
         utils_local.initCharCounter();
     })
 
