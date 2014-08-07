@@ -113,11 +113,13 @@ define('apps_widget',
     var add_group = function(app_group) {
         /* Add a localizable text field as the header of an app group. */
         var $apps_widget = $('.apps-widget');
+        var new_id = 'app-group-' + $('.app-group').length;
         $apps_widget.find('.apps').append(nunjucks.env.render('fields/app_group.html', {
             app_group: app_group || {},
-            app_group_id: 'app-group-' + $('.app-group').length
+            app_group_id: new_id
         }));
         $apps_widget.find('.placeholder-text').hide();
+        $('[name="' + new_id + '-' + $('#locale-switcher').val() + '"]').trigger('focus');
         z.page.trigger('refresh_preview');
     };
 
