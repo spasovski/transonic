@@ -1,6 +1,6 @@
 define('fields_transonic',
-    ['app_selector', 'apps_widget', 'feed', 'jquery', 'jquery.fakefilefield', 'log', 'nunjucks', 'preview_tray', 'requests', 'underscore', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
-    function(app_select, apps_widget, feed, $, fakefilefield, log, nunjucks, preview_tray, requests, _, urls, utils, utils_local, validator, z) {
+    ['app_selector', 'apps_widget', 'aviary', 'feed', 'jquery', 'jquery.fakefilefield', 'log', 'nunjucks', 'preview_tray', 'requests', 'underscore', 'urls', 'utils', 'utils_local', 'validate_transonic', 'z'],
+    function(app_select, apps_widget, aviary, feed, $, fakefilefield, log, nunjucks, preview_tray, requests, _, urls, utils, utils_local, validator, z) {
     'use strict';
 
     var imageUploads = {};  // keep track of drag-and-drop uploads to stuff into FormData later.
