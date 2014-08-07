@@ -12,6 +12,7 @@ define('forms_transonic',
         var data = {
             app: $form.find('[name="app"]').val(),
             background_color: $form.find('.bg-color input:checked').val(),
+            background_image_upload_url: $form.find('.processed-aviary-url').val(),
             description: utils_local.build_localized_field('description'),
             type: $form.find('.featured-type-choices').val(),
             preview: $form.find('.screenshot li.selected').data('id'),
@@ -20,18 +21,16 @@ define('forms_transonic',
             pullquote_text: utils_local.build_localized_field('pq-text'),
             slug: $form.find('[name="slug"]').val(),
         };
-        var $file_input = $form.find('[name="background-image-feed-banner"]');
         var $preview = $form.find('.fileinput .preview');
 
         // Validate.
-        var errors = validate.feed_app(data, $file_input, $preview);
-        $.extend(errors, validate.image($file_input));
+        var errors = validate.feed_app(data, $preview);
         if (!$.isEmptyObject(errors)) {
             return defer.Deferred().reject(errors);
         }
 
         cache.flush();
-        return save_feed_app(data, slug, $file_input);
+        return save_feed_app(data, slug);
     };
 
     var collection = function($form, slug) {
@@ -45,26 +44,25 @@ define('forms_transonic',
         var data = {
             apps: is_grouped ? get_app_groups($items) : get_app_ids($items),
             background_color: $form.find('.bg-color input:checked').val(),
+            background_image_upload_url: $form.find('.processed-aviary-url').val(),
             type: type,
             description: utils_local.build_localized_field('description'),
             name: utils_local.build_localized_field('name'),
             slug: $form.find('[name="slug"]').val(),
         };
-        var $file_input = $form.find('[name="background-image-feed-banner"]');
         var $preview = $form.find('.fileinput .preview');
         console.log(JSON.stringify(data));
 
         // Validate.
         var errors = {};
         $.extend(errors, is_grouped ? validate.app_group($items) : {});
-        $.extend(errors, validate.collection(data, $file_input, $preview));
-        $.extend(errors, validate.image($file_input));
+        $.extend(errors, validate.collection(data, $preview));
         if (!$.isEmptyObject(errors)) {
             return defer.Deferred().reject(errors);
         }
 
         cache.flush();
-        return save_collection(data, slug, $file_input);
+        return save_collection(data, slug);
     };
 
     var brand = function($form, slug) {
@@ -93,25 +91,24 @@ define('forms_transonic',
         var data = {
             apps: get_app_ids($('.apps-widget .result')),
             background_color: $form.find('.bg-color input:checked').val(),
+            background_image_upload_url: $form.find('.processed-aviary-url').val(),
             carrier: $form.find('[name="carrier"]').val(),
             description: utils_local.build_localized_field('description'),
             name: utils_local.build_localized_field('name'),
             region: $form.find('[name="region"]').val(),
             slug: $form.find('[name="slug"]').val(),
         };
-        var $file_input = $form.find('[name="background-image-feed-banner"]');
         var $preview = $form.find('.fileinput .preview');
         console.log(JSON.stringify(data));
 
         // Validate.
-        var errors = validate.shelf(data, $file_input, $preview);
-        $.extend(errors, validate.image($file_input));
+        var errors = validate.shelf(data, $preview);
         if (!$.isEmptyObject(errors)) {
             return defer.Deferred().reject(errors);
         }
 
         cache.flush();
-        return save_shelf(data, slug, $file_input);
+        return save_shelf(data, slug);
     };
 
     var feed_items = function($feeds, modified_regions) {
@@ -130,7 +127,8 @@ define('forms_transonic',
             var region = modified_regions[i];
             data[region] = [];
 
-            var $region_feed = $feeds.find(format('.region-feed[data-region="{0}"]', [region]));
+            var $region_feed = $feeds.find(format('.region-feed[data-region="{0}"]',
+                                                  [region]));
             $region_feed.find('.feed-element').each(function(i, feed_element) {
                 data[region].push([feed_element.getAttribute('data-type'),
                                    feed_element.getAttribute('data-id')]);
@@ -147,23 +145,11 @@ define('forms_transonic',
         return save_feed_items(data);
     };
 
-    function save_feed_app(data, slug, $file_input) {
-        // Post FeedApp.
+    function save_feed_app(data, slug) {
         var def = defer.Deferred();
-
         function success(feed_app) {
-            // Upload background image if needed.
-            if ($file_input.val()) {
-                upload_feed_image(feed_app, 'feed-app-image', $file_input).done(function(feed_image) {
-                    def.resolve(feed_app);
-                }).fail(function(error) {
-                    def.reject(error);
-                });
-            } else {
-                def.resolve(feed_app);
-            }
+            def.resolve(feed_app);
         }
-
         function fail(xhr) {
             def.reject(xhr.responseText);
         }
@@ -179,21 +165,11 @@ define('forms_transonic',
         return def.promise();
     }
 
-    function save_collection(data, slug, $file_input) {
+    function save_collection(data, slug) {
         var def = defer.Deferred();
-
         function success(collection) {
-           if ($file_input.val()) {
-                upload_feed_image(collection, 'collection-image', $file_input).done(function(feed_image) {
-                    def.resolve(collection);
-                }).fail(function(error) {
-                    def.reject(error);
-                });
-            } else {
-                def.resolve(collection);
-            }
+            def.resolve(collection);
         }
-
         function fail(xhr) {
             def.reject(xhr.responseText);
         }
@@ -211,11 +187,9 @@ define('forms_transonic',
 
     function save_brand(data, slug) {
         var def = defer.Deferred();
-
         function success(brand) {
             def.resolve(brand);
         }
-
         function fail(xhr) {
             def.reject(xhr.responseText);
         }
@@ -231,21 +205,11 @@ define('forms_transonic',
         return def.promise();
     }
 
-    function save_shelf(data, slug, $file_input) {
+    function save_shelf(data, slug) {
         var def = defer.Deferred();
-
         function success(shelf) {
-            if ($file_input.val()) {
-                upload_feed_image(shelf, 'feed-shelf-image', $file_input).done(function(feed_image) {
-                    def.resolve(shelf);
-                }).fail(function(error) {
-                    def.reject(error);
-                });
-            } else {
-                def.resolve(shelf);
-            }
+            def.resolve(shelf);
         }
-
         function fail(xhr) {
             def.reject(xhr.responseText);
         }
@@ -269,6 +233,7 @@ define('forms_transonic',
         function fail(xhr) {
             def.reject(xhr.responseText);
         }
+
         requests.put(urls.api.url('feed-shelf-publish', [slug])).then(success, fail);
         return def.promise();
     }
@@ -281,6 +246,7 @@ define('forms_transonic',
         function fail(xhr) {
             def.reject(xhr.responseText);
         }
+
         requests.del(urls.api.url('feed-shelf-publish', [slug])).then(success, fail);
         return def.promise();
     }
@@ -318,21 +284,6 @@ define('forms_transonic',
         });
 
         return apps;
-    }
-
-    function upload_feed_image(obj, endpoint, $file_input) {
-        // Upload feed app background image (header graphic).
-        var def = defer.Deferred();
-        var reader = new FileReader();
-
-        reader.onloadend = function() {
-            // Read from file input to data URL and send image to API upload endpoint.
-            requests.put(urls.api.url(endpoint, [obj.id]), reader.result).done(function(data) {
-                def.resolve(data);
-            });
-        };
-        reader.readAsDataURL($file_input[0].files[0]);
-        return def.promise();
     }
 
     return {

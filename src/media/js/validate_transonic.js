@@ -5,7 +5,7 @@ define('validate_transonic',
     var gettext = l10n.gettext;
 
 
-    var feed_app = function(data, $file_input, $preview) {
+    var feed_app = function(data, $preview) {
         var errs = {};
         if (!data.app) {
             errs.apps = gettext('App is required.');
@@ -15,10 +15,9 @@ define('validate_transonic',
         } else if (!validate_slug(data.slug)) {
             errs.slug = gettext('App is invalid.');
         }
-        if (!$file_input.val().length &&
-            data.type == feed.FEEDAPP_IMAGE &&
-            !$preview.attr('src')) {
-            errs['background-image'] = gettext('Background image is required.');
+        if (!data.background_image_upload_url &&
+            data.type == feed.FEEDAPP_IMAGE) {
+            errs['background-image'] = gettext('Valid background image is required.');
         }
         if (!validate_localized_field(data.description) &&
             data.type == feed.FEEDAPP_DESC) {
@@ -41,7 +40,7 @@ define('validate_transonic',
     };
 
 
-    var collection = function(data, $file_input, $preview) {
+    var collection = function(data, $preview) {
         var errs = {};
         if (!data.apps.length) {
             errs.apps = gettext('Apps are required.');
@@ -57,6 +56,7 @@ define('validate_transonic',
         return errs;
     };
 
+
     var brand = function(data) {
         var errs = {};
         if (!data.apps.length) {
@@ -71,7 +71,7 @@ define('validate_transonic',
     };
 
 
-    var shelf = function(data, $file_input, $preview) {
+    var shelf = function(data, $preview) {
         var errs = {};
         if (!data.apps.length) {
             errs.apps = gettext('Apps are required.');
@@ -90,10 +90,8 @@ define('validate_transonic',
         } else if (!validate_slug(data.slug)) {
             errs.slug = gettext('App is invalid.');
         }
-        if (!$file_input.val().length &&
-            data.type == feed.COLL_OPERATOR &&
-            !$preview.attr('src')) {
-            errs['background-image'] = gettext('Background image is required.');
+        if (!data.background_image_upload_url) {
+            errs['background-image'] = gettext('Valid background image is required.');
         }
         return errs;
     };
@@ -141,19 +139,6 @@ define('validate_transonic',
     };
 
 
-    function image($file_input) {
-        // Check if image is JPG/PNG.
-        var errs = {}
-        if ($file_input.val()) {
-            if (!$file_input[0].files[0].name.match(/\.(jpg|jpeg|png)$/)) {
-                var name = $file_input.closest('[data-error-field]').data('error-field') || 'Image';
-                errs[name] = gettext('Uploaded image must be in JPG/PNG format.');
-            }
-        }
-        return errs;
-    }
-
-
     function validate_localized_field(data) {
         /* Check if l10n object has a value for at least one language. */
         for (var lang in data) {
@@ -176,7 +161,6 @@ define('validate_transonic',
         shelf: shelf,
         feed_app: feed_app,
         feed_items: feed_items,
-        image: image
     };
 });
 
