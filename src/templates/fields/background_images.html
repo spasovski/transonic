@@ -4,7 +4,7 @@
   <label for="background-image" {% if feed_type != 'collections' %}class="required"{% endif %}>
     {{ _('Background Image') }}</label>
   <div class="inner">
-    {{ image_file_input('', 'feed-banner', obj.background_image) }}
+    {{ aviary_image_file_input(_('Feed Banner'), 'feed-banner', obj.background_image) }}
     {# {{ image_file_input(_('Shelf Landing'), 'shelf-landing') }} #}
   </div>
 </div>

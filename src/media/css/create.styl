@@ -142,7 +142,7 @@ form {
             vertical-align: top;
         }
     }
-    .background-image-input {
+    .background-image-input:not(.aviary) {
         display: inline-block;
 
         p {
@@ -485,5 +485,35 @@ option.highlighted {
             background-image: url(../img/pretty/close_active.svg);
             cursor: pointer;
         }
+    }
+}
+
+.aviary {
+    .preview {
+        width: 320px;
+        height: auto;
+    }
+    .aviary-url {
+        margin-right: 15px;
+        max-width: 350px;
+        vertical-align: top;
+    }
+    .aviary-url,
+    .fileinput {
+        display: inline-block;
+    }
+    .fileinput {
+        width: -moz-fit-content;
+        width: -webkit-fit-content;
+    }
+    [data-fileinput-fake] .button {
+        bottom: 2px;
+        height: 30px;
+        padding-bottom: 45px;
+        position: relative;
+        vertical-align: top;
+    }
+    .image-size {
+        font-style: italic;
     }
 }
