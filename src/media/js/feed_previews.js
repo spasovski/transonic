@@ -1,6 +1,6 @@
 define('feed_previews',
-    ['feed', 'l10n', 'templates', 'textoverflowclamp', 'utils_local', 'z'],
-    function(feed, l10n, nunjucks, clamp, utils, z) {
+    ['feed', 'l10n', 'templates', 'utils_local', 'z'],
+    function(feed, l10n, nunjucks, utils, z) {
 
     var gettext = l10n.gettext;
 
@@ -197,7 +197,6 @@ define('feed_previews',
                 })
             );
         }
-        clamp(document.querySelector('.feed .desc'), 4);
         load_images();
     }
 
