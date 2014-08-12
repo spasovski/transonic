@@ -26,7 +26,7 @@ def pre_update(ref):
 def update():
     with lcd(TRANSONIC):
         local('npm install')
-        local('npm install --force commonplace@0.3.8')
+        local('npm install --force commonplace@0.4.22')
         local('%s includes' % COMMONPLACE)
         local('%s langpacks' % COMMONPLACE)
 
