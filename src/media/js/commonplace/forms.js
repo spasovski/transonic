@@ -6,7 +6,7 @@ define('forms', ['z'], function(z) {
         }
     }
     // Note 'input' event is required for FF android (bug 977642)
-    z.body.on('change input', 'input, textarea', function(e) {
+    z.body.on('change input', 'input:not[novalidate], textarea', function(e) {
         checkValid(e.target.form);
     }).on('change', 'select', function(e) {
         checkValid(e.target.form);
