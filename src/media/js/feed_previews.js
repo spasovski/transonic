@@ -30,7 +30,8 @@ define('feed_previews',
             },
             price: '$0.81',
             price_locale: '$0.81',
-            slug: 'test-slug'
+            slug: 'test-slug',
+            url: '#',
         }, $('[name="app"]').data('app') || {});
     }
 
@@ -57,6 +58,7 @@ define('feed_previews',
                 price: $this.data('price'),
                 price_locale: $this.data('price'),
                 slug: 'test-slug',
+                url: '#',
             };
 
             if (grouped) {
