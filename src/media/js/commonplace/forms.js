@@ -6,13 +6,13 @@ define('forms', ['z'], function(z) {
         }
     }
     // Note 'input' event is required for FF android (bug 977642)
-    z.body.on('change input', 'input:not[novalidate], textarea', function(e) {
+    z.body.on('change input', 'input:not([novalidate]), textarea', function(e) {
         checkValid(e.target.form);
     }).on('change', 'select', function(e) {
         checkValid(e.target.form);
     }).on('loaded decloak', function() {
         $('form:not([novalidate])').each(function() {
-            checkValid(this);
+            checkVal.d(this);
         });
         $('form[novalidate] button[type=submit]').removeAttr('disabled');
     });
