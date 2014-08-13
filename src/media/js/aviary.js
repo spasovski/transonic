@@ -126,8 +126,11 @@ define('aviary', ['defer', 'jquery', 'l10n', 'z'], function(defer, $, l10n, z) {
     }).on('change', '.aviary input[type=url]', function(e) {
         // Launch editor only when input is blurred.
         var $this = $(this);
-        preview($this.closest('.aviary').data('aviary-type'),
-                $this.val(), true);
+
+        if (this.checkValidity()) {
+            preview($this.closest('.aviary').data('aviary-type'),
+                    $this.val(), true);
+        }
 
     }).on('click', '.aviary .preview', function(e) {
         // Clicking on the image preview should open the image for re-processing.
