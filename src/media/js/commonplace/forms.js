@@ -12,7 +12,7 @@ define('forms', ['z'], function(z) {
         checkValid(e.target.form);
     }).on('loaded decloak', function() {
         $('form:not([novalidate])').each(function() {
-            checkVal.d(this);
+            checkValid(this);
         });
         $('form[novalidate] button[type=submit]').removeAttr('disabled');
     });
