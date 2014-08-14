@@ -210,6 +210,13 @@ define('feed_previews',
                 $deferred.attr('src', $deferred.attr('data-src')).removeClass('deferred');
             });
         });
+        setTimeout(function() {
+            $('.deferred-background').each(function(i, deferred) {
+                var $deferred = $(deferred);
+                $deferred.css('background-image', 'url(' + $deferred.attr('data-src') + ')')
+                         .removeClass('deferred-background');
+            });
+        });
     }
 
     function stub_globals() {
