@@ -95,12 +95,13 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
         ],
 
         bg_color_choices: [
-            '#B90000',  // Raring Red.
-            '#FF4E00',  // Oneric Orange.
-            '#CD6723',  // Breezy Brown.
-            '#00AACC',  // Dapper Blue.
-            '#5F9B0A',  // Gusty Green.
-            '#2C393B',  // Intrepid Indigo.
+            '#CE001C',  // Ruby
+            '#F78813',  // Amber
+            '#00953F',  // Emerald
+            '#0099D0',  // Topaz
+            '#1E1E9C',  // Sapphire
+            '#5A197E',  // Amethyst
+            '#A20D55',  // Garnet
         ],
 
         text_color_choices: [  // Defecated.
