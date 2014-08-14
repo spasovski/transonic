@@ -1,5 +1,8 @@
 {% macro color_field(class, name, choices) %}
-  {% set color_selected = obj.background_color if obj else choices[0]%}
+  {% set color_selected = obj.background_color if obj else choices[0] %}
+  {% if indexOf(choices, obj.background_color) == -1 %}
+    {% set color_selected = choices[0] %}
+  {% endif %}
 
   <div class="{{ class }} field">
     <label class="inline-label required">{{ name }}</label>
