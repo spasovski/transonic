@@ -46,6 +46,12 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
         /* Add feed element to feed. */
         append(get_region_feed(), $(this));
     })
+    .on('click', '.feed-builder .manage-modules-listing .feed-element > a', function(e) {
+        /* Stop search results from getting navigated. */
+        e.preventDefault();
+        e.stopPropagation();
+        append(get_region_feed(), $(this).closest('.feed-element'));
+    })
     .on('click', '.feed-builder .region-feed .feed-element .delete', function() {
         /* Remove element from feed. */
         remove($(this).closest('.feed-element'));
