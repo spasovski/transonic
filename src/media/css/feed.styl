@@ -31,7 +31,7 @@ $vertical-tile-margin = 10px;  // Vertical space between feed tiles.
 }
 
 @media (min-width: 640px) {
-    [data-page-type="root"] .feed .feed-item-item {
+    [data-page-type="root"] .feed .feed-item-item:not(.loadmore) {
         margin: 0 0 $vertical-tile-padding;
         right: none;
     }
@@ -45,12 +45,17 @@ $vertical-tile-margin = 10px;  // Vertical space between feed tiles.
     }
 }
 
+[data-page-type~="root"] ul.feed {
+    opacity: 0;  // Fade-in.
+}
+
 // Main container for feed elements on the homepage.
 .feed {
     list-style-type: none;
     margin: 0 auto;
     padding: 10px 0;
     position: relative;
+    transition(opacity .2s .15s);
     width: 100%;
     max-width: $feed-column-width;
 
@@ -579,7 +584,7 @@ $vertical-tile-margin = 10px;  // Vertical space between feed tiles.
             padding: 0 10px 15px;
             position: relative;
             width: 300px;
-            z-index: 20;
+            z-index: 18;
         }
         &.full {
             .curve {
@@ -872,16 +877,18 @@ $vertical-tile-margin = 10px;  // Vertical space between feed tiles.
     }
 }
 
-/*  Give loadmore button its own row. Leaves ugly gaps though.
 .loadmore.feed-item-item {
+    // Put loadmore button on its own row.
+    margin-bottom: 0;
     max-width: 100%;
+    padding-bottom: 12px;
+    padding-top: 15px;
     width: 100%;
 
     button {
-        width: $mobile-tile-width;
+        width: 620px;
     }
 }
-*/
 
 @media (max-width: 321px) {
     .collection-landing,
