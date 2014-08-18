@@ -117,13 +117,18 @@ define('app_selector',
                     $next.addClass('disabled');
                 }
 
+                // Calculate app range for last page (bug 1055157).
+                var upper_limit = meta.offset + meta.limit;
+                if (upper_limit > meta.total_count) {
+                    upper_limit = meta.total_count;
+                }
+
                 // L10n: {0} refers to the position of the first app on the page,
                 // {1} refers to the position of the last app on the page,
                 // and {2} refers to the total number of apps across all pages.
                 var desc = format.format(gettext('Apps {0}-{1} of {2}.'),
-                    (meta.offset + 1), (meta.offset + meta.limit), meta.total_count);
+                    meta.offset + 1, upper_limit, meta.total_count);
                 $desc.text(desc);
-
             }
 
             $('.loading').hide();
