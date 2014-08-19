@@ -1,10 +1,11 @@
 {% include "fields/image_file_input.html" %}
 
 <div class="background-image field top-hat-field" data-error-field="background-image">
-  <label for="background-image" {% if feed_type != 'collections' %}class="required"{% endif %}>
+  <label for="background-image">
     {{ _('Background Image') }}</label>
   <div class="inner">
     {{ aviary_image_file_input(_('Feed Banner'), 'feed-banner', obj.background_image) }}
     {# {{ image_file_input(_('Shelf Landing'), 'shelf-landing') }} #}
   </div>
+  <p class="help-text optional">{{ _('Optional') }}</p>
 </div>

@@ -1,7 +1,7 @@
 {% set region_selected = obj.region if obj else '' %}
 
 <div class="field region has-pretty-select" data-error-field="region">
-  <label for="region" class="required">{{ _('Region') }}</label>
+  <label for="region">{{ _('Region') }}</label>
   <div class="pretty-select">
     <select id="region" name="region">
     <option value="" {{ 'selected' if not region_selected }}>

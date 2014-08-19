@@ -24,7 +24,7 @@ define('utils_local', ['jquery', 'log', 'notification', 'nunjucks', 'z'], functi
 
         $('.char-count').each(function() {
             var $this = $(this);
-            var $textarea = $('textarea[data-name=' + $this.data('for') + ']:not(.hidden)');
+            var $textarea = $('textarea[data-name=' + $this.closest('[data-for]').data('for') + ']:not(.hidden)');
 
             $this.html(
                 ngettext('<b>{n}</b> character remaining.',

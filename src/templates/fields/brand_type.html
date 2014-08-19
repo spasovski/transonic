@@ -1,7 +1,7 @@
 {% set brand_type_selected = obj.type if obj else feed.BRAND_TYPES_CHOICES[0][0] %}
 
 <div class="field has-pretty-select">
-  <label for="brand-type" class="required">{{ _('Title') }}</label>
+  <label for="brand-type">{{ _('Title') }}</label>
   <div class="pretty-select">
     <select id="brand-type" name="type">
     {% for brand_type, str in feed.BRAND_TYPES_CHOICES %}

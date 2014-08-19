@@ -4,5 +4,8 @@
   {% for lang in settings.languages %}
     {{ locale_textarea('description', lang, desc[lang], 300) }}
   {% endfor %}
-  <p class="help-text char-count" data-for="description">{{ _('Maximum 300 characters.') }}</p>
+  <p class="help-text" data-for="description">
+  	<span class="optional">{{ _('Optional; ') }}</span>
+  	<span class="char-count">{{ _('Maximum 300 characters.') }}</span>
+  </p>
 </div>

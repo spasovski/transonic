@@ -1,7 +1,7 @@
 {% set layout_selected = obj.layout if obj else feed.BRAND_LAYOUTS_CHOICES[0][0] %}
 
 <div class="field has-pretty-select">
-  <label for="brand-layout" class="required">{{ _('Layout') }}</label>
+  <label for="brand-layout">{{ _('Layout') }}</label>
   <div class="pretty-select">
     <select id="brand-layout" name="layout">
     {% for layout, str in feed.BRAND_LAYOUTS_CHOICES %}
