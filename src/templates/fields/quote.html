@@ -2,7 +2,6 @@
 
 <div class="pq-rating field">
   {% set rating_selected = obj.pullquote_rating if obj else 0 %}
-
   <label class="inline-label">{{ _('Rating') }}</label>
   <div class="choices-box">
     <fieldset class="choices" data-rating="{{ rating_selected }}">
@@ -16,20 +15,22 @@
       {% endfor %}
     </fieldset>
   </div>
+  <p class="help-text">{{ _('Optional') }}</p>
 </div>
 
 <div class="pq-text field has-textarea top-hat-field half" data-error-field="pullquote_text">
   {% set pq_text = obj.pullquote_text if obj else {} %}
 
-  <label class="required">{{ _('Quote') }}</label>
+  <label>{{ _('Quote') }}</label>
   {% for lang in settings.languages %}
     {{ locale_textarea('pq-text', lang, pq_text[lang]|safe, 300) }}
   {% endfor %}
-  <p class="help-text char-count" data-for="pq-text">{{ _('Maximum 300 characters.') }}</p>
+  <p class="help-text" data-for="pq-text"><span class="char-count">{{ _('Maximum 300 characters.') }}</span></p>
 </div>
 
 <div class="pq-attribution field">
   <label class="inline-label">{{ _('Attribution') }}</label>
   <input id="pq-attribution" name="pq-attribution" type="text" placeholder="some-user-1"
          maxlength=50 {% if obj %}value="{{ obj.pullquote_attribution }}"{% endif %}>
+  <p class="help-text">{{ _('Optional') }}</p>
 </div>

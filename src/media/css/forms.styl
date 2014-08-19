@@ -91,13 +91,15 @@ form {
         text-align: right;
         width: 110px;
     }
-    label.required:before,
-    .apps-widget-multiple label.required:before {
-        color: $red;
-        content: '\2A'; // Asterisk
+
+    .optional {
+        display: none;
+    }
+    &[data-type="apps"][data-subtype="screenshot"] .description .optional,
+    &[data-type="shelves"] .description .optional,
+    &[data-type="collections"] .description .optional,
+    &[data-type="collections"][data-collection-type="promo"] .background-image .optional {
         display: inline-block;
-        font-weight: bold;
-        margin: 0 3px;
     }
 
     .help-text,
