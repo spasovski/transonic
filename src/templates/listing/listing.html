@@ -41,7 +41,6 @@
 {% endmacro %}
 
 {% macro feed_brands(brands, response) %}
-  {% set b_types = feed.BRAND_TYPES %}
   <section>
     <h2>{{ _('Editorial Brands <em>({number})')|format({number: response.meta.total_count or brands.length}) }}</em></h2>
     <ul class="brands element-listing">
