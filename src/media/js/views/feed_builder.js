@@ -13,7 +13,7 @@ define('views/feed_builder', ['forms_transonic', 'jquery', 'jquery-sortable', 'f
         $('.feed-builder .submit').prop('disabled', true);
         $('.feeds .loading').show();
 
-        requests.get(urls.api.url('feed-items', [], {'region': region, 'ordering': 'order'})).always(function(feed_items) {
+        requests.get(urls.api.url('feed-items', [], {'region': region, 'ordering': 'order'}), true).always(function(feed_items) {
             feed_items = feed_items.objects;
             var $feed = $('.localized').addClass('hidden')
                                        .filter('[data-region=' + region + ']').removeClass('hidden');
