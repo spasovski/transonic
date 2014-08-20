@@ -5,7 +5,7 @@
       <img class="icon" src="{{ brand.preview_icon or brand.apps[0].icons['32'] }}">
     {% endif %}
     <h3 class="elliflow">
-      {{ _('{name} ({num_apps} apps)')|format({name: feed.BRAND_TYPES[brand.type][0] if num_apps == 1 else feed.BRAND_TYPES[brand.type][1],
+      {{ _('{name} ({num_apps} apps)')|format({name: feed.get_brand_type(brand.type, brand.app_count || brand.apps.length),
                                                num_apps: brand.app_count or brand.apps.length}) }}
     </h3>
     <span class="type">{{ feed.BRAND_LAYOUTS[brand.layout] }}</span>
