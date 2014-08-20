@@ -105,7 +105,7 @@ define('views/edit',
         builder.z('title', title);
         builder.z('type', 'edit detail ' + feedType);
 
-        requests.get(endpoint).done(function(obj) {
+        requests.get(endpoint, true).done(function(obj) {
             builder.start('create/' + feedType + '.html', {
                 'feed_type': feedType,  // 'apps', 'collections', or 'editorial'.
                 'obj': obj,
