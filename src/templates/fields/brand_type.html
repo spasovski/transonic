@@ -6,6 +6,7 @@
     <select id="brand-type" name="type">
     {% for brand_type in feed.BRAND_TYPES %}
       <option value="{{ brand_type }}" {{ 'selected' if brand_type_selected == brand_type }}>
+        {# We send `2` to force the brand name's plural form. #}
         {{ feed.get_brand_type(brand_type, 2) }}
       </option>
     {% endfor %}
