@@ -102,38 +102,42 @@ define('feed_previews',
             pullquote_text: $('.pq-text .localized:not(.hidden').val().escape() || '',
             type: $('.featured-type-choices').val() || 'icon',
         };
-    };
+    }
 
     function brand_factory() {
+        var apps = collection_apps_factory(feed.MAX_BRAND_APPS + 1);
         return {
-            apps: collection_apps_factory(feed.MAX_BRAND_APPS + 1),
+            apps: apps,
+            app_count: apps.length,
             layout: $('#brand-layout').val() || 'grid',
             type: $('#brand-type').val() || 'apps-for-albania',
-        }
+        };
     }
 
     function collection_factory() {
+        var apps = collection_apps_factory(feed.MAX_BRAND_APPS + 1);
         return {
-            apps: collection_apps_factory(feed.MAX_BRAND_APPS + 1),
+            apps: apps,
+            app_count: apps.length,
             background_color: $('.bg-color input:checked').val(),
             background_image: $('.background-image-input .preview').attr('src'),
             description: $('.description .localized:not(.hidden').val().escape() || '',
             name: $('.name .localized:not(.hidden').val().escape() || 'A Sample Collection',
             type: $('.collection-type-choices').val()
-        }
+        };
     }
 
     function shelf_factory() {
-        var apps = multi_app_factory();
-        apps = apps.length ? apps : [app_factory(), app_factory(), app_factory()];
+        var apps = collection_apps_factory(feed.MAX_BRAND_APPS + 1);
         return {
             apps: apps,
+            app_count: apps.length,
             background_color: $('.bg-color input:checked').val(),
             background_image: $('.background-image-input .preview').attr('src') || SAMPLE_BG,
             description: $('.description .localized:not(.hidden').val().escape() || '',
             name: $('.name .localized:not(.hidden').val().escape() || 'A Sample Shelf',
             type: $('.collection-type-choices input:checked').val() || feed.COLL_PROMO,
-        }
+        };
     }
 
     // Listeners.
