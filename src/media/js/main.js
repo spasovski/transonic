@@ -18,7 +18,7 @@ define(
     [
         'helpers',  // Must come before mostly everything else.
         'helpers_local',
-        'forms',  // Comment this if your app has no forms.
+        // 'forms',  // Comment this if your app has no forms.
         'l10n',
         'log',
         'login',  // Comment this if your app does not have accounts.
