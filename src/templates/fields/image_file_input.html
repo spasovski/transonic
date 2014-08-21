@@ -25,7 +25,7 @@
     <p class="image-size hidden"></p>
 
     {# Data URI. #}
-    <input class="processed-aviary-url" type="hidden" name="image-{{ slug }}">
+    <input class="processed-aviary-url" type="hidden" name="image-{{ slug }}" value="{{ src if src }}">
   </section>
 {% endmacro %}
 
