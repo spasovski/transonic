@@ -29,6 +29,11 @@ define('forms_transonic',
             return defer.Deferred().reject(errors);
         }
 
+        // Sanitize data before submitting to API.
+        if (data.type !== feed.FEEDAPP_QUOTE) {
+            data.pullquote_attribution = data.pullquote_rating = '';
+        }
+
         cache.flush();
         return save_feed_app(data, slug);
     };

@@ -32,7 +32,7 @@ define('validate_transonic',
             errs.pullquote_text = gettext('Quote text is required.');
         }
         if (!validate_localized_field(data.pullquote_text) &&
-            data.type != feed.FEEDAPP_QUOTE &&
+            data.type == feed.FEEDAPP_QUOTE &&
             (data.pullquote_rating || data.pullquote_attribution)) {
             errs.pullquote_text = gettext('Quote text is required if quote rating or quote attribution is set.');
         }
