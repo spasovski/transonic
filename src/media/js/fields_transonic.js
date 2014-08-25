@@ -15,10 +15,8 @@ define('fields_transonic',
         // Sync color previews and inputs.
         var $parent = $(this).closest('.colors');
         var $labels = $parent.find('label');
-        console.log()
         $labels.filter('.selected').removeClass('selected');
         var newSelected = $labels.filter('[for=' + this.id + ']').addClass('selected');
-        console.log(newSelected);
     })
     .on('change', '.pq-rating input', function() {
         // Set rating data attribute to highlight stars.
