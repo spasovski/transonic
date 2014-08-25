@@ -81,7 +81,7 @@ function() {
             return;
         }
         if (!user.logged_in()) {
-            z.page.trigger('navigate', [urls.reverse('login')]);
+            z.page.trigger('divert', [urls.reverse('login')]);
         }
     });
 
