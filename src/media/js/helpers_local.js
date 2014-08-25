@@ -23,6 +23,7 @@ define('helpers_local', ['feed', 'nunjucks', 'urls', 'utils_local', 'z'], functi
     };
 
     var filters_map = {
+        json: JSON.stringify,
         items: utils_local.items,
         unslug: unslug
     };
@@ -36,7 +37,9 @@ define('helpers_local', ['feed', 'nunjucks', 'urls', 'utils_local', 'z'], functi
 
     for (var i in filters_map) {
         if (filters_map.hasOwnProperty(i)) {
-            nunjucks.env.addFilter(i, filters_map[i]);
+            if (nunjucks.env) {
+                nunjucks.env.addFilter(i, filters_map[i]);
+            }
             filters[i] = filters_map[i];
         }
     }
