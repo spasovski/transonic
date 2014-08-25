@@ -131,11 +131,13 @@ define('fields_transonic',
 
     // Events for slug prefills for every feed item type.
     .on('input change', '.name .localized', function() {
-        var $slug = $('#slug');
         highlight_localized();
 
-        if (!$slug.data('dirty')) {
-            $slug.val(utils.slugify($(this).val()));
+        if (z.body.is('[data-page-type~="create"]')) {
+            var $slug = $('#slug');
+            if (!$slug.data('dirty')) {
+                $slug.val(utils.slugify($(this).val()));
+            }
         }
     })
     .on('blur', '.name .localized', function() { // Stop prefilling slug once we defocus 'name'.
