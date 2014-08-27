@@ -19,6 +19,7 @@ define('aviary', ['defer', 'jquery', 'l10n', 'z'], function(defer, $, l10n, z) {
 
             // Close the editor.
             featherEditor.close();
+            z.page.trigger('aviary_saved');
         },
         onError: function(errorObj) {
             console.error(errorObj.message);
@@ -150,6 +151,9 @@ define('aviary', ['defer', 'jquery', 'l10n', 'z'], function(defer, $, l10n, z) {
         });
 
         $('.aviary [type="url"]').val($input.val());
+    }).on('click', '.aviary .clear-image', function() {
+        $('.aviary input').val('');
+        $('.aviary .preview').attr('src', '').hide();
     });
 
     return {

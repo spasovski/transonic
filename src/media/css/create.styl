@@ -131,10 +131,13 @@ form {
         text-align: left;
     }
     .background-image .help-text {
-        width: 465px;
+        bottom: 5px;
+        position: relative;
+        width: 223px;
     }
     .background-image .inner {
         display: inline-block;
+        position: relative;
         vertical-align: top;
         width: 500px;
     }
@@ -497,8 +500,15 @@ option.highlighted {
 
 .aviary {
     .preview {
+        border-radius: 2px;
+        display: block;
+        margin-top: 10px;
         width: 320px;
         height: auto;
+
+        &.hidden {
+            display: none;
+        }
     }
     .aviary-url {
         margin-right: 15px;
@@ -525,5 +535,16 @@ option.highlighted {
     }
     input[type="url"]:invalid {
         box-shadow: none;
+    }
+}
+
+.background-image-input {
+    .clear-image {
+        display: inline-block;
+        height: 45px;
+        min-width: 80px;
+        position: absolute;
+        right: -60px;
+        top: -2px;
     }
 }

@@ -142,7 +142,7 @@ define('feed_previews',
 
     // Listeners.
     z.page.on('change keyup input', 'input, textarea, select', _.throttle(refresh, 250));
-    z.page.on('refresh_preview', _.throttle(refresh, 250));
+    z.page.on('refresh_preview aviary_saved', _.throttle(refresh, 250));
 
     function refresh() {
         empty();
