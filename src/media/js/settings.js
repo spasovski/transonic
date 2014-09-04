@@ -81,6 +81,7 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'congstar',
             'deutsche_telekom',
             'etisalat',
+            'grameenphone',
             'hutchinson_three_group',
             'kddi',
             'kt',
