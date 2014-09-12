@@ -38,8 +38,8 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
 
         languages: [
             'bn-BD', 'ca', 'cs', 'de', 'el', 'en-US', 'es', 'fr', 'hr', 'hu',
-            'it', 'mk', 'nl', 'pl', 'pt-BR', 'ro', 'ru', 'sr', 'sr-Latn', 'sk',
-            'tr', 'zh-CN'
+            'it', 'ja', 'mk', 'nl', 'pl', 'pt-BR', 'ro', 'ru', 'sr', 'sr-Latn',
+            'sk', 'tr', 'zh-CN'
         ],
 
         // A list of regions and their L10n mappings.
@@ -52,6 +52,7 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'cn': gettext('China'),
             'co': gettext('Colombia'),
             'cr': gettext('Costa Rica'),
+            'cz': gettext('Czech Republic'),
             'ec': gettext('Ecuador'),
             'sv': gettext('El Salvador'),
             'fr': gettext('France'),
@@ -61,6 +62,7 @@ define('settings', ['l10n', 'settings_local', 'underscore'], function(l10n, sett
             'hu': gettext('Hungary'),
             'in': gettext('India'),
             'it': gettext('Italy'),
+            'jp': gettext('Japan'),
             'mx': gettext('Mexico'),
             'me': gettext('Montenegro'),
             'ni': gettext('Nicaragua'),
