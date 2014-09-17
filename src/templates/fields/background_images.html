@@ -1,11 +1,20 @@
 {% include "fields/image_file_input.html" %}
 
-<div class="background-image field top-hat-field" data-error-field="background-image">
-  <label for="background-image">
-    {{ _('Background Image') }}</label>
+<div class="background-image bg-banner field top-hat-field" data-error-field="background-image">
+  <label>{{ _('Background Image') }}</label>
   <div class="inner">
     {{ aviary_image_file_input(_('Feed Banner'), 'feed-banner',
                                obj.background_image, feed_type) }}
     {# {{ image_file_input(_('Shelf Landing'), 'shelf-landing') }} #}
   </div>
 </div>
+
+{% if feed_type == 'shelves' %}
+  <div class="background-image bg-banner-landing field top-hat-field" data-error-field="background-image-landing">
+    <label>{{ _('Shelf Landing Image') }}</label>
+    <div class="inner">
+      {{ aviary_image_file_input(_('Shelf Landing'), 'shelf-landing',
+                                 obj.background_image_landing, feed_type) }}
+    </div>
+  </div>
+{% endif %}
