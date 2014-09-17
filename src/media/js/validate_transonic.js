@@ -93,6 +93,9 @@ define('validate_transonic',
         if (!data.background_image_upload_url) {
             errs['background-image'] = gettext('Valid background image is required.');
         }
+        if (!data.background_image_landing_upload_url) {
+            errs['background-image-landing'] = gettext('Valid landing background image is required.');
+        }
         return errs;
     };
 

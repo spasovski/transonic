@@ -95,7 +95,8 @@ define('forms_transonic',
         // Gather data.
         var data = {
             apps: get_app_ids($('.apps-widget .result')),
-            background_image_upload_url: $form.find('.processed-aviary-url').val(),
+            background_image_upload_url: $form.find('.bg-banner .processed-aviary-url').val(),
+            background_image_landing_upload_url: $form.find('.bg-banner-landing .processed-aviary-url').val(),
             carrier: $form.find('[name="carrier"]').val(),
             description: utils_local.build_localized_field('description'),
             name: utils_local.build_localized_field('name'),

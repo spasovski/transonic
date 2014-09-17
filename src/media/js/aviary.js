@@ -71,10 +71,10 @@ define('aviary', ['defer', 'jquery', 'l10n', 'z'], function(defer, $, l10n, z) {
         if (input.files && input.files[0]) {
             // This is so we can get the data URI of the image uploaded.
             var reader = new FileReader();
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 def.resolve(e.target.result);
             };
-            reader.onerror = function (err) {
+            reader.onerror = function(err) {
                 def.reject(err.getMessage());
             };
             reader.readAsDataURL(input.files[0]);
@@ -122,7 +122,7 @@ define('aviary', ['defer', 'jquery', 'l10n', 'z'], function(defer, $, l10n, z) {
         if (this.checkValidity() && e.keyCode === 13) {
              // After it's been blurred, the editor will get launched.
              return this.blur();
-         }
+        }
 
     }).on('change', '.aviary input[type=url]', function(e) {
         // Launch editor only when input is blurred.
@@ -150,7 +150,7 @@ define('aviary', ['defer', 'jquery', 'l10n', 'z'], function(defer, $, l10n, z) {
             return console.error(err);
         });
 
-        $('.aviary [type="url"]').val($input.val());
+        $(this).closest('.aviary').find('[type="url"]').val($input.val());
     }).on('click', '.aviary .clear-image', function() {
         $('.aviary input').val('');
         $('.aviary .preview').attr('src', '').hide();
