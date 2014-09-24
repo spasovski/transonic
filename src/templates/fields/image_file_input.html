@@ -1,12 +1,10 @@
-{% macro aviary_image_file_input(name, slug, src, feed_type) %}
-  {% set crop = '320x240' %}
-  {% if feed_type == 'shelves' %}
-    {% set crop = '2.133:1' %}
-  {% endif %}
+{% macro aviary_image_file_input(name, slug, src, feed_type, crop) %}
   <section class="aviary background-image-input {{ slug }}" data-aviary-type="{{ slug }}"
            data-theme="light"
-           data-force-crop-preset='["{{ name }}", "{{ crop }}"]'
-           data-force-crop-message="{{ _('Crop the image to these dimensions.') }}">
+           {% if crop %}
+             data-force-crop-preset='["{{ name }}", "{{ crop }}"]'
+             data-force-crop-message="{{ _('Crop the image to these dimensions.') }}"
+           {% endif %}>
 
     {# Image URL input. #}
     <input class="aviary-url" type="url" novalidate
